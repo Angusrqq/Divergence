@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: d9b5f297499443c4f9e5a2e3114cb51d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3233505251388342946
+    second: divergence meter_emission-Sheet 1_0
+  - first:
+      213: -1562462405808296196
+    second: divergence meter_emission-Sheet 1_1
+  - first:
+      213: 9149463633108833117
+    second: divergence meter_emission-Sheet 1_2
+  - first:
+      213: 7109685903862802516
+    second: divergence meter_emission-Sheet 1_3
+  - first:
+      213: 8116839702664946546
+    second: divergence meter_emission-Sheet 1_4
+  - first:
+      213: -8667027959784446202
+    second: divergence meter_emission-Sheet 1_5
+  - first:
+      213: -7524157041462159453
+    second: divergence meter_emission-Sheet 1_6
+  - first:
+      213: 4609565959541645660
+    second: divergence meter_emission-Sheet 1_7
+  - first:
+      213: 2894705406406975069
+    second: divergence meter_emission-Sheet 1_8
+  - first:
+      213: -8497752950872557197
+    second: divergence meter_emission-Sheet 1_9
+  - first:
+      213: 8183738605178689938
+    second: divergence meter_emission-Sheet 1_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1029
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d33af0b184023d0800000000000000
+      internalID: -3233505251388342946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1029
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfee4ee58b4015ae0800000000000000
+      internalID: -1562462405808296196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1029
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d539ec8c2bc69fe70800000000000000
+      internalID: 9149463633108833117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 1029
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 458285c29adaaa260800000000000000
+      internalID: 7109685903862802516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 589
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273a12864bec4a070800000000000000
+      internalID: 8116839702664946546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 589
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6076bae8df788b780800000000000000
+      internalID: -8667027959784446202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 589
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a7d4651903d49790800000000000000
+      internalID: -7524157041462159453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 589
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c51663351d778ff30800000000000000
+      internalID: 4609565959541645660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 149
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5e5a46fa3f0c2820800000000000000
+      internalID: 2894705406406975069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 149
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 379b636d6bae11a80800000000000000
+      internalID: -8497752950872557197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence meter_emission-Sheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 149
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2999350f6ea729170800000000000000
+      internalID: 8183738605178689938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      divergence meter_emission-Sheet 1_0: -3233505251388342946
+      divergence meter_emission-Sheet 1_1: -1562462405808296196
+      divergence meter_emission-Sheet 1_10: 8183738605178689938
+      divergence meter_emission-Sheet 1_2: 9149463633108833117
+      divergence meter_emission-Sheet 1_3: 7109685903862802516
+      divergence meter_emission-Sheet 1_4: 8116839702664946546
+      divergence meter_emission-Sheet 1_5: -8667027959784446202
+      divergence meter_emission-Sheet 1_6: -7524157041462159453
+      divergence meter_emission-Sheet 1_7: 4609565959541645660
+      divergence meter_emission-Sheet 1_8: 2894705406406975069
+      divergence meter_emission-Sheet 1_9: -8497752950872557197
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
