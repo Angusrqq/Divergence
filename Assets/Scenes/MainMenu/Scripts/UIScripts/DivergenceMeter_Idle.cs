@@ -35,11 +35,7 @@ public class DivergenceMeter_Idle : MonoBehaviour
         {
             delay -= Time.fixedDeltaTime;
         }
-<<<<<<< HEAD
         if (delay <= 0 && DM_material.GetColor("_Color") == Color.black)
-=======
-        if (delay <= 0)
->>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
         {
             foreach (DM_anim script in divergenceMeterAnimScripts)
             {
@@ -47,11 +43,7 @@ public class DivergenceMeter_Idle : MonoBehaviour
             }
             delay = 1f;
         }
-<<<<<<< HEAD
         divergenceMeter_anim.GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, Time.fixedDeltaTime, ref FadeTime, ref isEnded, 2f, 0f, true);
-=======
-        divergenceMeter_anim.GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 5f, Time.fixedDeltaTime, ref FadeTime, ref isEnded, 2f, 0f, true);
->>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
     }
 
     public void OnDisable()
