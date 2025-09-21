@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/!!GlobalScripts.meta
 guid: 71461457e12eac441aa6fe50b7fe1179
+========
+guid: 537b1bc8604cf7c48892a47e4de5e8ca
+>>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d:Assets/Scenes/Game.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

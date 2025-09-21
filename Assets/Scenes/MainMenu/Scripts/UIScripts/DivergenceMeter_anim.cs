@@ -19,24 +19,37 @@ public class divergenceMeter_anim : MonoBehaviour
     private float FadeTime = 1f;
     public bool isEnded = false;
     private bool EndAnimCalled = false;
+<<<<<<< HEAD
     private SpriteResolver dotResolver;
+=======
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
     void Awake()
     {
         seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
         List<GameObject> divergenceMeterPositions = new List<GameObject>();
+<<<<<<< HEAD
         divergenceMeterAnimScripts = new List<DM_anim>();
+=======
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
         foreach (Transform child in transform)
         {
             if (child.name.Contains("dot"))
             {
+<<<<<<< HEAD
                 SpriteResolver childResolver = child.GetComponent<SpriteResolver>();
                 dotResolver = childResolver;
                 //divergenceMeterAnimScripts.Add(child.GetComponent<DM_anim>());
+=======
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
                 continue;
             }
             divergenceMeterPositions.Add(child.gameObject);
         }
         divergenceMeterResolvers = new List<SpriteResolver>();
+<<<<<<< HEAD
+=======
+        divergenceMeterAnimScripts = new List<DM_anim>();
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
         foreach (GameObject position in divergenceMeterPositions)
         {
             SpriteResolver resolver = position.GetComponent<SpriteResolver>();
@@ -94,10 +107,15 @@ public class divergenceMeter_anim : MonoBehaviour
         {
             divergenceMeterResolvers[index].SetCategoryAndLabel(category, seed.ToString().ToArray<char>()[index - offset].ToString());
         }
+<<<<<<< HEAD
         dotResolver.SetCategoryAndLabel(category, "dot");
         DM_material.SetColor("_Color", defaultMaterialColor * 10);
         Debug.Log("Seed: " + seed);
         GameData.SetSeed(seed);
+=======
+        DM_material.SetColor("_Color", defaultMaterialColor * 10);
+        Debug.Log("Seed: " + seed);
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
     }
 
     public static void GlowFade(Material material, Color StartMatColor, Color TargetMatColor, float deltatime,

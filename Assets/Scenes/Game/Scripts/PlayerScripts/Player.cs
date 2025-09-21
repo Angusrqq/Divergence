@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,11 +18,20 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;
     public GameObject HealthBar;
     private Slider healthSlider;
+=======
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    [SerializeField] private float movementSpeed = 15f;
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
     private Vector2 movementVector;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+<<<<<<< HEAD
         damageableEntity = GetComponent<DamageableEntity>();
         healthSlider = HealthBar.GetComponent<Slider>();
         damageableEntity.onDamageTaken += UpdateHealth;
@@ -32,6 +42,8 @@ public class Player : MonoBehaviour
         }
         damageableEntity.onDeath += OnDeath;
         damageableEntity.Init(maxHealth);
+=======
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
     }
 
     private void Update()
@@ -65,6 +77,7 @@ public class Player : MonoBehaviour
     {
         rb.MovePosition(rb.position + movementVector * movementSpeed * Time.fixedDeltaTime);
     }
+<<<<<<< HEAD
 
     private void OnDeath(UnityEngine.Object source)
     {
@@ -120,4 +133,6 @@ public class Player : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+=======
+>>>>>>> bbf89a0ccd3dc5d8dafb344e5c502b1ac3dde62d
 }
