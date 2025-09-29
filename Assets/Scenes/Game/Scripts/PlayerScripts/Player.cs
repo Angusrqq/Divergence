@@ -1,14 +1,19 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(DamageableEntity))]
+[RequireComponent(typeof(AbilityHolder))]
+[RequireComponent(typeof(AnimatedEntity))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     [NonSerialized] public DamageableEntity damageableEntity;
+    [NonSerialized] public AnimatedEntity animatedEntity;
+    [NonSerialized] public SpriteRenderer spriteRenderer;
     [NonSerialized] public int level = 0;
     [NonSerialized] public int exp = 0;
     [NonSerialized] public int expNext = 100;
@@ -19,13 +24,19 @@ public class Player : MonoBehaviour
     private Slider healthSlider;
     private Vector2 movementVector;
 
+    public GUI GUI;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         damageableEntity = GetComponent<DamageableEntity>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animatedEntity = GetComponent<AnimatedEntity>();
         healthSlider = HealthBar.GetComponent<Slider>();
+
         damageableEntity.onDamageTaken += UpdateHealth;
         damageableEntity.onHeal += UpdateHealth;
+        GameData.UpdatePlayerRef(this);
         if (damageableEntity == null)
         {
             Debug.LogError($"{this.GetType()} at {gameObject} has no DamageableEntity component");
@@ -59,6 +70,22 @@ public class Player : MonoBehaviour
         }
 
         movementVector = movementVector.normalized; // Normalize to prevent faster diagonal movement
+        if (movementVector != Vector2.zero)
+        {
+            if (movementVector.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (movementVector.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            animatedEntity.ChangeAnimation("Run");
+        }
+        else
+        {
+            animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
+        }
     }
 
     private void FixedUpdate() // Use FixedUpdate for physics-related updates
@@ -68,6 +95,7 @@ public class Player : MonoBehaviour
 
     private void OnDeath(UnityEngine.Object source)
     {
+        GUI.Death();
         Debug.Log($"Player died by {source}");
     }
 
@@ -79,7 +107,6 @@ public class Player : MonoBehaviour
             {
                 damageableEntity.TakeDamage(collision.gameObject, collision_dentity.damage);
             }
-            
         }
     }
 
@@ -112,6 +139,7 @@ public class Player : MonoBehaviour
             return;
         }
         else exp += exp_to_add;
+
         onExpChange?.Invoke(source, exp_to_add);
         Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
     }

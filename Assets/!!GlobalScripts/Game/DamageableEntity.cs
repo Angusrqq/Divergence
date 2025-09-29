@@ -18,14 +18,17 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         if (health <= 0) return;
         if (health - amount <= 0)
         {
+            float taken = health;
             health = 0;
-            onDamageTaken?.Invoke(source, amount);
+            onDamageTaken?.Invoke(source, taken);
             onDeath?.Invoke(source);
             return;
         }
         health -= amount;
         onDamageTaken?.Invoke(source, amount);
     }
+
+    public bool canTakeDamage() => isVulnerable && health > 0;
 
     public void Heal(UnityEngine.Object source, float amount)
     {
