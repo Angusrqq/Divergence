@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [NonSerialized] public DamageableEntity damageableEntity;
     [NonSerialized] public AnimatedEntity animatedEntity;
     [NonSerialized] public SpriteRenderer spriteRenderer;
+    [NonSerialized] public Character characterData;
     [NonSerialized] public int level = 0;
     [NonSerialized] public int exp = 0;
     [NonSerialized] public int expNext = 100;

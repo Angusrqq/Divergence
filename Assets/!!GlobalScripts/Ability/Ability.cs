@@ -1,7 +1,21 @@
 using System;
 using UnityEngine.UI;
 using UnityEngine;
+//TODO: EVGENIY READ THIS
+// IF YOU DONT KNOW WHAT IS A SCRIPTABLE OBJECT
+// /\ read this: https://learn.unity.com/tutorial/introduction-to-scriptable-objects
+// watch this: https://www.youtube.com/watch?v=ry4I6QyPw4E (this is what i watched when making this)
 
+/// <summary>
+/// <para>
+/// <c>AbilityState</c> enum represents the different states an ability can be in.
+/// </para>
+/// <c>Ability</c> is a ScriptableObject that represents an ability that can be used by a player or an enemy.
+/// <para>
+/// It has properties like name, description, cooldown time, level, max level, active time, knockback force, and knockback duration.
+/// It also has methods to activate the ability, start the cooldown, handle the end of the cooldown, upgrade the ability, and update the ability state.
+/// </para>
+/// </summary>
 public class Ability : ScriptableObject
 {
     public new string name;
@@ -33,7 +47,7 @@ public class Ability : ScriptableObject
         state = AbilityState.ready;
     }
 
-    public virtual void Upgrade(){}
+    public virtual void Upgrade() { }
 
     public virtual void UpdateAbility()
     {
