@@ -5,9 +5,9 @@ using UnityEngine;
 public class AbilityHolder : MonoBehaviour
 {
     public List<Ability> Abilities;
-    private List<string> _abilityNames;
+    private List<string> _abilityNames = new();
     public List<PassiveAbility> Passives;
-    private List<string> _passiveNames;
+    private List<string> _passiveNames = new();
 
     void FixedUpdate()
     {

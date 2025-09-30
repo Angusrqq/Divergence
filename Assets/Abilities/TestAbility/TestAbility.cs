@@ -9,7 +9,9 @@ public class TestAbility : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        direction = Random.insideUnitCircle.normalized;
+        direction = GameData.player.movementVector;
+        if (direction == Vector2.zero) direction = new Vector2(GameData.player.spriteRenderer.flipX? -1 : 1, 0);
+        Debug.Log(direction);
     }
 
     void FixedUpdate()

@@ -13,8 +13,13 @@ public class AnimatedEntity : MonoBehaviour
     public string currentAnimation;
     void Start()
     {
-        animator = GetComponent<Animator>();
-        animatorController = animator.runtimeAnimatorController as AnimatorController;
+        animatorController??= animator.runtimeAnimatorController as AnimatorController;
+    }
+
+    public void SetAnimatorController(AnimatorController controller)
+    {
+        animator.runtimeAnimatorController = controller;
+        animatorController = controller;
     }
 
     // virtual protected void Update()

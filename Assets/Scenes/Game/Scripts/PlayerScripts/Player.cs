@@ -8,6 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AbilityHolder))]
 [RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AbilityHolder))]
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -20,24 +21,28 @@ public class Player : MonoBehaviour
     [NonSerialized] public int expNext = 100;
     [NonSerialized] public Action<UnityEngine.Object, int> onExpChange;
     [SerializeField] private float movementSpeed = 12f;
+    [NonSerialized] public AbilityHolder abilityHolder;
     public float maxHealth = 100f;
     public GameObject HealthBar;
     private Slider healthSlider;
-    private Vector2 movementVector;
+    public Vector2 movementVector;
 
     public GUI GUI;
 
-    private void Awake()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         damageableEntity = GetComponent<DamageableEntity>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animatedEntity = GetComponent<AnimatedEntity>();
         healthSlider = HealthBar.GetComponent<Slider>();
+        abilityHolder = GetComponent<AbilityHolder>();
 
         damageableEntity.onDamageTaken += UpdateHealth;
         damageableEntity.onHeal += UpdateHealth;
         GameData.UpdatePlayerRef(this);
+        characterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
+        BuildCharacter();
         if (damageableEntity == null)
         {
             Debug.LogError($"{this.GetType()} at {gameObject} has no DamageableEntity component");
@@ -148,5 +153,17 @@ public class Player : MonoBehaviour
     public void TakeExp(UnityEngine.Object source, int exp_to_take)
     {
         throw new NotImplementedException();
+    }
+
+    private void BuildCharacter()
+    {
+        animatedEntity.SetAnimatorController(characterData.animatorController);
+        movementSpeed = characterData.movementSpeed;
+        maxHealth = characterData.maxHealth;
+        level = characterData.startLevel;
+        foreach (Ability a in characterData.startingAbilities)
+        {
+            abilityHolder.AddAbility(a);
+        }
     }
 }

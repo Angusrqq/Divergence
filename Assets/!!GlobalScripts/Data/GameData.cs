@@ -29,15 +29,16 @@ public class GameData : MonoBehaviour
     public static List<Character> Characters;
     public static List<Character> unlockedCharacters;
     public static Character currentCharacter;
-    [SerializeField] private static List<Map> _Maps;
+    [SerializeField] private List<Map> _Maps;
     public static List<Map> Maps;
     public static List<Map> unlockedMaps;
     public static Map currentMap;
     [SerializeField] private List<Ability> _Abilities;
     public static List<Ability> Abilities;
     public static List<Ability> unlockedAbilities;
+    public static Sprite LockedIcon { get; private set; } // not going to cut it, //TODO: figure out a way to store/load constant icons
 
-    void Start()
+    void Awake()
     {
         if (instance != null)
         {
@@ -45,9 +46,14 @@ public class GameData : MonoBehaviour
         }
         else instance = this;
         DontDestroyOnLoad(gameObject);
+        LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
         SceneManager.sceneLoaded += OnSceneLoaded;
         Abilities = _Abilities;
         unlockedAbilities = Abilities;
+        Maps = _Maps;
+        unlockedMaps = Maps;
+        Characters = _Characters;
+        unlockedCharacters = Characters;
     }
 
     public static void ResetRandomToSeed()
@@ -77,6 +83,18 @@ public class GameData : MonoBehaviour
             Random.InitState((int)System.DateTime.Now.Ticks); // reset random to current time
             Debug.Log("Reset random to current time");
         }
+    }
+
+    public static void ChooseCharacter(Character character)
+    {
+        currentCharacter = character;
+        Debug.Log($"Chosen character: {character.name}");
+    }
+
+    public static void ChooseMap(Map map)
+    {
+        currentMap = map;
+        Debug.Log($"Chosen map: {map.name}");
     }
 
     public static void UpdatePlayerRef(Player _player)

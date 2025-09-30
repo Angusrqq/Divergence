@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3444fe169768fc3449e327275a8c0326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _allAbilities:
+  _Characters:
+  - {fileID: 11400000, guid: cd91144543b551e41a58fb488ce56dbc, type: 2}
+  - {fileID: 11400000, guid: d92d099eb0ebc1147bb5602a61ed131a, type: 2}
+  _Maps: []
+  _Abilities:
   - {fileID: 11400000, guid: 7f9dfaae940bfe341881086766b956bf, type: 2}
