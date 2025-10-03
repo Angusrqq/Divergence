@@ -14,5 +14,5 @@ public static class Attributes
     public static int manuallyTriggeredAbilitySlots = 0;
     public static float passiveAbilityEffectMult = 1f;
     public static int pierceTargets = 0;
-    public static float magnetRadius = 1f;
+    public static float magnetRadius = 0.5f;
 }

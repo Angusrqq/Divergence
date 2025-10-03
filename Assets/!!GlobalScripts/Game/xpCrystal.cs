@@ -1,21 +1,38 @@
+using System.Collections;
 using UnityEngine;
 
-public class xpCrystal : MonoBehaviour
+public class XpCrystal : MonoBehaviour
 {
-    // public xpCrystal(int expContaining)
-    // {
-    //     if (expContaining > 0)
-    //     {
-    //         this.expContaining = expContaining;
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError("xpCrystal expContaining must be greater than 0");
-    //         Destroy(gameObject);
-    //     }
-    // }
+    private int expContaining;
+    public bool IsFired { get; private set; } = false;
+    public float speed = 2f;
 
-    private readonly int expContaining;
+    public void SetExpContaining(int expContaining)
+    {
+        if (expContaining > 0)
+        {
+            this.expContaining = expContaining;
+        }
+        else
+        {
+            Debug.LogError("xpCrystal expContaining must be greater than 0");
+            Destroy(gameObject);
+        }
+    }
+
+    public IEnumerator MagnetToPlayerCoroutine(AnimationCurve curve) {
+        IsFired = true;
+        float time = 0f;
+        while (gameObject != null && time <= 1f)
+        {
+            if (GameData.player != null)
+            {
+                time += Time.fixedDeltaTime * speed;
+                transform.position = Vector3.Lerp(transform.position, GameData.player.transform.position, curve.Evaluate(time));
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
 
     // // Start is called once before the first execution of Update after the MonoBehaviour is created
     // void Start()
