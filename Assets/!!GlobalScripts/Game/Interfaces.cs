@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// <para>
+/// <c>IDamageable</c> interface defines the contract for any object that can take damage and be healed.
+/// </para>
+/// </summary>
 public interface IDamageable
 {
     float health { get; set; }

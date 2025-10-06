@@ -1,5 +1,16 @@
 using UnityEngine;
+using System;
 
+public enum AttributeId
+{
+    MagnetRadius
+}
+
+/// <summary>
+/// <para>
+/// <c>Attributes</c> is a static class that contains the attributes of the player.
+/// </para>
+/// </summary>
 public static class Attributes
 {
     public static float health = 100;
@@ -14,5 +25,16 @@ public static class Attributes
     public static int manuallyTriggeredAbilitySlots = 0;
     public static float passiveAbilityEffectMult = 1f;
     public static int pierceTargets = 0;
-    public static float magnetRadius = 0.5f;
+    public static event Action<AttributeId, float> OnAttributeChanged;
+    private static float _magnetRadius = 0.5f;
+    public static float magnetRadius
+    {
+        get => _magnetRadius;
+        set
+        {
+            if (Mathf.Approximately(_magnetRadius, value)) return;
+            _magnetRadius = value;
+            OnAttributeChanged?.Invoke(AttributeId.MagnetRadius, _magnetRadius);
+        }
+    }
 }

@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// <para>
+/// Example use of an ability.
+/// </para>
+/// </summary>
 public class TestAbility : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -10,7 +15,7 @@ public class TestAbility : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         direction = GameData.player.movementVector;
-        if (direction == Vector2.zero) direction = new Vector2(GameData.player.spriteRenderer.flipX? -1 : 1, 0);
+        if (direction == Vector2.zero) direction = new Vector2(GameData.player.spriteRenderer.flipX ? -1 : 1, 0);
         Debug.Log(direction);
     }
 

@@ -3,12 +3,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// <para>
+/// <c>CharacterButton</c> class represents a button in the character selection menu.
+/// </para>
+/// </summary>
 public class CharacterButton : SelectorItem
 {
     [NonSerialized] public Character characterData;
     [NonSerialized] public TMPro.TMP_Text nameText;
     public Image ButtonImage;
 
+/// <summary>
+/// <para>
+/// <c>Init</c> method initializes the character button with the given character data and selector manager.
+/// </para>
+/// </summary>
+/// <param name="character"></param>
+/// <param name="manager"></param>
     public void Init(Character character, SelectorManager manager)
     {
         nameText = GetComponentInChildren<TMPro.TMP_Text>();
@@ -18,11 +30,23 @@ public class CharacterButton : SelectorItem
         SetUI();
     }
 
+/// <summary>
+/// <para>
+/// <c>OnSelect</c> method updates the description in the selector manager when this button is selected.
+/// </para>
+/// </summary>
+/// <param name="eventData"></param>
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
         selectorManager.UpdateDescription(characterData.description);
     }
+
+/// <summary>
+/// <para>
+/// <c>SetUI</c> method sets the button image and name text based on whether the character is unlocked or not.
+/// </para>
+/// </summary>
     public void SetUI()
     {
         if (GameData.unlockedCharacters.Contains(characterData))

@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// <para>
+/// <c>EnemyManager</c> is a singleton class that manages the spawning and tracking of enemies in the game.
+/// </para>
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager _instance { get; private set; }
@@ -26,6 +31,11 @@ public class EnemyManager : MonoBehaviour
         else delay -= Time.deltaTime;
     }
 
+/// <summary>
+/// <para>
+/// <c>SpawnEnemy</c> method spawns an enemy at a random position within a defined range and sets its target to the player.
+/// </para>
+/// </summary>
     private void SpawnEnemy()
     {
         Enemy enemy = Instantiate(_prefab, new Vector3(UnityEngine.Random.Range(-2f, 2f), 0, 0), Quaternion.identity);

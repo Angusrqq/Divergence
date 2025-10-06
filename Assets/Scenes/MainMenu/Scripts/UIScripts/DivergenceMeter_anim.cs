@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
+//TODO: rework these animations, this is too stupid
 public class divergenceMeter_anim : MonoBehaviour
 {
     private List<SpriteResolver> divergenceMeterResolvers;

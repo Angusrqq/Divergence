@@ -30,25 +30,50 @@ public class Ability : ScriptableObject
     [NonSerialized] public float activeTimer;
     [NonSerialized] public AbilityState state = AbilityState.ready;
 
+/// <summary>
+/// <para>
+/// <c>Activate</c> is a virtual method that sets the state to active and starts the active timer.
+/// </para>
+/// </summary>
     public virtual void Activate()
     {
         state = AbilityState.active;
         activeTimer = activeTime;
     }
 
+/// <summary>
+/// <para>
+/// <c>StartCooldown</c> is a virtual method that sets the state to cooldown and starts the cooldown timer.
+/// </para>
+/// </summary>
     public virtual void StartCooldown()
     {
         state = AbilityState.cooldown;
         cooldownTimer = cooldownTime;
     }
 
+/// <summary>
+/// <para>
+/// <c>CooldownEnded</c> is a virtual method that sets the state to ready.
+/// </para>
+/// </summary>
     public virtual void CooldownEnded()
     {
         state = AbilityState.ready;
     }
 
+/// <summary>
+/// <para>
+/// <c>Upgrade</c> is a virtual method that upgrades the ability.
+/// </para>
+/// </summary>
     public virtual void Upgrade() { }
 
+/// <summary>
+/// <para>
+/// Handles the states of the ability. Should be manually called in update.
+/// </para>
+/// </summary>
     public virtual void UpdateAbility()
     {
         switch (state)
@@ -79,6 +104,11 @@ public class Ability : ScriptableObject
         }
     }
 
+/// <summary>
+/// <para>
+/// Handles the states of the ability to be used in fixed update.
+/// </para>
+/// </summary>
     public virtual void FixedUpdateAbility()
     {
         switch (state)

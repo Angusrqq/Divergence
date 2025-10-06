@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// <para>
+/// <c>PassiveAbility</c> is a ScriptableObject that represents a passive ability
+/// that can be added to an <c>AbilityHolder</c>.
+/// </para>
+/// </summary>
 public class PassiveAbility : ScriptableObject
 {
     public new string name;
@@ -8,7 +14,7 @@ public class PassiveAbility : ScriptableObject
     public int maxLevel;
     public PassiveAbilityType type;
     public virtual void Activate() { }
-    public virtual void Upgrade(){}
+    public virtual void Upgrade() { }
     public virtual void UpdateAbility() { }
 }
 

@@ -2,6 +2,15 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// <para>
+/// <c>Player</c> is a class for handling the player.
+/// </para>
+/// Handles the player`s movement, animations, abilities, health, experience, etc.
+/// <para>
+///TODO: Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
+/// </para>
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(DamageableEntity))]
@@ -51,6 +60,12 @@ public class Player : MonoBehaviour
         damageableEntity.Init(maxHealth);
     }
 
+/// <summary>
+/// <para>
+/// <c>Update</c> is a method for updating the player.
+/// </para>
+/// Handles the player`s input, sets the movement vector and changes the animation.
+/// </summary>
     private void Update()
     {
         movementVector = Vector2.zero;
@@ -94,17 +109,38 @@ public class Player : MonoBehaviour
         }
     }
 
+/// <summary>
+/// <para>
+/// <c>FixedUpdate</c> is used here for updating the player`s physics.
+/// </para>
+/// Updates the player`s position.
+/// </summary>
     private void FixedUpdate() // Use FixedUpdate for physics-related updates
     {
         rb.MovePosition(rb.position + movementVector * movementSpeed * Time.fixedDeltaTime);
     }
 
+/// <summary>
+/// <para>
+/// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
+/// </para>
+/// Shows the death screen and logs the death.
+/// </summary>
     private void OnDeath(UnityEngine.Object source)
     {
         GUI.Death();
         Debug.Log($"Player died by {source}");
     }
 
+/// <summary>
+/// <para>
+/// <c>OnCollisionStay2D</c> is used here for handling the player`s collisions.
+/// </para>
+/// Handles the player`s collisions with other objects.
+/// <para>
+/// If the collision object has a <c>DamageableEntity</c> component and the <c>canDealDamage</c> property is true, it deals damage to the player.
+/// </para>
+/// </summary>
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out DamageableEntity collision_dentity))
@@ -116,11 +152,22 @@ public class Player : MonoBehaviour
         }
     }
 
+/// <summary>
+/// <para>
+/// <c>UpdateHealth</c> is used here for updating the health bar.
+/// </para>
+/// Updates the player`s health slider.
+/// </summary>
     void UpdateHealth(UnityEngine.Object source, float amount)
     {
         healthSlider.value = damageableEntity.health / damageableEntity.maxHealth;
     }
-
+    /// <summary>
+    /// <para>
+    /// <c>OnDestroy</c> called when the GameObject is destroyed
+    /// </para>
+    /// Just unsubscribes from events
+    /// </summary>
     void OnDestroy()
     {
         damageableEntity.onDamageTaken -= UpdateHealth;
