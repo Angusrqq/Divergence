@@ -34,9 +34,9 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-/// <summary>
-/// This function is called when the play button is clicked.
-/// </summary>
+    /// <summary>
+    /// This function is called when the play button is clicked.
+    /// </summary>
     public void PlayGame()
     {
         mainMenuCanvas.enabled = false;
@@ -45,28 +45,29 @@ public class MainMenu : MonoBehaviour
         dmAnimScript.enabled = true;
     }
 
-/// <summary>
-/// This function is called when the confirm button on character selector menu is clicked.
-/// </summary>
+    /// <summary>
+    /// This function is called when the confirm button on character selector menu is clicked.
+    /// </summary>
     public void SetCharacter()
     {
         GameData.ChooseCharacter((Character)characterSelectorManager.currentSelectedItem);
     }
-/// <summary>
-/// This function (is not implemented yet because we don`t know yet how to store map data) is (SHOULD BE!!!) called when the confirm button on map selector menu is clicked.
-/// </summary>
+
+    /// <summary>
+    /// This function (is not implemented yet because we don`t know yet how to store map data) is (SHOULD BE!!!) called when the confirm button on map selector menu is clicked.
+    /// </summary>
     public void SetMap()
     {
         throw new System.NotImplementedException();
         //GameData.ChooseMap(map);
     }
 
-/// <summary>
-/// <para>
-/// This function is called in <c>Start()</c>
-/// </para>
-/// Creates a <c>CharacterButton</c> for each of all the characters that are unlocked.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// This function is called in <c>Start()</c>
+    /// </para>
+    /// Creates a <c>CharacterButton</c> for each of all the characters that are unlocked.
+    /// </summary>
     public void BuildCharacterSelector()
     {
         List<SelectorItem> characterButtons = new List<SelectorItem>();
@@ -83,9 +84,9 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-/// <summary>
-/// This function is called when the quit button is clicked.
-/// </summary>
+    /// <summary>
+    /// This function is called when the quit button is clicked.
+    /// </summary>
     public static void Quit()
     {
         // Save parameters here

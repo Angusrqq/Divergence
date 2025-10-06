@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-    /// <summary>
-    /// <para>
-    /// <c>GameData</c> class is supposed to be a DDOL(Dont Destroy On Load) singleton, meaning there will be only one instance of <c>GameData</c> in the entire game and it will persist when switching scenes.
-    /// </para>
-    /// <para>
-    /// It stores all the data that needs to persist between scenes, like player data, unlocked characters, maps, abilities, etc.
-    /// It also handles the random seed for procedural generation, and keeps track of the current state of the game.
-    /// </para>
-    /// It should have methods to save and load the data from a file, but thats too much for now since im the only one working.
-    /// </summary>
+
+/// <summary>
+/// <para>
+/// <c>GameData</c> class is supposed to be a DDOL(Dont Destroy On Load) singleton, meaning there will be only one instance of <c>GameData</c> in the entire game and it will persist when switching scenes.
+/// </para>
+/// <para>
+/// It stores all the data that needs to persist between scenes, like player data, unlocked characters, maps, abilities, etc.
+/// It also handles the random seed for procedural generation, and keeps track of the current state of the game.
+/// </para>
+/// It should have methods to save and load the data from a file, but thats too much for now since im the only one working.
+/// </summary>
 public class GameData : MonoBehaviour
 {
     //TODO: damn this is gonna be a lot
@@ -38,12 +39,12 @@ public class GameData : MonoBehaviour
     public static List<Ability> unlockedAbilities;
     public static Sprite LockedIcon { get; private set; } // not going to cut it, //TODO: figure out a way to store/load constant icons
 
-/// <summary>
-/// <para>
-/// <c>Awake</c> method ensures that there is only one instance of <c>GameData</c> and sets it to not be destroyed on load.
-/// </para>
-/// It also initializes the static lists and variables. It also subscribes to the <c>SceneManager.sceneLoaded</c> event to reset the random seed when the game scene is loaded.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>Awake</c> method ensures that there is only one instance of <c>GameData</c> and sets it to not be destroyed on load.
+    /// </para>
+    /// It also initializes the static lists and variables. It also subscribes to the <c>SceneManager.sceneLoaded</c> event to reset the random seed when the game scene is loaded.
+    /// </summary>
     void Awake()
     {
         if (instance != null)
@@ -51,7 +52,9 @@ public class GameData : MonoBehaviour
             Destroy(gameObject);
         }
         else instance = this;
+
         DontDestroyOnLoad(gameObject);
+        
         LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
         SceneManager.sceneLoaded += OnSceneLoaded;
         Abilities = _Abilities;
@@ -62,24 +65,24 @@ public class GameData : MonoBehaviour
         unlockedCharacters = Characters;
     }
 
-/// <summary>
-/// <para>
-/// <c>ResetRandomToSeed</c> method resets the Unity random number generator to the current seed and stores the last state of the random number generator.
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>ResetRandomToSeed</c> method resets the Unity random number generator to the current seed and stores the last state of the random number generator.
+    /// </para>
+    /// </summary>
     public static void ResetRandomToSeed()
     {
         Random.InitState(currentSeed);
         lastState = Random.state;
     }
 
-/// <summary>
-/// <para>
-/// <c>SetSeed</c> method sets the current seed to the passed value and optionally resets the random number generator to that seed.
-/// </para>
-/// </summary>
-/// <param name="seed"></param>
-/// <param name="resetRandom"></param>
+    /// <summary>
+    /// <para>
+    /// <c>SetSeed</c> method sets the current seed to the passed value and optionally resets the random number generator to that seed.
+    /// </para>
+    /// </summary>
+    /// <param name="seed"></param>
+    /// <param name="resetRandom"></param>
     public static void SetSeed(int seed, bool resetRandom = false)
     {
         currentSeed = seed;
@@ -87,13 +90,13 @@ public class GameData : MonoBehaviour
         Debug.Log($"Set seed to {currentSeed}");
     }
 
-/// <summary>
-/// <para>
-/// <c>OnSceneLoaded</c> method is called when a new scene is loaded
-/// </para>
-/// </summary>
-/// <param name="scene"></param>
-/// <param name="mode"></param>
+    /// <summary>
+    /// <para>
+    /// <c>OnSceneLoaded</c> method is called when a new scene is loaded
+    /// </para>
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
     public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene Loaded: {scene.name}");
@@ -110,39 +113,39 @@ public class GameData : MonoBehaviour
         }
     }
 
-/// <summary>
-/// <para>
-/// <c>ChooseCharacter</c> method sets the current character to the passed character.
-/// </para>
-/// Used in the character selection menu.
-/// </summary>
-/// <param name="character"></param>
+    /// <summary>
+    /// <para>
+    /// <c>ChooseCharacter</c> method sets the current character to the passed character.
+    /// </para>
+    /// Used in the character selection menu.
+    /// </summary>
+    /// <param name="character"></param>
     public static void ChooseCharacter(Character character)
     {
         currentCharacter = character;
         Debug.Log($"Chosen character: {character.name}");
     }
 
-/// <summary>
-/// <para>
-/// <c>ChooseMap</c> method sets the current map to the passed map.
-/// </para>
-/// Used in the map selection menu.
-/// </summary>
-/// <param name="map"></param>
+    /// <summary>
+    /// <para>
+    /// <c>ChooseMap</c> method sets the current map to the passed map.
+    /// </para>
+    /// Used in the map selection menu.
+    /// </summary>
+    /// <param name="map"></param>
     public static void ChooseMap(Map map)
     {
         currentMap = map;
         Debug.Log($"Chosen map: {map.name}");
     }
 
-/// <summary>
-/// <para>
-/// <c>UpdatePlayerRef</c> method updates the static reference to the player.
-/// </para>
-/// Used in the player script.
-/// </summary>
-/// <param name="_player"></param>
+    /// <summary>
+    /// <para>
+    /// <c>UpdatePlayerRef</c> method updates the static reference to the player.
+    /// </para>
+    /// Used in the player script.
+    /// </summary>
+    /// <param name="_player"></param>
     public static void UpdatePlayerRef(Player _player)
     {
         player = _player;

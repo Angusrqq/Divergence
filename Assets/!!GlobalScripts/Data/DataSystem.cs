@@ -14,8 +14,8 @@ public static class DataSystem
 
     public static void SaveProgData(MetaprogressionData data)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(SAVE_FILE_PATH, FileMode.Create);
+        BinaryFormatter formatter = new();
+        FileStream stream = new(SAVE_FILE_PATH, FileMode.Create);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -25,8 +25,9 @@ public static class DataSystem
     {
         if (File.Exists(SAVE_FILE_PATH))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(SAVE_FILE_PATH, FileMode.Open);
+            BinaryFormatter formatter = new();
+            FileStream stream = new(SAVE_FILE_PATH, FileMode.Open);
+            
             MetaprogressionData data = formatter.Deserialize(stream) as MetaprogressionData;
             stream.Close();
 

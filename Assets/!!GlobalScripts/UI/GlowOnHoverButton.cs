@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 /// <summary>
 /// <para>
 /// <c>GlowOnHoverButton</c> class adds a glowing effect to a button when hovered over or clicked.
@@ -17,12 +18,14 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private TMP_Text tmp;
     private Button button;
     private Color defaultcolor;
+
     void Start()
     {
         button = GetComponent<Button>();
         tmp = GetComponentInChildren<TMP_Text>();
         defaultcolor = tmp.fontMaterial.GetColor("_GlowColor");
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);

@@ -10,6 +10,7 @@ public class DM_anim : MonoBehaviour
     {
         resolver = GetComponent<SpriteResolver>();
     }
+    
     public void CustomUpdate()
     {
         int rand = Random.Range(0, 10);

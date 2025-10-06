@@ -14,13 +14,13 @@ public class CharacterButton : SelectorItem
     [NonSerialized] public TMPro.TMP_Text nameText;
     public Image ButtonImage;
 
-/// <summary>
-/// <para>
-/// <c>Init</c> method initializes the character button with the given character data and selector manager.
-/// </para>
-/// </summary>
-/// <param name="character"></param>
-/// <param name="manager"></param>
+    /// <summary>
+    /// <para>
+    /// <c>Init</c> method initializes the character button with the given character data and selector manager.
+    /// </para>
+    /// </summary>
+    /// <param name="character"></param>
+    /// <param name="manager"></param>
     public void Init(Character character, SelectorManager manager)
     {
         nameText = GetComponentInChildren<TMPro.TMP_Text>();
@@ -30,23 +30,23 @@ public class CharacterButton : SelectorItem
         SetUI();
     }
 
-/// <summary>
-/// <para>
-/// <c>OnSelect</c> method updates the description in the selector manager when this button is selected.
-/// </para>
-/// </summary>
-/// <param name="eventData"></param>
+    /// <summary>
+    /// <para>
+    /// <c>OnSelect</c> method updates the description in the selector manager when this button is selected.
+    /// </para>
+    /// </summary>
+    /// <param name="eventData"></param>
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
         selectorManager.UpdateDescription(characterData.description);
     }
 
-/// <summary>
-/// <para>
-/// <c>SetUI</c> method sets the button image and name text based on whether the character is unlocked or not.
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>SetUI</c> method sets the button image and name text based on whether the character is unlocked or not.
+    /// </para>
+    /// </summary>
     public void SetUI()
     {
         if (GameData.unlockedCharacters.Contains(characterData))
@@ -58,6 +58,7 @@ public class CharacterButton : SelectorItem
             ButtonImage.sprite = GameData.LockedIcon;
             Debug.LogWarning("FIGURE OUT A WAY TO STORE/LOAD CONST ICONS");
         }
+        
         nameText.text = characterData.name;
     }
 }

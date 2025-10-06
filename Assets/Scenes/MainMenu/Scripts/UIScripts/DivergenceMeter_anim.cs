@@ -21,11 +21,14 @@ public class divergenceMeter_anim : MonoBehaviour
     public bool isEnded = false;
     private bool EndAnimCalled = false;
     private SpriteResolver dotResolver;
+
     void Awake()
     {
         seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
+
         List<GameObject> divergenceMeterPositions = new List<GameObject>();
         divergenceMeterAnimScripts = new List<DM_anim>();
+
         foreach (Transform child in transform)
         {
             if (child.name.Contains("dot"))
@@ -37,7 +40,9 @@ public class divergenceMeter_anim : MonoBehaviour
             }
             divergenceMeterPositions.Add(child.gameObject);
         }
+
         divergenceMeterResolvers = new List<SpriteResolver>();
+
         foreach (GameObject position in divergenceMeterPositions)
         {
             SpriteResolver resolver = position.GetComponent<SpriteResolver>();
@@ -45,6 +50,7 @@ public class divergenceMeter_anim : MonoBehaviour
             DM_anim scriptRef = position.GetComponent<DM_anim>();
             divergenceMeterAnimScripts.Add(scriptRef);
         }
+
         defaultMaterialColor = DM_material.GetColor("_Color");
 
         Random.InitState(seed);
@@ -58,7 +64,9 @@ public class divergenceMeter_anim : MonoBehaviour
             loops++;
             delayTime = delay;
         }
+
         delayTime -= Time.fixedDeltaTime;
+
         if (delayTime <= 0f && delay < 0.04f)
         {
             foreach (DM_anim script in divergenceMeterAnimScripts)
@@ -66,6 +74,7 @@ public class divergenceMeter_anim : MonoBehaviour
                 script.CustomUpdate();
             }
         }
+
         if (delay > 0.04f)
         {
             if (EndAnimCalled)
@@ -79,7 +88,7 @@ public class divergenceMeter_anim : MonoBehaviour
             }
             if (isEnded)
             {
-                this.enabled = false;
+                enabled = false;
             }
         }
     }
@@ -87,16 +96,20 @@ public class divergenceMeter_anim : MonoBehaviour
     void EndAnim()
     {
         int offset = divergenceMeterResolvers.Count - seed.ToString().Length;
+
         for (int index = 0; index < offset; index++)
         {
             divergenceMeterResolvers[index].SetCategoryAndLabel(category, "0");
         }
+
         for (int index = offset; index < divergenceMeterResolvers.Count; index++)
         {
             divergenceMeterResolvers[index].SetCategoryAndLabel(category, seed.ToString().ToArray<char>()[index - offset].ToString());
         }
+
         dotResolver.SetCategoryAndLabel(category, "dot");
         DM_material.SetColor("_Color", defaultMaterialColor * 10);
+
         Debug.Log("Seed: " + seed);
         GameData.SetSeed(seed);
     }
@@ -117,16 +130,19 @@ public class divergenceMeter_anim : MonoBehaviour
                 material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, 1 - (time / lerp)));
             }
         }
+
         if (time <= cutoff && isCyclic)
         {
             IsEnded = !IsEnded;
             time = lerp;
         }
+
         if (!IsEnded && isCyclic)
         {
             time -= deltatime;
             material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, 1 - (time / lerp)));
         }
+
         if (IsEnded && isCyclic)
         {
             time -= deltatime;

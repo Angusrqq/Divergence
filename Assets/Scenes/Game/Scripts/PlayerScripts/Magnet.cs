@@ -30,11 +30,11 @@ public class Magnet : MonoBehaviour
         Attributes.OnAttributeChanged -= HandleAttributeChanged;
     }
 
-/// <summary>
-/// <para>
-/// <c>HandleAttributeChanged</c> is a method for updating the magnet's radius if the attribute changed (for example, if the player upgrades the magnet radius).
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>HandleAttributeChanged</c> is a method for updating the magnet's radius if the attribute changed (for example, if the player upgrades the magnet radius).
+    /// </para>
+    /// </summary>
     private void HandleAttributeChanged(AttributeId id, float value)
     {
         if (id != AttributeId.MagnetRadius) return;

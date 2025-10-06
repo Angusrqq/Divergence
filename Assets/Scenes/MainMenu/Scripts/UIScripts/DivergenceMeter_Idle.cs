@@ -9,9 +9,11 @@ public class DivergenceMeter_Idle : MonoBehaviour
     private float FadeTime = 2f;
     private bool isEnded = false;
     private float delay = 1f;
+
     void Awake()
     {
         List<GameObject> divergenceMeterPositions = new List<GameObject>();
+        
         foreach (Transform child in transform)
         {
             if (child.name.Contains("dot"))
@@ -20,12 +22,15 @@ public class DivergenceMeter_Idle : MonoBehaviour
             }
             divergenceMeterPositions.Add(child.gameObject);
         }
+
         divergenceMeterAnimScripts = new List<DM_anim>();
+
         foreach (GameObject position in divergenceMeterPositions)
         {
             DM_anim scriptRef = position.GetComponent<DM_anim>();
             divergenceMeterAnimScripts.Add(scriptRef);
         }
+
         defaultMaterialColor = DM_material.GetColor("_Color");
     }
 
@@ -35,6 +40,7 @@ public class DivergenceMeter_Idle : MonoBehaviour
         {
             delay -= Time.fixedDeltaTime;
         }
+
         if (delay <= 0 && DM_material.GetColor("_Color") == Color.black)
         {
             foreach (DM_anim script in divergenceMeterAnimScripts)
@@ -43,6 +49,7 @@ public class DivergenceMeter_Idle : MonoBehaviour
             }
             delay = 1f;
         }
+
         divergenceMeter_anim.GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, Time.fixedDeltaTime, ref FadeTime, ref isEnded, 2f, 0f, true);
     }
 

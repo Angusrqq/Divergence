@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-
 /// <summary>
 /// <para>
 /// <c>Character</c> is a ScriptableObject that represents a character that can be played by the player.
@@ -25,11 +24,11 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
     public float damageScale;
     public float cooldownReduction;
 
-/// <summary>
-/// <para>
-/// <c>Unlock</c> adds this character to the <c>GameData.unlockedCharacters</c> List if it is not already present.
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>Unlock</c> adds this character to the <c>GameData.unlockedCharacters</c> List if it is not already present.
+    /// </para>
+    /// </summary>
     public virtual void Unlock()
     {
         if (!GameData.unlockedCharacters.Contains(this))
@@ -38,11 +37,11 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
         }
     }
 
-/// <summary>
-/// <para>
-/// <c>Awake</c> populates the <c>animationClips</c> List with the names of the animation clips in the <c>animatorController</c>.
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>Awake</c> populates the <c>animationClips</c> List with the names of the animation clips in the <c>animatorController</c>.
+    /// </para>
+    /// </summary>
     public virtual void Awake()
     {
         foreach (AnimationClip clip in animatorController.animationClips)

@@ -13,12 +13,12 @@ public class SelectorManager : MonoBehaviour
     public TMPro.TMP_Text descriptionText;
     public Transform contentContainer;
 
-/// <summary>
-/// <para>
-/// <c>InitElements</c> instantiates and initializes the passed list of <c>SelectorItem</c> elements as children of <c>contentContainer</c>.
-/// </para>
-/// </summary>
-/// <param name="elements"></param>
+    /// <summary>
+    /// <para>
+    /// <c>InitElements</c> instantiates and initializes the passed list of <c>SelectorItem</c> elements as children of <c>contentContainer</c>.
+    /// </para>
+    /// </summary>
+    /// <param name="elements"></param>
     public void InitElements(List<SelectorItem> elements)
     {
         foreach (SelectorItem element in elements)
@@ -26,10 +26,11 @@ public class SelectorManager : MonoBehaviour
             Instantiate(element, contentContainer);
         }
     }
-/// <summary>
-/// <c>UpdateDescription</c> updates the description text with the passed string.
-/// </summary>
-/// <param name="description"></param>
+    
+    /// <summary>
+    /// <c>UpdateDescription</c> updates the description text with the passed string.
+    /// </summary>
+    /// <param name="description"></param>
     public void UpdateDescription(string description)
     {
         descriptionText.text = description;

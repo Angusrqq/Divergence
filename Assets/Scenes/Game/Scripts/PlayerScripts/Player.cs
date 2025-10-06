@@ -60,12 +60,12 @@ public class Player : MonoBehaviour
         damageableEntity.Init(maxHealth);
     }
 
-/// <summary>
-/// <para>
-/// <c>Update</c> is a method for updating the player.
-/// </para>
-/// Handles the player`s input, sets the movement vector and changes the animation.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>Update</c> is a method for updating the player.
+    /// </para>
+    /// Handles the player`s input, sets the movement vector and changes the animation.
+    /// </summary>
     private void Update()
     {
         movementVector = Vector2.zero;
@@ -90,7 +90,8 @@ public class Player : MonoBehaviour
             movementVector.x += 1;
         }
 
-        movementVector = movementVector.normalized; // Normalize to prevent faster diagonal movement
+        // Normalize to prevent faster diagonal movement
+        movementVector = movementVector.normalized;
         if (movementVector != Vector2.zero)
         {
             if (movementVector.x < 0)
@@ -109,38 +110,38 @@ public class Player : MonoBehaviour
         }
     }
 
-/// <summary>
-/// <para>
-/// <c>FixedUpdate</c> is used here for updating the player`s physics.
-/// </para>
-/// Updates the player`s position.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>FixedUpdate</c> is used here for updating the player`s physics.
+    /// </para>
+    /// Updates the player`s position.
+    /// </summary>
     private void FixedUpdate() // Use FixedUpdate for physics-related updates
     {
         rb.MovePosition(rb.position + movementVector * movementSpeed * Time.fixedDeltaTime);
     }
 
-/// <summary>
-/// <para>
-/// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
-/// </para>
-/// Shows the death screen and logs the death.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
+    /// </para>
+    /// Shows the death screen and logs the death.
+    /// </summary>
     private void OnDeath(UnityEngine.Object source)
     {
         GUI.Death();
         Debug.Log($"Player died by {source}");
     }
 
-/// <summary>
-/// <para>
-/// <c>OnCollisionStay2D</c> is used here for handling the player`s collisions.
-/// </para>
-/// Handles the player`s collisions with other objects.
-/// <para>
-/// If the collision object has a <c>DamageableEntity</c> component and the <c>canDealDamage</c> property is true, it deals damage to the player.
-/// </para>
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>OnCollisionStay2D</c> is used here for handling the player`s collisions.
+    /// </para>
+    /// Handles the player`s collisions with other objects.
+    /// <para>
+    /// If the collision object has a <c>DamageableEntity</c> component and the <c>canDealDamage</c> property is true, it deals damage to the player.
+    /// </para>
+    /// </summary>
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out DamageableEntity collision_dentity))
@@ -152,16 +153,17 @@ public class Player : MonoBehaviour
         }
     }
 
-/// <summary>
-/// <para>
-/// <c>UpdateHealth</c> is used here for updating the health bar.
-/// </para>
-/// Updates the player`s health slider.
-/// </summary>
+    /// <summary>
+    /// <para>
+    /// <c>UpdateHealth</c> is used here for updating the health bar.
+    /// </para>
+    /// Updates the player`s health slider.
+    /// </summary>
     void UpdateHealth(UnityEngine.Object source, float amount)
     {
         healthSlider.value = damageableEntity.health / damageableEntity.maxHealth;
     }
+    
     /// <summary>
     /// <para>
     /// <c>OnDestroy</c> called when the GameObject is destroyed
@@ -173,6 +175,7 @@ public class Player : MonoBehaviour
         damageableEntity.onDamageTaken -= UpdateHealth;
         damageableEntity.onHeal -= UpdateHealth;
         damageableEntity.onDeath -= OnDeath;
+
         onExpChange = null;
     }
 
@@ -205,9 +208,11 @@ public class Player : MonoBehaviour
     private void BuildCharacter()
     {
         animatedEntity.SetAnimatorController(characterData.animatorController);
+
         movementSpeed = characterData.movementSpeed;
         maxHealth = characterData.maxHealth;
         level = characterData.startLevel;
+
         foreach (Ability a in characterData.startingAbilities)
         {
             abilityHolder.AddAbility(a);
