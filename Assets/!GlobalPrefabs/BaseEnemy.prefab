@@ -140,7 +140,7 @@ MonoBehaviour:
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   damageFlashDuration: 0.1
   xpForKill: 10
-  xpCrystalPrefab: {fileID: 219700818905451428, guid: 3ff68223d38a503489063df6eb53ed89, type: 3}
+  xpCrystalPrefab: {fileID: 7069377261818586785, guid: 3ff68223d38a503489063df6eb53ed89, type: 3}
 --- !u!114 &3998149458944757455
 MonoBehaviour:
   m_ObjectHideFlags: 0

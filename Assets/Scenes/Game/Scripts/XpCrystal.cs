@@ -4,10 +4,10 @@ using UnityEngine;
 public class XpCrystal : MonoBehaviour
 {
     private int xpValue;
-    public bool IsFired { get; private set; } = false;
+    public bool IsFired { get; private set; } = false; // Fired from job
     public float speed = 2f;
 
-    public void SetxpValue(int xpValue)
+    public void SetXpValue(int xpValue)
     {
         if (xpValue > 0)
         {
@@ -19,7 +19,12 @@ public class XpCrystal : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
+    /// <summary>
+    /// Coroutine that moves the game object towards the player position using an animation curve.
+    /// </summary>
+    /// <param name="curve">Animation curve used to control the interpolation speed over time.</param>
+    /// <returns>IEnumerator used for coroutine execution.</returns>
     public IEnumerator MagnetToPlayerCoroutine(AnimationCurve curve)
     {
         IsFired = true;
@@ -32,22 +37,10 @@ public class XpCrystal : MonoBehaviour
                 time += Time.fixedDeltaTime * speed;
                 transform.position = Vector3.Lerp(transform.position, GameData.player.transform.position, curve.Evaluate(time));
             }
-            
+
             yield return new WaitForFixedUpdate();
         }
     }
-
-    // // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
