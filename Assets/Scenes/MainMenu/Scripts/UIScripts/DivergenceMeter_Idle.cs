@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class DivergenceMeter_Idle : MonoBehaviour
 {
-    private List<DM_anim> divergenceMeterAnimScripts;
+    private List<DivergenceMeterNumber> divergenceMeterAnimScripts;
     [SerializeField] private Material DM_material;
     private Color defaultMaterialColor;
     private float FadeTime = 2f;
     private bool isEnded = false;
     private float delay = 1f;
+
     void Awake()
     {
         List<GameObject> divergenceMeterPositions = new List<GameObject>();
+        
         foreach (Transform child in transform)
         {
             if (child.name.Contains("dot"))
@@ -20,12 +22,15 @@ public class DivergenceMeter_Idle : MonoBehaviour
             }
             divergenceMeterPositions.Add(child.gameObject);
         }
-        divergenceMeterAnimScripts = new List<DM_anim>();
+
+        divergenceMeterAnimScripts = new List<DivergenceMeterNumber>();
+
         foreach (GameObject position in divergenceMeterPositions)
         {
-            DM_anim scriptRef = position.GetComponent<DM_anim>();
+            DivergenceMeterNumber scriptRef = position.GetComponent<DivergenceMeterNumber>();
             divergenceMeterAnimScripts.Add(scriptRef);
         }
+
         defaultMaterialColor = DM_material.GetColor("_Color");
     }
 
@@ -35,14 +40,16 @@ public class DivergenceMeter_Idle : MonoBehaviour
         {
             delay -= Time.fixedDeltaTime;
         }
+
         if (delay <= 0 && DM_material.GetColor("_Color") == Color.black)
         {
-            foreach (DM_anim script in divergenceMeterAnimScripts)
+            foreach (DivergenceMeterNumber script in divergenceMeterAnimScripts)
             {
                 script.CustomUpdate();
             }
             delay = 1f;
         }
+
         divergenceMeter_anim.GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, Time.fixedDeltaTime, ref FadeTime, ref isEnded, 2f, 0f, true);
     }
 
