@@ -85,13 +85,16 @@ public class DivergenceMeter : MonoBehaviour
     {
         CoroutineRunning = true;
 
+
         while (time > 0)
         {
             time -= Time.deltaTime;
             material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, curve.Evaluate(time)));
 
+
             yield return new WaitForEndOfFrame();
         }
+
 
         CoroutineRunning = false;
     }
