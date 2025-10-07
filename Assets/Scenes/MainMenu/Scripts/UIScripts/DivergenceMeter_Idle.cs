@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DivergenceMeter_Idle : MonoBehaviour
 {
-    private List<DM_anim> divergenceMeterAnimScripts;
+    private List<DivergenceMeterNumber> divergenceMeterAnimScripts;
     [SerializeField] private Material DM_material;
     private Color defaultMaterialColor;
     private float FadeTime = 2f;
@@ -23,11 +23,11 @@ public class DivergenceMeter_Idle : MonoBehaviour
             divergenceMeterPositions.Add(child.gameObject);
         }
 
-        divergenceMeterAnimScripts = new List<DM_anim>();
+        divergenceMeterAnimScripts = new List<DivergenceMeterNumber>();
 
         foreach (GameObject position in divergenceMeterPositions)
         {
-            DM_anim scriptRef = position.GetComponent<DM_anim>();
+            DivergenceMeterNumber scriptRef = position.GetComponent<DivergenceMeterNumber>();
             divergenceMeterAnimScripts.Add(scriptRef);
         }
 
@@ -43,7 +43,7 @@ public class DivergenceMeter_Idle : MonoBehaviour
 
         if (delay <= 0 && DM_material.GetColor("_Color") == Color.black)
         {
-            foreach (DM_anim script in divergenceMeterAnimScripts)
+            foreach (DivergenceMeterNumber script in divergenceMeterAnimScripts)
             {
                 script.CustomUpdate();
             }

@@ -8,7 +8,7 @@ using UnityEngine.U2D.Animation;
 public class divergenceMeter_anim : MonoBehaviour
 {
     private List<SpriteResolver> divergenceMeterResolvers;
-    private List<DM_anim> divergenceMeterAnimScripts;
+    private List<DivergenceMeterNumber> divergenceMeterAnimScripts;
     private const string category = "DivergenceMeterSheet";
     public int seed;
     private float timer = 2;
@@ -27,7 +27,7 @@ public class divergenceMeter_anim : MonoBehaviour
         seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
 
         List<GameObject> divergenceMeterPositions = new List<GameObject>();
-        divergenceMeterAnimScripts = new List<DM_anim>();
+        divergenceMeterAnimScripts = new List<DivergenceMeterNumber>();
 
         foreach (Transform child in transform)
         {
@@ -47,7 +47,7 @@ public class divergenceMeter_anim : MonoBehaviour
         {
             SpriteResolver resolver = position.GetComponent<SpriteResolver>();
             divergenceMeterResolvers.Add(resolver);
-            DM_anim scriptRef = position.GetComponent<DM_anim>();
+            DivergenceMeterNumber scriptRef = position.GetComponent<DivergenceMeterNumber>();
             divergenceMeterAnimScripts.Add(scriptRef);
         }
 
@@ -69,7 +69,7 @@ public class divergenceMeter_anim : MonoBehaviour
 
         if (delayTime <= 0f && delay < 0.04f)
         {
-            foreach (DM_anim script in divergenceMeterAnimScripts)
+            foreach (DivergenceMeterNumber script in divergenceMeterAnimScripts)
             {
                 script.CustomUpdate();
             }
@@ -104,7 +104,7 @@ public class divergenceMeter_anim : MonoBehaviour
 
         for (int index = offset; index < divergenceMeterResolvers.Count; index++)
         {
-            divergenceMeterResolvers[index].SetCategoryAndLabel(category, seed.ToString().ToArray<char>()[index - offset].ToString());
+            divergenceMeterResolvers[index].SetCategoryAndLabel(category, seed.ToString().ToArray()[index - offset].ToString());
         }
 
         dotResolver.SetCategoryAndLabel(category, "dot");

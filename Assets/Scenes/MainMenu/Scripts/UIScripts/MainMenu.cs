@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject divergenceMeter;
     private divergenceMeter_anim dmAnimScript;
     private DivergenceMeter_Idle dmIdleScript;
+    private DivergenceMeter dm_test;
     private Canvas mainMenuCanvas;
     [SerializeField] private SelectorManager characterSelectorManager;
     [SerializeField] private CharacterButton characterButtonPrefab;
@@ -18,6 +19,7 @@ public class MainMenu : MonoBehaviour
     {
         dmAnimScript = divergenceMeter.GetComponent<divergenceMeter_anim>();
         dmIdleScript = divergenceMeter.GetComponent<DivergenceMeter_Idle>();
+        dm_test = divergenceMeter.GetComponent<DivergenceMeter>();
         mainMenuCanvas = GetComponent<Canvas>();
     }
 
@@ -28,7 +30,7 @@ public class MainMenu : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (dmAnimScript.isEnded)
+        if (DivergenceMeter.animationEnded)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
         }
@@ -42,7 +44,8 @@ public class MainMenu : MonoBehaviour
         mainMenuCanvas.enabled = false;
         dmIdleScript.OnDisable();
         dmIdleScript.enabled = false;
-        dmAnimScript.enabled = true;
+        // dmAnimScript.enabled = true;
+        StartCoroutine(dm_test.PlayAnimation());
     }
 
     /// <summary>

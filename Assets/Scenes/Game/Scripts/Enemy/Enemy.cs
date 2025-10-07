@@ -24,8 +24,8 @@ public class Enemy : MonoBehaviour
     public Color flashColor;
     public float damageFlashDuration = 0.1f;
     [NonSerialized] public bool isRespawnable = false;
-    public float xpForKill = 10f; // TODO: add xp system
-    public GameObject xpCrystalPrefab;
+    public int xpForKill = 10;
+    [SerializeField] private XpCrystal xpCrystalPrefab;
     Vector2 knockbackVelocity;
     float knockbackDuration;
 
@@ -38,10 +38,12 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         damageableEntity = GetComponent<DamageableEntity>();
+
         if (damageableEntity == null)
         {
             Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
         }
+
         damageableEntity.onDeath += OnDeath;
         damageableEntity.Init(maxHealth, true, damage);
         rb = GetComponent<Rigidbody2D>();
@@ -65,6 +67,7 @@ public class Enemy : MonoBehaviour
                 knockbackDuration -= Time.fixedDeltaTime;
                 return;
             }
+
             Vector2 direction = (target.transform.position - transform.position).normalized;
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
@@ -88,11 +91,13 @@ public class Enemy : MonoBehaviour
         if (damageableEntity.СanTakeDamage())
         {
             StartCoroutine(DamageFlash());
+
             if (knockbackForce > 0)
             {
                 Vector2 knockbackDirection = (transform.position - source.transform.position).normalized;
                 Knockback(knockbackDirection * knockbackForce, knockbackDuration);
             }
+
             damageableEntity.TakeDamage(source, amount);
         }
     }
@@ -129,11 +134,13 @@ public class Enemy : MonoBehaviour
     /// </summary>
     protected virtual void OnDeath(UnityEngine.Object source)
     {
-        Debug.Log($"Enemy at {gameObject} died by {source}");
-        // do something before destroying
+        // Debug.Log($"Enemy at {gameObject} died by {source}");
 
         if (xpCrystalPrefab != null)
-            Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity);
+        {
+            XpCrystal SpawnedCrystal = Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity);
+            SpawnedCrystal.SetXpValue(xpForKill);
+        }
 
         Destroy(gameObject);
     }
