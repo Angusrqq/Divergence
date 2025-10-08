@@ -18,7 +18,6 @@ public class EnemyManager : MonoBehaviour
     {
         _instance = this;
         Enemies = new List<Enemy>();
-        //SpawnEnemy();
     }
 
     void Update()
