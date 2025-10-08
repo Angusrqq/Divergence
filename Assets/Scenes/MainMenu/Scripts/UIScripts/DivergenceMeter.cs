@@ -33,7 +33,7 @@ public class DivergenceMeter : MonoBehaviour
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    //TODO: turn numbers into parameters
+    // TODO: turn numbers into parameters
     // TODO: Documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
@@ -48,16 +48,9 @@ public class DivergenceMeter : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-
-            Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
-
-            while (CoroutineRunning)
-            {
-                yield return new WaitForEndOfFrame();
-            }
         }
 
-        if (variant == AnimationVariant.Fast)
+        else if (variant == AnimationVariant.Fast)
         {
             foreach (DivergenceMeterNumber num in _numbers)
             {
@@ -65,19 +58,29 @@ public class DivergenceMeter : MonoBehaviour
             }
 
             yield return new WaitForSeconds(minRollTime);
+        }
 
-            Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<<
+        Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
 
-            while (CoroutineRunning)
-            {
-                yield return new WaitForEndOfFrame();
-            }
+        while (CoroutineRunning)
+        {
+            yield return new WaitForEndOfFrame();
         }
 
         animationEnded = true;
-        GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ???
+        GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
     }
 
+    //  TODO: write documentation while awake and not in the middle of the night
+    /// <summary>
+    /// Fancy lerp for the material colors
+    /// </summary>
+    /// <param name="material">the material to change its color</param>
+    /// <param name="StartMatColor">Color <c>a</c> for linear interpolation</param>
+    /// <param name="TargetMatColor">Color <c>b</c> for linear interpolation</param>
+    /// <param name="curve">curve (from 0 to 1 on time) that will be evaluated by <paramref name="time"></paramref></param>
+    /// <param name="time">how fast the color should change (less time -> more speed)</param>
+    /// <returns></returns>
     public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, AnimationCurve curve, float time)
     {
         CoroutineRunning = true;

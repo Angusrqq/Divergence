@@ -22,7 +22,17 @@ public class DivergenceMeterNumber : MonoBehaviour
     }
 
     // TODO: DO FUCKING DOCUMENTATION FOR THIS SHIT EGOR
-    public IEnumerator RollCoroutine(float time, float delay = 0f, bool blink = false, string label = "0")
+    /// <summary>
+    /// <para>
+    /// Coroutine that rolls the digit on the divergence meter and sets the <c>Sprite</c> of the <c>SpriteResolver</c> to the passed <paramref name="label"></paramref>.
+    /// </para>
+    /// </summary>
+    /// <param name="time">Duration of the animation in seconds</param>
+    /// <param name="delay">Delay between each digit switch</param>
+    /// <param name="label">Label of the <c>Sprite</c> that will be set after the animation is ended</param>
+    /// <returns></returns>
+    // i guess thats it
+    public IEnumerator RollCoroutine(float time, float delay = 0f, string label = "0")
     {
         while (time > 0)
         {
