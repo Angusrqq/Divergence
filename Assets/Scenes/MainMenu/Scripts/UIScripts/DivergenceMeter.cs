@@ -33,7 +33,7 @@ public class DivergenceMeter : MonoBehaviour
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    //TODO: turn numbers into parameters
+    // TODO: turn numbers into parameters
     // TODO: Documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
@@ -71,7 +71,7 @@ public class DivergenceMeter : MonoBehaviour
         GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
     }
 
-//TODO: write documentation while awake and not in the middle of the night
+    //  TODO: write documentation while awake and not in the middle of the night
     /// <summary>
     /// Fancy lerp for the material colors
     /// </summary>
@@ -85,16 +85,13 @@ public class DivergenceMeter : MonoBehaviour
     {
         CoroutineRunning = true;
 
-
         while (time > 0)
         {
             time -= Time.deltaTime;
             material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, curve.Evaluate(time)));
 
-
             yield return new WaitForEndOfFrame();
         }
-
 
         CoroutineRunning = false;
     }
