@@ -51,6 +51,7 @@ public class DivergenceMeter : MonoBehaviour
         }
 
         else if (variant == AnimationVariant.Fast)
+        else if (variant == AnimationVariant.Fast)
         {
             foreach (DivergenceMeterNumber num in _numbers)
             {
@@ -59,15 +60,21 @@ public class DivergenceMeter : MonoBehaviour
 
             yield return new WaitForSeconds(minRollTime);
         }
+        }
 
         Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
+        Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
 
+        while (CoroutineRunning)
+        {
+            yield return new WaitForEndOfFrame();
         while (CoroutineRunning)
         {
             yield return new WaitForEndOfFrame();
         }
 
         animationEnded = true;
+        GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
         GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
     }
 
@@ -85,13 +92,16 @@ public class DivergenceMeter : MonoBehaviour
     {
         CoroutineRunning = true;
 
+
         while (time > 0)
         {
             time -= Time.deltaTime;
             material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, curve.Evaluate(time)));
 
+
             yield return new WaitForEndOfFrame();
         }
+
 
         CoroutineRunning = false;
     }
