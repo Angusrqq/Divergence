@@ -71,6 +71,39 @@ public class DivergenceMeter : MonoBehaviour
         GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
     }
 
+    //TODO: test this and finish it
+    public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
+    {
+        // bool glowDirection = false;
+        while (true)
+        {
+            yield return StartCoroutine(GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, time));
+            foreach (DivergenceMeterNumber num in _numbers)
+            {
+                num.CustomUpdate();
+            }
+            yield return StartCoroutine(GlowFade(DM_material, DM_material.GetColor("_Color"), defaultMaterialColor * 5f, time));
+            // yield return new WaitForSeconds(time);
+            // if (!glowDirection && !CoroutineRunning)
+            // {
+            //     StartCoroutine(GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, GlowCurve, time));
+            //     yield return new WaitForSeconds(time);
+            //     glowDirection = !glowDirection;
+            //     foreach (DivergenceMeterNumber num in _numbers)
+            //     {
+            //         num.RollCoroutine(0f, label: Random.Range(1, 10).ToString());
+            //     }
+            // }
+            // else if (glowDirection && !CoroutineRunning)
+            // {
+            //     StartCoroutine(GlowFade(DM_material, Color.black, defaultMaterialColor * 5f, GlowCurve, time));
+            //     yield return new WaitForSeconds(time);
+            //     glowDirection = !glowDirection;
+            // }
+            // yield return new WaitForEndOfFrame();
+        }
+    }
+
     //  TODO: write documentation while awake and not in the middle of the night
     /// <summary>
     /// Fancy lerp for the material colors
@@ -96,6 +129,20 @@ public class DivergenceMeter : MonoBehaviour
         CoroutineRunning = false;
     }
 
+    public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, float time)
+    {
+        CoroutineRunning = true;
+        float time_passed = time;
+        while (time_passed > 0)
+        {
+            time_passed -= Time.deltaTime;
+            material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, 1 - (time_passed / time)));
+
+            yield return new WaitForEndOfFrame();
+        }
+        CoroutineRunning = false;
+    }
+
     public static int GetDigitFromNumber(int number, int index, int length = 0)
     {
         if (index > number.ToString().Length - 1 || length - index > number.ToString().Length) return 0;
@@ -108,5 +155,10 @@ public class DivergenceMeter : MonoBehaviour
         }
 
         return number % 10;
+    }
+
+    void OnDestroy()
+    {
+        DM_material.SetColor("_Color", defaultMaterialColor);
     }
 }

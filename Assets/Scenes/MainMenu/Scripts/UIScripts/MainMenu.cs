@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private DivergenceMeter_Idle dmIdleScript;
     private DivergenceMeter dm_test;
     private Canvas mainMenuCanvas;
+    private Coroutine IdleAnim;
     [SerializeField] private SelectorManager characterSelectorManager;
     [SerializeField] private CharacterButton characterButtonPrefab;
     void Awake()
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         BuildCharacterSelector();
+        IdleAnim = StartCoroutine(dm_test.IdleAnimation());
     }
 
     void FixedUpdate()
@@ -42,8 +44,9 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         mainMenuCanvas.enabled = false;
-        dmIdleScript.OnDisable();
-        dmIdleScript.enabled = false;
+        // dmIdleScript.OnDisable();
+        // dmIdleScript.enabled = false;
+        StopCoroutine(IdleAnim);
         // dmAnimScript.enabled = true;
         StartCoroutine(dm_test.PlayAnimation());
     }
