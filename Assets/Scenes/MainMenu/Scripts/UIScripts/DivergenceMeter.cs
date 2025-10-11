@@ -33,8 +33,7 @@ public class DivergenceMeter : MonoBehaviour
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    // TODO: turn numbers into parameters
-    // TODO: Documentation
+    // TODO: Turn numbers into parameters and documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
         if (variant == AnimationVariant.Full)
@@ -78,11 +77,14 @@ public class DivergenceMeter : MonoBehaviour
         while (true)
         {
             yield return StartCoroutine(GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, time));
+
             foreach (DivergenceMeterNumber num in _numbers)
             {
                 num.CustomUpdate();
             }
+
             yield return StartCoroutine(GlowFade(DM_material, DM_material.GetColor("_Color"), defaultMaterialColor * 5f, time));
+
             // yield return new WaitForSeconds(time);
             // if (!glowDirection && !CoroutineRunning)
             // {
@@ -133,6 +135,7 @@ public class DivergenceMeter : MonoBehaviour
     {
         CoroutineRunning = true;
         float time_passed = time;
+
         while (time_passed > 0)
         {
             time_passed -= Time.deltaTime;
@@ -140,6 +143,7 @@ public class DivergenceMeter : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+
         CoroutineRunning = false;
     }
 

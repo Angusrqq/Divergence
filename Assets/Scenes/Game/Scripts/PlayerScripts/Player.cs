@@ -49,13 +49,16 @@ public class Player : MonoBehaviour
 
         damageableEntity.onDamageTaken += UpdateHealth;
         damageableEntity.onHeal += UpdateHealth;
+
         GameData.UpdatePlayerRef(this);
         characterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
         BuildCharacter();
+
         if (damageableEntity == null)
         {
             Debug.LogError($"{this.GetType()} at {gameObject} has no DamageableEntity component");
         }
+
         damageableEntity.onDeath += OnDeath;
         damageableEntity.Init(maxHealth);
     }
@@ -194,16 +197,20 @@ public class Player : MonoBehaviour
             LevelUp();
             return;
         }
-        else exp += exp_to_add;
+        else
+        {
+            exp += exp_to_add;
+        }
 
         onExpChange?.Invoke(source, exp_to_add);
         Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
     }
 
-    public void TakeExp(UnityEngine.Object source, int exp_to_take)
-    {
-        throw new NotImplementedException();
-    }
+    // TODO: Uncomment if needed
+    // public void TakeExp(UnityEngine.Object source, int exp_to_take)
+    // {
+    //     throw new NotImplementedException();
+    // }
 
     private void BuildCharacter()
     {

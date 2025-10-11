@@ -1,9 +1,5 @@
 using System;
 using UnityEngine;
-//TODO: EVGENIY READ THIS
-// IF YOU DONT KNOW WHAT IS A SCRIPTABLE OBJECT
-// /\ read this: https://learn.unity.com/tutorial/introduction-to-scriptable-objects
-// watch this: https://www.youtube.com/watch?v=ry4I6QyPw4E (this is what i watched when making this)
 
 /// <summary>
 /// <para>
