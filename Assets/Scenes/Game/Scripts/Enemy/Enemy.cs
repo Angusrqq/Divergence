@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
             Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
         }
 
-        damageableEntity.onDeath += OnDeath;
+        damageableEntity.OnDeath += OnDeath;
         damageableEntity.Init(maxHealth, true, damage);
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public virtual void TakeDamage(GameObject source, float amount, float knockbackForce = 0f, float knockbackDuration = 0f)
     {
-        if (damageableEntity.СanTakeDamage())
+        if (damageableEntity.CanTakeDamage())
         {
             StartCoroutine(DamageFlash());
 
@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     protected virtual void SetMaxHealth(float amount)
     {
-        damageableEntity.maxHealth = amount;
+        damageableEntity.MaxHealth = amount;
         maxHealth = amount;
     }
 
@@ -145,9 +145,12 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Unsubscribes from the <c>OnDeath</c> event from the <c>DamageableEntity</c> class when the enemy is destroyed.
+    /// </summary>
     protected virtual void OnDestroy()
     {
-        damageableEntity.onDeath -= OnDeath;
+        damageableEntity.OnDeath -= OnDeath;
     }
 
     /// <summary>
@@ -175,9 +178,3 @@ public class Enemy : MonoBehaviour
         knockbackDuration = duration;
     }
 }
-
-// Надо написать/понять что мы можем сделать наиболее эффективно, чтобы работало
-
-// Как мы будем спавнить врагов?
-// Как мы будем инициализировать врагов?
-// Где мы будем хранить данные о каждом враге? PLS NO CHAT GEPETE (or little bit)

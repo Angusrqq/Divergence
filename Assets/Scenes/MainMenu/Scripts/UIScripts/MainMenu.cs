@@ -46,7 +46,11 @@ public class MainMenu : MonoBehaviour
         mainMenuCanvas.enabled = false;
         // dmIdleScript.OnDisable();
         // dmIdleScript.enabled = false;
-        StopCoroutine(IdleAnim);
+        if (IdleAnim != null)
+        {
+            StopCoroutine(IdleAnim);
+            IdleAnim = null;
+        }
         // dmAnimScript.enabled = true;
         StartCoroutine(dm_test.PlayAnimation());
     }

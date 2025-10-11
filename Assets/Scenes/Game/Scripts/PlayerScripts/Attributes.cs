@@ -27,7 +27,7 @@ public static class Attributes
     public static int pierceTargets = 0;
     public static event Action<AttributeId, float> OnAttributeChanged;
     private static float _magnetRadius = 0.5f;
-    public static float magnetRadius
+    public static float MagnetRadius
     {
         get => _magnetRadius;
         set

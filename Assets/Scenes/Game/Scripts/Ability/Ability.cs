@@ -83,6 +83,7 @@ public class Ability : ScriptableObject
                     StartCooldown();
                 }
                 break;
+
             case AbilityState.cooldown:
                 if (cooldownTimer > 0)
                 {
@@ -93,6 +94,7 @@ public class Ability : ScriptableObject
                     CooldownEnded();
                 }
                 break;
+                
             case AbilityState.ready:
                 Activate();
                 break;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-///TODO: Yo. not implemented at all.
+/// TODO: Yo. not implemented at all.
 /// Should store data about metaprogression, like time knowledge (some currency like gold), unlocked characters, etc.
 /// Should be serializable and saved/loaded using DataSystem.
 /// </summary>

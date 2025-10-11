@@ -27,6 +27,7 @@ public class CharacterButton : SelectorItem
         characterData = character;
         base.Init(character, manager);
         selectorManager = manager;
+        
         SetUI();
     }
 

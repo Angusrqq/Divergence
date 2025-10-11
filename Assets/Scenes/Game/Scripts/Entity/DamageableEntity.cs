@@ -9,13 +9,13 @@ using System;
 /// </summary>
 public class DamageableEntity : MonoBehaviour, IDamageable
 {
-    public float health { get; set; }
-    public float maxHealth { get; set; }
+    public float Health { get; set; }
+    public float MaxHealth { get; set; }
     public bool canDealDamage = false;
-    public float damage { get; set; }
-    public event Action<UnityEngine.Object> onDeath;
-    public event Action<UnityEngine.Object, float> onDamageTaken;
-    public event Action<UnityEngine.Object, float> onHeal;
+    public float Damage { get; set; }
+    public event Action<UnityEngine.Object> OnDeath;
+    public event Action<UnityEngine.Object, float> OnDamageTaken;
+    public event Action<UnityEngine.Object, float> OnHeal;
     public bool isVulnerable = true;
     public bool canHeal = true;
 
@@ -32,17 +32,19 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     public void TakeDamage(UnityEngine.Object source, float amount)
     {
         if (!isVulnerable) return;
-        if (health <= 0) return;
-        if (health - amount <= 0)
+        if (Health <= 0) return;
+
+        if (Health - amount <= 0)
         {
-            float taken = health;
-            health = 0;
-            onDamageTaken?.Invoke(source, taken);
-            onDeath?.Invoke(source);
+            float taken = Health;
+            Health = 0;
+            OnDamageTaken?.Invoke(source, taken);
+            OnDeath?.Invoke(source);
             return;
         }
-        health -= amount;
-        onDamageTaken?.Invoke(source, amount);
+        
+        Health -= amount;
+        OnDamageTaken?.Invoke(source, amount);
     }
 
     /// <summary>
@@ -58,7 +60,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// <returns>
     /// <c>true</c> if the entity can take damage, <c>false</c> otherwise.
     /// </returns>
-    public bool СanTakeDamage() => isVulnerable && health > 0;
+    public bool CanTakeDamage() => isVulnerable && Health > 0;
 
     /// <summary>
     /// <para>
@@ -72,14 +74,16 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     public void Heal(UnityEngine.Object source, float amount)
     {
         if (!canHeal) return;
-        if (health <= 0 || health >= maxHealth) return;
-        if (health + amount >= maxHealth)
+        if (Health <= 0 || Health >= MaxHealth) return;
+
+        if (Health + amount >= MaxHealth)
         {
-            onHeal?.Invoke(source, maxHealth - health);
-            health = maxHealth;
+            OnHeal?.Invoke(source, MaxHealth - Health);
+            Health = MaxHealth;
             return;
         }
-        health += amount;
+
+        Health += amount;
     }
 
     /// <summary>
@@ -92,12 +96,13 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// </summary>
     public void Init(float maxHealth, bool canDealDamage = false, float damage = 0)
     {
-        this.maxHealth = maxHealth;
-        this.health = maxHealth;
+        MaxHealth = maxHealth;
+        Health = maxHealth;
+        
         if (canDealDamage)
         {
             this.canDealDamage = canDealDamage;
-            this.damage = damage;
+            Damage = damage;
         }
     }
 }

@@ -51,7 +51,10 @@ public class GameData : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else instance = this;
+        else
+        {
+            instance = this;
+        }
 
         DontDestroyOnLoad(gameObject);
         
@@ -86,7 +89,12 @@ public class GameData : MonoBehaviour
     public static void SetSeed(int seed, bool resetRandom = false)
     {
         currentSeed = seed;
-        if (resetRandom) ResetRandomToSeed();
+
+        if (resetRandom)
+        {
+            ResetRandomToSeed();
+        }
+
         Debug.Log($"Set seed to {currentSeed}");
     }
 
@@ -106,6 +114,7 @@ public class GameData : MonoBehaviour
             ResetRandomToSeed();
             Debug.Log("Reset random to seed " + currentSeed);
         }
+        
         if (scene.name == "MainMenu")
         {
             Random.InitState((int)System.DateTime.Now.Ticks); // reset random to current time
@@ -151,6 +160,10 @@ public class GameData : MonoBehaviour
         player = _player;
     }
 
+    /// <summary>
+    /// Called when the object is destroyed.
+    /// Unsubscribes from the <c>SceneManager.sceneLoaded</c> event to prevent memory leaks.
+    /// </summary>
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

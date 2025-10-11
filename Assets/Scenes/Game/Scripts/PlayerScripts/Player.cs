@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// </para>
 /// Handles the player`s movement, animations, abilities, health, experience, etc.
 /// <para>
-///TODO: Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
+/// TODO: Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
 /// </para>
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
@@ -47,8 +47,8 @@ public class Player : MonoBehaviour
         healthSlider = HealthBar.GetComponent<Slider>();
         abilityHolder = GetComponent<AbilityHolder>();
 
-        damageableEntity.onDamageTaken += UpdateHealth;
-        damageableEntity.onHeal += UpdateHealth;
+        damageableEntity.OnDamageTaken += UpdateHealth;
+        damageableEntity.OnHeal += UpdateHealth;
 
         GameData.UpdatePlayerRef(this);
         characterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
@@ -56,10 +56,10 @@ public class Player : MonoBehaviour
 
         if (damageableEntity == null)
         {
-            Debug.LogError($"{this.GetType()} at {gameObject} has no DamageableEntity component");
+            Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
         }
 
-        damageableEntity.onDeath += OnDeath;
+        damageableEntity.OnDeath += OnDeath;
         damageableEntity.Init(maxHealth);
     }
 
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
     /// </para>
     /// Updates the player`s position.
     /// </summary>
-    private void FixedUpdate() // Use FixedUpdate for physics-related updates
+    private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movementVector * movementSpeed * Time.fixedDeltaTime);
     }
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
         {
             if (collision_dentity.canDealDamage)
             {
-                damageableEntity.TakeDamage(collision.gameObject, collision_dentity.damage);
+                damageableEntity.TakeDamage(collision.gameObject, collision_dentity.Damage);
             }
         }
     }
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateHealth(UnityEngine.Object source, float amount)
     {
-        healthSlider.value = damageableEntity.health / damageableEntity.maxHealth;
+        healthSlider.value = damageableEntity.Health / damageableEntity.MaxHealth;
     }
     
     /// <summary>
@@ -175,25 +175,38 @@ public class Player : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        damageableEntity.onDamageTaken -= UpdateHealth;
-        damageableEntity.onHeal -= UpdateHealth;
-        damageableEntity.onDeath -= OnDeath;
+        damageableEntity.OnDamageTaken -= UpdateHealth;
+        damageableEntity.OnHeal -= UpdateHealth;
+        damageableEntity.OnDeath -= OnDeath;
 
         onExpChange = null;
     }
 
+    /// <summary>
+    /// <para>
+    /// Levels up the player, increases the experience required for the next level, and logs the level up event.
+    /// </para>
+    /// </summary>
     public void LevelUp()
     {
         level++;
+        expNext += Mathf.RoundToInt(expNext * 1.1f);
         Debug.Log($"Player {gameObject.name} leveled up to level {level}");
     }
 
+    /// <summary>
+    /// <para>
+    /// Adds experience points to the player.
+    /// </para>
+    /// If the experience points added are enough to level up the player, levels up the player and logs the level up.
+    /// </summary>
+    /// <param name="source">The source of the experience points.</param>
+    /// <param name="exp_to_add">The amount of experience points to add.</param>
     public void AddExp(UnityEngine.Object source, int exp_to_add)
     {
         if (expNext - exp <= exp_to_add)
         {
             exp = exp_to_add - (expNext - exp);
-            expNext += Mathf.RoundToInt(expNext * 1.1f);
             LevelUp();
             return;
         }
@@ -212,6 +225,13 @@ public class Player : MonoBehaviour
     //     throw new NotImplementedException();
     // }
 
+    /// <summary>
+    /// <para>
+    /// Sets up the player character with the given character data.
+    /// </para>
+    /// Sets the animator controller, movement speed, max health and level of the player.
+    /// Adds all the starting abilities of the character to the ability holder.
+    /// </summary>
     private void BuildCharacter()
     {
         animatedEntity.SetAnimatorController(characterData.animatorController);

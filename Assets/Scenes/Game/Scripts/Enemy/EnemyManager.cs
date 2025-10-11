@@ -14,12 +14,18 @@ public class EnemyManager : MonoBehaviour
     private float delay = 1f;
     public List<Enemy> Enemies { get; private set; }
 
+    /// <summary>
+    /// Initializes the enemy manager singleton and creates a new list for storing enemies.
+    /// </summary>
     void Start()
     {
         _instance = this;
         Enemies = new List<Enemy>();
     }
 
+    /// <summary>
+    /// Updates the enemy spawning timer. If the timer is up, an enemy is spawned and the timer is reset.
+    /// </summary>
     void Update()
     {
         if (delay - Time.deltaTime <= 0)
@@ -27,7 +33,10 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy();
             delay = 1f;
         }
-        else delay -= Time.deltaTime;
+        else
+        {
+            delay -= Time.deltaTime;
+        }
     }
 
     /// <summary>

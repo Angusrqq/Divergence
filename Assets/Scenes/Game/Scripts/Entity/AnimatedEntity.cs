@@ -18,7 +18,7 @@ public class AnimatedEntity : MonoBehaviour
 
     void Start()
     {
-        animatorController ??= animator.runtimeAnimatorController as AnimatorController;
+        animatorController = animatorController != null ? animatorController : animator.runtimeAnimatorController as AnimatorController;
     }
 
     /// <summary>
@@ -49,6 +49,7 @@ public class AnimatedEntity : MonoBehaviour
     public virtual void ChangeAnimation(AnimationsList animation)
     {
         if (currentAnimation == animation.ToString()) return;
+        
         animator.Play(animation.ToString());
         currentAnimation = animation.ToString();
     }
@@ -61,6 +62,7 @@ public class AnimatedEntity : MonoBehaviour
     public virtual void ChangeAnimation(string animation)
     {
         if (currentAnimation == animation) return;
+
         animator.Play(animation);
         currentAnimation = animation;
     }

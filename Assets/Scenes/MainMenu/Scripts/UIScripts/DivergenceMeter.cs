@@ -9,9 +9,9 @@ public class DivergenceMeter : MonoBehaviour
     private List<DivergenceMeterNumber> _numbers = new();
     [SerializeField] private AnimationCurve GlowCurve;
     public int Seed;
+    public Coroutine NestedCoroutine;
     [SerializeField] private Material DM_material;
     private Color defaultMaterialColor;
-    private static bool CoroutineRunning = false;
     public static bool animationEnded = false;
 
     public enum AnimationVariant
@@ -22,6 +22,7 @@ public class DivergenceMeter : MonoBehaviour
 
     void Awake()
     {
+        animationEnded = false;
         defaultMaterialColor = DM_material.GetColor("_Color");
 
         foreach (Transform child in transform)
@@ -36,6 +37,7 @@ public class DivergenceMeter : MonoBehaviour
     // TODO: Turn numbers into parameters and documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
+        DM_material.SetColor("_Color", defaultMaterialColor);
         if (variant == AnimationVariant.Full)
         {
             foreach (DivergenceMeterNumber num in _numbers)
@@ -59,12 +61,7 @@ public class DivergenceMeter : MonoBehaviour
             yield return new WaitForSeconds(minRollTime);
         }
 
-        Coroutine Blink = StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
-
-        while (CoroutineRunning)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        yield return StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 10f, GlowCurve, 0.3f));//<< these numbers
 
         animationEnded = true;
         GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
@@ -73,36 +70,16 @@ public class DivergenceMeter : MonoBehaviour
     //TODO: test this and finish it
     public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
     {
-        // bool glowDirection = false;
         while (true)
         {
-            yield return StartCoroutine(GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, time));
+            yield return GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, time);
 
             foreach (DivergenceMeterNumber num in _numbers)
             {
                 num.CustomUpdate();
             }
 
-            yield return StartCoroutine(GlowFade(DM_material, DM_material.GetColor("_Color"), defaultMaterialColor * 5f, time));
-
-            // yield return new WaitForSeconds(time);
-            // if (!glowDirection && !CoroutineRunning)
-            // {
-            //     StartCoroutine(GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, GlowCurve, time));
-            //     yield return new WaitForSeconds(time);
-            //     glowDirection = !glowDirection;
-            //     foreach (DivergenceMeterNumber num in _numbers)
-            //     {
-            //         num.RollCoroutine(0f, label: Random.Range(1, 10).ToString());
-            //     }
-            // }
-            // else if (glowDirection && !CoroutineRunning)
-            // {
-            //     StartCoroutine(GlowFade(DM_material, Color.black, defaultMaterialColor * 5f, GlowCurve, time));
-            //     yield return new WaitForSeconds(time);
-            //     glowDirection = !glowDirection;
-            // }
-            // yield return new WaitForEndOfFrame();
+            yield return GlowFade(DM_material, DM_material.GetColor("_Color"), defaultMaterialColor * 5f, time);
         }
     }
 
@@ -118,8 +95,6 @@ public class DivergenceMeter : MonoBehaviour
     /// <returns></returns>
     public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, AnimationCurve curve, float time)
     {
-        CoroutineRunning = true;
-
         while (time > 0)
         {
             time -= Time.deltaTime;
@@ -127,13 +102,10 @@ public class DivergenceMeter : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-
-        CoroutineRunning = false;
     }
 
     public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, float time)
     {
-        CoroutineRunning = true;
         float time_passed = time;
 
         while (time_passed > 0)
@@ -143,8 +115,6 @@ public class DivergenceMeter : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-
-        CoroutineRunning = false;
     }
 
     public static int GetDigitFromNumber(int number, int index, int length = 0)
