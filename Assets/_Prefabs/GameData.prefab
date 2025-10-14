@@ -47,6 +47,13 @@ MonoBehaviour:
   _Characters:
   - {fileID: 11400000, guid: cd91144543b551e41a58fb488ce56dbc, type: 2}
   - {fileID: 11400000, guid: d92d099eb0ebc1147bb5602a61ed131a, type: 2}
+  - {fileID: 11400000, guid: b9b0febb01730d14db477ad7852714b6, type: 2}
+  - {fileID: 11400000, guid: 2e12ea3b658876f49b0efde5a3f8bad6, type: 2}
   _Maps: []
   _Abilities:
   - {fileID: 11400000, guid: 7f9dfaae940bfe341881086766b956bf, type: 2}
+  _Enemies:
+  - {fileID: 11400000, guid: ad1ceae49b9e54a4885f524163a6e72b, type: 2}
+  - {fileID: 11400000, guid: d56e767442d59ba4fa9e6fd49874e103, type: 2}
+  - {fileID: 11400000, guid: ab725356ee677d0439296ad2a5df786b, type: 2}
+  - {fileID: 11400000, guid: b04852904220a1b42bc7c6d5d3413949, type: 2}

@@ -9,25 +9,43 @@ using System.Collections;
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DamageableEntity))]
+[RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
     [NonSerialized] public DamageableEntity damageableEntity;
+    [NonSerialized] public AnimatedEntity animatedEntity;
+    [NonSerialized] public SpriteRenderer spriteRenderer;
+    [NonSerialized] public EnemyData enemyData;
     protected Transform target;
     protected Rigidbody2D rb;
-    public float moveSpeed = 2f;
     public float maxHealth = 100f;
-    public float damage = 10f;
-    public SpriteRenderer spriteRenderer;
+    public float moveSpeed = 12f;
+    public float damage = 1f;
+    public int xpDrop = 10;
     private Color originalColor;
     public Color flashColor;
     public float damageFlashDuration = 0.1f;
     [NonSerialized] public bool isRespawnable = false;
-    public int xpForKill = 10;
     [SerializeField] private XpCrystal xpCrystalPrefab;
     Vector2 knockbackVelocity;
     float knockbackDuration;
+
+    public void Init(EnemyData data, Transform newTarget)
+    {
+        enemyData = data;
+        maxHealth = data.baseMaxHealth;
+        damage = data.damage;
+        xpDrop = data.baseExp;
+        moveSpeed = data.baseMovementSpeed;
+        target = newTarget;
+        animatedEntity = GetComponent<AnimatedEntity>();
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        circleCollider2D.radius = data.colliderRadius;
+        circleCollider2D.offset = data.colliderOffset;
+        animatedEntity.SetAnimatorController(data.animatorController);
+    }
 
     /// <summary>
     /// <para>
@@ -69,6 +87,22 @@ public class Enemy : MonoBehaviour
             }
 
             Vector2 direction = (target.transform.position - transform.position).normalized;
+            if (direction != Vector2.zero)
+            {
+                if (direction.x < 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                else if (direction.x > 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                animatedEntity.ChangeAnimation("Run");
+            }
+            else
+            {
+                animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
+            }
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
     }
@@ -139,7 +173,7 @@ public class Enemy : MonoBehaviour
         if (xpCrystalPrefab != null)
         {
             XpCrystal SpawnedCrystal = Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity);
-            SpawnedCrystal.SetXpValue(xpForKill);
+            SpawnedCrystal.SetXpValue(xpDrop);
         }
 
         Destroy(gameObject);

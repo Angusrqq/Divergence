@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager _instance { get; private set; }
     [SerializeField] private Enemy _prefab;
-    public GameObject target;
+    public MonoBehaviour target;
     private float delay = 1f;
     public List<Enemy> Enemies { get; private set; }
 
@@ -49,7 +49,7 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = Instantiate(_prefab, new Vector3(UnityEngine.Random.Range(-2f, 2f), 0, 0), Quaternion.identity);
 
         enemy.transform.parent = transform;
-        enemy.SetTarget(target.transform);
+        enemy.Init(GameData.Enemies[Random.Range(0, GameData.Enemies.Count)], target.transform);
         enemy.gameObject.SetActive(true);
 
         Enemies.Add(enemy);

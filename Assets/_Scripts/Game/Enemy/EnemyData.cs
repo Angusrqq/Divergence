@@ -8,9 +8,11 @@ public class EnemyData : ScriptableObject
     public Sprite icon;
     public RuntimeAnimatorController animatorController;
     public List<string> animationClips;
-    public int baseMaxHealth;
-    public float baseMovementSpeed;
-    public float damage;
-    public int baseExp;
+    public int baseMaxHealth = 100;
+    public float baseMovementSpeed = 9f;
+    public float damage = 1f;
+    public int baseExp = 10;
     public List<Ability> abilities;
+    public float colliderRadius;
+    public Vector2 colliderOffset;
 }

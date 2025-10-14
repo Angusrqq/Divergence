@@ -17,7 +17,7 @@ public class AnimatedEntity : MonoBehaviour
 
     void Start()
     {
-        animatorController = animatorController != null ? animatorController : animator.runtimeAnimatorController;
+        animatorController = animatorController ? animatorController : animator.runtimeAnimatorController;
     }
 
     /// <summary>

@@ -171,8 +171,8 @@ public class Player : MonoBehaviour
     void UpdateHpBarPosition()//TODO: figure out this fucking bullshit
     {
         //how the fuck do i do that in orthographic camera or whatever the fucking the mode is
-        HealthBar.position = Camera.main.WorldToScreenPoint(transform.position);//worldtoscreenpoint doesnt work in orthographic camera?? what am i supposed to do
-        Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+        //HealthBar.position = Camera.main.WorldToScreenPoint(transform.position);//worldtoscreenpoint doesnt work in orthographic camera?? what am i supposed to do
+        //Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
     }
     
     /// <summary>

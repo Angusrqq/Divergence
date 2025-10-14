@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a44f4bada5faab4fb2df2e34a380e65, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  name: Slime
+  icon: {fileID: -7505095618505130590, guid: aca8f61c7be024545b7a580909d2587b, type: 3}
+  animatorController: {fileID: 9100000, guid: d011f73a67f580749a7a58e94599d68a, type: 2}
+  animationClips:
+  - Run
+  baseMaxHealth: 100
+  baseMovementSpeed: 9
+  damage: 1
+  baseExp: 10
+  abilities: []
+  colliderRadius: 0.05
+  colliderOffset: {x: 0, y: 0}
