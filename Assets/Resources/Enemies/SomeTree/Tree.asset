@@ -18,9 +18,9 @@ MonoBehaviour:
   animationClips:
   - Run
   baseMaxHealth: 100
-  baseMovementSpeed: 9
+  baseMovementSpeed: 4
   damage: 1
-  baseExp: 10
+  baseExp: 3
   abilities: []
   colliderRadius: 0.05
   colliderOffset: {x: 0, y: 0}
