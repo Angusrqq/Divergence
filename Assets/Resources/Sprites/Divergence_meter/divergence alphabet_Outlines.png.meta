@@ -1,0 +1,1079 @@
+fileFormatVersion: 2
+guid: ac20df9839b8dff48a43fa9c6cf41c8b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 135102916318895936
+    second: divergence alphabet_Outlines_0
+  - first:
+      213: -100839931532511626
+    second: divergence alphabet_Outlines_1
+  - first:
+      213: 9028463881808785378
+    second: divergence alphabet_Outlines_2
+  - first:
+      213: -5750435765322109695
+    second: divergence alphabet_Outlines_3
+  - first:
+      213: 1003641500065380883
+    second: divergence alphabet_Outlines_4
+  - first:
+      213: 610678026122259544
+    second: divergence alphabet_Outlines_5
+  - first:
+      213: -6553104105074758653
+    second: divergence alphabet_Outlines_6
+  - first:
+      213: 3187251593325814539
+    second: divergence alphabet_Outlines_7
+  - first:
+      213: -8104915898647753274
+    second: divergence alphabet_Outlines_8
+  - first:
+      213: -6409930609624309165
+    second: divergence alphabet_Outlines_9
+  - first:
+      213: 499795916042750766
+    second: divergence alphabet_Outlines_10
+  - first:
+      213: 486969056735541762
+    second: divergence alphabet_Outlines_11
+  - first:
+      213: 5586785796446941838
+    second: divergence alphabet_Outlines_12
+  - first:
+      213: -7094639798657404282
+    second: divergence alphabet_Outlines_13
+  - first:
+      213: -2089135345802199514
+    second: divergence alphabet_Outlines_14
+  - first:
+      213: 2758137845079798996
+    second: divergence alphabet_Outlines_15
+  - first:
+      213: -7522641661455934206
+    second: divergence alphabet_Outlines_16
+  - first:
+      213: -5730165490589894451
+    second: divergence alphabet_Outlines_17
+  - first:
+      213: -735263731282952009
+    second: divergence alphabet_Outlines_18
+  - first:
+      213: -146821034219306388
+    second: divergence alphabet_Outlines_19
+  - first:
+      213: 7229715155899133164
+    second: divergence alphabet_Outlines_20
+  - first:
+      213: 7033081973482363080
+    second: divergence alphabet_Outlines_21
+  - first:
+      213: 7012304895688450029
+    second: divergence alphabet_Outlines_22
+  - first:
+      213: -718592633955310271
+    second: divergence alphabet_Outlines_23
+  - first:
+      213: -7948683062776702977
+    second: divergence alphabet_Outlines_24
+  - first:
+      213: 6027117521370198151
+    second: divergence alphabet_Outlines_25
+  - first:
+      213: 4327159754993501950
+    second: divergence alphabet_Outlines_26
+  - first:
+      213: 2143288113232742366
+    second: divergence alphabet_Outlines_27
+  - first:
+      213: -3561076575561649117
+    second: divergence alphabet_Outlines_28
+  - first:
+      213: 3251789526136710235
+    second: divergence alphabet_Outlines_29
+  - first:
+      213: -2833981659716042894
+    second: divergence alphabet_Outlines_30
+  - first:
+      213: 8586177951091033241
+    second: divergence alphabet_Outlines_31
+  - first:
+      213: 5440911702643830767
+    second: divergence alphabet_Outlines_32
+  - first:
+      213: -3433886253461764999
+    second: divergence alphabet_Outlines_33
+  - first:
+      213: -1976980559929735218
+    second: divergence alphabet_Outlines_34
+  - first:
+      213: -1189174427117032837
+    second: divergence alphabet_Outlines_35
+  - first:
+      213: -4213191454929614234
+    second: divergence alphabet_Outlines_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_0
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f9e47f26bffd100800000000000000
+      internalID: 135102916318895936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_1
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67674d5dd9eb99ef0800000000000000
+      internalID: -100839931532511626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_2
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ef28aec01c8b4d70800000000000000
+      internalID: 9028463881808785378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_3
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10d264873295230b0800000000000000
+      internalID: -5750435765322109695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_4
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31abc3570a6aded00800000000000000
+      internalID: 1003641500065380883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_5
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85c6723ed60997800800000000000000
+      internalID: 610678026122259544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_6
+      rect:
+        serializedVersion: 2
+        x: 1949
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30c6dd84982be05a0800000000000000
+      internalID: -6553104105074758653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_7
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 2119
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b03abf5ff646b3c20800000000000000
+      internalID: 3187251593325814539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_8
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cd4fae8eed858f80800000000000000
+      internalID: -8104915898647753274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_9
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352a072621a5b07a0800000000000000
+      internalID: -6409930609624309165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_10
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b4be3dcb1afe600800000000000000
+      internalID: 499795916042750766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_11
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20a345be6cf02c600800000000000000
+      internalID: 486969056735541762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_12
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e82fa61f410488d40800000000000000
+      internalID: 5586785796446941838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_13
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6823daf21b6ca8d90800000000000000
+      internalID: -7094639798657404282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_14
+      rect:
+        serializedVersion: 2
+        x: 1949
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62e3fb1c876e103e0800000000000000
+      internalID: -2089135345802199514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_15
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1679
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4fa81c1cfd64620800000000000000
+      internalID: 2758137845079798996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_16
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d5d5cf3453a9790800000000000000
+      internalID: -7522641661455934206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_17
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8ff2598dc5a70b0800000000000000
+      internalID: -5730165490589894451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_18
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b0c6a03881dbc5f0800000000000000
+      internalID: -735263731282952009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_19
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c628dc91c0366fdf0800000000000000
+      internalID: -146821034219306388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_20
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cec20ae21ab155460800000000000000
+      internalID: 7229715155899133164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_21
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c89e91cac68a9160800000000000000
+      internalID: 7033081973482363080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_22
+      rect:
+        serializedVersion: 2
+        x: 1949
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def1e3c5626b05160800000000000000
+      internalID: 7012304895688450029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_23
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1239
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 145a1e28ecb0706f0800000000000000
+      internalID: -718592633955310271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_24
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff7d70b4eda90b190800000000000000
+      internalID: -7948683062776702977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_25
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 780bdc0e37f94a350800000000000000
+      internalID: 6027117521370198151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_26
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef601c2fed82d0c30800000000000000
+      internalID: 4327159754993501950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_27
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed70e80fe2d7ebd10800000000000000
+      internalID: 2143288113232742366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_28
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 324feafc8b3849ec0800000000000000
+      internalID: -3561076575561649117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_29
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b54e6b5685da02d20800000000000000
+      internalID: 3251789526136710235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_30
+      rect:
+        serializedVersion: 2
+        x: 1949
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27f37a012bcaba8d0800000000000000
+      internalID: -2833981659716042894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_31
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 799
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9948211ea5b382770800000000000000
+      internalID: 8586177951091033241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_32
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 359
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fefe95acd50028b40800000000000000
+      internalID: 5440911702643830767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_33
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 359
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974805f55a26850d0800000000000000
+      internalID: -3433886253461764999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_34
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 359
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7098db7aa5094e0800000000000000
+      internalID: -1976980559929735218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_35
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 359
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ae5b7b8243f7fe0800000000000000
+      internalID: -1189174427117032837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: divergence alphabet_Outlines_36
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 359
+        width: 152
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a8536b1bcb785c0800000000000000
+      internalID: -4213191454929614234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      divergence alphabet_Outlines_0: 135102916318895936
+      divergence alphabet_Outlines_1: -100839931532511626
+      divergence alphabet_Outlines_10: 499795916042750766
+      divergence alphabet_Outlines_11: 486969056735541762
+      divergence alphabet_Outlines_12: 5586785796446941838
+      divergence alphabet_Outlines_13: -7094639798657404282
+      divergence alphabet_Outlines_14: -2089135345802199514
+      divergence alphabet_Outlines_15: 2758137845079798996
+      divergence alphabet_Outlines_16: -7522641661455934206
+      divergence alphabet_Outlines_17: -5730165490589894451
+      divergence alphabet_Outlines_18: -735263731282952009
+      divergence alphabet_Outlines_19: -146821034219306388
+      divergence alphabet_Outlines_2: 9028463881808785378
+      divergence alphabet_Outlines_20: 7229715155899133164
+      divergence alphabet_Outlines_21: 7033081973482363080
+      divergence alphabet_Outlines_22: 7012304895688450029
+      divergence alphabet_Outlines_23: -718592633955310271
+      divergence alphabet_Outlines_24: -7948683062776702977
+      divergence alphabet_Outlines_25: 6027117521370198151
+      divergence alphabet_Outlines_26: 4327159754993501950
+      divergence alphabet_Outlines_27: 2143288113232742366
+      divergence alphabet_Outlines_28: -3561076575561649117
+      divergence alphabet_Outlines_29: 3251789526136710235
+      divergence alphabet_Outlines_3: -5750435765322109695
+      divergence alphabet_Outlines_30: -2833981659716042894
+      divergence alphabet_Outlines_31: 8586177951091033241
+      divergence alphabet_Outlines_32: 5440911702643830767
+      divergence alphabet_Outlines_33: -3433886253461764999
+      divergence alphabet_Outlines_34: -1976980559929735218
+      divergence alphabet_Outlines_35: -1189174427117032837
+      divergence alphabet_Outlines_36: -4213191454929614234
+      divergence alphabet_Outlines_4: 1003641500065380883
+      divergence alphabet_Outlines_5: 610678026122259544
+      divergence alphabet_Outlines_6: -6553104105074758653
+      divergence alphabet_Outlines_7: 3187251593325814539
+      divergence alphabet_Outlines_8: -8104915898647753274
+      divergence alphabet_Outlines_9: -6409930609624309165
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
