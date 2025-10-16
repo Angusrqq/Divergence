@@ -16,11 +16,13 @@ MonoBehaviour:
   description: Blind and Huntress
   icon: {fileID: 4255070246054394469, guid: ad3e63324a455004d904057fd5746b4c, type: 3}
   animatorController: {fileID: 9100000, guid: 0a625dcc9e26e7b4790a6271866b6969, type: 2}
-  animationClips: []
+  animationClips:
+  - BlindHuntressIdle
+  - BlindHuntressRun
   unlockCost: 300
   startLevel: 0
   startingAbilities: []
   maxHealth: 100
-  movementSpeed: 10
+  movementSpeed: 15
   damageScale: 1
   cooldownReduction: 1

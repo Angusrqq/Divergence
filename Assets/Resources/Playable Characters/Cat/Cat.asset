@@ -21,6 +21,6 @@ MonoBehaviour:
   startLevel: 0
   startingAbilities: []
   maxHealth: 100
-  movementSpeed: 10
+  movementSpeed: 15
   damageScale: 1
   cooldownReduction: 1

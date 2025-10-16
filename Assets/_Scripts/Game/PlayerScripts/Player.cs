@@ -21,6 +21,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Magnet magnet { get; private set; }
     [NonSerialized] public DamageableEntity damageableEntity;
     [NonSerialized] public AnimatedEntity animatedEntity;
     [NonSerialized] public SpriteRenderer spriteRenderer;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        magnet = GetComponentInChildren<Magnet>();
         damageableEntity = GetComponent<DamageableEntity>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animatedEntity = GetComponent<AnimatedEntity>();
