@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,7 @@ public class PassiveAbility : ScriptableObject
     public string description;
     public int level = 1;
     public int maxLevel;
+    [NonSerialized] public bool isEvolved = false;
     public PassiveAbilityType type;
     public virtual void Activate() { }
     public virtual void Upgrade() { }

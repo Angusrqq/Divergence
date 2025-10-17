@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     [NonSerialized] public AnimatedEntity animatedEntity;
     [NonSerialized] public SpriteRenderer spriteRenderer;
     [NonSerialized] public EnemyData enemyData;
+    [SerializeField] private ParticleSystem m_particleSystem;
+    private ParticleSystem m_psInstance;
     protected Transform target;
     protected Rigidbody2D rb;
     public float maxHealth = 100f;
@@ -26,7 +28,7 @@ public class Enemy : MonoBehaviour
     public int xpDrop = 10;
     private Color originalColor;
     public Color flashColor;
-    public float damageFlashDuration = 0.1f;
+    public float damageFlashDuration = 2f;
     [NonSerialized] public bool isRespawnable = false;
     [SerializeField] private XpCrystal xpCrystalPrefab;
     Vector2 knockbackVelocity;
@@ -125,7 +127,7 @@ public class Enemy : MonoBehaviour
         if (damageableEntity.CanTakeDamage())
         {
             StartCoroutine(DamageFlash());
-
+            EmitParticles((transform.position - source.transform.position).normalized);
             if (knockbackForce > 0)
             {
                 Vector2 knockbackDirection = (transform.position - source.transform.position).normalized;
@@ -194,9 +196,16 @@ public class Enemy : MonoBehaviour
     /// </summary>
     IEnumerator DamageFlash()
     {
-        spriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(damageFlashDuration);
-        spriteRenderer.color = originalColor;
+        Material material = spriteRenderer.material;
+        float elapsedTime = 0f;
+        material.SetColor("_FlashColor", flashColor);
+        while (elapsedTime < damageFlashDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float flashAmount = Mathf.Lerp(1f, 0f, elapsedTime / damageFlashDuration);
+            material.SetFloat("_FlashAmount", flashAmount);
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -210,5 +219,11 @@ public class Enemy : MonoBehaviour
 
         knockbackVelocity = velocity;
         knockbackDuration = duration;
+    }
+
+    void EmitParticles(Vector2 direction)
+    {
+        Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, direction);
+        m_psInstance = Instantiate(m_particleSystem, transform.position, spawnRotation);
     }
 }

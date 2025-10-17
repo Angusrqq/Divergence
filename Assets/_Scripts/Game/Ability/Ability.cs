@@ -21,6 +21,7 @@ public class Ability : ScriptableObject
     public float activeTime;
     public float knockbackForce = 2f;
     public float knockbackDuration = 0.25f;
+    public bool isEvolved { get; private set; } = false; //TODO: change to nonserialized (its not serialized for testing purposes)
     [NonSerialized] public float cooldownTimer;
     [NonSerialized] public float activeTimer;
     [NonSerialized] public AbilityState state = AbilityState.ready;

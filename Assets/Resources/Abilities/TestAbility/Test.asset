@@ -20,6 +20,7 @@ MonoBehaviour:
   activeTime: 2
   knockbackForce: 5
   knockbackDuration: 0.25
-  _prefab: {fileID: 8819735309349882969, guid: 692b57a0254a1ed4c820bf18bc1aa87b, type: 3}
+  _standardPrefab: {fileID: 8819735309349882969, guid: 692b57a0254a1ed4c820bf18bc1aa87b, type: 3}
+  _evoPrefab: {fileID: 0}
   speed: 0.35
-  damage: 100
+  damage: 10

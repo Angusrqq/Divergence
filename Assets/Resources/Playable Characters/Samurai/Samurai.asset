@@ -21,7 +21,8 @@ MonoBehaviour:
   - Run
   unlockCost: 0
   startLevel: 0
-  startingAbilities: []
+  startingAbilities:
+  - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}
   maxHealth: 100
   movementSpeed: 15
   damageScale: 1

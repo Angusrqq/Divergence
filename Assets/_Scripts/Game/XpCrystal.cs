@@ -49,8 +49,6 @@ public class XpCrystal : MonoBehaviour
     {
         IsFired = true;
         float time = 0f;
-        m_particleSystem.transform.parent = null;
-        Debug.Log(m_particleSystem.transform.parent);
         while (gameObject != null && time <= 1f)
         {
             if (GameData.player != null)

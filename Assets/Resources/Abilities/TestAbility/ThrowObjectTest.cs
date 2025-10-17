@@ -8,11 +8,12 @@ using UnityEngine.UI;
 /// </para>
 /// Here we just instantiate the prefab and let it do the rest of the logic
 /// </summary>
-[CreateAssetMenu(fileName = "ThrowObjectTest", menuName = "Abilities/ThrowObjectTest")]
-public class ThrowObjectTest : Ability
+[CreateAssetMenu(fileName = "New InstantiatedAbility", menuName = "Abilities/InstantiatedAbility")]
+public class InstantiatedAbilityScriptable : Ability
 {
-    [SerializeField] private TestAbility _prefab;
-    private TestAbility _instance;
+    [SerializeField] private InstantiatedAbilityMono _standardPrefab;
+    [SerializeField] private InstantiatedAbilityMono _evoPrefab;
+    private InstantiatedAbilityMono _instance;
     public float speed;
     public float damage;
 
@@ -24,7 +25,14 @@ public class ThrowObjectTest : Ability
 /// </summary>
     public override void Activate()
     {
-        _instance = Instantiate(_prefab, GameData.player.transform.position, Quaternion.identity);
+        if (isEvolved && _evoPrefab != null)
+        {
+            _instance = Instantiate(_evoPrefab, GameData.player.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            _instance = Instantiate(_standardPrefab, GameData.player.transform.position, Quaternion.identity);
+        }
         _instance.ability = this;
         base.Activate();
     }
