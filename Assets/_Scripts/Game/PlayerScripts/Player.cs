@@ -35,8 +35,10 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;
     public RectTransform HealthBar;
     private Slider healthSlider;
+    public RectTransform LevelBar;
+    private Slider levelSlider;
+    private TMPro.TMP_Text levelLabel;
     public Vector2 movementVector;
-
     public GUI GUI;
 
     private void Start()
@@ -47,10 +49,13 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animatedEntity = GetComponent<AnimatedEntity>();
         healthSlider = HealthBar.GetComponent<Slider>();
+        levelSlider = LevelBar.GetComponent<Slider>();
+        levelLabel = LevelBar.GetComponentInChildren<TMPro.TMP_Text>();
         abilityHolder = GetComponent<AbilityHolder>();
 
         damageableEntity.OnDamageTaken += UpdateHealth;
         damageableEntity.OnHeal += UpdateHealth;
+        onExpChange += UpdateLevelBar;
 
         GameData.UpdatePlayerRef(this);
         characterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
@@ -228,7 +233,12 @@ public class Player : MonoBehaviour
         onExpChange?.Invoke(source, exp_to_add);
         Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
     }
-
+    
+    public void UpdateLevelBar(UnityEngine.Object source, int expValue)
+    {
+        levelSlider.value = (float)exp / expNext;
+        levelLabel.text = $"lv. {level}";
+    }
     // TODO: Uncomment if needed
     // public void TakeExp(UnityEngine.Object source, int exp_to_take)
     // {
