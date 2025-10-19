@@ -2,51 +2,59 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-/// <summary>
-/// <para>
-/// Base enemy class.
-/// </para>
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DamageableEntity))]
 [RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CircleCollider2D))]
+
+/// <summary>
+/// Base enemy class.
+/// </summary>
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem m_particleSystem;
+    [SerializeField] private XpCrystal xpCrystalPrefab;
+
     [NonSerialized] public DamageableEntity damageableEntity;
     [NonSerialized] public AnimatedEntity animatedEntity;
     [NonSerialized] public SpriteRenderer spriteRenderer;
     [NonSerialized] public EnemyData enemyData;
-    [SerializeField] private ParticleSystem m_particleSystem;
-    private ParticleSystem m_psInstance;
-    protected Transform target;
-    protected Rigidbody2D rb;
+    [NonSerialized] public bool isRespawnable = false;
     public float maxHealth = 100f;
     public float moveSpeed = 12f;
     public float damage = 1f;
     public int xpDrop = 10;
-    private Color originalColor;
     public Color flashColor;
     public float damageFlashDuration = 2f;
-    [NonSerialized] public bool isRespawnable = false;
-    [SerializeField] private XpCrystal xpCrystalPrefab;
-    Vector2 knockbackVelocity;
-    float knockbackDuration;
 
+    protected Transform target;
+    protected Rigidbody2D rb;
+
+    // private Color _originalColor; // Uncomment if needed
+    private ParticleSystem _particleSystemInstance;
+    private Vector2 _knockbackVelocity;
+    private float _knockbackDuration;
+
+    /// <summary>
+    /// Initializes the enemy with the provided data and target.
+    /// </summary>
+    /// <param name="data">The data for the enemy to be initialized with.</param>
+    /// <param name="newTarget">The target for the enemy to move towards.</param>
     public void Init(EnemyData data, Transform newTarget)
     {
         enemyData = data;
-        maxHealth = data.baseMaxHealth;
-        damage = data.damage;
-        xpDrop = data.baseExp;
-        moveSpeed = data.baseMovementSpeed;
+        maxHealth = data.BaseMaxHealth;
+        damage = data.Damage;
+        xpDrop = data.BaseExp;
+        moveSpeed = data.BaseMovementSpeed;
         target = newTarget;
         animatedEntity = GetComponent<AnimatedEntity>();
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
-        circleCollider2D.radius = data.colliderRadius;
-        circleCollider2D.offset = data.colliderOffset;
-        animatedEntity.SetAnimatorController(data.animatorController);
+        circleCollider2D.radius = data.ColliderRadius;
+        circleCollider2D.offset = data.ColliderOffset;
+        animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
     /// <summary>
@@ -68,7 +76,7 @@ public class Enemy : MonoBehaviour
         damageableEntity.Init(maxHealth, true, damage);
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
+        // _originalColor = spriteRenderer.color;
     }
 
     /// <summary>
@@ -81,10 +89,10 @@ public class Enemy : MonoBehaviour
     {
         if (target != null)
         {
-            if (knockbackDuration > 0)
+            if (_knockbackDuration > 0)
             {
-                rb.MovePosition(rb.position + knockbackVelocity * Time.fixedDeltaTime);
-                knockbackDuration -= Time.fixedDeltaTime;
+                rb.MovePosition(rb.position + _knockbackVelocity * Time.fixedDeltaTime);
+                _knockbackDuration -= Time.fixedDeltaTime;
                 return;
             }
 
@@ -105,15 +113,11 @@ public class Enemy : MonoBehaviour
             {
                 animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
             }
+
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// Speaks for itself
-    /// </para>
-    /// </summary>
     public virtual void SetTarget(Transform newTarget) => target = newTarget;
 
     /// <summary>
@@ -128,6 +132,8 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(DamageFlash());
             EmitParticles((transform.position - source.transform.position).normalized);
+            AudioManager.instance.PlaySFX(1);
+
             if (knockbackForce > 0)
             {
                 Vector2 knockbackDirection = (transform.position - source.transform.position).normalized;
@@ -156,11 +162,6 @@ public class Enemy : MonoBehaviour
         maxHealth = amount;
     }
 
-    /// <summary>
-    /// <para>
-    /// Don`t know where we will need this but seems wait wtf why we need this we have start and awake?????. am i retarded?????
-    /// </para>
-    /// </summary>
     protected virtual void OnSpawn() { }
 
     /// <summary>
@@ -174,7 +175,7 @@ public class Enemy : MonoBehaviour
 
         if (xpCrystalPrefab != null)
         {
-            XpCrystal SpawnedCrystal = Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity);
+            XpCrystal SpawnedCrystal = Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity, transform.parent);
             SpawnedCrystal.SetXpValue(xpDrop);
         }
 
@@ -197,13 +198,15 @@ public class Enemy : MonoBehaviour
     IEnumerator DamageFlash()
     {
         Material material = spriteRenderer.material;
-        float elapsedTime = 0f;
         material.SetColor("_FlashColor", flashColor);
+
+        float elapsedTime = 0f;
         while (elapsedTime < damageFlashDuration)
         {
             elapsedTime += Time.deltaTime;
             float flashAmount = Mathf.Lerp(1f, 0f, elapsedTime / damageFlashDuration);
             material.SetFloat("_FlashAmount", flashAmount);
+            
             yield return null;
         }
     }
@@ -215,15 +218,15 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public virtual void Knockback(Vector2 velocity, float duration)
     {
-        if (knockbackDuration > 0) return;
+        if (_knockbackDuration > 0) return;
 
-        knockbackVelocity = velocity;
-        knockbackDuration = duration;
+        _knockbackVelocity = velocity;
+        _knockbackDuration = duration;
     }
 
     void EmitParticles(Vector2 direction)
     {
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, direction);
-        m_psInstance = Instantiate(m_particleSystem, transform.position, spawnRotation);
+        _particleSystemInstance = Instantiate(m_particleSystem, transform.position, spawnRotation, transform.parent);
     }
 }

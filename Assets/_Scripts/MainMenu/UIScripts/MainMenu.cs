@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Canvas))]
+
 /// <summary>
 /// <para>
 /// This script is responsible for the main menu of the game.
@@ -9,25 +11,22 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject divergenceMeter;
-    private divergenceMeter_anim dmAnimScript;
-    private DivergenceMeter_Idle dmIdleScript;
-    private DivergenceMeter dm_test;
-    private Canvas mainMenuCanvas;
-    private Coroutine IdleAnim;
     [SerializeField] private SelectorManager characterSelectorManager;
     [SerializeField] private CharacterButton characterButtonPrefab;
+    private DivergenceMeter _divergenceMeter;
+    private Canvas mainMenuCanvas;
+    private Coroutine IdleAnim;
+
     void Awake()
     {
-        dmAnimScript = divergenceMeter.GetComponent<divergenceMeter_anim>();
-        dmIdleScript = divergenceMeter.GetComponent<DivergenceMeter_Idle>();
-        dm_test = divergenceMeter.GetComponent<DivergenceMeter>();
+        _divergenceMeter = divergenceMeter.GetComponent<DivergenceMeter>();
         mainMenuCanvas = GetComponent<Canvas>();
     }
 
     void Start()
     {
         BuildCharacterSelector();
-        IdleAnim = StartCoroutine(dm_test.IdleAnimation());
+        IdleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
     }
 
     void FixedUpdate()
@@ -44,15 +43,14 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         mainMenuCanvas.enabled = false;
-        // dmIdleScript.OnDisable();
-        // dmIdleScript.enabled = false;
+
         if (IdleAnim != null)
         {
             StopCoroutine(IdleAnim);
             IdleAnim = null;
         }
-        // dmAnimScript.enabled = true;
-        StartCoroutine(dm_test.PlayAnimation());
+
+        StartCoroutine(_divergenceMeter.PlayAnimation());
     }
 
     /// <summary>
@@ -80,7 +78,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void BuildCharacterSelector()
     {
-        List<SelectorItem> characterButtons = new List<SelectorItem>();
+        List<SelectorItem> characterButtons = new();
         foreach (Character character in GameData.unlockedCharacters)
         {
             CharacterButton charButton = Instantiate(characterButtonPrefab, characterSelectorManager.contentContainer);
@@ -89,7 +87,7 @@ public class MainMenu : MonoBehaviour
         }
         if (characterButtons.Count > 0)
         {
-            characterButtons[0].OnSelect(null); // select first character by default
+            characterButtons[0].OnSelect(null); // Select first character by default
             characterButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
         }
     }

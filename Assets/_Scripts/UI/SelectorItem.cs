@@ -15,8 +15,8 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
     /// <c>Init</c> method initializes the selector item with the given data and manager
     /// </para>
     /// </summary>
-    /// <param name="data"></param>
-    /// <param name="manager"></param>
+    /// <param name="data"></param> // TODO: Egor add desc for param
+    /// <param name="manager"></param> // TODO: Egor add desc for param
     public virtual void Init(ScriptableObject data, SelectorManager manager)
     {
         selectorManager = manager;
@@ -26,7 +26,7 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
     /// <summary>
     /// <c>OnSelect</c> updates the currently selected item in the <c>SelectorManager</c>.
     /// </summary>
-    /// <param name="eventData"></param>
+    /// <param name="eventData"></param> // TODO: Egor add desc for param
     public virtual void OnSelect(BaseEventData eventData)
     {
         selectorManager.currentSelectedItem = itemData;

@@ -13,20 +13,22 @@ public enum AttributeId
 /// </summary>
 public static class Attributes
 {
-    public static float health = 100;
-    public static float maxHealth = 100;
-    public static float playerDamageMult = 1f;
-    public static float playerResistsMult = 1f;
-    public static int projectilesAdd = 0;
-    public static float castSpeedMult = 1f;
-    public static float cooldownReductionMult = 1f;
-    public static int activeAbilitySlots = 5;
-    public static int passiveAbilitySlots = 5;
-    public static int manuallyTriggeredAbilitySlots = 0;
-    public static float passiveAbilityEffectMult = 1f;
-    public static int pierceTargets = 0;
+    public static float Health = 100;
+    public static float MaxHealth = 100;
+    public static float PlayerDamageMult = 1f;
+    public static float PlayerResistsMult = 1f;
+    public static int ProjectilesAdd = 0;
+    public static float CastSpeedMult = 1f;
+    public static float CooldownReductionMult = 1f;
+    public static int ActiveAbilitySlots = 5;
+    public static int PassiveAbilitySlots = 5;
+    public static int ManuallyTriggeredAbilitySlots = 0;
+    public static float PassiveAbilityEffectMult = 1f;
+    public static int PierceTargets = 0;
     public static event Action<AttributeId, float> OnAttributeChanged;
+
     private static float _magnetRadius = 0.5f;
+
     public static float MagnetRadius
     {
         get => _magnetRadius;

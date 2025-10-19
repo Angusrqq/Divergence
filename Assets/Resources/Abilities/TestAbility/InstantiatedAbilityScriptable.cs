@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// <para>
@@ -13,19 +11,22 @@ public class InstantiatedAbilityScriptable : Ability
 {
     [SerializeField] private InstantiatedAbilityMono _standardPrefab;
     [SerializeField] private InstantiatedAbilityMono _evoPrefab;
-    private InstantiatedAbilityMono _instance;
+
     public float speed;
     public float damage;
+    public int localProjectilesAmount = 1; // How many projectiles are fired in a single burst
 
-/// <summary>
-/// <para>
-/// This is the method that is called when the ability is activated
-/// </para>
-/// instantiates the prefab and sets the ability to it
-/// </summary>
+    private InstantiatedAbilityMono _instance;
+
+    /// <summary>
+    /// <para>
+    /// This is the method that is called when the ability is activated
+    /// </para>
+    /// instantiates the prefab and sets the ability to it
+    /// </summary>
     public override void Activate()
     {
-        if (isEvolved && _evoPrefab != null)
+        if (IsEvolved && _evoPrefab != null)
         {
             _instance = Instantiate(_evoPrefab, GameData.player.transform.position, Quaternion.identity);
         }
@@ -33,25 +34,20 @@ public class InstantiatedAbilityScriptable : Ability
         {
             _instance = Instantiate(_standardPrefab, GameData.player.transform.position, Quaternion.identity);
         }
-        _instance.ability = this;
+
+        _instance.Init(this);
         base.Activate();
     }
 
-/// <summary>
-/// <para>
-/// This is the method that is called when the ability is deactivated
-/// </para>
-/// destroys the instance of the prefab
-/// </summary>
-    public override void StartCooldown()
-    {
-        if (_instance) { Destroy(_instance.gameObject); _instance = null; }
-        base.StartCooldown();
-    }
-
-    public void DestroyInstance()
-    {
-        Destroy(_instance.gameObject);
-        _instance = null;
-    }
+    /// <summary>
+    /// <para>
+    /// This is the method that is called when the ability is deactivated
+    /// </para>
+    /// destroys the instance of the prefab
+    /// </summary>
+    // public override void StartCooldown()
+    // {
+    //     if (_instance) { Destroy(_instance.gameObject); _instance = null; }
+    //     base.StartCooldown();
+    // }
 }

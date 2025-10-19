@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO: Evgeniy - Refactor this
 /// <summary>
 /// <para>
 /// <c>GameData</c> class is supposed to be a DDOL(Dont Destroy On Load) singleton, meaning there will be only one instance of <c>GameData</c> in the entire game and it will persist when switching scenes.
@@ -57,9 +58,6 @@ public class GameData : MonoBehaviour
         {
             instance = this;
         }
-
-        DontDestroyOnLoad(gameObject);
-        
         LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
         SceneManager.sceneLoaded += OnSceneLoaded;
         Abilities = _Abilities;
@@ -117,7 +115,7 @@ public class GameData : MonoBehaviour
             ResetRandomToSeed();
             Debug.Log("Reset random to seed " + currentSeed);
         }
-        
+
         if (scene.name == "MainMenu")
         {
             Random.InitState((int)System.DateTime.Now.Ticks); // reset random to current time

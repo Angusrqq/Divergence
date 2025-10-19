@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class DivergenceMeter : MonoBehaviour
 {
-    private const string category = "DivergenceMeterSheet";
-    private List<DivergenceMeterNumber> _numbers = new();
+    private const string CATEGORY = "DivergenceMeterSheet";
+
     [SerializeField] private AnimationCurve GlowCurve;
+    // [SerializeField] private AnimationCurve _glowCurve; // TODO: EGOR: Move curve from `GlowCurve` to `_glowCurve`
+    [SerializeField] private Material _divergenceMeterMaterial;
+
     public int Seed;
     public Coroutine NestedCoroutine;
-    [SerializeField] private Material DM_material;
-    private Color defaultMaterialColor;
     public static bool animationEnded = false;
+
+    private readonly List<DivergenceMeterNumber> _numbers = new();
+    private Color defaultMaterialColor;
 
     public enum AnimationVariant
     {
@@ -23,7 +27,7 @@ public class DivergenceMeter : MonoBehaviour
     void Awake()
     {
         animationEnded = false;
-        defaultMaterialColor = DM_material.GetColor("_Color");
+        defaultMaterialColor = _divergenceMeterMaterial.GetColor("_Color");
 
         foreach (Transform child in transform)
         {
@@ -37,7 +41,7 @@ public class DivergenceMeter : MonoBehaviour
     // TODO: Turn numbers into parameters and documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
-        DM_material.SetColor("_Color", defaultMaterialColor);
+        _divergenceMeterMaterial.SetColor("_Color", defaultMaterialColor);
         if (variant == AnimationVariant.Full)
         {
             foreach (DivergenceMeterNumber num in _numbers)
@@ -61,10 +65,10 @@ public class DivergenceMeter : MonoBehaviour
             yield return new WaitForSeconds(minRollTime);
         }
 
-        yield return StartCoroutine(GlowFade(DM_material, defaultMaterialColor, defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
+        yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, defaultMaterialColor, defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
 
         animationEnded = true;
-        GameData.SetSeed(Seed);// should not be here | From Evgeniy to Egor >>> WTF R U TEXTED ??? | << this guy doesn`t get me🤓
+        GameData.SetSeed(Seed); // TODO: Move that line into another place
     }
 
     //TODO: test this and finish it
@@ -72,18 +76,17 @@ public class DivergenceMeter : MonoBehaviour
     {
         while (true)
         {
-            yield return GlowFade(DM_material, defaultMaterialColor * 5f, Color.black, time);
+            yield return GlowFade(_divergenceMeterMaterial, defaultMaterialColor * 5f, Color.black, time);
 
             foreach (DivergenceMeterNumber num in _numbers)
             {
                 num.CustomUpdate();
             }
 
-            yield return GlowFade(DM_material, DM_material.GetColor("_Color"), defaultMaterialColor * 5f, time);
+            yield return GlowFade(_divergenceMeterMaterial, _divergenceMeterMaterial.GetColor("_Color"), defaultMaterialColor * 5f, time);
         }
     }
 
-    //  TODO: write documentation while awake and not in the middle of the night
     /// <summary>
     /// Fancy lerp for the material colors
     /// </summary>
@@ -133,6 +136,6 @@ public class DivergenceMeter : MonoBehaviour
 
     void OnDestroy()
     {
-        DM_material.SetColor("_Color", defaultMaterialColor);
+        _divergenceMeterMaterial.SetColor("_Color", defaultMaterialColor);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Evgeniy - Refactor this
 /// <summary>
 /// <para>
 /// <c>Character</c> is a ScriptableObject that represents a character that can be played by the player.
@@ -13,7 +14,7 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
     public new string name;
     public string description;
     public Sprite icon;
-    public RuntimeAnimatorController animatorController;
+    public RuntimeAnimatorController AnimatorController;
     public List<string> animationClips;
     public int unlockCost;
     public int startLevel = 0;
@@ -23,6 +24,23 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
     public float damageScale;
     public float cooldownReduction;
 
+    /// <summary>
+    /// <para>
+    /// <c>Awake</c> populates the <c>animationClips</c> List with the names of the animation clips in the <c>AnimatorController</c>.
+    /// </para>
+    /// </summary>
+    public virtual void Awake()
+    {
+        foreach (AnimationClip clip in AnimatorController.animationClips)
+        {
+            animationClips ??= new List<string>();
+            if (!animationClips.Contains(clip.name))
+            {
+                animationClips.Add(clip.name);
+            }
+        }
+    }
+    
     /// <summary>
     /// <para>
     /// <c>Unlock</c> adds this character to the <c>GameData.unlockedCharacters</c> List if it is not already present.
@@ -36,22 +54,6 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Awake</c> populates the <c>animationClips</c> List with the names of the animation clips in the <c>animatorController</c>.
-    /// </para>
-    /// </summary>
-    public virtual void Awake()
-    {
-        foreach (AnimationClip clip in animatorController.animationClips)
-        {
-            animationClips ??= new List<string>();
-            if (!animationClips.Contains(clip.name))
-            {
-                animationClips.Add(clip.name);
-            }
-        }
-    }
 
     public virtual void Upgrade() // wow great autocomplete suggestion, might implement that later
     {

@@ -9,15 +9,16 @@ using System;
 /// </summary>
 public class DamageableEntity : MonoBehaviour, IDamageable
 {
-    public float Health { get; set; }
-    public float MaxHealth { get; set; }
-    public bool canDealDamage = false;
-    public float Damage { get; set; }
     public event Action<UnityEngine.Object> OnDeath;
     public event Action<UnityEngine.Object, float> OnDamageTaken;
     public event Action<UnityEngine.Object, float> OnHeal;
-    public bool isVulnerable = true;
-    public bool canHeal = true;
+    public bool IsVulnerable = true;
+    public bool CanHeal = true;
+
+    public float Health { get; set; }
+    public float MaxHealth { get; set; }
+    public bool CanDealDamage = false;
+    public float Damage { get; set; }
 
     /// <summary>
     /// <para>
@@ -25,13 +26,13 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// </para>
     /// Checks if the entity is vulnerable and if it has health left.
     /// <para>
-    /// If the entity has health left, it takes the damage and invokes the <c>onDamageTaken</c> event.
+    /// If the entity has health left, it takes the damage and invokes the <c>OnDamageTaken</c> event.
     /// </para>
-    /// If the entity has no health left, it invokes the <c>onDeath</c> event.
+    /// If the entity has no health left, it invokes the <c>OnDeath</c> event.
     /// </summary>
     public void TakeDamage(UnityEngine.Object source, float amount)
     {
-        if (!isVulnerable) return;
+        if (!IsVulnerable) return;
         if (Health <= 0) return;
 
         if (Health - amount <= 0)
@@ -60,7 +61,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// <returns>
     /// <c>true</c> if the entity can take damage, <c>false</c> otherwise.
     /// </returns>
-    public bool CanTakeDamage() => isVulnerable && Health > 0;
+    public bool CanTakeDamage() => IsVulnerable && Health > 0;
 
     /// <summary>
     /// <para>
@@ -68,12 +69,12 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// </para>
     /// Checks if the entity can heal and if it has health left.
     /// <para>
-    /// If the entity can heal and has health left, it heals the entity and invokes the <c>onHeal</c> event.
+    /// If the entity can heal and has health left, it heals the entity and invokes the <c>OnHeal</c> event.
     /// </para>
     /// </summary>
     public void Heal(UnityEngine.Object source, float amount)
     {
-        if (!canHeal) return;
+        if (!CanHeal) return;
         if (Health <= 0 || Health >= MaxHealth) return;
 
         if (Health + amount >= MaxHealth)
@@ -101,7 +102,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         
         if (canDealDamage)
         {
-            this.canDealDamage = canDealDamage;
+            CanDealDamage = canDealDamage;
             Damage = damage;
         }
     }

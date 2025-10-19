@@ -9,9 +9,11 @@ public interface IDamageable
 {
     float Health { get; set; }
     float MaxHealth { get; set; }
+
     event Action<UnityEngine.Object> OnDeath;
     event Action<UnityEngine.Object, float> OnDamageTaken;
     event Action<UnityEngine.Object, float> OnHeal;
+    
     void TakeDamage(UnityEngine.Object sender, float amount);
     void Heal(UnityEngine.Object sender, float amount);
 }

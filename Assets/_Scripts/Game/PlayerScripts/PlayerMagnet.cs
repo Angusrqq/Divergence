@@ -10,7 +10,7 @@ using UnityEngine;
 /// It basically checks if the xp crystal is in the magnet's radius and if it is,
 /// it starts the xp crystal's <c>MagnetToPlayerCoroutine</c> passing the serialized animation curve.
 /// </summary>
-public class Magnet : MonoBehaviour
+public class PlayerMagnet : MonoBehaviour
 {
     [NonSerialized] public CircleCollider2D magnetCollider;
     public AnimationCurve curve;

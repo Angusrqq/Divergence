@@ -1,17 +1,39 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+
+/// <summary>
+/// The Katana class represents a projectile ability that creates a slash effect. 
+/// It inherits from InstantiatedAbilityMono and handles the visual representation and animation of the slash.
+/// The class supports both regular and evolved versions of the slash, with the evolved version including additional particle effects.
+/// </summary>
 public class Katana : InstantiatedAbilityMono
 {
-    [SerializeField] private ParticleSystem m_evoParticles;
-    private ParticleSystem m_PSInstance;
+    [SerializeField] private ParticleSystem _evoParticles;
+
     private SpriteRenderer spriteRenderer;
+    
+    /// <summary>
+    /// Initializes the projectile's components and sets its initial position and direction.
+    /// This method is called when the script instance is being loaded.
+    /// </summary>
     protected override void Awake()
     {
+        /// Get the Rigidbody2D component attached to the projectile.
         rb = GetComponent<Rigidbody2D>();
+        
+        /// Get the SpriteRenderer component attached to the projectile.
         spriteRenderer = GetComponent<SpriteRenderer>();
-        direction = new Vector2(GameData.player.spriteRenderer.flipX ? -1 : 1, 0);
-        spriteRenderer.flipX = GameData.player.spriteRenderer.flipX;
+        
+        /// Determine the initial direction based on the player's sprite flip state.
+        direction = new Vector2(GameData.player.SpriteRenderer.flipX ? -1 : 1, 0);
+        
+        /// Match the projectile's sprite flip state with the player's sprite flip state.
+        spriteRenderer.flipX = GameData.player.SpriteRenderer.flipX;
+        
+        /// Set the initial position of the projectile based on the player's position and direction.
         transform.position = new Vector2(GameData.player.transform.position.x, GameData.player.transform.position.y) + (direction * 2);
     }
 
@@ -20,11 +42,17 @@ public class Katana : InstantiatedAbilityMono
         return;
     }
 
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// </summary>
+    /// <remarks>
+    /// If the ability is evolved, calls the EvoSlash coroutine, otherwise calls the Slash coroutine.
+    /// </remarks>
     void Start()
     {
-        if (ability.isEvolved)
+        if (ability.IsEvolved)
         {
-            StartCoroutine(EvoSlash());
+            StartCoroutine(EvoSlashCoroutine());
         }
         else
         {
@@ -32,31 +60,51 @@ public class Katana : InstantiatedAbilityMono
         }
     }
 
+    /// <summary>
+    /// Coroutine for the slash animation.
+    /// </summary>
+    /// <remarks>
+    /// Gradually changes the alpha value of the sprite renderer's color from white to transparent over the ability's active time.
+    /// Destroys the game object when the animation is finished.
+    /// </remarks>
     private IEnumerator Slash()
     {
         float elapsedTime = 0f;
-        Color transparent = new Color(1, 1, 1, 0);
+
         while (spriteRenderer.color.a > 0)
         {
             elapsedTime += Time.deltaTime;
-            
-            spriteRenderer.color = Color.Lerp(Color.white, transparent, elapsedTime / ability.activeTime);
+
+            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, elapsedTime / ability.ActiveTime);
             yield return null;
         }
+        
         Destroy(gameObject);
     }
 
-    private IEnumerator EvoSlash()
+    /// <summary>
+    /// Coroutine for the evolved slash animation.
+    /// </summary>
+    /// <remarks>
+    /// Instantiates the evolved particle system at the projectile's position and direction.
+    /// Gradually changes the alpha value of the sprite renderer's color from white to transparent over the ability's active time.
+    /// Destroys the game object when the animation is finished.
+    /// </remarks>
+    private IEnumerator EvoSlashCoroutine()
     {
-        float elapsedTime = 0f;
-        Quaternion dir = Quaternion.FromToRotation(Vector2.right, direction);
-        m_PSInstance = Instantiate(m_evoParticles, transform.position, dir);
-        while (spriteRenderer.color.a > 0)
+        float animationElapsedTime = 0f;
+        Quaternion particleDirection = Quaternion.FromToRotation(Vector2.right, direction);
+        
+        Instantiate(_evoParticles, transform.position, particleDirection);
+
+        while (spriteRenderer.color.a > 0f)
         {
-            elapsedTime += Time.deltaTime;
-            spriteRenderer.color = Color.Lerp(new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), elapsedTime / ability.activeTime);
+            animationElapsedTime += Time.deltaTime;
+            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, animationElapsedTime / ability.ActiveTime);
+
             yield return null;
         }
+
         Destroy(gameObject);
     }
 }

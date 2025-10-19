@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a44f4bada5faab4fb2df2e34a380e65, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  name: Tree
-  icon: {fileID: 6501043370658576501, guid: 13f7a047689793542baaffef1c2afbdc, type: 3}
-  animatorController: {fileID: 9100000, guid: 5070b516ff083a14b870ee5208f8ee0f, type: 2}
-  animationClips:
-  - Run
-  baseMaxHealth: 100
-  baseMovementSpeed: 4
-  damage: 1
-  baseExp: 3
-  abilities: []
-  colliderRadius: 0.05
-  colliderOffset: {x: 0, y: 0}
+  Name: Tree
+  Icon: {fileID: -5772978578478332001, guid: 13f7a047689793542baaffef1c2afbdc, type: 3}
+  AnimatorController: {fileID: 9100000, guid: 5070b516ff083a14b870ee5208f8ee0f, type: 2}
+  AnimationClips: []
+  BaseMaxHealth: 100
+  BaseMovementSpeed: 9
+  Damage: 1
+  BaseExp: 10
+  Abilities: []
+  ColliderRadius: 0.05
+  ColliderOffset: {x: 0, y: 0}

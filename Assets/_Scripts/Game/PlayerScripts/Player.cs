@@ -2,6 +2,15 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(DamageableEntity))]
+[RequireComponent(typeof(AbilityHolder))]
+[RequireComponent(typeof(AnimatedEntity))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AbilityHolder))]
+
+// TODO: Egor - Write normal documentation, ts doesnt work
 /// <summary>
 /// <para>
 /// <c>Player</c> is a class for handling the player.
@@ -11,63 +20,59 @@ using UnityEngine.UI;
 /// TODO: Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
 /// </para>
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(DamageableEntity))]
-[RequireComponent(typeof(AbilityHolder))]
-[RequireComponent(typeof(AnimatedEntity))]
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(AbilityHolder))]
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    public Magnet magnet { get; private set; }
-    [NonSerialized] public DamageableEntity damageableEntity;
-    [NonSerialized] public AnimatedEntity animatedEntity;
-    [NonSerialized] public SpriteRenderer spriteRenderer;
-    [NonSerialized] public Character characterData;
-    [NonSerialized] public int level = 0;
-    [NonSerialized] public int exp = 0;
-    [NonSerialized] public int expNext = 100;
-    [NonSerialized] public Action<UnityEngine.Object, int> onExpChange;
-    [SerializeField] private float movementSpeed = 12f;
-    [NonSerialized] public AbilityHolder abilityHolder;
-    public float maxHealth = 100f;
+    [SerializeField] private float _movementSpeed = 12f;
+
+    [NonSerialized] public DamageableEntity DamageableEntity;
+    [NonSerialized] public AnimatedEntity AnimatedEntity;
+    [NonSerialized] public SpriteRenderer SpriteRenderer;
+    [NonSerialized] public Character CharacterData;
+    [NonSerialized] public int Level = 0;
+    [NonSerialized] public int Exp = 0;
+    [NonSerialized] public int ExpNext = 100;
+    [NonSerialized] public Action<UnityEngine.Object, int> OnExpChange;
+    [NonSerialized] public AbilityHolder AbilityHolder;
+    public float MaxHealth = 100f;
     public RectTransform HealthBar;
-    private Slider healthSlider;
     public RectTransform LevelBar;
-    private Slider levelSlider;
-    private TMPro.TMP_Text levelLabel;
-    public Vector2 movementVector;
+    public Vector2 MovementVector;
     public GUI GUI;
+
+    private Rigidbody2D _rb;
+    private Slider _healthSlider;
+    private Slider _levelSlider;
+    private TMPro.TMP_Text _levelLabel;
+
+    public PlayerMagnet Magnet { get; private set; }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        magnet = GetComponentInChildren<Magnet>();
-        damageableEntity = GetComponent<DamageableEntity>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animatedEntity = GetComponent<AnimatedEntity>();
-        healthSlider = HealthBar.GetComponent<Slider>();
-        levelSlider = LevelBar.GetComponent<Slider>();
-        levelLabel = LevelBar.GetComponentInChildren<TMPro.TMP_Text>();
-        abilityHolder = GetComponent<AbilityHolder>();
+        _rb = GetComponent<Rigidbody2D>();
+        Magnet = GetComponentInChildren<PlayerMagnet>();
+        DamageableEntity = GetComponent<DamageableEntity>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        AnimatedEntity = GetComponent<AnimatedEntity>();
+        _healthSlider = HealthBar.GetComponent<Slider>();
+        _levelSlider = LevelBar.GetComponent<Slider>();
+        _levelLabel = LevelBar.GetComponentInChildren<TMPro.TMP_Text>();
+        AbilityHolder = GetComponent<AbilityHolder>();
 
-        damageableEntity.OnDamageTaken += UpdateHealth;
-        damageableEntity.OnHeal += UpdateHealth;
-        onExpChange += UpdateLevelBar;
+        DamageableEntity.OnDamageTaken += UpdateHealth;
+        DamageableEntity.OnHeal += UpdateHealth;
+        OnExpChange += UpdateLevelBar;
 
         GameData.UpdatePlayerRef(this);
-        characterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
+        CharacterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
         BuildCharacter();
 
-        if (damageableEntity == null)
+        if (DamageableEntity == null)
         {
             Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
         }
 
-        damageableEntity.OnDeath += OnDeath;
-        damageableEntity.Init(maxHealth);
+        DamageableEntity.OnDeath += OnDeath;
+        DamageableEntity.Init(MaxHealth);
     }
 
     /// <summary>
@@ -78,45 +83,46 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        movementVector = Vector2.zero;
+        MovementVector = Vector2.zero;
 
         if (Input.GetKey(KeyCode.W))
         {
-            movementVector.y += 1;
+            MovementVector.y += 1;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            movementVector.y += -1;
+            MovementVector.y += -1;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            movementVector.x += -1;
+            MovementVector.x += -1;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            movementVector.x += 1;
+            MovementVector.x += 1;
         }
 
         // Normalize to prevent faster diagonal movement
-        movementVector = movementVector.normalized;
-        if (movementVector != Vector2.zero)
+        MovementVector = MovementVector.normalized;
+        if (MovementVector != Vector2.zero)
         {
-            if (movementVector.x < 0)
+            if (MovementVector.x < 0)
             {
-                spriteRenderer.flipX = true;
+                SpriteRenderer.flipX = true;
             }
-            else if (movementVector.x > 0)
+            else if (MovementVector.x > 0)
             {
-                spriteRenderer.flipX = false;
+                SpriteRenderer.flipX = false;
             }
-            animatedEntity.ChangeAnimation("Run");
+
+            AnimatedEntity.ChangeAnimation("Run");
         }
         else
         {
-            animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
+            AnimatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
         }
     }
 
@@ -128,7 +134,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movementVector * movementSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _movementSpeed * Time.fixedDeltaTime * MovementVector);
         UpdateHpBarPosition();
     }
 
@@ -157,9 +163,9 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out DamageableEntity collision_dentity))
         {
-            if (collision_dentity.canDealDamage)
+            if (collision_dentity.CanDealDamage)
             {
-                damageableEntity.TakeDamage(collision.gameObject, collision_dentity.Damage);
+                DamageableEntity.TakeDamage(collision.gameObject, collision_dentity.Damage);
             }
         }
     }
@@ -172,7 +178,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateHealth(UnityEngine.Object source, float amount)
     {
-        healthSlider.value = damageableEntity.Health / damageableEntity.MaxHealth;
+        _healthSlider.value = DamageableEntity.Health / DamageableEntity.MaxHealth;
     }
 
     void UpdateHpBarPosition()//TODO: figure out this fucking bullshit
@@ -181,7 +187,7 @@ public class Player : MonoBehaviour
         //HealthBar.position = Camera.main.WorldToScreenPoint(transform.position);//worldtoscreenpoint doesnt work in orthographic camera?? what am i supposed to do
         //Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
     }
-    
+
     /// <summary>
     /// <para>
     /// <c>OnDestroy</c> called when the GameObject is destroyed
@@ -190,11 +196,11 @@ public class Player : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        damageableEntity.OnDamageTaken -= UpdateHealth;
-        damageableEntity.OnHeal -= UpdateHealth;
-        damageableEntity.OnDeath -= OnDeath;
+        DamageableEntity.OnDamageTaken -= UpdateHealth;
+        DamageableEntity.OnHeal -= UpdateHealth;
+        DamageableEntity.OnDeath -= OnDeath;
 
-        onExpChange = null;
+        OnExpChange = null;
     }
 
     /// <summary>
@@ -204,9 +210,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
-        level++;
-        expNext += Mathf.RoundToInt(expNext * 1.1f);
-        Debug.Log($"Player {gameObject.name} leveled up to level {level}");
+        Level++;
+        ExpNext += Mathf.RoundToInt(ExpNext * 1.1f);
+        Debug.Log($"Player {gameObject.name} leveled up to level {Level}");
     }
 
     /// <summary>
@@ -219,26 +225,27 @@ public class Player : MonoBehaviour
     /// <param name="exp_to_add">The amount of experience points to add.</param>
     public void AddExp(UnityEngine.Object source, int exp_to_add)
     {
-        if (expNext - exp <= exp_to_add)
+        if (ExpNext - Exp <= exp_to_add)
         {
-            exp = exp_to_add - (expNext - exp);
+            Exp = exp_to_add - (ExpNext - Exp);
             LevelUp();
             return;
         }
         else
         {
-            exp += exp_to_add;
+            Exp += exp_to_add;
         }
 
-        onExpChange?.Invoke(source, exp_to_add);
+        OnExpChange?.Invoke(source, exp_to_add);
         Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
     }
-    
+
     public void UpdateLevelBar(UnityEngine.Object source, int expValue)
     {
-        levelSlider.value = (float)exp / expNext;
-        levelLabel.text = $"lv. {level}";
+        _levelSlider.value = (float)Exp / ExpNext;
+        _levelLabel.text = $"lv. {Level}";
     }
+
     // TODO: Uncomment if needed
     // public void TakeExp(UnityEngine.Object source, int exp_to_take)
     // {
@@ -254,15 +261,15 @@ public class Player : MonoBehaviour
     /// </summary>
     private void BuildCharacter()
     {
-        animatedEntity.SetAnimatorController(characterData.animatorController);
+        AnimatedEntity.SetAnimatorController(CharacterData.AnimatorController);
 
-        movementSpeed = characterData.movementSpeed;
-        maxHealth = characterData.maxHealth;
-        level = characterData.startLevel;
+        _movementSpeed = CharacterData.movementSpeed;
+        MaxHealth = CharacterData.maxHealth;
+        Level = CharacterData.startLevel;
 
-        foreach (Ability a in characterData.startingAbilities)
+        foreach (Ability ability in CharacterData.startingAbilities)
         {
-            abilityHolder.AddAbility(a);
+            AbilityHolder.AddAbility(ability);
         }
     }
 }

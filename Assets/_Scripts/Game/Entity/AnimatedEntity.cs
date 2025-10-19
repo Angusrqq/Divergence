@@ -4,20 +4,21 @@ using UnityEngine;
 /// <para>
 /// <c>AnimatedEntity</c> is a class for handling the animation of an entity.
 /// </para>
-/// NOT FULLY IMPLEMENTED YET
+/// NOT FULLY IMPLEMENTED YET // TODO: Egor - Remove ts line if class is fully implemented
 /// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimatedEntity : MonoBehaviour
 {
-    public Animator animator;
-    public RuntimeAnimatorController animatorController;
+    public Animator Animator;
+    public RuntimeAnimatorController AnimatorController;
+    public string CurrentAnimation;
+
     public enum AnimationsList { Default }
-    public string currentAnimation;
 
     void Start()
     {
-        animatorController = animatorController ? animatorController : animator.runtimeAnimatorController;
+        AnimatorController = AnimatorController ? AnimatorController : Animator.runtimeAnimatorController;
     }
 
     /// <summary>
@@ -28,8 +29,8 @@ public class AnimatedEntity : MonoBehaviour
     /// </summary>
     public void SetAnimatorController(RuntimeAnimatorController controller)
     {
-        animator.runtimeAnimatorController = controller;
-        animatorController = controller;
+        Animator.runtimeAnimatorController = controller;
+        AnimatorController = controller;
     }
 
     // virtual protected void Update()
@@ -47,10 +48,10 @@ public class AnimatedEntity : MonoBehaviour
     /// </summary>
     public virtual void ChangeAnimation(AnimationsList animation)
     {
-        if (currentAnimation == animation.ToString()) return;
+        if (CurrentAnimation == animation.ToString()) return;
         
-        animator.Play(animation.ToString());
-        currentAnimation = animation.ToString();
+        Animator.Play(animation.ToString());
+        CurrentAnimation = animation.ToString();
     }
 
     /// <summary>
@@ -60,10 +61,10 @@ public class AnimatedEntity : MonoBehaviour
     /// </summary>
     public virtual void ChangeAnimation(string animation)
     {
-        if (currentAnimation == animation) return;
+        if (CurrentAnimation == animation) return;
 
-        animator.Play(animation);
-        currentAnimation = animation;
+        Animator.Play(animation);
+        CurrentAnimation = animation;
     }
 
     // public virtual IEnumerator PlayAnimation(AnimationsList animation)

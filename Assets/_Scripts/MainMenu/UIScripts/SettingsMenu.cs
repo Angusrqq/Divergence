@@ -1,96 +1,100 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private TMP_Dropdown refreshRateDropdown;
-    [SerializeField] private TMP_Dropdown fullScreenDropdown;
-    private Resolution[] resolutions;
-    private List<Resolution> filteredResolutions;
-    private int[] refreshRates;
-    private int currentRefreshRateIndex = 0;
-    private int currentResolutionIndex = 0;
-    private int currentFullScreenIndex = 0;
+    [SerializeField] private TMP_Dropdown _resolutionDropdown;
+    [SerializeField] private TMP_Dropdown _refreshRateDropdown;
+    [SerializeField] private TMP_Dropdown _fullScreenDropdown;
+
+    private Resolution[] _resolutions;
+    private List<Resolution> _filteredResolutions;
+    private int[] _refreshRates;
+    private int _currentRefreshRateIndex = 0;
+    private int _currentResolutionIndex = 0;
+    private int _currentFullScreenIndex = 0;
 
     void Start()
     {
-        resolutions = Screen.resolutions;
-        filteredResolutions = new List<Resolution>();
-        refreshRates = new int[] { 30, 60, 75, 90, 120, 144, 165, 240, 300, 360, 500 };
+        _resolutions = Screen.resolutions;
+        _filteredResolutions = new List<Resolution>();
+        _refreshRates = new int[] { 30, 60, 75, 90, 120, 144, 165, 240, 300, 360, 500 };
 
-        resolutionDropdown.ClearOptions();
-        fullScreenDropdown.ClearOptions();
-        refreshRateDropdown.ClearOptions();
+        _resolutionDropdown.ClearOptions();
+        _refreshRateDropdown.ClearOptions();
+        _fullScreenDropdown.ClearOptions();
 
         float currentRefreshRate = Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value);
-        for (int i = 0; i < resolutions.Length; i++)
+        for (int i = 0; i < _resolutions.Length; i++)
         {
-            int refresh = Mathf.RoundToInt((float)resolutions[i].refreshRateRatio.value);
+            int refresh = Mathf.RoundToInt((float)_resolutions[i].refreshRateRatio.value);
             if (refresh == currentRefreshRate)
             {
-                filteredResolutions.Add(resolutions[i]);
+                _filteredResolutions.Add(_resolutions[i]);
             }
         }
 
-        List<string> resolutionOptions = new List<string>();
-        for (int i = 0; i < filteredResolutions.Count; i++)
+        List<string> resolutionOptions = new();
+        for (int i = 0; i < _filteredResolutions.Count; i++)
         {
-            string resolutionOption = filteredResolutions[i].width + " x " + filteredResolutions[i].height;
+            string resolutionOption = _filteredResolutions[i].width + " x " + _filteredResolutions[i].height;
             resolutionOptions.Add(resolutionOption);
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
+            if (_filteredResolutions[i].width == Screen.width && _filteredResolutions[i].height == Screen.height)
             {
-                currentResolutionIndex = i;
+                _currentResolutionIndex = i;
             }
         }
 
-        List<string> resfreshRateOptions = new List<string>();
-        for (int i = 0; i < refreshRates.Length; i++)
+        List<string> resfreshRateOptions = new();
+        for (int i = 0; i < _refreshRates.Length; i++)
         {
-            string refreshRateOption = refreshRates[i].ToString() + " Hz";
+            string refreshRateOption = _refreshRates[i].ToString() + " Hz";
             resfreshRateOptions.Add(refreshRateOption);
-            if (refreshRates[i] == currentRefreshRate)
+            if (_refreshRates[i] == currentRefreshRate)
             {
-                currentRefreshRateIndex = i;
+                _currentRefreshRateIndex = i;
             }
         }
 
-        resolutionDropdown.AddOptions(resolutionOptions);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        _resolutionDropdown.AddOptions(resolutionOptions);
+        _resolutionDropdown.value = _currentResolutionIndex;
+        _resolutionDropdown.RefreshShownValue();
 
-        fullScreenDropdown.AddOptions(new List<string> { "FullScreen", "Borderless", "Windowed" });
+        _fullScreenDropdown.AddOptions(new List<string> { "FullScreen", "Borderless", "Windowed" });
+
         switch (Screen.fullScreenMode)
         {
             case FullScreenMode.ExclusiveFullScreen:
-                currentFullScreenIndex = 0;
+                _currentFullScreenIndex = 0;
                 break;
             case FullScreenMode.FullScreenWindow:
-                currentFullScreenIndex = 1;
+                _currentFullScreenIndex = 1;
                 break;
             case FullScreenMode.Windowed:
-                currentFullScreenIndex = 2;
+                _currentFullScreenIndex = 2;
                 break;
         }
-        fullScreenDropdown.value = currentFullScreenIndex;
-        fullScreenDropdown.RefreshShownValue();
+        
+        _fullScreenDropdown.value = _currentFullScreenIndex;
+        _fullScreenDropdown.RefreshShownValue();
 
-        refreshRateDropdown.AddOptions(resfreshRateOptions);
-        refreshRateDropdown.value = currentRefreshRateIndex;
-        refreshRateDropdown.RefreshShownValue();
+        _refreshRateDropdown.AddOptions(resfreshRateOptions);
+        _refreshRateDropdown.value = _currentRefreshRateIndex;
+        _refreshRateDropdown.RefreshShownValue();
     }
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = filteredResolutions[resolutionIndex];
+        Resolution resolution = _filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
     public void SetRefreshRate(int refreshRateIndex)
     {
-        Application.targetFrameRate = refreshRates[refreshRateIndex];
+        Application.targetFrameRate = _refreshRates[refreshRateIndex];
     }
-    
+
     public void SetFullscreen(int fullScreenIndex)
     {
         switch (fullScreenIndex)

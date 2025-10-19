@@ -8,18 +8,20 @@ using System.Collections.Generic;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager _instance { get; private set; }
     [SerializeField] private Enemy _prefab;
-    public MonoBehaviour target;
+
+    public MonoBehaviour Target;
+    public static EnemyManager Instance { get; private set; }
+    public static List<Enemy> Enemies { get; private set; }
+
     private float delay = 1f;
-    public List<Enemy> Enemies { get; private set; }
 
     /// <summary>
     /// Initializes the enemy manager singleton and creates a new list for storing enemies.
     /// </summary>
     void Start()
     {
-        _instance = this;
+        Instance = this;
         Enemies = new List<Enemy>();
     }
 
@@ -31,7 +33,7 @@ public class EnemyManager : MonoBehaviour
         if (delay - Time.deltaTime <= 0)
         {
             SpawnEnemy();
-            delay = 1f;
+            delay = 0.5f;
         }
         else
         {
@@ -46,12 +48,13 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     private void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(_prefab, new Vector3(UnityEngine.Random.Range(-2f, 2f), 0, 0), Quaternion.identity);
+        Enemy enemy = Instantiate(_prefab, new Vector3(Random.Range(-2f, 2f), 0, 0), Quaternion.identity);
 
         enemy.transform.parent = transform;
-        enemy.Init(GameData.Enemies[Random.Range(0, GameData.Enemies.Count)], target.transform);
+        enemy.Init(GameData.Enemies[Random.Range(0, GameData.Enemies.Count)], Target.transform);
         enemy.gameObject.SetActive(true);
 
         Enemies.Add(enemy);
+        
     }
 }

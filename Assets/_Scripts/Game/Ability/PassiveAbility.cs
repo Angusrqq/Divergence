@@ -9,12 +9,14 @@ using UnityEngine;
 /// </summary>
 public class PassiveAbility : ScriptableObject
 {
-    public new string name;
-    public string description;
-    public int level = 1;
-    public int maxLevel;
-    [NonSerialized] public bool isEvolved = false;
-    public PassiveAbilityType type;
+    [NonSerialized] public bool IsEvolved = false;
+
+    public string Name;
+    public string Description;
+    public int Level = 1;
+    public int MaxLevel;
+    public PassiveAbilityType Type;
+
     public virtual void Activate() { }
     public virtual void Upgrade() { }
     public virtual void UpdateAbility() { }

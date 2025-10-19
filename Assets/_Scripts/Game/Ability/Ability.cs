@@ -13,18 +13,19 @@ using UnityEngine;
 /// </summary>
 public class Ability : ScriptableObject
 {
-    public new string name;
-    public string description;
-    public float cooldownTime;
-    public int level = 1;
-    public int maxLevel;
-    public float activeTime;
-    public float knockbackForce = 2f;
-    public float knockbackDuration = 0.25f;
-    public bool isEvolved { get; private set; } = false; //TODO: change to nonserialized (its not serialized for testing purposes)
-    [NonSerialized] public float cooldownTimer;
-    [NonSerialized] public float activeTimer;
-    [NonSerialized] public AbilityState state = AbilityState.ready;
+    public string Name;
+    public string Description;
+    public float CooldownTime;
+    public int Level = 1;
+    public int MaxLevel;
+    public float ActiveTime;
+    public float KnockbackForce = 2f;
+    public float KnockbackDuration = 0.25f;
+    public bool IsEvolved = false; //TODO: Egor - change to nonserialized (its not serialized for testing purposes)
+    public bool CountActiveTimeInCooldown = true;
+    [NonSerialized] public float CooldownTimer;
+    [NonSerialized] public float ActiveTimer;
+    [NonSerialized] public AbilityState State = AbilityState.ready;
 
     /// <summary>
     /// <para>
@@ -33,8 +34,11 @@ public class Ability : ScriptableObject
     /// </summary>
     public virtual void Activate()
     {
-        state = AbilityState.active;
-        activeTimer = activeTime;
+        State = AbilityState.active;
+        if (CountActiveTimeInCooldown)
+        {
+            ActiveTimer = ActiveTime;
+        }
     }
 
     /// <summary>
@@ -44,8 +48,8 @@ public class Ability : ScriptableObject
     /// </summary>
     public virtual void StartCooldown()
     {
-        state = AbilityState.cooldown;
-        cooldownTimer = cooldownTime;
+        State = AbilityState.cooldown;
+        CooldownTimer = CooldownTime;
     }
 
     /// <summary>
@@ -55,7 +59,7 @@ public class Ability : ScriptableObject
     /// </summary>
     public virtual void CooldownEnded()
     {
-        state = AbilityState.ready;
+        State = AbilityState.ready;
     }
 
     /// <summary>
@@ -72,12 +76,12 @@ public class Ability : ScriptableObject
     /// </summary>
     public virtual void UpdateAbility()
     {
-        switch (state)
+        switch (State)
         {
             case AbilityState.active:
-                if (activeTimer > 0)
+                if (ActiveTimer > 0)
                 {
-                    activeTimer -= Time.deltaTime;
+                    ActiveTimer -= Time.deltaTime;
                 }
                 else
                 {
@@ -86,9 +90,9 @@ public class Ability : ScriptableObject
                 break;
 
             case AbilityState.cooldown:
-                if (cooldownTimer > 0)
+                if (CooldownTimer > 0)
                 {
-                    cooldownTimer -= Time.deltaTime;
+                    CooldownTimer -= Time.deltaTime;
                 }
                 else
                 {
@@ -109,12 +113,12 @@ public class Ability : ScriptableObject
     /// </summary>
     public virtual void FixedUpdateAbility()
     {
-        switch (state)
+        switch (State)
         {
             case AbilityState.active:
-                if (activeTimer > 0)
+                if (ActiveTimer > 0)
                 {
-                    activeTimer -= Time.fixedDeltaTime;
+                    ActiveTimer -= Time.fixedDeltaTime;
                 }
                 else
                 {
@@ -123,9 +127,9 @@ public class Ability : ScriptableObject
                 break;
 
             case AbilityState.cooldown:
-                if (cooldownTimer > 0)
+                if (CooldownTimer > 0)
                 {
-                    cooldownTimer -= Time.fixedDeltaTime;
+                    CooldownTimer -= Time.fixedDeltaTime;
                 }
                 else
                 {

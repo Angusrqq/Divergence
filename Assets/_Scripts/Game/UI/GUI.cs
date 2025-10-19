@@ -14,17 +14,17 @@ public class GUI : MonoBehaviour
     public Image PauseScreenPanel;
     public Image LevelUpPanel;
     public Image DeathScreenPanel;
-    [NonSerialized] public static bool paused = false;
-    [NonSerialized] public static bool canPause = true;
+    [NonSerialized] public static bool Paused = false;
+    [NonSerialized] public static bool CanPause = true;
 
     /// <summary>
     /// Handles pausing when Escape is pressed.
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        if (Input.GetKeyDown(KeyCode.Escape) && CanPause)
         {
-            if (paused)
+            if (Paused)
             {
                 Continue();
             }
@@ -74,7 +74,7 @@ public class GUI : MonoBehaviour
     public void UnpauseInternal()
     {
         TogglePause(false);
-        canPause = true;
+        CanPause = true;
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ public class GUI : MonoBehaviour
     public void PauseInternal()
     {
         TogglePause(true);
-        canPause = false;
+        CanPause = false;
     }
 
     /// <summary>
@@ -93,20 +93,20 @@ public class GUI : MonoBehaviour
     /// <c>TogglePause</c> toggles the pause state.
     /// </para> Pauses or unpauses the game.
     /// </summary>
-    /// <param name="isPausing"></param>
+    /// <param name="isPausing"></param> // TODO: Egor add documentation
     public void TogglePause(bool isPausing)
     {
-        if (isPausing != paused)
+        if (isPausing != Paused)
         {
             if (Time.timeScale == 0f)
             {
                 Time.timeScale = 1f;
-                paused = false;
+                Paused = false;
             }
             else
             {
                 Time.timeScale = 0f;
-                paused = true;
+                Paused = true;
             }
         }
     }
@@ -141,7 +141,7 @@ public class GUI : MonoBehaviour
     public void OnLevelUp()
     {
         TogglePause(true);
-        canPause = false;
+        CanPause = false;
         LevelUpPanel.gameObject.SetActive(true);
     }
 
@@ -151,10 +151,10 @@ public class GUI : MonoBehaviour
     /// </para>
     /// Not fully implemented - some ability specific code should be added here.
     /// </summary>
-    public void Resurrect() // TODO: Rename this shit to `Revive` i cant find where it is called by death menu and i cant find the fucking death menu
+    public void Resurrect() // TODO: Egor Rename this shit to `Revive` i cant find where it is called by death menu and i cant find the fucking death menu
     {
         TogglePause(false);
-        canPause = true;
+        CanPause = true;
         DeathScreenPanel.gameObject.SetActive(false);
         //Some ability specific code here 
     }

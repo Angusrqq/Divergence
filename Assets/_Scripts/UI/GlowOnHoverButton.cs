@@ -49,9 +49,4 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }
-
-    public static float ElasticOut(float t, float p = 0.3f)
-    {
-        return Mathf.Pow(2f, -10f * t) * Mathf.Sin((t - p / 4f) * (2f * Mathf.PI) / p) + 1f;
-    }
 }

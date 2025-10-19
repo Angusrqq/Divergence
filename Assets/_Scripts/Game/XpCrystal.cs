@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+
 /// <summary>
 /// Represents an XP (Experience Points) crystal in the game that can be collected by the player.
 /// The crystal moves towards the player when activated and awards XP when collected.
@@ -9,16 +11,14 @@ public class XpCrystal : MonoBehaviour
 {
     private int xpValue;
     private readonly float speed = 1f;
-    private ParticleSystem m_particleSystem;
     private SpriteRenderer spriteRenderer;
+
+    public bool IsFired { get; private set; }
 
     void Awake()
     {
-        m_particleSystem = GetComponent<ParticleSystem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    public bool IsFired { get; private set; }
 
     /// <summary>
     /// Sets the XP (experience points) value for the XP crystal.
@@ -49,6 +49,7 @@ public class XpCrystal : MonoBehaviour
     {
         IsFired = true;
         float time = 0f;
+        
         while (gameObject != null && time <= 1f)
         {
             if (GameData.player != null)
@@ -73,26 +74,7 @@ public class XpCrystal : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Player player))
         {
             player.AddExp(gameObject, xpValue);
-            m_particleSystem.Stop();
-            spriteRenderer.enabled = false;
-            Destroy(gameObject, m_particleSystem.main.startLifetime.constantMax);
+            Destroy(gameObject);
         }
-    }
-
-    // public void OnDestroy()
-    // {
-    //     m_particleSystem.transform.parent = null;
-    //     var emission = m_particleSystem.emission;
-    //     emission.enabled = false;
-    //     Destroy(m_particleSystem, m_particleSystem.main.startLifetime.constantMax);
-    // }
-
-    public IEnumerator DestroySystem(ParticleSystem system)
-    {
-        if (system && system.IsAlive(true))
-        {
-            Destroy(system);
-        }
-        yield return null;
     }
 }

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a44f4bada5faab4fb2df2e34a380e65, type: 3}
   m_Name: Bat
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  name: Bat
-  icon: {fileID: 4297251893678942116, guid: 054b356ca68bf5041965cae4c86e9753, type: 3}
-  animatorController: {fileID: 9100000, guid: 6b0009c3c60dccd408fbeb91fca577f0, type: 2}
-  animationClips: []
-  baseMaxHealth: 100
-  baseMovementSpeed: 8
-  damage: 1
-  baseExp: 10
-  abilities: []
-  colliderRadius: 0.04
-  colliderOffset: {x: 0, y: 0}
+  Name: Bat
+  Icon: {fileID: 4297251893678942116, guid: 054b356ca68bf5041965cae4c86e9753, type: 3}
+  AnimatorController: {fileID: 9100000, guid: 6b0009c3c60dccd408fbeb91fca577f0, type: 2}
+  AnimationClips: []
+  BaseMaxHealth: 100
+  BaseMovementSpeed: 9
+  Damage: 1
+  BaseExp: 10
+  Abilities: []
+  ColliderRadius: 0.04
+  ColliderOffset: {x: 0, y: 0}

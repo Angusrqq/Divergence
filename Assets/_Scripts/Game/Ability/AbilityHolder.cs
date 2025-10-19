@@ -10,20 +10,29 @@ using UnityEngine;
 public class AbilityHolder : MonoBehaviour
 {
     public List<Ability> Abilities;
-    private List<string> _abilityNames = new();
     public List<PassiveAbility> Passives;
-    private List<string> _passiveNames = new();
+
+    private readonly List<string> _abilityNames = new();
+    private readonly List<string> _passiveNames = new();
 
     /// <summary>
     /// <para>
     /// Calls <c>FixedUpdateAbility</c> for each ability in <c>Abilities</c> List.
     /// </para>
     /// </summary>
-    void FixedUpdate()
+    // void FixedUpdate()
+    // {
+    //     foreach (Ability a in Abilities)
+    //     {
+    //         a.FixedUpdateAbility();
+    //     }
+    // }
+
+    void Update()
     {
         foreach (Ability a in Abilities)
         {
-            a.FixedUpdateAbility();
+            a.UpdateAbility();
         }
     }
 
@@ -39,7 +48,7 @@ public class AbilityHolder : MonoBehaviour
         if (_abilityNames.Contains(a.name))
         {
             Ability T = GetAbilityByName(a.name);
-            if (T.level < T.maxLevel)
+            if (T.Level < T.MaxLevel)
             {
                 T.Upgrade();
             }
@@ -64,7 +73,7 @@ public class AbilityHolder : MonoBehaviour
         if (_passiveNames.Contains(passive.name))
         {
             PassiveAbility T = GetPassiveByName(passive.name);
-            if (T.level < T.maxLevel)
+            if (T.Level < T.MaxLevel)
             {
                 T.Upgrade();
             }

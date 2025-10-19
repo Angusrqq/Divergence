@@ -18,7 +18,7 @@ public class SelectorManager : MonoBehaviour
     /// <c>InitElements</c> instantiates and initializes the passed list of <c>SelectorItem</c> elements as children of <c>contentContainer</c>.
     /// </para>
     /// </summary>
-    /// <param name="elements"></param>
+    /// <param name="elements"></param> // TODO: Egor add desc for param
     public void InitElements(List<SelectorItem> elements)
     {
         foreach (SelectorItem element in elements)
@@ -30,7 +30,7 @@ public class SelectorManager : MonoBehaviour
     /// <summary>
     /// <c>UpdateDescription</c> updates the description text with the passed string.
     /// </summary>
-    /// <param name="description"></param>
+    /// <param name="description"></param> // TODO: Egor add desc for param
     public void UpdateDescription(string description)
     {
         descriptionText.text = description;

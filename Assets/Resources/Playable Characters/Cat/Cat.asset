@@ -15,11 +15,14 @@ MonoBehaviour:
   name: Cat
   description: A little running cat
   icon: {fileID: -6045110389800113485, guid: bb2c47a4dc7ad1244a2259e3def03e4b, type: 3}
-  animatorController: {fileID: 9100000, guid: b4c4b060fcb388d4f8c10f6e9cfa7b92, type: 2}
-  animationClips: []
+  AnimatorController: {fileID: 9100000, guid: b4c4b060fcb388d4f8c10f6e9cfa7b92, type: 2}
+  animationClips:
+  - CatIdle
+  - CatRun
   unlockCost: 400
   startLevel: 0
-  startingAbilities: []
+  startingAbilities:
+  - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}
   maxHealth: 100
   movementSpeed: 15
   damageScale: 1

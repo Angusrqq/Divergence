@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Blind Huntress
   description: Blind and Huntress
   icon: {fileID: 4255070246054394469, guid: ad3e63324a455004d904057fd5746b4c, type: 3}
-  animatorController: {fileID: 9100000, guid: 0a625dcc9e26e7b4790a6271866b6969, type: 2}
+  AnimatorController: {fileID: 9100000, guid: 0a625dcc9e26e7b4790a6271866b6969, type: 2}
   animationClips:
   - BlindHuntressIdle
   - BlindHuntressRun

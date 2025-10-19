@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::ThrowObjectTest
-  name: Test
-  description: Throw shit
-  cooldownTime: 0.2
-  level: 1
-  maxLevel: 5
-  activeTime: 2
-  knockbackForce: 5
-  knockbackDuration: 0.25
+  Name: Test
+  Description: Throw square
+  CooldownTime: 0.2
+  Level: 1
+  MaxLevel: 5
+  ActiveTime: 2
+  KnockbackForce: 5
+  KnockbackDuration: 0.25
+  IsEvolved: 0
+  CountActiveTimeInCooldown: 1
   _standardPrefab: {fileID: 8819735309349882969, guid: 692b57a0254a1ed4c820bf18bc1aa87b, type: 3}
   _evoPrefab: {fileID: 0}
   speed: 0.35
   damage: 1000
+  localProjectilesAmount: 1

@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Satiro
   description: desc
   icon: {fileID: -7751219071525288297, guid: cadc6332fd48ec242a6c95768600d2fc, type: 3}
-  animatorController: {fileID: 9100000, guid: 4bb54e4b0308e444cbfe897565c43674, type: 2}
+  AnimatorController: {fileID: 9100000, guid: 4bb54e4b0308e444cbfe897565c43674, type: 2}
   animationClips:
   - Default
   - Run
