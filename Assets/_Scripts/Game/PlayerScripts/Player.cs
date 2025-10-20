@@ -181,11 +181,18 @@ public class Player : MonoBehaviour
         _healthSlider.value = DamageableEntity.Health / DamageableEntity.MaxHealth;
     }
 
-    void UpdateHpBarPosition()//TODO: figure out this fucking bullshit
+    void UpdateHpBarPosition()
     {
-        //how the fuck do i do that in orthographic camera or whatever the fucking the mode is
-        //HealthBar.position = Camera.main.WorldToScreenPoint(transform.position);//worldtoscreenpoint doesnt work in orthographic camera?? what am i supposed to do
-        //Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+        float offset = -0.5f;
+        Vector2 pos = new Vector2(transform.position.x, -(SpriteRenderer.bounds.size.y / 2) + transform.position.y + offset);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            HealthBar.parent.transform as RectTransform,
+            screenPos,
+            Camera.main,
+            out Vector2 localPos
+        );
+        HealthBar.localPosition = localPos;
     }
 
     /// <summary>

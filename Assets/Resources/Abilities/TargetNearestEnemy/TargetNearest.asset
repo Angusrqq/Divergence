@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: TargetNearest
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  Name: NearestTest
-  Description: Shot at nearest enemy
+  Name: Rice Balls
+  Description: Rice, you know?
   CooldownTime: 0.1
   Level: 1
   MaxLevel: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Adun
   description: Adun
   icon: {fileID: -4921107232465060269, guid: 57b964dc621cd5248b47a5ace664a39f, type: 3}
-  AnimatorController: {fileID: 0}
+  AnimatorController: {fileID: 9100000, guid: a31dd74836ee32b44a4e6832854aed9c, type: 2}
   animationClips:
   - Idle_1
   - Idle_Blink

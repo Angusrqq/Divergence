@@ -15,8 +15,16 @@ public class InstantiatedAbilityScriptable : Ability
     public float speed;
     public float damage;
     public int localProjectilesAmount = 1; // How many projectiles are fired in a single burst
-
+    public Character nativeUser;
     private InstantiatedAbilityMono _instance;
+
+    void Awake()
+    {
+        if (GameData.currentCharacter == nativeUser)
+        {
+            IsEvolved = true;
+        }
+    }
 
     /// <summary>
     /// <para>

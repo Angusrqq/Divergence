@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Enemy _prefab;
 
     public MonoBehaviour Target;
+    public int maxEnemyCount = 10000;
+    private Camera _camera;
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
 
@@ -19,6 +21,10 @@ public class EnemyManager : MonoBehaviour
     /// <summary>
     /// Initializes the enemy manager singleton and creates a new list for storing enemies.
     /// </summary>
+    void Awake()
+    {
+        _camera = Camera.main;
+    }
     void Start()
     {
         Instance = this;
@@ -32,7 +38,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (delay - Time.deltaTime <= 0)
         {
-            SpawnEnemy();
+            SpawnEnemy(new Vector2(Random.Range(-2f, 2f), 0), Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
             delay = 0.5f;
         }
         else
@@ -46,15 +52,25 @@ public class EnemyManager : MonoBehaviour
     /// <c>SpawnEnemy</c> method spawns an enemy at a random position within a defined range and sets its target to the player.
     /// </para>
     /// </summary>
-    private void SpawnEnemy()
+    private void SpawnEnemy(Vector2 pos, Quaternion rot, int enemyIndex = 0)
     {
-        Enemy enemy = Instantiate(_prefab, new Vector3(Random.Range(-2f, 2f), 0, 0), Quaternion.identity);
+        Enemy enemy = Instantiate(_prefab, pos, rot);
 
         enemy.transform.parent = transform;
-        enemy.Init(GameData.Enemies[Random.Range(0, GameData.Enemies.Count)], Target.transform);
+        enemy.Init(GameData.Enemies[enemyIndex], Target.transform);
         enemy.gameObject.SetActive(true);
 
         Enemies.Add(enemy);
-        
+    }
+    
+    private void SpawnEnemy(Vector2 pos, Quaternion rot, EnemyData enemyData)
+    {
+        Enemy enemy = Instantiate(_prefab, pos, rot);
+
+        enemy.transform.parent = transform;
+        enemy.Init(enemyData, Target.transform);
+        enemy.gameObject.SetActive(true);
+
+        Enemies.Add(enemy);
     }
 }
