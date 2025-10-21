@@ -40,7 +40,7 @@ public class CharacterButton : SelectorItem
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        selectorManager.UpdateDescription(characterData.description);
+        selectorManager.UpdateDescription(characterData.Description);
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class CharacterButton : SelectorItem
     {
         if (GameData.unlockedCharacters.Contains(characterData))
         {
-            ButtonImage.sprite = characterData.icon;
+            ButtonImage.sprite = characterData.Icon;
         }
         else
         {

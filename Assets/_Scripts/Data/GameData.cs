@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class GameData : MonoBehaviour
 {
     //TODO: damn this is gonna be a lot
-    //TODO: some way of map data storage(todo in Map.cs)
+    // some way of map data storage(todo in Map.cs)
     //TODO: save/load system
     //TODO: setting current character/map/abilities in menu
     //TODO: character selection in menu and display character info

@@ -8,7 +8,7 @@ public class DivergenceMeter : MonoBehaviour
     private const string CATEGORY = "DivergenceMeterSheet";
 
     [SerializeField] private AnimationCurve GlowCurve;
-    // [SerializeField] private AnimationCurve _glowCurve; // TODO: EGOR: Move curve from `GlowCurve` to `_glowCurve`
+    // [SerializeField] private AnimationCurve _glowCurve; // TODO: Egor - Move curve from `GlowCurve` to `_glowCurve`
     [SerializeField] private Material _divergenceMeterMaterial;
 
     public int Seed;
@@ -38,7 +38,7 @@ public class DivergenceMeter : MonoBehaviour
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    // TODO: Turn numbers into parameters and documentation
+    // TODO: Egor - Turn numbers into parameters and documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
         _divergenceMeterMaterial.SetColor("_Color", defaultMaterialColor);
@@ -68,10 +68,10 @@ public class DivergenceMeter : MonoBehaviour
         yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, defaultMaterialColor, defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
 
         animationEnded = true;
-        GameData.SetSeed(Seed); // TODO: Move that line into another place
+        GameData.SetSeed(Seed); // TODO: Egor - Move that line into another place
     }
 
-    //TODO: test this and finish it
+    //TODO: Egor - test this and finish it
     public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
     {
         while (true)

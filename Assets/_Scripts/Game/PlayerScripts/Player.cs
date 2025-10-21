@@ -17,7 +17,7 @@ using UnityEngine.UI;
 /// </para>
 /// Handles the player`s movement, animations, abilities, health, experience, etc.
 /// <para>
-/// TODO: Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
+/// TODO: Egor - Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
 /// </para>
 /// </summary>
 public class Player : MonoBehaviour
@@ -268,13 +268,13 @@ public class Player : MonoBehaviour
     /// </summary>
     private void BuildCharacter()
     {
-        AnimatedEntity.SetAnimatorController(CharacterData.AnimatorController);
+        AnimatedEntity.SetAnimatorController(CharacterData.CharacterAnimatorController);
 
-        _movementSpeed = CharacterData.movementSpeed;
-        MaxHealth = CharacterData.maxHealth;
-        Level = CharacterData.startLevel;
+        _movementSpeed = CharacterData.MovementSpeed;
+        MaxHealth = CharacterData.MaxHealth;
+        Level = CharacterData.StartLevel;
 
-        foreach (Ability ability in CharacterData.startingAbilities)
+        foreach (Ability ability in CharacterData.StartingAbilities)
         {
             AbilityHolder.AddAbility(ability);
         }

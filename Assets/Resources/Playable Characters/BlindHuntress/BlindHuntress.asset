@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edc0ab6cc575ff4d89d88a15a68c936, type: 3}
   m_Name: BlindHuntress
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  name: Blind Huntress
-  description: Blind and Huntress
-  icon: {fileID: 4255070246054394469, guid: ad3e63324a455004d904057fd5746b4c, type: 3}
-  AnimatorController: {fileID: 9100000, guid: 0a625dcc9e26e7b4790a6271866b6969, type: 2}
-  animationClips:
-  - BlindHuntressIdle
-  - BlindHuntressRun
-  unlockCost: 300
-  startLevel: 0
-  startingAbilities: []
-  maxHealth: 100
-  movementSpeed: 15
-  damageScale: 1
-  cooldownReduction: 1
+  _name: Blind Huntress
+  _description: Blind and Huntress
+  _icon: {fileID: 4255070246054394469, guid: ad3e63324a455004d904057fd5746b4c, type: 3}
+  _unlockCost: 0
+  _startLevel: 0
+  _maxHealth: 100
+  _movementSpeed: 15
+  _damageScale: 1
+  _cooldownReduction: 1
+  _characterAnimatorController: {fileID: 9100000, guid: 0a625dcc9e26e7b4790a6271866b6969, type: 2}
+  _characterAnimationClips: []
+  _startingAbilities:
+  - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}

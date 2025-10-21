@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 /// <para>
 /// <c>DataSystem</c> is a static class that handles saving and loading of metaprogression data.
 /// </para>
-///TODO: Not implemented yet, not ready for use.
+///TODO: Egor - Not implemented yet, not ready for use.
 /// </summary>
 public static class DataSystem
 {

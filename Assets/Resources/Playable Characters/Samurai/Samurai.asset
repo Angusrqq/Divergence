@@ -12,18 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edc0ab6cc575ff4d89d88a15a68c936, type: 3}
   m_Name: Samurai
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  name: Samurai
-  description: desc
-  icon: {fileID: -1501021414962227678, guid: b7d84f2f71366de4aa67469855a98786, type: 3}
-  AnimatorController: {fileID: 9100000, guid: 7a23bb2214c271a44adbb4445cfc4f27, type: 2}
-  animationClips:
-  - Idle
-  - Run
-  unlockCost: 0
-  startLevel: 0
-  startingAbilities:
+  _name: Samurai
+  _description: Real samurai
+  _icon: {fileID: -1501021414962227678, guid: b7d84f2f71366de4aa67469855a98786, type: 3}
+  _unlockCost: 0
+  _startLevel: 0
+  _maxHealth: 100
+  _movementSpeed: 15
+  _damageScale: 1
+  _cooldownReduction: 1
+  _characterAnimatorController: {fileID: 9100000, guid: 7a23bb2214c271a44adbb4445cfc4f27, type: 2}
+  _characterAnimationClips: []
+  _startingAbilities:
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}
-  maxHealth: 100
-  movementSpeed: 15
-  damageScale: 1
-  cooldownReduction: 1
