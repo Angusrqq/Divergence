@@ -33,22 +33,18 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
     [SerializeField] private List<Ability> _startingAbilities;
 
     /// <summary>
-    /// <para>
-    /// <c>Awake</c> populates the <c>animationClips</c> List with the names of the animation clips in the <c>AnimatorController</c>.
-    /// </para>
+    /// Initializes the character by populating the <c>CharacterAnimationClips</c> List with the names of the animation clips in the <c>AnimatorController</c>.
+    /// If the <c>AnimatorController</c> is null, this method does nothing.
     /// </summary>
-    public virtual void Awake()
+    public void Initialize()
     {
-        foreach (AnimationClip clip in CharacterAnimatorController.animationClips)
-        {
-            CharacterAnimationClips ??= new List<string>();
-            if (!CharacterAnimationClips.Contains(clip.name))
-            {
-                CharacterAnimationClips.Add(clip.name);
-            }
-        }
+        if (CharacterAnimatorController == null) return;
+        CharacterAnimationClips ??= new List<string>();
+        CharacterAnimationClips.Clear();
+        foreach (var clip in CharacterAnimatorController.animationClips)
+            CharacterAnimationClips.Add(clip.name);
     }
-    
+
     /// <summary>
     /// <para>
     /// <c>Unlock</c> adds this character to the <c>GameData.unlockedCharacters</c> List if it is not already present.
@@ -77,75 +73,20 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
         // }
     }
 
-    public string Name
-    {
-        get => _name;
-        private set => _name = value;
-    }
-
-    public string Description
-    {
-        get => _description;
-        private set => _description = value;
-    }
-
-    public Sprite Icon
-    {
-        get => _icon;
-        private set => _icon = value;
-    }
-
-    public int UnlockCost
-    {
-        get => _unlockCost;
-        private set => _unlockCost = value;
-    }
-
-    public int StartLevel
-    {
-        get => _startLevel;
-        private set => _startLevel = value;
-    }
-
-    public int MaxHealth
-    {
-        get => _maxHealth;
-        private set => _maxHealth = value;
-    }
-
-    public float MovementSpeed
-    {
-        get => _movementSpeed;
-        private set => _movementSpeed = value;
-    }
-
-    public float DamageScale
-    {
-        get => _damageScale;
-        private set => _damageScale = value;
-    }
-
-    public float CooldownReduction
-    {
-        get => _cooldownReduction;
-        private set => _cooldownReduction = value;
-    }
-
-    public RuntimeAnimatorController CharacterAnimatorController
-    {
-        get => _characterAnimatorController;
-        private set => _characterAnimatorController = value;
-    }
-
+    public string Name => _name;
+    public string Description => _description;
+    public Sprite Icon => _icon;
+    public int UnlockCost => _unlockCost;
+    public int StartLevel => _startLevel;
+    public int MaxHealth => _maxHealth;
+    public float MovementSpeed => _movementSpeed;
+    public float DamageScale => _damageScale;
+    public float CooldownReduction => _cooldownReduction;
+    public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
     public List<string> CharacterAnimationClips
     {
         get => _characterAnimationClips;
         private set => _characterAnimationClips = value;
     }
-
-    public List<Ability> StartingAbilities
-    {
-        get => _startingAbilities;
-        private set => _startingAbilities = value;
-    }
+    public List<Ability> StartingAbilities => _startingAbilities;
 }

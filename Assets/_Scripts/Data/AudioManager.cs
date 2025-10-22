@@ -1,13 +1,12 @@
 using UnityEngine;
 
-// TODO: Evgeniy - Refactor this
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioSource musicSource;
-    public AudioSource sfxSource;
-    public AudioClip[] musicClips;
-    public AudioClip[] sfxClips;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _sfxSource;
+    [SerializeField] private AudioClip[] _musicClips;
+    [SerializeField] private AudioClip[] _sfxClips;
 
     private void Awake()
     {
@@ -23,26 +22,28 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(int index)
     {
-        musicSource.clip = musicClips[index];
-        musicSource.Play();
+        _musicSource.clip = _musicClips[index];
+        _musicSource.Play();
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        musicSource.clip = clip;
-        musicSource.Play();
+        _musicSource.clip = clip;
+        _musicSource.Play();
     }
 
     public void PlaySFX(int index)
     {
-        sfxSource.clip = sfxClips[index];
-        sfxSource.Play();
+        _sfxSource.clip = _sfxClips[index];
+        _sfxSource.Play();
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        sfxSource.clip = clip;
-        sfxSource.Play();
+        _sfxSource.clip = clip;
+        _sfxSource.Play();
     }
 
+    public AudioClip[] MusicClips => _musicClips;
+    public AudioClip[] SFXClips => _sfxClips;
 }

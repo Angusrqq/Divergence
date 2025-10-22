@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bee12e718bbac4a9a8d5501514fc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  musicSource: {fileID: 8851972457472660114}
-  sfxSource: {fileID: 6527846054963774794}
-  musicClips: []
-  sfxClips:
+  _musicSource: {fileID: 8851972457472660114}
+  _sfxSource: {fileID: 6527846054963774794}
+  _musicClips: []
+  _sfxClips:
   - {fileID: 8300000, guid: a63f14804fc9f4f4cbec2728d00d4a5d, type: 3}
   - {fileID: 8300000, guid: 23f69b3392a72074d9394e4c5f9f4677, type: 3}
   - {fileID: 8300000, guid: b16c435ea5d730e4ca69c7583de3b416, type: 3}

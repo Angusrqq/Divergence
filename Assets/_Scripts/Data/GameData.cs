@@ -31,10 +31,10 @@ public class GameData : MonoBehaviour
     public static List<Character> Characters;
     public static List<Character> unlockedCharacters;
     public static Character currentCharacter;
-    [SerializeField] private List<Map> _Maps;
-    public static List<Map> Maps;
-    public static List<Map> unlockedMaps;
-    public static Map currentMap;
+    // [SerializeField] private List<MapData> _Maps; // TODO: MAP
+    // public static List<MapData> Maps;
+    // public static List<MapData> unlockedMaps;
+    // public static MapData currentMap;
     [SerializeField] private List<Ability> _Abilities;
     public static List<Ability> Abilities;
     public static List<Ability> unlockedAbilities;
@@ -62,8 +62,8 @@ public class GameData : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         Abilities = _Abilities;
         unlockedAbilities = Abilities;
-        Maps = _Maps;
-        unlockedMaps = Maps;
+        // Maps = _Maps; // TODO: MAP
+        // unlockedMaps = Maps;
         Characters = _Characters;
         unlockedCharacters = Characters;
         Enemies = _Enemies;
@@ -143,11 +143,11 @@ public class GameData : MonoBehaviour
     /// Used in the map selection menu.
     /// </summary>
     /// <param name="map"></param>
-    public static void ChooseMap(Map map)
-    {
-        currentMap = map;
-        Debug.Log($"Chosen map: {map.name}");
-    }
+    // public static void ChooseMap(MapData map) // TODO: MAP
+    // {
+    //     currentMap = map;
+    //     Debug.Log($"Chosen map: {map.name}");
+    // }
 
     /// <summary>
     /// <para>
