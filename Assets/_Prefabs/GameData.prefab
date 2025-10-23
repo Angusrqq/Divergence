@@ -51,7 +51,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c75b908ce16e5744b9aa790cbe5b96b2, type: 2}
   - {fileID: 11400000, guid: 883d13b904e313242986c316cd2793d2, type: 2}
   - {fileID: 11400000, guid: 6147f31fdf03ef34498e9ee3c33d9356, type: 2}
-  _Maps: []
+  _Maps:
+  - {fileID: 11400000, guid: 5371d769ead06754eae11e0ed9052228, type: 2}
   _Abilities:
   - {fileID: 11400000, guid: 7f9dfaae940bfe341881086766b956bf, type: 2}
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}
