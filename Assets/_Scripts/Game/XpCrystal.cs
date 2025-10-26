@@ -55,7 +55,7 @@ public class XpCrystal : MonoBehaviour
             if (GameData.player != null)
             {
                 time += Time.fixedDeltaTime * speed;
-                transform.position = Vector3.Lerp(transform.position, GameData.player.transform.position, curve.Evaluate(time));
+                transform.position = Vector3.LerpUnclamped(transform.position, GameData.player.transform.position, curve.Evaluate(time));
             }
 
             yield return new WaitForFixedUpdate();

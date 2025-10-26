@@ -48,7 +48,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             // Apply damage, knockback, and other effects to the enemy
-            enemy.TakeDamage(gameObject, ability.damage, ability.KnockbackForce, ability.KnockbackDuration);
+            enemy.TakeDamage(gameObject, ability.damage, knockbackForce: ability.KnockbackForce, knockbackDuration: ability.KnockbackDuration);
 
             Destroy(gameObject);
             ability.StartCooldown();

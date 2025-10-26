@@ -56,6 +56,7 @@ MonoBehaviour:
   _Abilities:
   - {fileID: 11400000, guid: 7f9dfaae940bfe341881086766b956bf, type: 2}
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}
+  - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}
   _Enemies:
   - {fileID: 11400000, guid: ad1ceae49b9e54a4885f524163a6e72b, type: 2}
   - {fileID: 11400000, guid: d56e767442d59ba4fa9e6fd49874e103, type: 2}

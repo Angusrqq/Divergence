@@ -21,6 +21,7 @@ public static class Attributes
     public static float CastSpeedMult = 1f;
     public static float CooldownReductionMult = 1f;
     public static int ActiveAbilitySlots = 5;
+    public static int AbilitiesPerLevel = 3;
     public static int PassiveAbilitySlots = 5;
     public static int ManuallyTriggeredAbilitySlots = 0;
     public static float PassiveAbilityEffectMult = 1f;

@@ -23,6 +23,7 @@ public class Ability : ScriptableObject
     public float KnockbackDuration = 0.25f;
     public bool IsEvolved = false; //TODO: Egor - change to nonserialized (its not serialized for testing purposes)
     public bool CountActiveTimeInCooldown = true;
+    public Sprite Icon;
     [NonSerialized] public float CooldownTimer;
     [NonSerialized] public float ActiveTimer;
     [NonSerialized] public AbilityState State = AbilityState.ready;

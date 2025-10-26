@@ -63,7 +63,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             // Apply damage, knockback force, and knockback duration to the enemy
-            enemy.TakeDamage(gameObject, ability.damage, ability.KnockbackForce, ability.KnockbackDuration);
+            enemy.TakeDamage(gameObject, ability.damage, knockbackForce: ability.KnockbackForce, knockbackDuration: ability.KnockbackDuration);
         }
     }
 }

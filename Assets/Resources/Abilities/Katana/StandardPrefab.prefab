@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b0cdb800273ef4fb7c8d7d871d1acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Katana
-  m_evoParticles: {fileID: 4672974651187647681, guid: a37493cb731775844a36142480b8b2c5, type: 3}
+  _evoParticles: {fileID: 0}
 --- !u!61 &-8582951853049282626
 BoxCollider2D:
   m_ObjectHideFlags: 0

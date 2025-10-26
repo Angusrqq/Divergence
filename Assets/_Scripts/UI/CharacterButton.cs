@@ -19,8 +19,8 @@ public class CharacterButton : SelectorItem
     /// <c>Init</c> method initializes the character button with the given character data and selector manager.
     /// </para>
     /// </summary>
-    /// <param name="character"></param> // TODO: Egor add desc for param
-    /// <param name="manager"></param> // TODO: Egor add desc for param
+    /// <param name="character"><c>Character</c> to be associated with this button</param>
+    /// <param name="manager"><c>SelectorManager</c> parent that will contain this button</param>
     public void Init(Character character, SelectorManager manager)
     {
         nameText = GetComponentInChildren<TMPro.TMP_Text>();
@@ -36,7 +36,6 @@ public class CharacterButton : SelectorItem
     /// <c>OnSelect</c> method updates the description in the selector manager when this button is selected.
     /// </para>
     /// </summary>
-    /// <param name="eventData"></param> // TODO: Egor add desc for param
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);

@@ -16,9 +16,6 @@ using UnityEngine.UI;
 /// <c>Player</c> is a class for handling the player.
 /// </para>
 /// Handles the player`s movement, animations, abilities, health, experience, etc.
-/// <para>
-/// TODO: Egor - Not fully universal yet (for character specific stuff), since there are still many things that need to be implemented
-/// </para>
 /// </summary>
 public class Player : MonoBehaviour
 {
@@ -32,6 +29,7 @@ public class Player : MonoBehaviour
     [NonSerialized] public int Exp = 0;
     [NonSerialized] public int ExpNext = 100;
     [NonSerialized] public Action<UnityEngine.Object, int> OnExpChange;
+    [NonSerialized] public Action<UnityEngine.Object, int> OnLevelUp;
     [NonSerialized] public AbilityHolder AbilityHolder;
     public float MaxHealth = 100f;
     public RectTransform HealthBar;
@@ -45,6 +43,11 @@ public class Player : MonoBehaviour
     private TMPro.TMP_Text _levelLabel;
 
     public PlayerMagnet Magnet { get; private set; }
+
+    void Awake()
+    {
+        GameData.UpdatePlayerRef(this);
+    }
 
     private void Start()
     {
@@ -62,7 +65,6 @@ public class Player : MonoBehaviour
         DamageableEntity.OnHeal += UpdateHealth;
         OnExpChange += UpdateLevelBar;
 
-        GameData.UpdatePlayerRef(this);
         CharacterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
         BuildCharacter();
 
@@ -176,7 +178,7 @@ public class Player : MonoBehaviour
     /// </para>
     /// Updates the player`s health slider.
     /// </summary>
-    void UpdateHealth(UnityEngine.Object source, float amount)
+    void UpdateHealth(UnityEngine.Object source, float amount, Type type = null)
     {
         _healthSlider.value = DamageableEntity.Health / DamageableEntity.MaxHealth;
     }
@@ -208,6 +210,7 @@ public class Player : MonoBehaviour
         DamageableEntity.OnDeath -= OnDeath;
 
         OnExpChange = null;
+        OnLevelUp = null;
     }
 
     /// <summary>
@@ -215,10 +218,11 @@ public class Player : MonoBehaviour
     /// Levels up the player, increases the experience required for the next level, and logs the level up event.
     /// </para>
     /// </summary>
-    public void LevelUp()
+    public void LevelUp(UnityEngine.Object source)
     {
         Level++;
         ExpNext += Mathf.RoundToInt(ExpNext * 1.1f);
+        OnLevelUp?.Invoke(source, Level);
         Debug.Log($"Player {gameObject.name} leveled up to level {Level}");
     }
 
@@ -235,7 +239,7 @@ public class Player : MonoBehaviour
         if (ExpNext - Exp <= exp_to_add)
         {
             Exp = exp_to_add - (ExpNext - Exp);
-            LevelUp();
+            LevelUp(source);
             return;
         }
         else

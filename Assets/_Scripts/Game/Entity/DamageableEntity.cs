@@ -10,8 +10,9 @@ using System;
 public class DamageableEntity : MonoBehaviour, IDamageable
 {
     public event Action<UnityEngine.Object> OnDeath;
-    public event Action<UnityEngine.Object, float> OnDamageTaken;
-    public event Action<UnityEngine.Object, float> OnHeal;
+    public event Action<UnityEngine.Object, float, Type> OnDamageTaken;
+    public event Action<UnityEngine.Object, float, Type> OnHeal;
+    public StatusHolder Statuses = new();
     public bool IsVulnerable = true;
     public bool CanHeal = true;
 
@@ -30,7 +31,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// </para>
     /// If the entity has no health left, it invokes the <c>OnDeath</c> event.
     /// </summary>
-    public void TakeDamage(UnityEngine.Object source, float amount)
+    public void TakeDamage(UnityEngine.Object source, float amount, Type type = null)
     {
         if (!IsVulnerable) return;
         if (Health <= 0) return;
@@ -39,13 +40,18 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         {
             float taken = Health;
             Health = 0;
-            OnDamageTaken?.Invoke(source, taken);
+            OnDamageTaken?.Invoke(source, taken, type);
             OnDeath?.Invoke(source);
             return;
         }
-        
+
         Health -= amount;
-        OnDamageTaken?.Invoke(source, amount);
+        OnDamageTaken?.Invoke(source, amount, type);
+    }
+
+    public void FixedUpdate()
+    {
+        Statuses.RunTicks();
     }
 
     /// <summary>
@@ -72,14 +78,14 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// If the entity can heal and has health left, it heals the entity and invokes the <c>OnHeal</c> event.
     /// </para>
     /// </summary>
-    public void Heal(UnityEngine.Object source, float amount)
+    public void Heal(UnityEngine.Object source, float amount, Type type)
     {
         if (!CanHeal) return;
         if (Health <= 0 || Health >= MaxHealth) return;
 
         if (Health + amount >= MaxHealth)
         {
-            OnHeal?.Invoke(source, MaxHealth - Health);
+            OnHeal?.Invoke(source, MaxHealth - Health, type);
             Health = MaxHealth;
             return;
         }

@@ -137,7 +137,7 @@ public class PartitionEnemy : MonoBehaviour
     /// Just the method from the DamageableEntity class.
     /// </para>
     /// </summary>
-    public virtual void Heal(UnityEngine.Object source, float amount) => damageableEntity.Heal(source, amount);
+    public virtual void Heal(UnityEngine.Object source, float amount, Type type = null) => damageableEntity.Heal(source, amount, type);
 
     /// <summary>
     /// <para>

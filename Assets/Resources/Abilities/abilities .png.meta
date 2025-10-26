@@ -1,0 +1,410 @@
+fileFormatVersion: 2
+guid: 176c429236c7ec441be212f413b2c2ec
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7390053722860520265
+    second: abilities _0
+  - first:
+      213: -5104492029948398176
+    second: abilities _1
+  - first:
+      213: 2750108781188966302
+    second: abilities _2
+  - first:
+      213: -6469946024760412689
+    second: abilities _3
+  - first:
+      213: 6102099612273604670
+    second: abilities _4
+  - first:
+      213: 7883913090302968920
+    second: abilities _5
+  - first:
+      213: 8888171638534108517
+    second: abilities _6
+  - first:
+      213: -5257466870821248081
+    second: abilities _7
+  - first:
+      213: -1787544201784335930
+    second: abilities _8
+  - first:
+      213: 1685504763303243303
+    second: abilities _9
+  - first:
+      213: 8506596774925809245
+    second: abilities _10
+  - first:
+      213: 822825854304438207
+    second: abilities _11
+  - first:
+      213: 5376313833426879633
+    second: abilities _12
+  - first:
+      213: -3993064018009112463
+    second: abilities _13
+  - first:
+      213: 6479059826516918325
+    second: abilities _14
+  - first:
+      213: -3352295608057572388
+    second: abilities _15
+  - first:
+      213: -4621375166937168537
+    second: abilities _16
+  - first:
+      213: 4454569487117403456
+    second: abilities _17
+  - first:
+      213: -6513995348815815247
+    second: abilities _18
+  - first:
+      213: 6647184704546804512
+    second: abilities _19
+  - first:
+      213: -4442314314041167481
+    second: abilities _20
+  - first:
+      213: -3079199236349382434
+    second: abilities _21
+  - first:
+      213: -1788521513403094186
+    second: abilities _22
+  - first:
+      213: 6273563272653522234
+    second: abilities _23
+  - first:
+      213: 8873185069993820046
+    second: abilities _24
+  - first:
+      213: 4463481276992200390
+    second: abilities _25
+  - first:
+      213: 4042638718397356616
+    second: abilities _26
+  - first:
+      213: -7022180230395547128
+    second: abilities _27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fireball
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 201
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc78d11b41417990800000000000000
+      internalID: -7390053722860520265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 197
+        width: 53
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a5fc142b833929b0800000000000000
+      internalID: -5104492029948398176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movespeed
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 197
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e976374ad595a2620800000000000000
+      internalID: 2750108781188966302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 150
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe57436ae522636a0800000000000000
+      internalID: -6469946024760412689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crystalHeal
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 133
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e38fd9d54430fa450800000000000000
+      internalID: 6102099612273604670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisibility
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 76
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8548f835f29496d60800000000000000
+      internalID: 7883913090302968920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vampirism
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 73
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 565f6818301295b70800000000000000
+      internalID: 8888171638534108517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaxHealthUp
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 15
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa3a05a7cb9b907b0800000000000000
+      internalID: -5257466870821248081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Critical strike
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 9
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c1e550f40e5137e0800000000000000
+      internalID: -1787544201784335930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9de4f6352085c15418ced9c6f9a89e5f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Critical strike: -1787544201784335930
+      MaxHealthUp: -5257466870821248081
+      bomb: -6469946024760412689
+      crystalHeal: 6102099612273604670
+      fireball: -7390053722860520265
+      invisibility: 7883913090302968920
+      movespeed: 2750108781188966302
+      shield: -5104492029948398176
+      vampirism: 8888171638534108517
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

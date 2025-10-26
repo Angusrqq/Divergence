@@ -11,9 +11,9 @@ public interface IDamageable
     float MaxHealth { get; set; }
 
     event Action<UnityEngine.Object> OnDeath;
-    event Action<UnityEngine.Object, float> OnDamageTaken;
-    event Action<UnityEngine.Object, float> OnHeal;
+    event Action<UnityEngine.Object, float, Type> OnDamageTaken;
+    event Action<UnityEngine.Object, float, Type> OnHeal;
     
-    void TakeDamage(UnityEngine.Object sender, float amount);
-    void Heal(UnityEngine.Object sender, float amount);
+    void TakeDamage(UnityEngine.Object sender, float amount, Type type = null);
+    void Heal(UnityEngine.Object sender, float amount, Type type = null);
 }

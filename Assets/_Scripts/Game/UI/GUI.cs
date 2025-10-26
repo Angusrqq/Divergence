@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,8 +16,16 @@ public class GUI : MonoBehaviour
     public Image PauseScreenPanel;
     public Image LevelUpPanel;
     public Image DeathScreenPanel;
+    public AbilityButton AbilityButtonPrefab;
     [NonSerialized] public static bool Paused = false;
     [NonSerialized] public static bool CanPause = true;
+    public List<Ability> AbilityChoices { get; private set; } = new();
+    private List<AbilityButton> _abilityButtons = new();
+
+    void Start()
+    {
+        GameData.player.OnLevelUp += OnLevelUp;
+    }
 
     /// <summary>
     /// Handles pausing when Escape is pressed.
@@ -138,11 +148,39 @@ public class GUI : MonoBehaviour
     /// <c>LevelUp</c> is called when the player levels up.
     /// </para> Shows the level up screen.
     /// </summary>
-    public void OnLevelUp()
+    public void OnLevelUp(UnityEngine.Object source, int level)
     {
-        TogglePause(true);
-        CanPause = false;
+        PauseInternal();
+        AbilityChoices.Clear();
+        for (int i = 0; i < Attributes.AbilitiesPerLevel; i++)
+        {
+            Ability rolled = GameData.unlockedAbilities[GameData.ValuableRoll(0, GameData.unlockedAbilities.Count)];
+            AbilityChoices.Add(rolled);
+        }
+        RebuildAbilities();
         LevelUpPanel.gameObject.SetActive(true);
+    }
+
+    public void CloseLevelUp()
+    {
+        UnpauseInternal();
+        LevelUpPanel.gameObject.SetActive(false);
+    }
+
+    private void RebuildAbilities()
+    {
+        foreach (AbilityButton button in _abilityButtons)
+        {
+            Destroy(button.gameObject);
+        }
+        _abilityButtons.Clear();
+        
+        foreach(Ability a in AbilityChoices)
+        {
+            AbilityButton button = Instantiate(AbilityButtonPrefab, LevelUpPanel.transform);
+            button.Init(a);
+            _abilityButtons.Add(button);
+        }
     }
 
     /// <summary>
@@ -151,7 +189,7 @@ public class GUI : MonoBehaviour
     /// </para>
     /// Not fully implemented - some ability specific code should be added here.
     /// </summary>
-    public void Resurrect() // TODO: Egor Rename this shit to `Revive` i cant find where it is called by death menu and i cant find the fucking death menu
+    public void Revive()
     {
         TogglePause(false);
         CanPause = true;

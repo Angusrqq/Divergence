@@ -4,7 +4,6 @@ using UnityEngine;
 /// <para>
 /// <c>AnimatedEntity</c> is a class for handling the animation of an entity.
 /// </para>
-/// NOT FULLY IMPLEMENTED YET // TODO: Egor - Remove ts line if class is fully implemented
 /// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]

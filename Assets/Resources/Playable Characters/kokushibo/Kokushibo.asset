@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _name: Kokushibo
   _description: Him
-  _icon: {fileID: -1804447855422354050, guid: c793e1f3ed92f594690ecde58490eac2, type: 3}
+  _icon: {fileID: 2410635517405602792, guid: 9f902761138df7243bdd4a8cfff44923, type: 3}
   _unlockCost: 0
   _startLevel: 0
   _maxHealth: 100

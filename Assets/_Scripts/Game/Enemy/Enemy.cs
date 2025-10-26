@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
     /// </para>
     /// Starts the <c>DamageFlash</c> coroutine and applies the knockback if there is one.
     /// </summary>
-    public virtual void TakeDamage(GameObject source, float amount, float knockbackForce = 0f, float knockbackDuration = 0f)
+    public virtual void TakeDamage(GameObject source, float amount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f)
     {
         if (damageableEntity.CanTakeDamage())
         {
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
                 Knockback(knockbackDirection * knockbackForce, knockbackDuration);
             }
 
-            damageableEntity.TakeDamage(source, amount);
+            damageableEntity.TakeDamage(source, amount, type);
         }
     }
 
@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour
     /// Just the method from the DamageableEntity class.
     /// </para>
     /// </summary>
-    public virtual void Heal(UnityEngine.Object source, float amount) => damageableEntity.Heal(source, amount);
+    public virtual void Heal(UnityEngine.Object source, float amount, Type type = null) => damageableEntity.Heal(source, amount, type);
 
     /// <summary>
     /// <para>

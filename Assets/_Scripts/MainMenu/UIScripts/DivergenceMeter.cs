@@ -71,7 +71,6 @@ public class DivergenceMeter : MonoBehaviour
         GameData.SetSeed(Seed); // TODO: Egor - Move that line into another place
     }
 
-    //TODO: Egor - test this and finish it
     public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
     {
         while (true)

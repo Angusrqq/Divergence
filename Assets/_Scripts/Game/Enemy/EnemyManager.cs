@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     {
         _camera = Camera.main;
     }
+
     void Start()
     {
         Instance = this;
@@ -38,7 +39,12 @@ public class EnemyManager : MonoBehaviour
     {
         if (delay - Time.deltaTime <= 0)
         {
-            SpawnEnemy(new Vector2(Random.Range(-2f, 2f), 0), Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
+            bool vertical = Random.Range(0, 2) == 1;
+            // Vector2 offset = new(10f, 10f);
+            //TODO: apply an offset to this shit, dk how to explain (enemies spawn right at the edge, their sprite size is not included here)
+            Vector2 viewportCoords = vertical ? new(Random.Range(0, 2), Random.Range(0f, 1f)) : new(Random.Range(0f, 1f), Random.Range(0, 2));
+            Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
+            SpawnEnemy(spawnPos, Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
             delay = 0.5f;
         }
         else
@@ -49,7 +55,7 @@ public class EnemyManager : MonoBehaviour
 
     /// <summary>
     /// <para>
-    /// <c>SpawnEnemy</c> method spawns an enemy at a random position within a defined range and sets its target to the player.
+    /// <c>SpawnEnemy</c> method spawns an enemy at a Vector2 <c>pos</c> and sets its target to the player.
     /// </para>
     /// </summary>
     private void SpawnEnemy(Vector2 pos, Quaternion rot, int enemyIndex = 0)
@@ -62,7 +68,7 @@ public class EnemyManager : MonoBehaviour
 
         Enemies.Add(enemy);
     }
-    
+
     private void SpawnEnemy(Vector2 pos, Quaternion rot, EnemyData enemyData)
     {
         Enemy enemy = Instantiate(_prefab, pos, rot);

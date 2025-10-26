@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 // TODO: Evgeniy - Refactor this
 /// <summary>
@@ -22,16 +23,16 @@ public class GameData : MonoBehaviour
     //TODO: character selection in menu and display character info
     //TODO: map selection in menu and display map info
     //TODO: ability tree in main menu <<< hard one, so optional for now
-    //TODO: AUDIO << hard one, not optional
     public static GameData instance;
     public static Player player;
     public static int currentSeed;
-    public static Random.State lastState;
+    public static Random.State lastValuableState;
+    public static Random.State lastInvaluableState;
     [SerializeField] private List<Character> _Characters;
     public static List<Character> Characters;
     public static List<Character> unlockedCharacters;
     public static Character currentCharacter;
-    [SerializeField] private List<MapData> _Maps; // TODO: MAP
+    [SerializeField] private List<MapData> _Maps;
     public static List<MapData> Maps;
     public static List<MapData> unlockedMaps;
     public static MapData currentMap;
@@ -41,6 +42,7 @@ public class GameData : MonoBehaviour
     [SerializeField] private List<EnemyData> _Enemies;
     public static List<EnemyData> Enemies;
     public static Sprite LockedIcon { get; private set; } // not going to cut it, //TODO: figure out a way to store/load constant icons
+    public static Tilemap TilemapToLoadMaps { get; set; }
 
     /// <summary>
     /// <para>
@@ -62,7 +64,7 @@ public class GameData : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         Abilities = _Abilities;
         unlockedAbilities = Abilities;
-        Maps = _Maps; // TODO: MAP
+        Maps = _Maps;
         unlockedMaps = Maps;
         Characters = _Characters;
         unlockedCharacters = Characters;
@@ -77,7 +79,36 @@ public class GameData : MonoBehaviour
     public static void ResetRandomToSeed()
     {
         Random.InitState(currentSeed);
-        lastState = Random.state;
+        lastValuableState = Random.state;
+        lastInvaluableState = Random.state;
+    }
+
+
+//TODO: USE THESE FUNCTIONS WHEN YOU WANT TO KEEP TRACK OF THE IMPORTANT EVENTS (like rolling abilities after levelling up).
+    /// <summary>
+    /// Regular int <c>Random.Range</c> function, but saves random states
+    /// </summary>
+    public static int ValuableRoll(int minInclusive, int maxExclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastValuableState;
+        int res = Random.Range(minInclusive, maxExclusive);
+        lastValuableState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
+    }
+
+    /// <summary>
+    /// Regular float <c>Random.Range</c> function, but saves random states
+    /// </summary>
+    public static float ValuableRoll(float minInclusive, float maxInclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastValuableState;
+        float res = Random.Range(minInclusive, maxInclusive);
+        lastValuableState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
     }
 
     /// <summary>
@@ -85,8 +116,6 @@ public class GameData : MonoBehaviour
     /// <c>SetSeed</c> method sets the current seed to the passed value and optionally resets the random number generator to that seed.
     /// </para>
     /// </summary>
-    /// <param name="seed"></param>
-    /// <param name="resetRandom"></param>
     public static void SetSeed(int seed, bool resetRandom = false)
     {
         currentSeed = seed;
@@ -104,8 +133,6 @@ public class GameData : MonoBehaviour
     /// <c>OnSceneLoaded</c> method is called when a new scene is loaded
     /// </para>
     /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
     public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene Loaded: {scene.name}");
@@ -113,13 +140,16 @@ public class GameData : MonoBehaviour
         if (scene.name == "Game")
         {
             ResetRandomToSeed();
-            // currentMap.ApplyToTilemap();
+
+            currentMap = currentMap != null ? currentMap : Maps[0];
+            currentMap.ApplyToTilemap(TilemapToLoadMaps);
+            
             Debug.Log("Reset random to seed " + currentSeed);
         }
 
         if (scene.name == "MainMenu")
         {
-            Random.InitState((int)System.DateTime.Now.Ticks); // reset random to current time
+            Random.InitState((int)System.DateTime.Now.Ticks); // Reset random to current time
             Debug.Log("Reset random to current time");
         }
     }
@@ -144,7 +174,7 @@ public class GameData : MonoBehaviour
     /// Used in the map selection menu.
     /// </summary>
     /// <param name="map"></param>
-    public static void ChooseMap(MapData map) // TODO: MAP
+    public static void ChooseMap(MapData map)
     {
         currentMap = map;
         Debug.Log($"Chosen map: {map.name}");
