@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
   Name: Katana
   Description: Slashes stuff
-  CooldownTime: 0.7
   Level: 1
   MaxLevel: 5
+  IsEvolved: 0
+  Icon: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
+  CooldownTime: 0.7
   ActiveTime: 0.2
   KnockbackForce: 4
   KnockbackDuration: 0.25
-  IsEvolved: 0
   CountActiveTimeInCooldown: 1
   _standardPrefab: {fileID: 5151721436561418865, guid: 43353bcbba6b6f241b682699d2f94c35, type: 3}
   _evoPrefab: {fileID: 8681463279908197005, guid: 99f1bb4aed65b7e40958ba081987263e, type: 3}

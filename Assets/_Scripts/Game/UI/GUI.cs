@@ -19,7 +19,7 @@ public class GUI : MonoBehaviour
     public AbilityButton AbilityButtonPrefab;
     [NonSerialized] public static bool Paused = false;
     [NonSerialized] public static bool CanPause = true;
-    public List<Ability> AbilityChoices { get; private set; } = new();
+    public List<BaseAbility> AbilityChoices { get; private set; } = new();
     private List<AbilityButton> _abilityButtons = new();
 
     void Start()
@@ -152,9 +152,12 @@ public class GUI : MonoBehaviour
     {
         PauseInternal();
         AbilityChoices.Clear();
+        List<BaseAbility> unlockedAbilities = new(GameData.unlockedAbilities);
         for (int i = 0; i < Attributes.AbilitiesPerLevel; i++)
         {
-            Ability rolled = GameData.unlockedAbilities[GameData.ValuableRoll(0, GameData.unlockedAbilities.Count)];
+            if (unlockedAbilities.Count == 0) break;
+            BaseAbility rolled = unlockedAbilities[GameData.ValuableRoll(0, unlockedAbilities.Count)];
+            unlockedAbilities.Remove(rolled);
             AbilityChoices.Add(rolled);
         }
         RebuildAbilities();
@@ -175,7 +178,7 @@ public class GUI : MonoBehaviour
         }
         _abilityButtons.Clear();
         
-        foreach(Ability a in AbilityChoices)
+        foreach(BaseAbility a in AbilityChoices)
         {
             AbilityButton button = Instantiate(AbilityButtonPrefab, LevelUpPanel.transform);
             button.Init(a);

@@ -7,9 +7,9 @@ public class AbilityButton : MonoBehaviour
     public TMP_Text AbilityName;
     public TMP_Text Description;
     public Image Icon;
-    public Ability Ability;
+    public BaseAbility Ability;
 
-    public void Init(Ability ability)
+    public void Init(BaseAbility ability)
     {
         AbilityName.text = ability.Name;
         Description.text = ability.Description;
@@ -19,7 +19,14 @@ public class AbilityButton : MonoBehaviour
 
     public void AbilityPicked()
     {
-        GameData.player.AbilityHolder.AddAbility(Ability);
-        transform.parent.GetComponentInParent<GUI>().CloseLevelUp(); // TODO: Find a better way, looks bad
+        if (Ability.GetType() == typeof(PassiveAbility))
+        {
+            GameData.player.AbilityHolder.AddPassive(Ability);
+        }
+        else
+        {
+            GameData.player.AbilityHolder.AddAbility(Ability);
+        }
+            transform.parent.GetComponentInParent<GUI>().CloseLevelUp(); // TODO: Find a better way, looks bad
     }
 }

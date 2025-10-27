@@ -11,19 +11,13 @@ using UnityEngine;
 /// It also has methods to activate the ability, start the cooldown, handle the end of the cooldown, upgrade the ability, and update the ability state.
 /// </para>
 /// </summary>
-public class Ability : ScriptableObject
+public class Ability : BaseAbility
 {
-    public string Name;
-    public string Description;
     public float CooldownTime;
-    public int Level = 1;
-    public int MaxLevel;
     public float ActiveTime;
     public float KnockbackForce = 2f;
     public float KnockbackDuration = 0.25f;
-    public bool IsEvolved = false; //TODO: Egor - change to nonserialized (its not serialized for testing purposes)
     public bool CountActiveTimeInCooldown = true;
-    public Sprite Icon;
     [NonSerialized] public float CooldownTimer;
     [NonSerialized] public float ActiveTimer;
     [NonSerialized] public AbilityState State = AbilityState.ready;
@@ -33,7 +27,7 @@ public class Ability : ScriptableObject
     /// <c>Activate</c> is a virtual method that sets the state to active and starts the active timer.
     /// </para>
     /// </summary>
-    public virtual void Activate()
+    public override void Activate()
     {
         State = AbilityState.active;
         if (CountActiveTimeInCooldown)
@@ -65,17 +59,10 @@ public class Ability : ScriptableObject
 
     /// <summary>
     /// <para>
-    /// <c>Upgrade</c> is a virtual method that upgrades the ability.
-    /// </para>
-    /// </summary>
-    public virtual void Upgrade() { }
-
-    /// <summary>
-    /// <para>
     /// Handles the states of the ability. Should be manually called in update.
     /// </para>
     /// </summary>
-    public virtual void UpdateAbility()
+    public override void UpdateAbility()
     {
         switch (State)
         {

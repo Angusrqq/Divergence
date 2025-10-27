@@ -12,7 +12,6 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     public event Action<UnityEngine.Object> OnDeath;
     public event Action<UnityEngine.Object, float, Type> OnDamageTaken;
     public event Action<UnityEngine.Object, float, Type> OnHeal;
-    public StatusHolder Statuses = new();
     public bool IsVulnerable = true;
     public bool CanHeal = true;
 
@@ -47,11 +46,6 @@ public class DamageableEntity : MonoBehaviour, IDamageable
 
         Health -= amount;
         OnDamageTaken?.Invoke(source, amount, type);
-    }
-
-    public void FixedUpdate()
-    {
-        Statuses.RunTicks();
     }
 
     /// <summary>

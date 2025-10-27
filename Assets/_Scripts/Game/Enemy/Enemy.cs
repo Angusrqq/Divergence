@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     [NonSerialized] public SpriteRenderer spriteRenderer;
     [NonSerialized] public EnemyData enemyData;
     [NonSerialized] public bool isRespawnable = false;
+    public StatusHolder Statuses = new();
     public float maxHealth = 100f;
     public float moveSpeed = 12f;
     public float damage = 1f;
@@ -116,6 +117,7 @@ public class Enemy : MonoBehaviour
 
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
+        Statuses.RunTicks();
     }
 
     public virtual void SetTarget(Transform newTarget) => target = newTarget;

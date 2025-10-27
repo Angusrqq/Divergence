@@ -7,19 +7,20 @@ using UnityEngine;
 /// that can be added to an <c>AbilityHolder</c>.
 /// </para>
 /// </summary>
-public class PassiveAbility : ScriptableObject
+
+[CreateAssetMenu(fileName = "New PassvieAbility", menuName = "Abilities/PassiveAbility")]
+public class PassiveAbility : BaseAbility
 {
-    [NonSerialized] public bool IsEvolved = false;
-
-    public string Name;
-    public string Description;
-    public int Level = 1;
-    public int MaxLevel;
     public PassiveAbilityType Type;
+    [SerializeReference] public PassiveAbilityMono MonoLogic;
 
-    public virtual void Activate() { }
-    public virtual void Upgrade() { }
-    public virtual void UpdateAbility() { }
+    public override void Activate() => MonoLogic.Activate();
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        MonoLogic.Upgrade();
+    }
+    public override void UpdateAbility() => MonoLogic.UpdateBehaviour();
 }
 
 public enum PassiveAbilityType

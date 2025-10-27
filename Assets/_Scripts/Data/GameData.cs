@@ -36,9 +36,9 @@ public class GameData : MonoBehaviour
     public static List<MapData> Maps;
     public static List<MapData> unlockedMaps;
     public static MapData currentMap;
-    [SerializeField] private List<Ability> _Abilities;
-    public static List<Ability> Abilities;
-    public static List<Ability> unlockedAbilities;
+    [SerializeField] private List<BaseAbility> _Abilities;
+    public static List<BaseAbility> Abilities;
+    public static List<BaseAbility> unlockedAbilities;
     [SerializeField] private List<EnemyData> _Enemies;
     public static List<EnemyData> Enemies;
     public static Sprite LockedIcon { get; private set; } // not going to cut it, //TODO: figure out a way to store/load constant icons

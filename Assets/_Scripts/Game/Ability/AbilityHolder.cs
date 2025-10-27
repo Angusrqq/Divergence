@@ -9,8 +9,8 @@ using UnityEngine;
 /// </summary>
 public class AbilityHolder : MonoBehaviour
 {
-    public List<Ability> Abilities;
-    public List<PassiveAbility> Passives;
+    public List<BaseAbility> Abilities;
+    public List<BaseAbility> Passives;
 
     private readonly List<string> _abilityNames = new();
     private readonly List<string> _passiveNames = new();
@@ -43,11 +43,11 @@ public class AbilityHolder : MonoBehaviour
     /// else, if the ability is already present and its level is less than its max level, upgrades the ability.
     /// </summary>
     /// <param name="a"></param>
-    public void AddAbility(Ability a)
+    public void AddAbility(BaseAbility a)
     {
         if (_abilityNames.Contains(a.name))
         {
-            Ability T = GetAbilityByName(a.name);
+            BaseAbility T = GetAbilityByName(a.name);
             if (T.Level < T.MaxLevel)
             {
                 T.Upgrade();
@@ -68,11 +68,11 @@ public class AbilityHolder : MonoBehaviour
     /// </para> else, if the passive is already present and its level is less than its max level, upgrades the passive.
     /// </summary>
     /// <param name="passive"></param>
-    public void AddPassive(PassiveAbility passive)
+    public void AddPassive(BaseAbility passive)
     {
         if (_passiveNames.Contains(passive.name))
         {
-            PassiveAbility T = GetPassiveByName(passive.name);
+            BaseAbility T = GetPassiveByName(passive.name);
             if (T.Level < T.MaxLevel)
             {
                 T.Upgrade();
@@ -90,7 +90,7 @@ public class AbilityHolder : MonoBehaviour
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public PassiveAbility GetPassiveByName(string name)
+    public BaseAbility GetPassiveByName(string name)
     {
         return Passives[_passiveNames.IndexOf(name)];
     }
@@ -102,7 +102,7 @@ public class AbilityHolder : MonoBehaviour
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public Ability GetAbilityByName(string name)
+    public BaseAbility GetAbilityByName(string name)
     {
         return Abilities[_abilityNames.IndexOf(name)];
     }
