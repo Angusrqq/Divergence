@@ -15,7 +15,7 @@ public class XpCrystal : MonoBehaviour
 
     public bool IsFired { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

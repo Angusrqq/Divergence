@@ -30,12 +30,12 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     /// </para>
     /// If the entity has no health left, it invokes the <c>OnDeath</c> event.
     /// </summary>
-    public void TakeDamage(UnityEngine.Object source, float amount, Type type = null)
+    public void TakeDamage(UnityEngine.Object source, float damageAmount, Type type = null)
     {
         if (!IsVulnerable) return;
         if (Health <= 0) return;
 
-        if (Health - amount <= 0)
+        if (Health - damageAmount <= 0)
         {
             float taken = Health;
             Health = 0;
@@ -44,8 +44,8 @@ public class DamageableEntity : MonoBehaviour, IDamageable
             return;
         }
 
-        Health -= amount;
-        OnDamageTaken?.Invoke(source, amount, type);
+        Health -= damageAmount;
+        OnDamageTaken?.Invoke(source, damageAmount, type);
     }
 
     /// <summary>

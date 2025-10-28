@@ -5,11 +5,14 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Tilemap/MapData", fileName = "NewMapData")]
 public class MapData : ScriptableObject
 {
+    [Header("Map Data")]
     public string mapName;
     public Vector2Int size;
     public Vector2Int startPosition;
-    public List<TileInfo> tiles = new();
     public Sprite icon;
+
+    [Header("Tiles")]
+    public List<TileInfo> tiles = new();
 
     [System.Serializable]
     public class TileInfo
@@ -18,6 +21,12 @@ public class MapData : ScriptableObject
         public TileBase tile;
     }
 
+    /// <summary>
+    /// Captures all tiles from the specified Tilemap and stores them in the MapData.
+    /// This method first clears the existing tile list, then iterates through all positions in the Tilemap,
+    /// adding each non-null tile to the list. Finally, it updates the MapData size to match the Tilemap bounds.
+    /// </summary>
+    /// <param name="tilemap">The Tilemap from which the tiles are captured.</param>
     public void CaptureFromTilemap(Tilemap tilemap)
     {
         tiles.Clear();
@@ -34,6 +43,10 @@ public class MapData : ScriptableObject
         size = new Vector2Int(tilemap.cellBounds.size.x, tilemap.cellBounds.size.y);
     }
 
+    /// <summary>
+    /// Applies all tiles from the MapData to the specified Tilemap.
+    /// </summary>
+    /// <param name="tilemap">The Tilemap to which the tiles will be applied.</param>
     public void ApplyToTilemap(Tilemap tilemap)
     {
         tilemap.ClearAllTiles();

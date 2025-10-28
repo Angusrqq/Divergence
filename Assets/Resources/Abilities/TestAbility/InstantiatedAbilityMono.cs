@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -65,5 +66,10 @@ public class InstantiatedAbilityMono : MonoBehaviour
             // Apply damage, knockback force, and knockback duration to the enemy
             enemy.TakeDamage(gameObject, ability.damage, knockbackForce: ability.KnockbackForce, knockbackDuration: ability.KnockbackDuration);
         }
+    }
+
+    public static Enemy FindClosest()
+    {
+        return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
     }
 }

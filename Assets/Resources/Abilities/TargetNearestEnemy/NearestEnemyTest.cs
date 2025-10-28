@@ -55,10 +55,10 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         }
     }
 
-    public Enemy FindClosest()
-    {
-        return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
-    }
+    // public Enemy FindClosest()
+    // {
+    //     return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
+    // }
 
     // public struct FindClosestEnemy : IJob
     // {

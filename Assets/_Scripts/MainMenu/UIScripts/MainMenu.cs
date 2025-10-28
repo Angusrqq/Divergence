@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject divergenceMeter;
     [SerializeField] private SelectorManager characterSelectorManager;
     [SerializeField] private CharacterButton characterButtonPrefab;
+    
     private DivergenceMeter _divergenceMeter;
     private Canvas mainMenuCanvas;
     private Coroutine IdleAnim;

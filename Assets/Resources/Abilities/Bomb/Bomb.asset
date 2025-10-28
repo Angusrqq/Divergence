@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
+  m_Name: Bomb
+  m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
+  Name: Bomb
+  Description: Throw bomb into an enemy
+  Level: 1
+  MaxLevel: 5
+  IsEvolved: 1
+  Icon: {fileID: -6469946024760412689, guid: 176c429236c7ec441be212f413b2c2ec, type: 3}
+  CooldownTime: 1
+  ActiveTime: 2
+  KnockbackForce: 0
+  KnockbackDuration: 0
+  CountActiveTimeInCooldown: 1
+  _standardPrefab: {fileID: 2879648600081668989, guid: 62c9baebc508c274e9fe4f0b1af058c3, type: 3}
+  _evoPrefab: {fileID: 0}
+  speed: 0.15
+  damage: 5
+  localProjectilesAmount: 1
+  nativeUser: {fileID: 0}

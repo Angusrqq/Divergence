@@ -11,12 +11,13 @@ public class DivergenceMeter : MonoBehaviour
     // [SerializeField] private AnimationCurve _glowCurve; // TODO: Egor - Move curve from `GlowCurve` to `_glowCurve`
     [SerializeField] private Material _divergenceMeterMaterial;
 
-    public int Seed;
+
     public Coroutine NestedCoroutine;
     public static bool animationEnded = false;
 
+    private int _seed;
     private readonly List<DivergenceMeterNumber> _numbers = new();
-    private Color defaultMaterialColor;
+    private Color _defaultMaterialColor;
 
     public enum AnimationVariant
     {
@@ -27,7 +28,7 @@ public class DivergenceMeter : MonoBehaviour
     void Awake()
     {
         animationEnded = false;
-        defaultMaterialColor = _divergenceMeterMaterial.GetColor("_Color");
+        _defaultMaterialColor = _divergenceMeterMaterial.GetColor("_Color");
 
         foreach (Transform child in transform)
         {
@@ -41,7 +42,7 @@ public class DivergenceMeter : MonoBehaviour
     // TODO: Egor - Turn numbers into parameters and documentation
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
-        _divergenceMeterMaterial.SetColor("_Color", defaultMaterialColor);
+        _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
         if (variant == AnimationVariant.Full)
         {
             foreach (DivergenceMeterNumber num in _numbers)
@@ -65,7 +66,7 @@ public class DivergenceMeter : MonoBehaviour
             yield return new WaitForSeconds(minRollTime);
         }
 
-        yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, defaultMaterialColor, defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
+        yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, _defaultMaterialColor, _defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
 
         animationEnded = true;
         GameData.SetSeed(Seed); // TODO: Egor - Move that line into another place
@@ -75,14 +76,14 @@ public class DivergenceMeter : MonoBehaviour
     {
         while (true)
         {
-            yield return GlowFade(_divergenceMeterMaterial, defaultMaterialColor * 5f, Color.black, time);
+            yield return GlowFade(_divergenceMeterMaterial, _defaultMaterialColor * 5f, Color.black, time);
 
             foreach (DivergenceMeterNumber num in _numbers)
             {
                 num.CustomUpdate();
             }
 
-            yield return GlowFade(_divergenceMeterMaterial, _divergenceMeterMaterial.GetColor("_Color"), defaultMaterialColor * 5f, time);
+            yield return GlowFade(_divergenceMeterMaterial, _divergenceMeterMaterial.GetColor("_Color"), _defaultMaterialColor * 5f, time);
         }
     }
 
@@ -92,9 +93,8 @@ public class DivergenceMeter : MonoBehaviour
     /// <param name="material">the material to change its color</param>
     /// <param name="StartMatColor">Color <c>a</c> for linear interpolation</param>
     /// <param name="TargetMatColor">Color <c>b</c> for linear interpolation</param>
-    /// <param name="curve">curve (from 0 to 1 on time) that will be evaluated by <paramref name="time"></paramref></param>
-    /// <param name="time">how fast the color should change (less time -> more speed)</param>
-    /// <returns></returns>
+    /// <param name="curve">Curve (from 0 to 1 on time) that will be evaluated by <paramref name="time"></paramref></param>
+    /// <param name="time">How fast the color should change (less time -> more speed)</param>
     public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, AnimationCurve curve, float time)
     {
         while (time > 0)
@@ -135,6 +135,12 @@ public class DivergenceMeter : MonoBehaviour
 
     void OnDestroy()
     {
-        _divergenceMeterMaterial.SetColor("_Color", defaultMaterialColor);
+        _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
+    }
+
+    public int Seed
+    {
+        get => _seed;
+        private set => _seed = value;
     }
 }
