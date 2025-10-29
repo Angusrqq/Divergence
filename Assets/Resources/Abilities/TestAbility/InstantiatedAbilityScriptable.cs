@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -16,7 +17,7 @@ public class InstantiatedAbilityScriptable : Ability
     public float damage;
     public int localProjectilesAmount = 1; // How many projectiles are fired in a single burst
     public Character nativeUser;
-    private InstantiatedAbilityMono _instance;
+    public List<InstantiatedAbilityMono> Instances { get; private set; }
 
     void Awake()
     {
@@ -36,14 +37,22 @@ public class InstantiatedAbilityScriptable : Ability
     {
         if (IsEvolved && _evoPrefab != null)
         {
-            _instance = Instantiate(_evoPrefab, GameData.player.transform.position, Quaternion.identity);
+            for(int i = 0; i < localProjectilesAmount + Attributes.ProjectilesAdd; i++)
+            {
+                var instance = Instantiate(_evoPrefab, GameData.player.transform.position, Quaternion.identity);
+                instance.Init(this);
+                Instances.Add(instance);
+            }
         }
         else
         {
-            _instance = Instantiate(_standardPrefab, GameData.player.transform.position, Quaternion.identity);
+            for(int i = 0; i < localProjectilesAmount + Attributes.ProjectilesAdd; i++)
+            {
+                var instance = Instantiate(_standardPrefab, GameData.player.transform.position, Quaternion.identity);
+                instance.Init(this);
+                Instances.Add(instance);
+            }
         }
-
-        _instance.Init(this);
         base.Activate();
     }
 

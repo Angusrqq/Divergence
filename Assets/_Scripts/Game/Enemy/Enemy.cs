@@ -128,13 +128,21 @@ public class Enemy : MonoBehaviour
     /// </para>
     /// Starts the <c>DamageFlash</c> coroutine and applies the knockback if there is one.
     /// </summary>
-    public virtual void TakeDamage(GameObject source, float damageAmount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f)
+    public virtual void TakeDamage(GameObject source, float amount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f,
+    Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, int sfxIndex = default)
     {
+        flashColor = flashColor == default ? this.flashColor : flashColor;
+        damageFlashDuration = damageFlashDuration == default ? this.damageFlashDuration : damageFlashDuration;
+        particleSystem = particleSystem != null ? particleSystem : m_particleSystem;
+        sfxIndex = sfxIndex == default ? 1 : sfxIndex;
         if (damageableEntity.CanTakeDamage())
         {
-            StartCoroutine(DamageFlash());
-            EmitParticles((transform.position - source.transform.position).normalized);
-            AudioManager.instance.PlaySFX(1);
+            StartCoroutine(DamageFlash(flashColor, damageFlashDuration));
+            if (useParticles)
+            {
+                EmitParticles(particleSystem, (transform.position - source.transform.position).normalized);
+            }
+            AudioManager.instance.PlaySFX(sfxIndex);
 
             if (knockbackForce > 0)
             {
@@ -142,7 +150,11 @@ public class Enemy : MonoBehaviour
                 Knockback(knockbackDirection * knockbackForce, knockbackDuration);
             }
 
-            damageableEntity.TakeDamage(source, damageAmount, type);
+            if (source.GetType() == typeof(Player))
+            {
+                amount *= Attributes.PlayerDamageMult;
+            }
+            damageableEntity.TakeDamage(source, amount, type);
         }
     }
 
@@ -197,7 +209,7 @@ public class Enemy : MonoBehaviour
     /// Flashes the enemy`s sprite.
     /// </para>
     /// </summary>
-    IEnumerator DamageFlash()
+    IEnumerator DamageFlash(Color flashColor, float damageFlashDuration)
     {
         Material material = spriteRenderer.material;
         material.SetColor("_FlashColor", flashColor);
@@ -226,9 +238,9 @@ public class Enemy : MonoBehaviour
         _knockbackDuration = duration;
     }
 
-    void EmitParticles(Vector2 direction)
+    void EmitParticles(ParticleSystem system, Vector2 direction)
     {
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, direction);
-        _particleSystemInstance = Instantiate(m_particleSystem, transform.position, spawnRotation, transform.parent);
+        _particleSystemInstance = Instantiate(system, transform.position, spawnRotation, transform.parent);
     }
 }

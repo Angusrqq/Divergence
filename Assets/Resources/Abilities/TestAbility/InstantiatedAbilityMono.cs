@@ -54,6 +54,11 @@ public class InstantiatedAbilityMono : MonoBehaviour
         }
     }
 
+    protected virtual void OnDestroy()
+    {
+        ability.Instances.Remove(this);
+    }
+
     /// <summary>
     /// Called when another object enters a 2D collider trigger and checks if the other object has an Enemy component to apply damage, knockback force, and knockback duration to the enemy.
     /// </summary>
@@ -64,10 +69,9 @@ public class InstantiatedAbilityMono : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             // Apply damage, knockback force, and knockback duration to the enemy
-            enemy.TakeDamage(gameObject, ability.damage, knockbackForce: ability.KnockbackForce, knockbackDuration: ability.KnockbackDuration);
+            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration);
         }
     }
-
     public static Enemy FindClosest()
     {
         return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);

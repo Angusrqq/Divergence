@@ -167,7 +167,8 @@ public class Player : MonoBehaviour
         {
             if (collision_dentity.CanDealDamage)
             {
-                DamageableEntity.TakeDamage(collision.gameObject, collision_dentity.Damage);
+                float damage = collision_dentity.Damage * Attributes.PlayerResistsMult;
+                DamageableEntity.TakeDamage(collision.gameObject, damage);
             }
         }
     }

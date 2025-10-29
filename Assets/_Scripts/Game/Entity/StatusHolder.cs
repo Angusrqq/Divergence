@@ -5,6 +5,7 @@ public class StatusHolder
 {
     private List<StatusEffect> _effectBuffer = new();
     public List<StatusEffect> EffectBuffer => _effectBuffer;
+    private List<StatusEffect> _effectsToDump = new();
 
     public void RunTicks()
     {
@@ -13,8 +14,13 @@ public class StatusHolder
         {
             effect.Tick();
         }
+        foreach (StatusEffect effect in _effectsToDump)
+        {
+            _effectBuffer.Remove(effect);
+        }
+        _effectsToDump.Clear();
     }
-    
+
     public void ApplyEffect(StatusEffect effect)
     {
         StatusEffect foundEffect = _effectBuffer.Find(e => e.Name == effect.Name);
@@ -26,5 +32,11 @@ public class StatusHolder
         {
             _effectBuffer.Add(effect);
         }
+    }
+    
+    public void RemoveStatusEffect(StatusEffect effect)
+    {
+        if(_effectBuffer.Contains(effect) == false) return;
+        _effectsToDump.Add(effect);
     }
 }
