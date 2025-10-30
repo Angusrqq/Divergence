@@ -23,10 +23,10 @@ public class Enemy : MonoBehaviour
     [NonSerialized] public EnemyData enemyData;
     [NonSerialized] public bool isRespawnable = false;
     public StatusHolder Statuses = new();
-    public float maxHealth = 100f;
-    public float moveSpeed = 12f;
-    public float damage = 1f;
-    public int xpDrop = 10;
+    public Stat maxHealth = 100f;
+    public Stat moveSpeed = 12f;
+    public Stat damage = 1f;
+    public Stat xpDrop = 10;
     public Color flashColor;
     public float damageFlashDuration = 2f;
 
@@ -114,7 +114,6 @@ public class Enemy : MonoBehaviour
             {
                 animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
             }
-
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
         Statuses.RunTicks();
@@ -129,7 +128,7 @@ public class Enemy : MonoBehaviour
     /// Starts the <c>DamageFlash</c> coroutine and applies the knockback if there is one.
     /// </summary>
     public virtual void TakeDamage(GameObject source, float amount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f,
-    Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, int sfxIndex = default)
+    Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, bool useSound = true, int sfxIndex = default)
     {
         flashColor = flashColor == default ? this.flashColor : flashColor;
         damageFlashDuration = damageFlashDuration == default ? this.damageFlashDuration : damageFlashDuration;
@@ -138,11 +137,16 @@ public class Enemy : MonoBehaviour
         if (damageableEntity.CanTakeDamage())
         {
             StartCoroutine(DamageFlash(flashColor, damageFlashDuration));
+
             if (useParticles)
             {
                 EmitParticles(particleSystem, (transform.position - source.transform.position).normalized);
             }
-            AudioManager.instance.PlaySFX(sfxIndex);
+
+            if (useSound)
+            {
+                AudioManager.instance.PlaySFX(sfxIndex);
+            }
 
             if (knockbackForce > 0)
             {

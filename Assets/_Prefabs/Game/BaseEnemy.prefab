@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &6211102340784009416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,13 +109,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_particleSystem: {fileID: 7094119184735996351, guid: d5daf955686d6dd4c8ef747076455f34, type: 3}
+  xpCrystalPrefab: {fileID: 7069377261818586785, guid: 9e1d252a1d403124683989ff5b0facde, type: 3}
   maxHealth: 100
   moveSpeed: 12
   damage: 1
   xpDrop: 10
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   damageFlashDuration: 0.2
-  xpCrystalPrefab: {fileID: 7069377261818586785, guid: 9e1d252a1d403124683989ff5b0facde, type: 3}
 --- !u!114 &3998149458944757455
 MonoBehaviour:
   m_ObjectHideFlags: 0

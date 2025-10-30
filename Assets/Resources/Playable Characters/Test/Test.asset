@@ -24,4 +24,4 @@ MonoBehaviour:
   _characterAnimatorController: {fileID: 9100000, guid: a31dd74836ee32b44a4e6832854aed9c, type: 2}
   _characterAnimationClips: []
   _startingAbilities:
-  - {fileID: 11400000, guid: 358312a8ec0e39649a4814128646bb7d, type: 2}
+  - {fileID: 11400000, guid: b741aa6e73563804b89467274f2fb651, type: 2}

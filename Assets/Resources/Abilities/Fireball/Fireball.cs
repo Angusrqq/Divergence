@@ -28,9 +28,9 @@ public class Fireball : InstantiatedAbilityMono
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration);
-            NegativeStatusEffect burn = new NegativeStatusEffect(GameData.player, "burn", enemy, delayBetweenTicks: 1, ticks: 5, damage: ability.damage * 0.1f);
-            enemy.Statuses.ApplyEffect(burn);
+            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration, useSound: false);
+            Burn burnEffect = new(GameData.player, enemy, damage: ability.damage * 0.1f);
+            enemy.Statuses.ApplyEffect(burnEffect);
             Destroy(gameObject);
             ability.StartCooldown();
         }

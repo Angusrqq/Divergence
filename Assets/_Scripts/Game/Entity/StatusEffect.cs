@@ -37,11 +37,11 @@ public class StatusEffect
     public static StatusEffect operator +(StatusEffect left, StatusEffect right)
     {
         if (left != right) throw new SystemException("StatusEffects with differing names and types cannot be combined");
-        Action method = left._tickMethod == right._tickMethod ? left._tickMethod : left._tickMethod + right._tickMethod;
-        if(left._tickMethod != right._tickMethod)
-        {
-            Debug.LogWarning($"[StatusEffect operator +] {left} tickMethod differs from {right}, they will be combined");
-        }
+        Action method = left._tickMethod; //== right._tickMethod ? left._tickMethod : left._tickMethod + right._tickMethod;
+        // if(left._tickMethod != right._tickMethod)
+        // {
+        //     Debug.LogWarning($"[StatusEffect operator +] {left} tickMethod differs from {right}, they will be combined");
+        // }
         return new StatusEffect(
             left.Type,
             left._sender,
@@ -94,16 +94,20 @@ public class StatusEffect
     //--------end of generated stuff i dont understand
     public virtual void Tick()
     {
-        if (Time.timeAsDouble - _lastTickTime >= _delayBetweenTicks && _ticks > 0)
+        if (Time.timeAsDouble - _lastTickTime >= _delayBetweenTicks && _timesApplied > 0)
         {
             _tickMethod();
-            Debug.Log($"Status {_name} ticked");
             _lastTickTime = Time.timeAsDouble;
             _ticks--;
         }
-        if(_ticks <= 0)
+        if (_ticks <= 0)
+        {
+            _timesApplied--;
+        }
+        if (_timesApplied <= 0)
         {
             _target.Statuses.RemoveStatusEffect(this);
+            OnRemove();
         }
     }
 
@@ -111,6 +115,9 @@ public class StatusEffect
     {
         throw new NotImplementedException();
     }
+
+    public virtual void OnApply() { }
+    protected virtual void OnRemove() { }
 }
 
 public class NegativeStatusEffect : StatusEffect
@@ -133,4 +140,35 @@ public class PositiveStatusEffect : StatusEffect // i feel stupid
 {
     public PositiveStatusEffect(MonoBehaviour sender, string name, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 0f)
     : base(StatusType.Positive, sender, name, target, tickMethod, timesApplied, delayBetweenTicks) { }
+}
+
+public class Burn : NegativeStatusEffect
+{
+    public Burn(MonoBehaviour sender, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f)
+    : base(sender, "burn", target, tickMethod, timesApplied, delayBetweenTicks, ticks, damage) { }
+}
+
+public class Acid : NegativeStatusEffect
+{
+    private StatModifier _slowModifier;
+    public Acid(MonoBehaviour sender, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f, float percentSlow = 0f)
+    : base(sender, "acid", target, tickMethod, timesApplied, delayBetweenTicks, ticks, damage)
+    {
+        _slowModifier = new(percentSlow, StatModifierType.Additive, this);
+    }
+
+    public override void OnApply()
+    {
+        _target.moveSpeed.AddModifier(_slowModifier);
+    }
+
+    protected override void TickMethod()
+    {
+        _target.TakeDamage(_sender.gameObject, _damage * _timesApplied, GetType(), flashColor: Color.green, useParticles: false);
+    }
+
+    protected override void OnRemove()
+    {
+        _target.moveSpeed.RemoveModifier(_slowModifier);
+    }
 }

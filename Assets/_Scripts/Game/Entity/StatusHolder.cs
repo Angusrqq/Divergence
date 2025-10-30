@@ -31,6 +31,7 @@ public class StatusHolder
         else
         {
             _effectBuffer.Add(effect);
+            effect.OnApply();
         }
     }
     
