@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
@@ -6,20 +5,20 @@ using UnityEngine.U2D.Animation;
 [RequireComponent(typeof(SpriteResolver))]
 public class DivergenceMeterNumber : MonoBehaviour
 {
-    [NonSerialized] public SpriteResolver resolver;
-    public bool Rolled = false;
+    private SpriteResolver _resolver;
+    public bool Rolled { get; private set; } = false;
 
     private const string CATEGORY = "DivergenceMeterSheet";
 
     void Awake()
     {
-        resolver = GetComponent<SpriteResolver>();
+        _resolver = GetComponent<SpriteResolver>();
     }
 
     public void CustomUpdate()
     {
         int rand = UnityEngine.Random.Range(0, 10);
-        resolver.SetCategoryAndLabel(CATEGORY, rand.ToString());
+        _resolver.SetCategoryAndLabel(CATEGORY, rand.ToString());
     }
 
     /// <summary>
@@ -37,13 +36,13 @@ public class DivergenceMeterNumber : MonoBehaviour
         {
             if (delay > 0) yield return new WaitForSeconds(delay);
 
-            resolver.SetCategoryAndLabel(CATEGORY, UnityEngine.Random.Range(0, 10).ToString());
+            _resolver.SetCategoryAndLabel(CATEGORY, UnityEngine.Random.Range(0, 10).ToString());
             time -= Time.fixedDeltaTime;
 
             yield return new WaitForFixedUpdate();
         }
 
-        resolver.SetCategoryAndLabel(CATEGORY, label);
+        _resolver.SetCategoryAndLabel(CATEGORY, label);
         Rolled = true;
     }
 }

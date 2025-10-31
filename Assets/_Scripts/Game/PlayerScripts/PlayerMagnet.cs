@@ -50,7 +50,7 @@ public class PlayerMagnet : MonoBehaviour
     /// <c>HandleAttributeChanged</c> is a method for updating the magnet's radius if the attribute changed.
     /// </para>
     /// </summary>
-    private void HandleAttributeChanged(AttributeId id, float value)
+    private void HandleAttributeChanged(AttributeId id, Stat value)
     {
         if (id != AttributeId.MagnetRadius) return;
         if (magnetCollider == null)

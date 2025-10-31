@@ -34,6 +34,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
     {
         // Update direction towards target if target exists, otherwise maintain current direction
         direction = target ? (target.transform.position - transform.position).normalized : direction.normalized;
+        
         // Move the rigidbody towards the target with the ability's speed
         rb.MovePosition(ability.speed * direction + rb.position);
     }

@@ -12325,7 +12325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181e5ff06d6408e4da373bcb13b0b9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DivergenceMeter
-  GlowCurve:
+  _glowCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3

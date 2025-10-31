@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (DivergenceMeter.animationEnded)
+        if (DivergenceMeter.AnimationEnded)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
         }

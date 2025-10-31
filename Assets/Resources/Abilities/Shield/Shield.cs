@@ -1,12 +1,21 @@
+using UnityEngine;
+
 public class Shield : PassiveAbilityMono
 {
+    private StatModifierByStat shieldModifier;
+    private Stat resistValue;
     public override void Activate()
     {
-        Attributes.PlayerResistsMult -= 0.1f * Attributes.PassiveAbilityEffectMult;
+        resistValue = -0.1f;
+        resistValue.AddModifier(Attributes.PassiveAbilityEffectMultModifier);
+        shieldModifier = new(ref resistValue, StatModifierType.Percent, this);
+        Attributes.PlayerResistsMult.AddModifier(shieldModifier);
+        Debug.Log($"Shield Activated, player resist: {Attributes.PlayerResistsMult}, resistBase: {resistValue.BaseValue}, resistCurrent {resistValue}");
     }
 
     public override void Upgrade()
     {
-        Attributes.PlayerResistsMult -= 0.05f * Attributes.PassiveAbilityEffectMult;
+        resistValue -= 0.05f;
+        Debug.Log($"Shield Upgraded, player resist: {Attributes.PlayerResistsMultModifier}, resistBase: {resistValue.BaseValue}, resistCurrent {resistValue}");
     }
 }

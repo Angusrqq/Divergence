@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(Rigidbody2D))]
-
+// TODO: Evgeniy - Refactor this
 /// <summary>
 /// <para>
 /// Example use of an ability.
 /// </para>
 /// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class InstantiatedAbilityMono : MonoBehaviour
 {
     [System.NonSerialized] public InstantiatedAbilityScriptable ability;

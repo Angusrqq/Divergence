@@ -154,7 +154,7 @@ public class Acid : NegativeStatusEffect
     public Acid(MonoBehaviour sender, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f, float percentSlow = 0f)
     : base(sender, "acid", target, tickMethod, timesApplied, delayBetweenTicks, ticks, damage)
     {
-        _slowModifier = new(percentSlow, StatModifierType.Additive, this);
+        _slowModifier = new(percentSlow, StatModifierType.Percent, this);
     }
 
     public override void OnApply()

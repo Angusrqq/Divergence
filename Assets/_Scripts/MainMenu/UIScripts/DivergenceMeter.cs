@@ -7,13 +7,11 @@ public class DivergenceMeter : MonoBehaviour
 {
     private const string CATEGORY = "DivergenceMeterSheet";
 
-    [SerializeField] private AnimationCurve GlowCurve;
-    // [SerializeField] private AnimationCurve _glowCurve; // TODO: Egor - Move curve from `GlowCurve` to `_glowCurve`
+    [SerializeField] private AnimationCurve _glowCurve;
     [SerializeField] private Material _divergenceMeterMaterial;
 
-
     public Coroutine NestedCoroutine;
-    public static bool animationEnded = false;
+    public static bool AnimationEnded = false;
 
     private int _seed;
     private readonly List<DivergenceMeterNumber> _numbers = new();
@@ -27,7 +25,7 @@ public class DivergenceMeter : MonoBehaviour
 
     void Awake()
     {
-        animationEnded = false;
+        AnimationEnded = false;
         _defaultMaterialColor = _divergenceMeterMaterial.GetColor("_Color");
 
         foreach (Transform child in transform)
@@ -39,7 +37,11 @@ public class DivergenceMeter : MonoBehaviour
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    // TODO: Egor - Turn numbers into parameters and documentation
+    void OnDestroy()
+    {
+        _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
+    }
+
     public IEnumerator PlayAnimation(float minRollTime = 1.5f, float maxRollTime = 3.5f, AnimationVariant variant = AnimationVariant.Full)
     {
         _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
@@ -66,10 +68,10 @@ public class DivergenceMeter : MonoBehaviour
             yield return new WaitForSeconds(minRollTime);
         }
 
-        yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, _defaultMaterialColor, _defaultMaterialColor * 20f, GlowCurve, 0.3f));//<< these numbers
+        yield return StartCoroutine(GlowFade(_divergenceMeterMaterial, _defaultMaterialColor, _defaultMaterialColor * 20f, _glowCurve, 0.3f));//<< these numbers
 
-        animationEnded = true;
-        GameData.SetSeed(Seed); // TODO: Egor - Move that line into another place
+        AnimationEnded = true;
+        GameData.SetSeed(Seed);
     }
 
     public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
@@ -91,29 +93,29 @@ public class DivergenceMeter : MonoBehaviour
     /// Fancy lerp for the material colors
     /// </summary>
     /// <param name="material">the material to change its color</param>
-    /// <param name="StartMatColor">Color <c>a</c> for linear interpolation</param>
-    /// <param name="TargetMatColor">Color <c>b</c> for linear interpolation</param>
+    /// <param name="startMatColor">Color <c>a</c> for linear interpolation</param>
+    /// <param name="targetMatColor">Color <c>b</c> for linear interpolation</param>
     /// <param name="curve">Curve (from 0 to 1 on time) that will be evaluated by <paramref name="time"></paramref></param>
     /// <param name="time">How fast the color should change (less time -> more speed)</param>
-    public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, AnimationCurve curve, float time)
+    public static IEnumerator GlowFade(Material material, Color startMatColor, Color targetMatColor, AnimationCurve curve, float time)
     {
         while (time > 0)
         {
             time -= Time.deltaTime;
-            material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, curve.Evaluate(time)));
+            material.SetColor("_Color", Color.Lerp(startMatColor, targetMatColor, curve.Evaluate(time)));
 
             yield return new WaitForEndOfFrame();
         }
     }
 
-    public static IEnumerator GlowFade(Material material, Color StartMatColor, Color TargetMatColor, float time)
+    public static IEnumerator GlowFade(Material material, Color startMatColor, Color targetMatColor, float time)
     {
-        float time_passed = time;
+        float timePassed = time;
 
-        while (time_passed > 0)
+        while (timePassed > 0)
         {
-            time_passed -= Time.deltaTime;
-            material.SetColor("_Color", Color.Lerp(StartMatColor, TargetMatColor, 1 - (time_passed / time)));
+            timePassed -= Time.deltaTime;
+            material.SetColor("_Color", Color.Lerp(startMatColor, targetMatColor, 1 - (timePassed / time)));
 
             yield return new WaitForEndOfFrame();
         }
@@ -131,11 +133,6 @@ public class DivergenceMeter : MonoBehaviour
         }
 
         return number % 10;
-    }
-
-    void OnDestroy()
-    {
-        _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
     }
 
     public int Seed

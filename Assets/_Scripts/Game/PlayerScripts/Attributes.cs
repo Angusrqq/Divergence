@@ -13,24 +13,35 @@ public enum AttributeId
 /// </summary>
 public static class Attributes
 {
-    public static float Health = 100;
-    public static float MaxHealth = 100;
-    public static float PlayerDamageMult = 1f;
-    public static float PlayerResistsMult = 1f;
-    public static byte ProjectilesAdd = 0;
-    public static float CastSpeedMult = 1f;
-    public static float CooldownReductionMult = 1f;
-    public static byte ActiveAbilitySlots = 5;
-    public static byte AbilitiesPerLevel = 3;
-    public static byte PassiveAbilitySlots = 5;
-    public static byte ManuallyTriggeredAbilitySlots = 0;
-    public static float PassiveAbilityEffectMult = 1f;
-    public static short PierceTargets = 0;
-    public static event Action<AttributeId, float> OnAttributeChanged;
+    public static Stat Health = 100;
+    public static Stat MaxHealth = 100;
+    public static Stat PlayerDamageMult = 1f;
+    public static Stat PlayerResistsMult = 1f;
+    public static Stat ProjectilesAdd = 0;
+    public static Stat CastSpeedMult = 1f;
+    public static Stat CooldownReductionMult = 1f;
+    public static Stat ActiveAbilitySlots = 5;
+    public static Stat AbilitiesPerLevel = 3;
+    public static Stat PassiveAbilitySlots = 5;
+    public static Stat ManuallyTriggeredAbilitySlots = 0;
+    public static Stat PassiveAbilityEffectMult = 0f;
+    public static Stat PierceTargets = 0;
 
-    private static float _magnetRadius = 0.5f;
+    public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+    public static event Action<AttributeId, Stat> OnAttributeChanged;
 
-    public static float MagnetRadius
+    private static Stat _magnetRadius = 0.5f;
+
+    public static Stat MagnetRadius
     {
         get => _magnetRadius;
         set
