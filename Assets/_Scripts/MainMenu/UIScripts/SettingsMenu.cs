@@ -2,8 +2,16 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages graphics-related settings UI: resolution, refresh rate, and fullscreen mode.
+/// </summary>
+/// <remarks>
+/// Populates dropdowns at startup using the current monitor's supported modes, then applies
+/// selected options via <see cref="Screen"/> and <see cref="Application.targetFrameRate"/>.
+/// </remarks>
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("Dropdowns")]
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private TMP_Dropdown _refreshRateDropdown;
     [SerializeField] private TMP_Dropdown _fullScreenDropdown;
@@ -15,6 +23,9 @@ public class SettingsMenu : MonoBehaviour
     private int _currentResolutionIndex = 0;
     private int _currentFullScreenIndex = 0;
 
+    /// <summary>
+    /// Initializes dropdown options based on the current monitor capabilities and current settings.
+    /// </summary>
     void Start()
     {
         _resolutions = Screen.resolutions;
@@ -35,6 +46,7 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
+        // Add resolution options to the dropdown
         List<string> resolutionOptions = new();
         for (int i = 0; i < _filteredResolutions.Count; i++)
         {
@@ -46,17 +58,19 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
-        List<string> resfreshRateOptions = new();
+        // Add refresh rate options to the dropdown
+        List<string> refreshRateOptions = new();
         for (int i = 0; i < _refreshRates.Length; i++)
         {
             string refreshRateOption = _refreshRates[i].ToString() + " Hz";
-            resfreshRateOptions.Add(refreshRateOption);
+            refreshRateOptions.Add(refreshRateOption);
             if (_refreshRates[i] == currentRefreshRate)
             {
                 _currentRefreshRateIndex = i;
             }
         }
 
+        // Add resolution options to the dropdown
         _resolutionDropdown.AddOptions(resolutionOptions);
         _resolutionDropdown.value = _currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
@@ -79,22 +93,34 @@ public class SettingsMenu : MonoBehaviour
         _fullScreenDropdown.value = _currentFullScreenIndex;
         _fullScreenDropdown.RefreshShownValue();
 
-        _refreshRateDropdown.AddOptions(resfreshRateOptions);
+        _refreshRateDropdown.AddOptions(refreshRateOptions);
         _refreshRateDropdown.value = _currentRefreshRateIndex;
         _refreshRateDropdown.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Set the selected resolution.
+    /// </summary>
+    /// <param name="resolutionIndex">Index into the filtered resolutions list.</param>
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = _filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
+    /// <summary>
+    /// Sets the game's target frame rate to the selected refresh rate.
+    /// </summary>
+    /// <param name="refreshRateIndex">Index into the available refresh rate array.</param>
     public void SetRefreshRate(int refreshRateIndex)
     {
         Application.targetFrameRate = _refreshRates[refreshRateIndex];
     }
 
+    /// <summary>
+    /// Changes the fullscreen mode according to the selected dropdown option.
+    /// </summary>
+    /// <param name="fullScreenIndex">0 = Exclusive Fullscreen, 1 = Borderless, 2 = Windowed.</param>
     public void SetFullscreen(int fullScreenIndex)
     {
         switch (fullScreenIndex)

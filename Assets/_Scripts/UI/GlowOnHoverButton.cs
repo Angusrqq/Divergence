@@ -8,45 +8,73 @@ using UnityEngine.UI;
 /// <c>GlowOnHoverButton</c> class adds a glowing effect to a button when hovered over or clicked.
 /// </para>
 /// <para>
-/// Sets the glow effect on pointer events.
+/// Sets the glow effect on pointer events. Acts as a component for any button with a <c>TMP_Text</c> child.
 /// </para>
-/// Acts like a component for any button with a TMP_Text child.
 /// </summary>
 [RequireComponent(typeof(Button))]
 public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    private TMP_Text tmp;
-    private Button button;
-    private Color defaultcolor;
+    protected TMP_Text _tmp;
+    protected Button _button;
+    protected Color _defaultColor;
 
-    void Start()
+    /// <summary>
+    /// <para>
+    /// <c>Start</c> method initializes the button and text components, and stores the default glow color.
+    /// </para>
+    /// </summary>
+    public virtual void Start()
     {
-        button = GetComponent<Button>();
-        tmp = GetComponentInChildren<TMP_Text>();
-        defaultcolor = tmp.fontMaterial.GetColor("_GlowColor");
+        _button = GetComponent<Button>();
+        _tmp = GetComponentInChildren<TMP_Text>();
+        _defaultColor = _tmp.fontMaterial.GetColor("_GlowColor");
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    /// <summary>
+    /// <para>
+    /// <c>OnPointerEnter</c> method applies the glow effect when the pointer enters the button.
+    /// </para>
+    /// </summary>
+    /// <param name="eventData">Pointer event data</param>
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
-        tmp.fontMaterial.SetFloat("_GlowPower", 1f);
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    /// <summary>
+    /// <para>
+    /// <c>OnPointerExit</c> method removes the glow effect when the pointer exits the button.
+    /// </para>
+    /// </summary>
+    /// <param name="eventData">Pointer event data</param>
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
-        tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
-        tmp.fontMaterial.SetFloat("_GlowPower", 0f);
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    /// <summary>
+    /// <para>
+    /// <c>OnPointerDown</c> method applies a pressed glow effect when the pointer is pressed down on the button.
+    /// </para>
+    /// </summary>
+    /// <param name="eventData">Pointer event data</param>
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
-        tmp.fontMaterial.SetFloat("_GlowOffset", 1f);
-        tmp.fontMaterial.SetFloat("_GlowPower", 1f);
+        _tmp.fontMaterial.SetFloat("_GlowOffset", 1f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    /// <summary>
+    /// <para>
+    /// <c>OnPointerUp</c> method removes the glow effect when the pointer is released from the button.
+    /// </para>
+    /// </summary>
+    /// <param name="eventData">Pointer event data</param>
+    public virtual void OnPointerUp(PointerEventData eventData)
     {
-        tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
-        tmp.fontMaterial.SetFloat("_GlowPower", 0f);
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }
 }

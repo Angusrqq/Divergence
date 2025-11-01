@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using UnityEngine;
 
 public enum StatusType
@@ -81,7 +80,7 @@ public class StatusEffect
         return _name == other._name && Type == other.Type;
     }
 
-    public override int GetHashCode()
+    public override int GetHashCode() // TODO: Egor - 'GetHashCode' implementation can be simplified (IDE0070)
     {
         unchecked
         {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,6 +21,9 @@ public class GUI : MonoBehaviour
     public List<BaseAbility> AbilityChoices { get; private set; } = new();
     private List<AbilityButton> _abilityButtons = new();
 
+    /// <summary>
+    /// Subscribes to the player's level-up event to trigger the level-up UI flow.
+    /// </summary>
     void Start()
     {
         GameData.player.OnLevelUp += OnLevelUp;
@@ -103,7 +105,7 @@ public class GUI : MonoBehaviour
     /// <c>TogglePause</c> toggles the pause state.
     /// </para> Pauses or unpauses the game.
     /// </summary>
-    /// <param name="isPausing"></param> // TODO: Egor add documentation
+    /// <param name="isPausing">True to pause (set <see cref="Time.timeScale"/> to 0), false to unpause.</param>
     public void TogglePause(bool isPausing)
     {
         if (isPausing != Paused)
@@ -164,12 +166,23 @@ public class GUI : MonoBehaviour
         LevelUpPanel.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Closes the level-up UI and returns the game to an unpaused state.
+    /// </summary>
+    /// <remarks>
+    /// Typically invoked by a UI button after the player confirms an ability choice.
+    /// Calls <see cref="UnpauseInternal"/> and hides <see cref="LevelUpPanel"/>.
+    /// </remarks>
     public void CloseLevelUp()
     {
         UnpauseInternal();
         LevelUpPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Rebuilds the level-up ability selection UI from <see cref="AbilityChoices"/>.
+    /// Destroys any existing buttons and instantiates new <see cref="AbilityButton"/> entries.
+    /// </summary>
     private void RebuildAbilities()
     {
         foreach (AbilityButton button in _abilityButtons)

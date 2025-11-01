@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
+/// <summary>
+/// ScriptableObject asset containing tilemap data for serialization and runtime loading.
+/// </summary>
 [CreateAssetMenu(menuName = "Tilemap/MapData", fileName = "NewMapData")]
 public class MapData : ScriptableObject
 {

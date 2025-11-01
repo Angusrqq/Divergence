@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// <para>
@@ -9,9 +10,21 @@ using UnityEngine;
 /// </summary>
 public class SelectorManager : MonoBehaviour
 {
-    [NonSerialized] public ScriptableObject currentSelectedItem;
+    [NonSerialized] public ScriptableObject CurrentSelectedData;
+    private SelectorItem _currentSelectedItem;
+    public SelectorItem CurrentSelectedItem
+    {
+        get => _currentSelectedItem;
+        set
+        {
+            _currentSelectedItem?.OnDeselect();
+            _currentSelectedItem = value;
+            CurrentSelectedData = _currentSelectedItem.ItemData;
+        }
+    }
     public TMPro.TMP_Text descriptionText;
     public Transform contentContainer;
+    public Mask mask; // TODO: Egor - Write normal expression names for variables, use fucking `CodeStyleDocument.md`! When i trying to rename shit like that it break everything!
 
     /// <summary>
     /// <para>

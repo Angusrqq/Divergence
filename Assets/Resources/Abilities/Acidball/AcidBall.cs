@@ -6,11 +6,11 @@ public class AcidBall : Fireball
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration, useSound: false);
-            Acid acidEffect = new(GameData.player, enemy, damage: ability.damage * 0.1f, percentSlow: -0.5f);
+            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration, useSound: false);
+            Acid acidEffect = new(GameData.player, enemy, damage: Ability.damage * 0.1f, percentSlow: -0.5f);
             enemy.Statuses.ApplyEffect(acidEffect);
             Destroy(gameObject);
-            ability.StartCooldown();
+            Ability.StartCooldown();
         }
     }
 }

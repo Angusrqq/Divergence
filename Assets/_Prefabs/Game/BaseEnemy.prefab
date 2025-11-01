@@ -110,12 +110,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_particleSystem: {fileID: 7094119184735996351, guid: d5daf955686d6dd4c8ef747076455f34, type: 3}
   xpCrystalPrefab: {fileID: 7069377261818586785, guid: 9e1d252a1d403124683989ff5b0facde, type: 3}
-  maxHealth: 100
-  moveSpeed: 12
-  damage: 1
-  xpDrop: 10
+  maxHealth:
+    BaseValue: 100
+    BaseModifier: 0
+    BaseMultiplier: 0
+  moveSpeed:
+    BaseValue: 12
+    BaseModifier: 0
+    BaseMultiplier: 0
+  damage:
+    BaseValue: 1
+    BaseModifier: 0
+    BaseMultiplier: 0
+  xpDrop:
+    BaseValue: 10
+    BaseModifier: 0
+    BaseMultiplier: 0
   flashColor: {r: 1, g: 1, b: 1, a: 1}
-  damageFlashDuration: 0.2
+  damageFlashDuration: 0.15
 --- !u!114 &3998149458944757455
 MonoBehaviour:
   m_ObjectHideFlags: 0

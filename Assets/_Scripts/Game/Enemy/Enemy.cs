@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     public Stat damage = 1f;
     public Stat xpDrop = 10;
     public Color flashColor;
-    public float damageFlashDuration = 2f;
+    public float damageFlashDuration = 0.2f;
 
     protected Transform target;
     protected Rigidbody2D rb;

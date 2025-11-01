@@ -50,7 +50,7 @@ public class Katana : InstantiatedAbilityMono
     /// </remarks>
     void Start()
     {
-        if (ability.IsEvolved)
+        if (Ability.IsEvolved)
         {
             StartCoroutine(EvoSlashCoroutine());
         }
@@ -75,7 +75,7 @@ public class Katana : InstantiatedAbilityMono
         {
             elapsedTime += Time.deltaTime;
 
-            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, elapsedTime / ability.ActiveTime);
+            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, elapsedTime / Ability.ActiveTime);
             yield return null;
         }
         
@@ -100,7 +100,7 @@ public class Katana : InstantiatedAbilityMono
         while (spriteRenderer.color.a > 0f)
         {
             animationElapsedTime += Time.deltaTime;
-            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, animationElapsedTime / ability.ActiveTime);
+            spriteRenderer.color = Color.Lerp(Color.white, Color.clear, animationElapsedTime / Ability.ActiveTime);
 
             yield return null;
         }

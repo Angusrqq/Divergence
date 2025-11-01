@@ -17,7 +17,7 @@ public class DivergenceMeterNumber : MonoBehaviour
 
     public void CustomUpdate()
     {
-        int rand = UnityEngine.Random.Range(0, 10);
+        int rand = Random.Range(0, 10);
         _resolver.SetCategoryAndLabel(CATEGORY, rand.ToString());
     }
 
@@ -36,7 +36,7 @@ public class DivergenceMeterNumber : MonoBehaviour
         {
             if (delay > 0) yield return new WaitForSeconds(delay);
 
-            _resolver.SetCategoryAndLabel(CATEGORY, UnityEngine.Random.Range(0, 10).ToString());
+            _resolver.SetCategoryAndLabel(CATEGORY, Random.Range(0, 10).ToString());
             time -= Time.fixedDeltaTime;
 
             yield return new WaitForFixedUpdate();

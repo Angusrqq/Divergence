@@ -1,23 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-
 /// <summary>
 /// Represents an XP (Experience Points) crystal in the game that can be collected by the player.
 /// The crystal moves towards the player when activated and awards XP when collected.
 /// </summary>
+[RequireComponent(typeof(SpriteRenderer))]
 public class XpCrystal : MonoBehaviour
 {
-    private int xpValue;
-    private readonly float speed = 1f;
-    private SpriteRenderer spriteRenderer;
+    private const float SPEED = 1f;
+    
+    private int _xpValue;
+    private SpriteRenderer _spriteRenderer;
 
     public bool IsFired { get; private set; }
 
+    /// <summary>
+    /// Caches required component references.
+    /// </summary>
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -31,7 +34,7 @@ public class XpCrystal : MonoBehaviour
     {
         if (value > 0)
         {
-            xpValue = value;
+            _xpValue = value;
         }
         else
         {
@@ -54,7 +57,7 @@ public class XpCrystal : MonoBehaviour
         {
             if (GameData.player != null)
             {
-                time += Time.fixedDeltaTime * speed;
+                time += Time.fixedDeltaTime * SPEED;
                 transform.position = Vector3.LerpUnclamped(transform.position, GameData.player.transform.position, curve.Evaluate(time));
             }
 
@@ -73,7 +76,7 @@ public class XpCrystal : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            player.AddExp(gameObject, xpValue);
+            player.AddExp(gameObject, _xpValue);
             Destroy(gameObject);
         }
     }

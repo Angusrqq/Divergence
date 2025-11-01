@@ -1,35 +1,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Canvas))]
-
 /// <summary>
 /// <para>
-/// This script is responsible for the main menu of the game.
+/// <c>MainMenu</c> class manages the main menu scene, including character selection, game start, and menu navigation.
 /// </para>
 /// </summary>
+[RequireComponent(typeof(Canvas))]
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject divergenceMeter;
-    [SerializeField] private SelectorManager characterSelectorManager;
-    [SerializeField] private CharacterButton characterButtonPrefab;
-    
-    private DivergenceMeter _divergenceMeter;
-    private Canvas mainMenuCanvas;
-    private Coroutine IdleAnim;
+    [SerializeField] private GameObject _divergenceMeterObject;
+    [SerializeField] private SelectorManager _characterSelectorManager;
+    [SerializeField] private CharacterButton _characterButtonPrefab;
 
+    private DivergenceMeter _divergenceMeter;
+    private Canvas _mainMenuCanvas;
+    private Coroutine _idleAnim;
+
+    /// <summary>
+    /// <para>
+    /// <c>Awake</c> method initializes components when the object is created.
+    /// </para>
+    /// </summary>
     void Awake()
     {
-        _divergenceMeter = divergenceMeter.GetComponent<DivergenceMeter>();
-        mainMenuCanvas = GetComponent<Canvas>();
+        _divergenceMeter = _divergenceMeterObject.GetComponent<DivergenceMeter>();
+        _mainMenuCanvas = GetComponent<Canvas>();
     }
 
+    /// <summary>
+    /// <para>
+    /// <c>Start</c> method builds the character selector and starts the divergence meter idle animation.
+    /// </para>
+    /// </summary>
     void Start()
     {
         BuildCharacterSelector();
-        IdleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
+        _idleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
     }
 
+    /// <summary>
+    /// <para>
+    /// <c>FixedUpdate</c> method checks if the divergence meter animation has ended and loads the game scene.
+    /// </para>
+    /// </summary>
     void FixedUpdate()
     {
         if (DivergenceMeter.AnimationEnded)
@@ -39,31 +53,46 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// This function is called when the play button is clicked.
+    /// <para>
+    /// <c>PlayGame</c> method is called when the play button is clicked.
+    /// </para>
+    /// <para>
+    /// Disables the main menu canvas, stops the idle animation, and starts the divergence meter play animation.
+    /// </para>
     /// </summary>
     public void PlayGame()
     {
-        mainMenuCanvas.enabled = false;
+        _mainMenuCanvas.enabled = false;
 
-        if (IdleAnim != null)
+        if (_idleAnim != null)
         {
-            StopCoroutine(IdleAnim);
-            IdleAnim = null;
+            StopCoroutine(_idleAnim);
+            _idleAnim = null;
         }
 
         StartCoroutine(_divergenceMeter.PlayAnimation());
     }
 
     /// <summary>
-    /// This function is called when the confirm button on character selector menu is clicked.
+    /// <para>
+    /// <c>SetCharacter</c> method is called when the confirm button on character selector menu is clicked.
+    /// </para>
+    /// <para>
+    /// Sets the selected character in <c>GameData</c>.
+    /// </para>
     /// </summary>
     public void SetCharacter()
     {
-        GameData.ChooseCharacter((Character)characterSelectorManager.currentSelectedItem);
+        GameData.ChooseCharacter((Character)_characterSelectorManager.CurrentSelectedData);
     }
 
     /// <summary>
-    /// This function (is not implemented yet because we don`t know yet how to store map data) is (SHOULD BE!!!) called when the confirm button on map selector menu is clicked.
+    /// <para>
+    /// <c>SetMap</c> method is not implemented yet because map data storage is not yet determined.
+    /// </para>
+    /// <para>
+    /// Should be called when the confirm button on map selector menu is clicked.
+    /// </para>
     /// </summary>
     public void SetMap()
     {
@@ -73,17 +102,19 @@ public class MainMenu : MonoBehaviour
 
     /// <summary>
     /// <para>
-    /// This function is called in <c>Start()</c>
+    /// <c>BuildCharacterSelector</c> method is called in <c>Start()</c>.
     /// </para>
-    /// Creates a <c>CharacterButton</c> for each of all the characters that are unlocked.
+    /// <para>
+    /// Creates a <c>CharacterButton</c> for each unlocked character and selects the first character by default.
+    /// </para>
     /// </summary>
     public void BuildCharacterSelector()
     {
         List<SelectorItem> characterButtons = new();
         foreach (Character character in GameData.unlockedCharacters)
         {
-            CharacterButton charButton = Instantiate(characterButtonPrefab, characterSelectorManager.contentContainer);
-            charButton.Init(character, characterSelectorManager);
+            CharacterButton charButton = Instantiate(_characterButtonPrefab, _characterSelectorManager.contentContainer);
+            charButton.Init(character, _characterSelectorManager);
             characterButtons.Add(charButton);
         }
         if (characterButtons.Count > 0)
@@ -94,11 +125,16 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// This function is called when the quit button is clicked.
+    /// <para>
+    /// <c>Quit</c> method is called when the quit button is clicked.
+    /// </para>
+    /// <para>
+    /// Quits the application. Parameters should be saved before quitting.
+    /// </para>
     /// </summary>
     public static void Quit()
     {
-        // Save parameters here
+        // TODO: Save parameters here
         Application.Quit();
     }
 }

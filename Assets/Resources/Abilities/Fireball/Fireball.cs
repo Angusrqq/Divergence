@@ -21,18 +21,18 @@ public class Fireball : InstantiatedAbilityMono
         else
         {
             Destroy(gameObject);
-            ability.StartCooldown();
+            Ability.StartCooldown();
         }
     }
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration, useSound: false);
-            Burn burnEffect = new(GameData.player, enemy, damage: ability.damage * 0.1f);
+            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration, useSound: false);
+            Burn burnEffect = new(GameData.player, enemy, damage: Ability.damage * 0.1f);
             enemy.Statuses.ApplyEffect(burnEffect);
             Destroy(gameObject);
-            ability.StartCooldown();
+            Ability.StartCooldown();
         }
     }
 }

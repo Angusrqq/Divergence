@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,8 +8,15 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class SelectorItem : MonoBehaviour, ISelectHandler
 {
-    public ScriptableObject itemData;
-    public SelectorManager selectorManager;
+    [SerializeField] private ScriptableObject _itemData;
+    [SerializeField] private SelectorManager _selectorManager;
+    public ScriptableObject ItemData => _itemData;
+    public SelectorManager SelectorManager
+    {
+        get => _selectorManager;
+        set => _selectorManager = value;
+    }
+
 
     /// <summary>
     /// <para>
@@ -19,15 +27,17 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
     /// <param name="manager"><c>SelectorManager</c> parent that will contain this item</param>
     public virtual void Init(ScriptableObject data, SelectorManager manager)
     {
-        selectorManager = manager;
-        itemData = data;
+        _selectorManager = manager;
+        _itemData = data;
     }
-    
+
     /// <summary>
     /// <c>OnSelect</c> updates the currently selected item in the <c>SelectorManager</c>.
     /// </summary>
     public virtual void OnSelect(BaseEventData eventData)
     {
-        selectorManager.currentSelectedItem = itemData;
+        _selectorManager.CurrentSelectedItem = this;
     }
+
+    public virtual void OnDeselect() { }
 }

@@ -2,6 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Main player controller responsible for input, movement, health/XP tracking,
+/// UI updates, and reacting to gameplay events (damage, death, level up).
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(DamageableEntity))]
@@ -9,14 +13,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AbilityHolder))]
-
-// TODO: Egor - Write normal documentation, ts doesnt work
-/// <summary>
-/// <para>
-/// <c>Player</c> is a class for handling the player.
-/// </para>
-/// Handles the player`s movement, animations, abilities, health, experience, etc.
-/// </summary>
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 12f;
@@ -44,11 +40,17 @@ public class Player : MonoBehaviour
 
     public PlayerMagnet Magnet { get; private set; }
 
+    /// <summary>
+    /// Initializes global player reference.
+    /// </summary>
     void Awake()
     {
         GameData.UpdatePlayerRef(this);
     }
 
+    /// <summary>
+    /// Caches components, wires events, builds character, and initializes health.
+    /// </summary>
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -179,11 +181,16 @@ public class Player : MonoBehaviour
     /// </para>
     /// Updates the player`s health slider.
     /// </summary>
+    /// <param name="source">Origin of the health change.</param>
+    /// <param name="amount">Change amount.</param>
     void UpdateHealth(UnityEngine.Object source, float amount, Type type = null)
     {
         _healthSlider.value = DamageableEntity.Health / DamageableEntity.MaxHealth;
     }
 
+    /// <summary>
+    /// Positions the health bar UI above the player's sprite in screen space.
+    /// </summary>
     void UpdateHpBarPosition()
     {
         float offset = -0.5f;
@@ -234,7 +241,7 @@ public class Player : MonoBehaviour
     /// If the experience points added are enough to level up the player, levels up the player and logs the level up.
     /// </summary>
     /// <param name="source">The source of the experience points.</param>
-    /// <param name="exp_to_add">The amount of experience points to add.</param>
+    /// <param name="exp_to_add">Experience amount to add.</param>
     public void AddExp(UnityEngine.Object source, int exp_to_add)
     {
         if (ExpNext - Exp <= exp_to_add)
@@ -252,17 +259,16 @@ public class Player : MonoBehaviour
         Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
     }
 
+    /// <summary>
+    /// Updates the level bar slider and label to reflect current XP progress.
+    /// </summary>
+    /// <param name="source">Origin of the XP change.</param>
+    /// <param name="expValue">XP delta that triggered the update.</param>
     public void UpdateLevelBar(UnityEngine.Object source, int expValue)
     {
         _levelSlider.value = (float)Exp / ExpNext;
         _levelLabel.text = $"lv. {Level}";
     }
-
-    // TODO: Uncomment if needed
-    // public void TakeExp(UnityEngine.Object source, int exp_to_take)
-    // {
-    //     throw new NotImplementedException();
-    // }
 
     /// <summary>
     /// <para>

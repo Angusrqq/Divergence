@@ -3,19 +3,36 @@ using System.Linq;
 
 // TODO: Evgeniy - Refactor this
 /// <summary>
-/// <para>
-/// Example use of an ability.
-/// </para>
+/// Base MonoBehaviour for runtime ability instances spawned by
+/// <see cref="InstantiatedAbilityScriptable"/> during <c>Activate()</c>.
+/// Handles movement, lifetime countdown, collision damage, and self-unregistration.
 /// </summary>
+/// <remarks>
+/// Instances are created by <see cref="InstantiatedAbilityScriptable.Activate"/>, which calls
+/// <see cref="Init(InstantiatedAbilityScriptable)"/> and adds the instance to
+/// <see cref="InstantiatedAbilityScriptable.Instances"/>. This component moves every physics tick
+/// using the player's current movement vector or facing as a fallback, and destroys itself when the
+/// configured active time elapses. On destruction, it removes itself from the owning ability's
+/// <see cref="InstantiatedAbilityScriptable.Instances"/> list.
+/// </remarks>
 [RequireComponent(typeof(Rigidbody2D))]
 public class InstantiatedAbilityMono : MonoBehaviour
 {
-    [System.NonSerialized] public InstantiatedAbilityScriptable ability;
+    [System.NonSerialized] private InstantiatedAbilityScriptable _ability;
+    public InstantiatedAbilityScriptable Ability
+    {
+        get => _ability;
+        protected set => _ability = value;
+    }
     
     protected Rigidbody2D rb;
     protected Vector2 direction;
     protected float timer;
 
+    /// <summary>
+    /// Caches the <see cref="Rigidbody2D"/> and derives the initial movement direction
+    /// from the player's movement vector or facing if idle.
+    /// </summary>
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,23 +44,39 @@ public class InstantiatedAbilityMono : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes the instance with its owning ability and lifetime.
+    /// Called by <see cref="InstantiatedAbilityScriptable.Activate"/> right after instantiation.
+    /// </summary>
+    /// <param name="ability">The ability data providing speed, damage, and ActiveTime.</param>
     public virtual void Init(InstantiatedAbilityScriptable ability)
     {
-        this.ability = ability;
+        Ability = ability;
         timer = ability.ActiveTime;
     }
 
+    /// <summary>
+    /// Physics tick: applies movement logic and counts down remaining active time.
+    /// </summary>
     protected virtual void FixedUpdate()
     {
         FixedUpdateLogic();
         CountDownActiveTimer(Time.fixedDeltaTime);
     }
     
+    /// <summary>
+    /// Default straight-line movement at <see cref="Ability.speed"/> in the resolved <see cref="direction"/>.
+    /// Override to provide custom per-ability trajectories.
+    /// </summary>
     protected virtual void FixedUpdateLogic()
     {
-        rb.MovePosition(ability.speed * direction + rb.position);
+        rb.MovePosition(Ability.speed * direction + rb.position);
     }
 
+    /// <summary>
+    /// Decrements the internal lifetime and destroys the GameObject when it expires.
+    /// </summary>
+    /// <param name="delta">The fixed time step to subtract from the remaining lifetime.</param>
     protected virtual void CountDownActiveTimer(float delta)
     {
         timer -= delta;
@@ -54,9 +87,12 @@ public class InstantiatedAbilityMono : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// On destruction, unregisters this instance from <see cref="InstantiatedAbilityScriptable.Instances"/>.
+    /// </summary>
     protected virtual void OnDestroy()
     {
-        ability.Instances.Remove(this);
+        Ability.Instances.Remove(this);
     }
 
     /// <summary>
@@ -69,9 +105,14 @@ public class InstantiatedAbilityMono : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             // Apply damage, knockback force, and knockback duration to the enemy
-            enemy.TakeDamage(GameData.player.gameObject, ability.damage, GetType(), ability.KnockbackForce, ability.KnockbackDuration);
+            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
         }
     }
+    
+    /// <summary>
+    /// Returns the enemy closest to the player, or <c>null</c> if none exist.
+    /// </summary>
+    /// <returns>The nearest <see cref="Enemy"/> to the player, or <c>null</c>.</returns>
     public static Enemy FindClosest()
     {
         return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);

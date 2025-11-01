@@ -32,6 +32,23 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
     [Header("Starting Abilities")]
     [SerializeField] private List<Ability> _startingAbilities;
 
+    public string Name => _name;
+    public string Description => _description;
+    public Sprite Icon => _icon;
+    public int UnlockCost => _unlockCost;
+    public int StartLevel => _startLevel;
+    public int MaxHealth => _maxHealth;
+    public float MovementSpeed => _movementSpeed;
+    public float DamageScale => _damageScale;
+    public float CooldownReduction => _cooldownReduction;
+    public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
+    public List<string> CharacterAnimationClips
+    {
+        get => _characterAnimationClips;
+        private set => _characterAnimationClips = value;
+    }
+    public List<Ability> StartingAbilities => _startingAbilities;
+
     /// <summary>
     /// Initializes the character by populating the <c>CharacterAnimationClips</c> List with the names of the animation clips in the <c>AnimatorController</c>.
     /// If the <c>AnimatorController</c> is null, this method does nothing.
@@ -72,21 +89,4 @@ public class Character : ScriptableObject //TODO: open to suggestions on how do 
         //     a.Upgrade();
         // }
     }
-
-    public string Name => _name;
-    public string Description => _description;
-    public Sprite Icon => _icon;
-    public int UnlockCost => _unlockCost;
-    public int StartLevel => _startLevel;
-    public int MaxHealth => _maxHealth;
-    public float MovementSpeed => _movementSpeed;
-    public float DamageScale => _damageScale;
-    public float CooldownReduction => _cooldownReduction;
-    public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
-    public List<string> CharacterAnimationClips
-    {
-        get => _characterAnimationClips;
-        private set => _characterAnimationClips = value;
-    }
-    public List<Ability> StartingAbilities => _startingAbilities;
 }

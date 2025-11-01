@@ -26,7 +26,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         if (target == null)
         {
             Destroy(gameObject);
-            ability.StartCooldown();
+            Ability.StartCooldown();
         }
     }
 
@@ -36,7 +36,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         direction = target ? (target.transform.position - transform.position).normalized : direction.normalized;
         
         // Move the rigidbody towards the target with the ability's speed
-        rb.MovePosition(ability.speed * direction + rb.position);
+        rb.MovePosition(Ability.speed * direction + rb.position);
     }
 
     /// <summary>
@@ -49,10 +49,10 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             // Apply damage, knockback, and other effects to the enemy
-            enemy.TakeDamage(gameObject, ability.damage, knockbackForce: ability.KnockbackForce, knockbackDuration: ability.KnockbackDuration);
+            enemy.TakeDamage(gameObject, Ability.damage, knockbackForce: Ability.KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
 
             Destroy(gameObject);
-            ability.StartCooldown();
+            Ability.StartCooldown();
         }
     }
 

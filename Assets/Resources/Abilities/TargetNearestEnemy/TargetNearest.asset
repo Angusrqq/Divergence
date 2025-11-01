@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
   Name: Rice Balls
   Description: Rice, you know?
-  CooldownTime: 0.1
   Level: 1
   MaxLevel: 0
+  IsEvolved: 1
+  Icon: {fileID: 0}
+  CooldownTime: 0.1
   ActiveTime: 1
   KnockbackForce: 2
   KnockbackDuration: 0.25
-  IsEvolved: 0
   CountActiveTimeInCooldown: 1
   _standardPrefab: {fileID: 7531767928548574074, guid: 3318aaa26194fa247a89ad7d28cd5c5c, type: 3}
   _evoPrefab: {fileID: 0}
   speed: 0.35
-  damage: 10
+  damage: 40
   localProjectilesAmount: 1
+  nativeUser: {fileID: 0}

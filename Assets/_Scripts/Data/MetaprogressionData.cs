@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -10,11 +8,21 @@ using System.Collections.Generic;
 [System.Serializable]
 public class MetaprogressionData
 {
-    public int timeKnowledge;
+    public int TimeKnowledge;
+    public List<Character> UnlockedCharacters = new();
+    public List<Ability> UnlockedAbilities = new();
+    //TODO: Implement Upgrade class
+    // public List<Upgrade> Upgrades = new();
+    public List<MapData> UnlockedMaps = new();
+
     // some parameters that need to be saved here
 
-    public MetaprogressionData(int timeKnowledge)
+    public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<Ability> unlockedAbilities = null, List<MapData> unlockedMaps = null)
     {
-        this.timeKnowledge = timeKnowledge;
+        TimeKnowledge = timeKnowledge;
+        UnlockedCharacters = unlockedCharacters ?? new List<Character>();
+        UnlockedAbilities = unlockedAbilities ?? new List<Ability>();
+        UnlockedMaps = unlockedMaps ?? new List<MapData>();
     }
 }
+
