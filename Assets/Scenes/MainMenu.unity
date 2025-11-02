@@ -6998,10 +6998,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453790152144601592, guid: ddf676ac0d220a84eb9c031b9a84a430, type: 3}
-      propertyPath: m_ShowMaskGraphic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5114015160085368052, guid: ddf676ac0d220a84eb9c031b9a84a430, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9473,7 +9469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   _divergenceMeterObject: {fileID: 5678481414552362103}
   _characterSelectorManager: {fileID: 587687311}
-  _characterButtonPrefab: {fileID: 4609888917366405002, guid: 7531c595c04ff9145a405c287c8eb39a, type: 3}
+  _characterButtonPrefab: {fileID: 2800599835213710089, guid: 7531c595c04ff9145a405c287c8eb39a, type: 3}
 --- !u!114 &1744224286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11878,14 +11874,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4179593511206002481, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179593511206002481, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4346317339787790970, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11983,10 +11971,7 @@ PrefabInstance:
     - {fileID: 8369691429264721952, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2133361446939008520, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5678481414552362108}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
 --- !u!1001 &5308995543975347051
 PrefabInstance:
@@ -12086,52 +12071,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2133361446939008520, guid: 8efe59b94d7e8cd41a533939ee0f8264, type: 3}
   m_PrefabInstance: {fileID: 3980284724283690687}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5678481414552362108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5678481414552362103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181e5ff06d6408e4da373bcb13b0b9f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DivergenceMeter
-  _glowCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.010101
-      outSlope: 1.010101
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.99
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -100.0001
-      outSlope: -100.0001
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _divergenceMeterMaterial: {fileID: 2100000, guid: 2d820f836a2dbda45b45c0130f5fef34, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

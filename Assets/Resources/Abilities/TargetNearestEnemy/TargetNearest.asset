@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: TargetNearest
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  Name: Rice Balls
-  Description: Rice, you know?
+  _name: Rice Balls
+  _description: very asian
+  _icon: {fileID: 0}
   Level: 1
   MaxLevel: 0
   IsEvolved: 1
-  Icon: {fileID: 0}
   CooldownTime: 0.1
   ActiveTime: 1
   KnockbackForce: 2

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  Name: Bomb
-  Description: Throw bomb into an enemy
+  _name: Bomb
+  _description: Boom
+  _icon: {fileID: -8958314516376139771, guid: f6a30dafcb16e624bb9db14ccaa7562e, type: 3}
   Level: 1
   MaxLevel: 5
   IsEvolved: 1
-  Icon: {fileID: -6469946024760412689, guid: 176c429236c7ec441be212f413b2c2ec, type: 3}
   CooldownTime: 1
   ActiveTime: 2
   KnockbackForce: 0

@@ -114,9 +114,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &1560322233548155952
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,9 +253,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &2133361446939008520
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,8 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 559423974226324818}
   - component: {fileID: 4179593511206002481}
-  - component: {fileID: 8133634987072944350}
-  - component: {fileID: 8369691429264721952}
+  - component: {fileID: 4316472399232246717}
   m_Layer: 0
   m_Name: DivergenceMeter
   m_TagString: Untagged
@@ -366,8 +363,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -380,22 +377,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8133634987072944350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133361446939008520}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67b740d96a4623428211f7c93c879ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  seed: 0
-  DM_material: {fileID: 2100000, guid: 2d820f836a2dbda45b45c0130f5fef34, type: 2}
-  isEnded: 0
---- !u!114 &8369691429264721952
+--- !u!114 &4316472399232246717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,10 +386,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133361446939008520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d84c09b63170dc4684bffb2fbe5400b, type: 3}
+  m_Script: {fileID: 11500000, guid: 181e5ff06d6408e4da373bcb13b0b9f2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  DM_material: {fileID: 2100000, guid: 2d820f836a2dbda45b45c0130f5fef34, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::DivergenceMeter
+  _glowCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.010101
+      outSlope: 1.010101
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -100.0001
+      outSlope: -100.0001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _divergenceMeterMaterial: {fileID: 2100000, guid: 2d820f836a2dbda45b45c0130f5fef34, type: 2}
 --- !u!1 &3982279437754110766
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,9 +537,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -547,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &4903185561293091491
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,9 +676,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -687,7 +701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &5799407626812591405
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,9 +815,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -827,7 +840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &6492715391265215049
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,9 +954,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -967,7 +979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &6496871187675014704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,9 +1093,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1107,7 +1118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0
 --- !u!1 &6604708910602607969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,9 +1232,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 279688957
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5568803350837311700, guid: 4b6eea83f389d8a4b9e54933b15ce885, type: 3}
+  m_Sprite: {fileID: 4486113597115412957, guid: 251a2803b09cd0348827d94141406951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1247,4 +1257,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66302039d7d6dfa49a9023cd008d1dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Rolled: 0

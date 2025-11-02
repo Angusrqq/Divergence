@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: Katana
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  Name: Katana
-  Description: Slashes stuff
+  _name: Katana
+  _description: Slashes stuff
+  _icon: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
-  Icon: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
   CooldownTime: 0.7
   ActiveTime: 0.2
   KnockbackForce: 4

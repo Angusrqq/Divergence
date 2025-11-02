@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: fa9bab9d10de4b348a109b9b9b3bdcfc, type: 2}
+  m_Material: {fileID: 2100000, guid: 21b0e9ecfa5db894eafbc3242800c9f6, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8548922892615242641
 GameObject:
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 1783328076049213619}
   - component: {fileID: 2877500028719138929}
   - component: {fileID: 7543738850137435980}
-  - component: {fileID: 4609888917366405002}
+  - component: {fileID: 2800599835213710089}
   m_Layer: 5
   m_Name: ItemButtonTemplate
   m_TagString: Untagged
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76edfea55b703843adf56388e156beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskedGlowOnHover
---- !u!114 &4609888917366405002
+--- !u!114 &2800599835213710089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -434,8 +434,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e764311162b5c9740a50653b81cb1c7d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterButton
   _itemData: {fileID: 0}
   _selectorManager: {fileID: 0}
+  SelectedImage: {fileID: 1714134962019201862}
   ButtonImage: {fileID: 6137338354419277653}
-  BorderImage: {fileID: 1714134962019201862}

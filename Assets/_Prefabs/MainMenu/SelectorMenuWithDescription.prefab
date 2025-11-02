@@ -993,4 +993,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SelectorManager
   descriptionText: {fileID: 7630394058503517007}
   contentContainer: {fileID: 5374040946798054639}
-  mask: {fileID: 4453790152144601592}
+  Mask: {fileID: 4453790152144601592}

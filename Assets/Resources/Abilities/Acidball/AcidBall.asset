@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: AcidBall
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  Name: AcidBall
-  Description: DAMN
+  _name: AcidBall
+  _description: DAMN
+  _icon: {fileID: -6587199473179042072, guid: f1c74b89ef742bc4c88cbc94361853ad, type: 3}
   Level: 1
   MaxLevel: 5
-  IsEvolved: 0
-  Icon: {fileID: -6587199473179042072, guid: f1c74b89ef742bc4c88cbc94361853ad, type: 3}
+  IsEvolved: 1
   CooldownTime: 1
   ActiveTime: 1
   KnockbackForce: 2

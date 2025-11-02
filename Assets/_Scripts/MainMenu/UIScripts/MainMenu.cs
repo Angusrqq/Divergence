@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _divergenceMeterObject;
     [SerializeField] private SelectorManager _characterSelectorManager;
-    [SerializeField] private CharacterButton _characterButtonPrefab;
+    [SerializeField] private SelectorItemWithInfo _characterButtonPrefab;
 
     private DivergenceMeter _divergenceMeter;
     private Canvas _mainMenuCanvas;
@@ -113,7 +113,7 @@ public class MainMenu : MonoBehaviour
         List<SelectorItem> characterButtons = new();
         foreach (Character character in GameData.unlockedCharacters)
         {
-            CharacterButton charButton = Instantiate(_characterButtonPrefab, _characterSelectorManager.contentContainer);
+            SelectorItemWithInfo charButton = Instantiate(_characterButtonPrefab, _characterSelectorManager.contentContainer);
             charButton.Init(character, _characterSelectorManager);
             characterButtons.Add(charButton);
         }

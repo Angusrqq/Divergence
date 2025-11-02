@@ -1,41 +1,40 @@
 using System;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// <para>
-/// <c>CharacterButton</c> class represents a button in the character selection menu.
-/// </para>
+/// Represents a selectable item in a UI selector with additional information display capabilities.
+/// This class extends SelectorItem to provide enhanced functionality for displaying item details,
+/// including icon, name, and description when selected or hovered.
 /// </summary>
-public class CharacterButton : SelectorItem
+public class SelectorItemWithInfo : SelectorItem
 {
-    [NonSerialized] public Character characterData;
+    [NonSerialized] public BaseScriptableObjectInfo Data;
     [NonSerialized] public TMPro.TMP_Text nameText;
     public Image ButtonImage;
-    public Image BorderImage;
+    //public Color SelectColor = new(255, 225, 90, 255);
+
     private MaskedGlowOnHover _maskedGlowOnHover;
     //private Color _baseColor;
-    //public Color SelectColor = new(255, 225, 90, 255);
 
     /// <summary>
     /// <para>
-    /// <c>Init</c> method initializes the character button with the given character data and selector manager.
+    /// <c>Init</c> method initializes the data button with the given data and selector manager.
     /// </para>
     /// <para>
     /// Sets up the masked glow component with the selector manager's mask.
     /// </para>
     /// </summary>
-    /// <param name="character"><c>Character</c> to be associated with this button</param>
+    /// <param name="data"><c>Data</c> to be associated with this button</param>
     /// <param name="manager"><c>SelectorManager</c> parent that will contain this button</param>
-    public void Init(Character character, SelectorManager manager)
+    public void Init(BaseScriptableObjectInfo data, SelectorManager manager)
     {
         nameText = GetComponentInChildren<TMPro.TMP_Text>();
-        characterData = character;
-        base.Init(character, manager);
+        Data = data;
+        base.Init(Data, manager);
         SelectorManager = manager;
         _maskedGlowOnHover = GetComponent<MaskedGlowOnHover>();
-        _maskedGlowOnHover.SetMask(SelectorManager.mask);
+        _maskedGlowOnHover.SetMask(SelectorManager.Mask);
         SetUI();
     }
 
@@ -47,8 +46,7 @@ public class CharacterButton : SelectorItem
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-        BorderImage.enabled = true;
-        SelectorManager.UpdateDescription(characterData.Description);
+        SelectorManager.UpdateDescription(Data.Description);
     }
 
     /// <summary>
@@ -59,7 +57,6 @@ public class CharacterButton : SelectorItem
     public override void OnDeselect()
     {
         base.OnDeselect();
-        BorderImage.enabled = false;
     }
 
     /// <summary>
@@ -69,16 +66,7 @@ public class CharacterButton : SelectorItem
     /// </summary>
     public void SetUI()
     {
-        if (GameData.unlockedCharacters.Contains(characterData))
-        {
-            ButtonImage.sprite = characterData.Icon;
-        }
-        else
-        {
-            ButtonImage.sprite = GameData.LockedIcon;
-            Debug.LogWarning("FIGURE OUT A WAY TO STORE/LOAD CONST ICONS");
-        }
-        
-        nameText.text = characterData.name;
+        ButtonImage.sprite = Data.Icon;
+        nameText.text = Data.name;
     }
 }
