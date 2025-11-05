@@ -5,19 +5,19 @@ using UnityEngine;
 /// </summary>
 public class Shield : PassiveAbilityMono
 {
-    private StatModifierByStat shieldModifier;
-    private Stat resistValue;
+    private StatModifierByStat _shieldModifier;
+    private Stat _resistValue;
     
     /// <summary>
     /// Applies the initial resistance modifier scaled by passive ability effect multipliers.
     /// </summary>
     public override void Activate()
     {
-        resistValue = -0.1f;
-        resistValue.AddModifier(Attributes.PassiveAbilityEffectMultModifier);
-        shieldModifier = new(ref resistValue, StatModifierType.Percent, this);
-        Attributes.PlayerResistsMult.AddModifier(shieldModifier);
-        Debug.Log($"Shield Activated, player resist: {Attributes.PlayerResistsMult}, resistBase: {resistValue.BaseValue}, resistCurrent {resistValue}");
+        _resistValue = -0.1f;
+        _resistValue.AddModifier(Attributes.PassiveAbilityEffectMultModifier);
+        _shieldModifier = new(ref _resistValue, StatModifierType.Percent, this);
+        Attributes.PlayerResistsMult.AddModifier(_shieldModifier);
+        Debug.Log($"Shield Activated, player resist: {Attributes.PlayerResistsMult}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class Shield : PassiveAbilityMono
     /// </summary>
     public override void Upgrade()
     {
-        resistValue -= 0.05f;
-        Debug.Log($"Shield Upgraded, player resist: {Attributes.PlayerResistsMultModifier}, resistBase: {resistValue.BaseValue}, resistCurrent {resistValue}");
+        _resistValue -= 0.05f;
+        Debug.Log($"Shield Upgraded, player resist: {Attributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
     }
 }

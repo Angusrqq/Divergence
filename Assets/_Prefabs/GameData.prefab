@@ -60,6 +60,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}
   - {fileID: 11400000, guid: 358312a8ec0e39649a4814128646bb7d, type: 2}
   - {fileID: 11400000, guid: b741aa6e73563804b89467274f2fb651, type: 2}
+  - {fileID: 11400000, guid: ce21f0c163c65cb488dd573e2049abb1, type: 2}
+  - {fileID: 11400000, guid: bc668a2b9002fe94bacf19186c4b97b2, type: 2}
+  - {fileID: 11400000, guid: 6968776bda6083544b116cab074409c9, type: 2}
   _Enemies:
   - {fileID: 11400000, guid: ad1ceae49b9e54a4885f524163a6e72b, type: 2}
   - {fileID: 11400000, guid: d56e767442d59ba4fa9e6fd49874e103, type: 2}

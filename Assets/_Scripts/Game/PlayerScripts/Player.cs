@@ -15,7 +15,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AbilityHolder))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed = 12f;
+    [SerializeField] private Stat _movementSpeed = 12f;
 
     [NonSerialized] public DamageableEntity DamageableEntity;
     [NonSerialized] public AnimatedEntity AnimatedEntity;
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private TMPro.TMP_Text _levelLabel;
 
     public PlayerMagnet Magnet { get; private set; }
+    public Stat MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
 
     /// <summary>
     /// Initializes global player reference.

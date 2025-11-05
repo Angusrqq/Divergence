@@ -70,7 +70,7 @@ public class MapDataEditor : EditorWindow
         }
 
         targetMapData.CaptureFromTilemap(sourceTilemap);
-        targetMapData.mapName = sourceTilemap.name;
+        targetMapData.Name = sourceTilemap.name;
         EditorUtility.SetDirty(targetMapData);
         AssetDatabase.SaveAssets();
 

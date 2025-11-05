@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4edc0ab6cc575ff4d89d88a15a68c936, type: 3}
-  m_Name: Test
+  m_Name: Reddveil
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  _name: GFP
+  _name: Reddveil
   _description: Blast from the past
   _icon: {fileID: 3713219614965599903, guid: cc76acfbb7d9ba842a398b732be124c5, type: 3}
   _unlockCost: 0

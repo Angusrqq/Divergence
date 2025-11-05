@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Shield
   _description: +10% damage resistance
-  _icon: {fileID: -5104492029948398176, guid: 176c429236c7ec441be212f413b2c2ec, type: 3}
+  _icon: {fileID: -727713798360024150, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
-  Type: 0
   MonoLogic: {fileID: -5458697453704288132, guid: 5985099975ef7624b82a280c520ee02b, type: 3}
+  Type: 0

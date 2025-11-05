@@ -9,6 +9,7 @@ using System.Collections.Generic;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy _prefab;
+    [SerializeField] public Stat SpawnDelay = 1f;
 
     public MonoBehaviour Target;
     public int maxEnemyCount = 10000;
@@ -16,7 +17,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
 
-    private float delay = 1f;
+    private float delay;
 
     /// <summary>
     /// Initializes the enemy manager singleton and creates a new list for storing enemies.
@@ -24,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     void Awake()
     {
         _camera = Camera.main;
+        delay = SpawnDelay;
     }
 
     void Start()
@@ -45,7 +47,7 @@ public class EnemyManager : MonoBehaviour
             Vector2 viewportCoords = vertical ? new(Random.Range(0, 2), Random.Range(0f, 1f)) : new(Random.Range(0f, 1f), Random.Range(0, 2));
             Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
             SpawnEnemy(spawnPos, Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
-            delay = 0.5f;
+            delay = SpawnDelay;
         }
         else
         {

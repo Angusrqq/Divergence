@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// TODO: Egor - Yo. not implemented at all.
 /// Should store data about metaprogression, like time knowledge (some currency like gold), unlocked characters, etc.
 /// Should be serializable and saved/loaded using DataSystem.
 /// </summary>
 [System.Serializable]
 public class MetaprogressionData
 {
+    // TODO: Egor - Try to use private fields with getters and setters
     public int TimeKnowledge;
     public List<Character> UnlockedCharacters = new();
     public List<Ability> UnlockedAbilities = new();
-    //TODO: Implement Upgrade class
-    // public List<Upgrade> Upgrades = new();
+    // public List<Upgrade> Upgrades = new(); //TODO: Implement Upgrade class
     public List<MapData> UnlockedMaps = new();
 
     // some parameters that need to be saved here
@@ -25,4 +24,3 @@ public class MetaprogressionData
         UnlockedMaps = unlockedMaps ?? new List<MapData>();
     }
 }
-

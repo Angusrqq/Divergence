@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using UnityEditor.SettingsManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-// TODO: Evgeniy - Refactor this
 /// <summary>
 /// <para>
 /// <c>GameData</c> class is supposed to be a DDOL(Dont Destroy On Load) singleton, meaning there will be only one instance of <c>GameData</c> in the entire game and it will persist when switching scenes.
@@ -16,31 +16,33 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GameData : MonoBehaviour
 {
-    //TODO: damn this is gonna be a lot
+    // TODO: We need to do scary refactoring here because this is gonna break everything ☢️
+    // damn this is gonna be a lot
     // some way of map data storage(todo in Map.cs)
     //TODO: save/load system
-    //TODO: setting current character/map/abilities in menu
-    //TODO: character selection in menu and display character info
     //TODO: map selection in menu and display map info
     //TODO: ability tree in main menu <<< hard one, so optional for now
+    [SerializeField] private List<Character> _Characters;
+    [SerializeField] private List<MapData> _Maps;
+    [SerializeField] private List<BaseAbility> _Abilities;
+    [SerializeField] private List<EnemyData> _Enemies;
+
     public static GameData instance;
     public static Player player;
+    public static SettingsData currentSettings { get; private set; }
     public static int currentSeed;
     public static Random.State lastValuableState;
     public static Random.State lastInvaluableState;
-    [SerializeField] private List<Character> _Characters;
     public static List<Character> Characters;
     public static List<Character> unlockedCharacters;
     public static Character currentCharacter;
-    [SerializeField] private List<MapData> _Maps;
     public static List<MapData> Maps;
     public static List<MapData> unlockedMaps;
     public static MapData currentMap;
-    [SerializeField] private List<BaseAbility> _Abilities;
     public static List<BaseAbility> Abilities;
     public static List<BaseAbility> unlockedAbilities;
-    [SerializeField] private List<EnemyData> _Enemies;
     public static List<EnemyData> Enemies;
+
     public static Sprite LockedIcon { get; private set; } // not going to cut it, //TODO: figure out a way to store/load constant icons
     public static Tilemap TilemapToLoadMaps { get; set; }
 
@@ -60,8 +62,13 @@ public class GameData : MonoBehaviour
         {
             instance = this;
         }
+
+        currentSettings = InitializeSettings();
+
         LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // TODO: Do something with this craziness
         Abilities = _Abilities;
         unlockedAbilities = Abilities;
         Maps = _Maps;
@@ -84,7 +91,7 @@ public class GameData : MonoBehaviour
     }
 
 
-//TODO: USE THESE FUNCTIONS WHEN YOU WANT TO KEEP TRACK OF THE IMPORTANT EVENTS (like rolling abilities after levelling up).
+    //  USE THESE FUNCTIONS WHEN YOU WANT TO KEEP TRACK OF THE IMPORTANT EVENTS (like rolling abilities after levelling up).
     /// <summary>
     /// Regular int <c>Random.Range</c> function, but saves random states
     /// </summary>
@@ -199,5 +206,35 @@ public class GameData : MonoBehaviour
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private static SettingsData InitializeSettings()
+    {
+        SettingsData data = new();
+        data = DataSystem.LoadSettingsData() ?? data;
+        SetGameSettings(data);
+        return data;
+    }
+
+    private static void SetGameSettings(SettingsData data)
+    {
+        Screen.SetResolution(data.ScreenWidth, data.ScreenHeight, (FullScreenMode)System.Enum.Parse(typeof(FullScreenMode), data.FullScreen));
+        Application.targetFrameRate = data.RefreshRate;
+        AudioManager.instance.SetMasterVolume(data.MasterVolume);
+        AudioManager.instance.SetMusicVolume(data.MusicVolume);
+        AudioManager.instance.SetSFXVolume(data.SfxVolume);
+    }
+
+    public static void UpdateSettings(SettingsData data, bool refreshSettings = false, bool save = false)
+    {
+        if (refreshSettings)
+        {
+            SetGameSettings(data);
+        }
+        if (save)
+        {
+            DataSystem.SaveSettingsData(data);
+        }
+        currentSettings = data;
     }
 }

@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
         circleCollider2D.radius = data.ColliderRadius;
         circleCollider2D.offset = data.ColliderOffset;
+
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
@@ -67,7 +68,6 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         damageableEntity = GetComponent<DamageableEntity>();
-
         if (damageableEntity == null)
         {
             Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour
 
         damageableEntity.OnDeath += OnDeath;
         damageableEntity.Init(maxHealth, true, damage);
+
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // _originalColor = spriteRenderer.color;
@@ -114,8 +115,10 @@ public class Enemy : MonoBehaviour
             {
                 animatedEntity.ChangeAnimation(AnimatedEntity.AnimationsList.Default);
             }
+
             rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
         }
+
         Statuses.RunTicks();
     }
 
@@ -134,6 +137,7 @@ public class Enemy : MonoBehaviour
         damageFlashDuration = damageFlashDuration == default ? this.damageFlashDuration : damageFlashDuration;
         particleSystem = particleSystem != null ? particleSystem : m_particleSystem;
         sfxIndex = sfxIndex == default ? 1 : sfxIndex;
+
         if (damageableEntity.CanTakeDamage())
         {
             StartCoroutine(DamageFlash(flashColor, damageFlashDuration));
@@ -158,6 +162,7 @@ public class Enemy : MonoBehaviour
             {
                 amount *= Attributes.PlayerDamageMult;
             }
+
             damageableEntity.TakeDamage(source, amount, type);
         }
     }
@@ -242,6 +247,11 @@ public class Enemy : MonoBehaviour
         _knockbackDuration = duration;
     }
 
+    /// <summary>
+    /// Emits particles from a particle system in a specified direction.
+    /// </summary>
+    /// <param name="system">The particle system to be instantiated and emitted</param>
+    /// <param name="direction">The direction in which the particles should be emitted</param>
     void EmitParticles(ParticleSystem system, Vector2 direction)
     {
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, direction);

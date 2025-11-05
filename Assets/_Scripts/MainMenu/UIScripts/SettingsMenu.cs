@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages graphics-related settings UI: resolution, refresh rate, and fullscreen mode.
@@ -15,6 +16,11 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private TMP_Dropdown _refreshRateDropdown;
     [SerializeField] private TMP_Dropdown _fullScreenDropdown;
+
+    [Header("Audio")]
+    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Slider _musicVolumeSlider;
+    [SerializeField] private Slider _sfxVolumeSlider;
 
     private Resolution[] _resolutions;
     private List<Resolution> _filteredResolutions;
@@ -135,5 +141,26 @@ public class SettingsMenu : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.Windowed;
                 break;
         }
+    }
+
+    public void SetMasterVolume()
+    {
+        AudioManager.instance.SetMasterVolume(_masterVolumeSlider.value);
+    }
+
+    public void SetMusicVolume()
+    {
+        AudioManager.instance.SetMusicVolume(_musicVolumeSlider.value);
+    }
+
+    public void SetSFXVolume()
+    {
+        AudioManager.instance.SetSFXVolume(_sfxVolumeSlider.value);
+    }
+//TODO: tie methods above for sliders and this one to the sliders and a button respectfully and make it save the settings
+    public void SaveSettings()
+    {
+        // SettingsData data = new(construct it using current settings)
+        // GameData.UpdateSettings(data);
     }
 }

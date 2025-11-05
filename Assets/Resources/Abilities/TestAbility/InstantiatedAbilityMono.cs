@@ -16,6 +16,7 @@ using System.Linq;
 /// <see cref="InstantiatedAbilityScriptable.Instances"/> list.
 /// </remarks>
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class InstantiatedAbilityMono : MonoBehaviour
 {
     [System.NonSerialized] private InstantiatedAbilityScriptable _ability;
@@ -24,8 +25,9 @@ public class InstantiatedAbilityMono : MonoBehaviour
         get => _ability;
         protected set => _ability = value;
     }
-    
+
     protected Rigidbody2D rb;
+    protected AnimatedEntity animatedEntity;
     protected Vector2 direction;
     protected float timer;
 
@@ -36,6 +38,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        TryGetComponent(out animatedEntity);
         direction = GameData.player.MovementVector;
 
         if (direction == Vector2.zero)

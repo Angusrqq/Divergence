@@ -6,13 +6,11 @@ using System.Collections.Generic;
 /// ScriptableObject asset containing tilemap data for serialization and runtime loading.
 /// </summary>
 [CreateAssetMenu(menuName = "Tilemap/MapData", fileName = "NewMapData")]
-public class MapData : ScriptableObject
+public class MapData : BaseScriptableObjectInfo
 {
     [Header("Map Data")]
-    public string mapName;
     public Vector2Int size;
     public Vector2Int startPosition;
-    public Sprite icon;
 
     [Header("Tiles")]
     public List<TileInfo> tiles = new();

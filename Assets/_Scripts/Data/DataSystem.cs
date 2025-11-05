@@ -1,16 +1,17 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
 
+// TODO: Implement this class because we cant save any data right now
 /// <summary>
 /// <para>
 /// <c>DataSystem</c> is a static class that handles saving and loading of metaprogression data.
 /// </para>
-///TODO: Egor - Not implemented yet, not ready for use.
 /// </summary>
 public static class DataSystem
 {
-    public static string SAVE_FILE_PATH = Application.persistentDataPath + "/save.adun";
+    public static readonly string SAVE_FILE_PATH = Application.persistentDataPath + "/save.adun";
 
     /// <summary>
     /// Saves the given metaprogression data to the file located at DataSystem.SAVE_FILE_PATH.
@@ -42,10 +43,47 @@ public static class DataSystem
 
             return data;
         }
-
         else
         {
             return null;
         }
+    }
+
+    public static void SaveSettingsData(SettingsData data)
+    {
+        PlayerPrefs.SetString("Config", JsonUtility.ToJson(data));
+    }
+
+    public static SettingsData LoadSettingsData()
+    {
+        if (PlayerPrefs.HasKey("Config"))
+        {
+            return JsonUtility.FromJson<SettingsData>(PlayerPrefs.GetString("Config"));
+        }
+        return null;
+    }
+}
+
+[Serializable]
+public class SettingsData
+{
+    public float MasterVolume;
+    public float MusicVolume;
+    public float SfxVolume;
+    public int ScreenWidth;
+    public int ScreenHeight;
+    public int RefreshRate;
+    public string FullScreen;
+
+    public SettingsData(float masterVolume = 0f, float musicVolume = 0f, float sfxVolume = 0f,
+                        int screenWidth = default, int screenHeight = default, double refreshRate = default, string fullScreen = "Windowed")
+    {
+        MasterVolume = masterVolume;
+        MusicVolume = musicVolume;
+        SfxVolume = sfxVolume;
+        FullScreen = fullScreen;
+        ScreenWidth = screenWidth == default ? Screen.currentResolution.width : screenWidth;
+        ScreenHeight = screenHeight == default ? Screen.currentResolution.height : screenHeight;
+        RefreshRate = (int)(refreshRate == default ? Screen.currentResolution.refreshRateRatio.value : refreshRate);
     }
 }

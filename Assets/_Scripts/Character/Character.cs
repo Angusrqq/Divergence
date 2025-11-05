@@ -22,10 +22,10 @@ public class Character : BaseScriptableObjectInfo //TODO: open to suggestions on
 
     [Header("Character Animations")]
     [SerializeField] private RuntimeAnimatorController _characterAnimatorController;
-    [SerializeField] private List<string> _characterAnimationClips;
 
     [Header("Starting Abilities")]
     [SerializeField] private List<Ability> _startingAbilities;
+    
     public int UnlockCost => _unlockCost;
     public int StartLevel => _startLevel;
     public int MaxHealth => _maxHealth;
@@ -33,25 +33,7 @@ public class Character : BaseScriptableObjectInfo //TODO: open to suggestions on
     public float DamageScale => _damageScale;
     public float CooldownReduction => _cooldownReduction;
     public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
-    public List<string> CharacterAnimationClips
-    {
-        get => _characterAnimationClips;
-        private set => _characterAnimationClips = value;
-    }
     public List<Ability> StartingAbilities => _startingAbilities;
-
-    /// <summary>
-    /// Initializes the character by populating the <c>CharacterAnimationClips</c> List with the names of the animation clips in the <c>AnimatorController</c>.
-    /// If the <c>AnimatorController</c> is null, this method does nothing.
-    /// </summary>
-    public void Initialize()
-    {
-        if (CharacterAnimatorController == null) return;
-        CharacterAnimationClips ??= new List<string>();
-        CharacterAnimationClips.Clear();
-        foreach (var clip in CharacterAnimatorController.animationClips)
-            CharacterAnimationClips.Add(clip.name);
-    }
 
     /// <summary>
     /// <para>
@@ -66,7 +48,7 @@ public class Character : BaseScriptableObjectInfo //TODO: open to suggestions on
         }
     }
 
-
+    // TODO: We need to implement this method because game is so boring rn
     public virtual void Upgrade() // wow great autocomplete suggestion, might implement that later
     {
         throw new System.NotImplementedException();

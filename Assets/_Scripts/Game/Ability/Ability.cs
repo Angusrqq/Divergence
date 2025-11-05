@@ -13,14 +13,14 @@ using UnityEngine;
 /// </summary>
 public class Ability : BaseAbility
 {
+    [NonSerialized] public float CooldownTimer;
+    [NonSerialized] public float ActiveTimer;
+    [NonSerialized] public AbilityState State = AbilityState.ready;
     public float CooldownTime;
     public float ActiveTime;
     public float KnockbackForce = 2f;
     public float KnockbackDuration = 0.25f;
     public bool CountActiveTimeInCooldown = true;
-    [NonSerialized] public float CooldownTimer;
-    [NonSerialized] public float ActiveTimer;
-    [NonSerialized] public AbilityState State = AbilityState.ready;
 
     /// <summary>
     /// <para>

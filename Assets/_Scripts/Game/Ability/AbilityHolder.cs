@@ -1,5 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public enum AbilityState
+{
+    ready,
+    active,
+    cooldown
+}
 
 /// <summary>
 /// <para>
@@ -15,22 +23,9 @@ public class AbilityHolder : MonoBehaviour
     private readonly List<string> _abilityNames = new();
     private readonly List<string> _passiveNames = new();
 
-    /// <summary>
-    /// <para>
-    /// Calls <c>FixedUpdateAbility</c> for each ability in <c>Abilities</c> List.
-    /// </para>
-    /// </summary>
-    // void FixedUpdate()
-    // {
-    //     foreach (Ability a in Abilities)
-    //     {
-    //         a.FixedUpdateAbility();
-    //     }
-    // }
-
     void Update()
     {
-        foreach (Ability a in Abilities)
+        foreach (Ability a in Abilities.Cast<Ability>())
         {
             a.UpdateAbility();
         }
@@ -106,16 +101,4 @@ public class AbilityHolder : MonoBehaviour
     {
         return Abilities[_abilityNames.IndexOf(name)];
     }
-}
-
-/// <summary>
-/// <para>
-/// <c>AbilityState</c> is an enum that represents the state of an ability.
-/// </para>
-/// </summary>
-public enum AbilityState
-{
-    ready,
-    active,
-    cooldown
 }

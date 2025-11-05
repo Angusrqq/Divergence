@@ -7,7 +7,7 @@ public class BaseScriptableObjectInfo : ScriptableObject
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
     
-    public string Name => _name;
+    public string Name {get => _name; set => _name = value;}
     public string Description => _description;
     public Sprite Icon => _icon;
 }

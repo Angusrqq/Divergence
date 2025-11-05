@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
+  m_Name: HeavyHitter
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
+  _name: Heavy hitter
+  _description: heavy hit and etc
+  _icon: {fileID: 8295224864411331983, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Level: 1
+  MaxLevel: 3
+  IsEvolved: 0
+  MonoLogic: {fileID: -1005157012370643185, guid: 0161c687c71628d41a27329830a65978, type: 3}
+  Type: 0

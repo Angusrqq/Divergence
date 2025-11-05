@@ -20,7 +20,11 @@ public class Stat
     private readonly List<StatModifier> _flatModifiers;
     private readonly List<StatModifier> _percentModifiers;
     private readonly List<StatModifier> _multModifiers;
+
     public int TotalModifiers => _flatModifiers.Count + _percentModifiers.Count + _multModifiers.Count;
+    public static implicit operator float(Stat stat) => stat.Value;
+    public static implicit operator Stat(float value) => new(value);
+    public static implicit operator int(Stat stat) => (int)stat.Value;
 
     public Stat(float BaseValue, float BaseModifier = 1, float BaseMultiplier = 1, List<StatModifier> flatModifiers = null,
     List<StatModifier> percentModifiers = null, List<StatModifier> multModifiers = null)
@@ -28,6 +32,7 @@ public class Stat
         this.BaseValue = BaseValue;
         this.BaseModifier = BaseModifier;
         this.BaseMultiplier = BaseMultiplier;
+
         _flatModifiers = flatModifiers ?? new();
         _percentModifiers = percentModifiers ?? new();
         _multModifiers = multModifiers ?? new();
@@ -86,22 +91,22 @@ public class Stat
         {
             flatValue += modifier.Value;
         }
+
         float additiveValue = BaseModifier;
         foreach (StatModifier modifier in _percentModifiers)
         {
             additiveValue += modifier.Value;
         }
+
         float multiplicativeValue = BaseMultiplier;
         foreach (StatModifier modifier in _multModifiers)
         {
             multiplicativeValue += modifier.Value;
         }
+
         return flatValue * additiveValue * multiplicativeValue;
     }
 
-    public static implicit operator float(Stat stat) => stat.Value;
-    public static implicit operator Stat(float value) => new(value);
-    public static implicit operator int(Stat stat) => (int)stat.Value;
     public override string ToString() => Value.ToString();
 
     private void OnModifierValueChanged(StatModifier modifier) => _recalculationNeeded = true;

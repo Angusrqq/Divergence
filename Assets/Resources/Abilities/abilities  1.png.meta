@@ -1,0 +1,711 @@
+fileFormatVersion: 2
+guid: 918bdf82bf209d6499e1e68dda7d01bd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5685157490742104129
+    second: abilities  1_0
+  - first:
+      213: -890758179379066591
+    second: abilities  1_1
+  - first:
+      213: 3865979267415745994
+    second: abilities  1_2
+  - first:
+      213: -727713798360024150
+    second: abilities  1_3
+  - first:
+      213: -8996511375018434408
+    second: abilities  1_4
+  - first:
+      213: 5823914111252901910
+    second: abilities  1_5
+  - first:
+      213: 8341783019637210984
+    second: abilities  1_6
+  - first:
+      213: 646348143477169675
+    second: abilities  1_7
+  - first:
+      213: 4343528361783417165
+    second: abilities  1_8
+  - first:
+      213: -2661228194424277968
+    second: abilities  1_9
+  - first:
+      213: -926733279370872471
+    second: abilities  1_10
+  - first:
+      213: -3995549226574457110
+    second: abilities  1_11
+  - first:
+      213: 3334511835353551136
+    second: abilities  1_12
+  - first:
+      213: 3275149530380210373
+    second: abilities  1_13
+  - first:
+      213: -5364074142465631101
+    second: abilities  1_14
+  - first:
+      213: -8838299409037085554
+    second: abilities  1_15
+  - first:
+      213: 8295224864411331983
+    second: abilities  1_16
+  - first:
+      213: -797219564275853354
+    second: abilities  1_17
+  - first:
+      213: -4289354037535779264
+    second: abilities  1_18
+  - first:
+      213: 1611358318042585107
+    second: abilities  1_19
+  - first:
+      213: -4402887480372853437
+    second: abilities  1_20
+  - first:
+      213: -3245057498987135861
+    second: abilities  1_21
+  - first:
+      213: 18925996925129505
+    second: abilities  1_22
+  - first:
+      213: 1035533167292304562
+    second: abilities  1_23
+  - first:
+      213: -7908212768212141821
+    second: abilities  1_24
+  - first:
+      213: -820258915895413791
+    second: abilities  1_25
+  - first:
+      213: -1365048474191278810
+    second: abilities  1_26
+  - first:
+      213: 7496996770738245504
+    second: abilities  1_27
+  - first:
+      213: -6668069518857156404
+    second: abilities  1_28
+  - first:
+      213: 9129395401110446018
+    second: abilities  1_29
+  - first:
+      213: 7920300250795358323
+    second: abilities  1_30
+  - first:
+      213: -2561611510991108813
+    second: abilities  1_31
+  - first:
+      213: -4687593683668541472
+    second: abilities  1_32
+  - first:
+      213: 4075958750634070468
+    second: abilities  1_33
+  - first:
+      213: 1175438291954935293
+    second: abilities  1_34
+  - first:
+      213: -9187222070953696174
+    second: abilities  1_35
+  - first:
+      213: 7449833729251826611
+    second: abilities  1_36
+  - first:
+      213: 7788783453916986052
+    second: abilities  1_37
+  - first:
+      213: -5307589297849768022
+    second: abilities  1_38
+  - first:
+      213: -7875139049900994120
+    second: abilities  1_39
+  - first:
+      213: 1058378786535584764
+    second: abilities  1_40
+  - first:
+      213: -8522888242332800050
+    second: abilities  1_41
+  - first:
+      213: 4853060127340344330
+    second: abilities  1_42
+  - first:
+      213: -8683644201018609064
+    second: abilities  1_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fireball
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14095d7dd9cb5ee40800000000000000
+      internalID: 5685157490742104129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: poison arrow
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 205
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1294651c72463a3f0800000000000000
+      internalID: -890758179379066591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire trail
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5275f29a7b6a530800000000000000
+      internalID: 3865979267415745994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 197
+        width: 54
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aabb99ee724a6e5f0800000000000000
+      internalID: -727713798360024150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: move speed up
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 198
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890e34ae198f52380800000000000000
+      internalID: -8996511375018434408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 150
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6103d9b1703b2d050800000000000000
+      internalID: 5823914111252901910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cooldown reduction
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 143
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86f7cdea577f3c370800000000000000
+      internalID: 8341783019637210984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: projectile speed
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 133
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e9035463a48f800800000000000000
+      internalID: 646348143477169675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crystal heal
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 133
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d495fe33800574c30800000000000000
+      internalID: 4343528361783417165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: adun
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03436159e0b611bd0800000000000000
+      internalID: -2661228194424277968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage force field
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 74
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 969f0911ef49323f0800000000000000
+      internalID: -926733279370872471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slowdown force field
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 75
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae65173d525fc88c0800000000000000
+      internalID: -3995549226574457110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vampirism
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 73
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0219595e8d0964e20800000000000000
+      internalID: 3334511835353551136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thorns
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 76
+        width: 53
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c09998352ba37d20800000000000000
+      internalID: 3275149530380210373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hawkeye
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 14
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38c5a7dccfafe85b0800000000000000
+      internalID: -5364074142465631101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: max health up
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 12
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e84bcc9c38d085580800000000000000
+      internalID: -8838299409037085554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: heavy hitter
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 3
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8da93f601f8e1370800000000000000
+      internalID: 8295224864411331983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: energy blast
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 6
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d79857b705bfe4f0800000000000000
+      internalID: -797219564275853354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: critical strike
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 9
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046dac49a372974c0800000000000000
+      internalID: -4289354037535779264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9ad824e437afde545a6fe39257ba9e94
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      abilities  1_19: 1611358318042585107
+      abilities  1_20: -4402887480372853437
+      abilities  1_21: -3245057498987135861
+      abilities  1_22: 18925996925129505
+      abilities  1_23: 1035533167292304562
+      abilities  1_24: -7908212768212141821
+      abilities  1_25: -820258915895413791
+      abilities  1_26: -1365048474191278810
+      abilities  1_27: 7496996770738245504
+      abilities  1_28: -6668069518857156404
+      abilities  1_29: 9129395401110446018
+      abilities  1_30: 7920300250795358323
+      abilities  1_31: -2561611510991108813
+      abilities  1_32: -4687593683668541472
+      abilities  1_33: 4075958750634070468
+      abilities  1_34: 1175438291954935293
+      abilities  1_35: -9187222070953696174
+      abilities  1_36: 7449833729251826611
+      abilities  1_37: 7788783453916986052
+      abilities  1_38: -5307589297849768022
+      abilities  1_39: -7875139049900994120
+      abilities  1_40: 1058378786535584764
+      abilities  1_41: -8522888242332800050
+      abilities  1_42: 4853060127340344330
+      abilities  1_43: -8683644201018609064
+      adun: -2661228194424277968
+      bomb: 5823914111252901910
+      cooldown reduction: 8341783019637210984
+      critical strike: -4289354037535779264
+      crystal heal: 4343528361783417165
+      damage force field: -926733279370872471
+      energy blast: -797219564275853354
+      fire trail: 3865979267415745994
+      fireball: 5685157490742104129
+      hawkeye: -5364074142465631101
+      heavy hitter: 8295224864411331983
+      max health up: -8838299409037085554
+      move speed up: -8996511375018434408
+      poison arrow: -890758179379066591
+      projectile speed: 646348143477169675
+      shield: -727713798360024150
+      slowdown force field: -3995549226574457110
+      thorns: 3275149530380210373
+      vampirism: 3334511835353551136
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
