@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 3075083336233276558}
   - component: {fileID: 658993095305488226}
   m_Layer: 5
-  m_Name: CharacterScroll View
+  m_Name: ItemScroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

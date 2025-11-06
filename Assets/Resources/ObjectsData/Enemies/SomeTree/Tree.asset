@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a44f4bada5faab4fb2df2e34a380e65, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  Name: Tree
+  Icon: {fileID: -5772978578478332001, guid: 13f7a047689793542baaffef1c2afbdc, type: 3}
+  AnimatorController: {fileID: 9100000, guid: 5070b516ff083a14b870ee5208f8ee0f, type: 2}
+  AnimationClips: []
+  BaseMaxHealth: 100
+  BaseMovementSpeed: 9
+  Damage: 1
+  BaseExp: 1000
+  Abilities: []
+  ColliderRadius: 0.05
+  ColliderOffset: {x: 0, y: 0}
