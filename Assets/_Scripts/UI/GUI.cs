@@ -155,7 +155,7 @@ public class GUI : MonoBehaviour
         PauseInternal();
         AbilityChoices.Clear();
         List<BaseAbilityScriptable> unlockedAbilities = new(GameData.unlockedAbilities);
-        for (int i = 0; i < Attributes.AbilitiesPerLevel; i++)
+        for (int i = 0; i < GameData.InGameAttributes.AbilitiesPerLevel; i++)
         {
             if (unlockedAbilities.Count == 0) break;
             BaseAbilityScriptable rolled = unlockedAbilities[GameData.ValuableRoll(0, unlockedAbilities.Count)];

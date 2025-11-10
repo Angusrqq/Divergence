@@ -18,7 +18,9 @@ public class AbilityHandler : BaseAbilityHandler
         State = AbilityState.ready;
         CountActiveTimeInCooldown = source.CountActiveTimeInCooldown;
         ActiveTime = source.ActiveTime;
+        ActiveTime.AddModifier(GameData.InGameAttributes.AbilityActiveTimeMultModifier);
         CooldownTime = source.CooldownTime;
+        CooldownTime.AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
         KnockbackForce = source.KnockbackForce;
         KnockbackDuration = source.KnockbackDuration;
     }

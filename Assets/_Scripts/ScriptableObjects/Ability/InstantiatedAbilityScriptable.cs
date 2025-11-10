@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +16,7 @@ public class InstantiatedAbilityScriptable : Ability
     public InstantiatedAbilityMono EvoPrefab;
 
     public float speed;
+    public float SpawnDelay = 0f;
     public float damage;
     public int localProjectilesAmount = 1; // How many projectiles are fired in a single burst
     public Character nativeUser; // Character for which this ability is considered native; toggles evolved state when active.

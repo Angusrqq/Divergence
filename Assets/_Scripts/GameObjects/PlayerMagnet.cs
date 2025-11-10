@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
-
 /// <summary>
 /// <para>
 /// <c>Magnet</c> is a script that makes the xp crystals magnet to the player.
@@ -10,9 +8,11 @@ using UnityEngine;
 /// It basically checks if the xp crystal is in the magnet's radius and if it is,
 /// it starts the xp crystal's <c>MagnetToPlayerCoroutine</c> passing the serialized animation curve.
 /// </summary>
+[RequireComponent(typeof(CircleCollider2D))]
 public class PlayerMagnet : MonoBehaviour
 {
     [NonSerialized] public CircleCollider2D magnetCollider;
+    
     public AnimationCurve curve;
 
     /// <summary>
@@ -25,15 +25,23 @@ public class PlayerMagnet : MonoBehaviour
     {
         magnetCollider = GetComponent<CircleCollider2D>();
         UpdateRadius();
-        Attributes.OnAttributeChanged += HandleAttributeChanged;
+        GameData.InGameAttributes.OnAttributeChanged += HandleAttributeChanged;
     }
 
     /// <summary>
-    /// Updates the radius of the magnet to the value of the <c>MagnetRadius</c> attribute.
+    /// Called when the magnet's trigger area is entered by another object.
+    /// If the other object is an <c>ExperienceCrystal</c> and it is not fired, it starts the experience crystal's <c>MagnetToPlayerCoroutine</c> passing the serialized animation curve.
     /// </summary>
-    public void UpdateRadius()
+    /// <param name="collision">The collider of the object that entered the trigger area.</param>
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        magnetCollider.radius = Attributes.MagnetRadius;
+        if (collision.TryGetComponent(out ExperienceCrystal experienceCrystal))
+        {
+            if (experienceCrystal != null && !experienceCrystal.IsFired)
+            {
+                experienceCrystal.StartCoroutine(experienceCrystal.MagnetToPlayerCoroutine(curve));
+            }
+        }
     }
 
     /// <summary>
@@ -42,7 +50,15 @@ public class PlayerMagnet : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        Attributes.OnAttributeChanged -= HandleAttributeChanged;
+        GameData.InGameAttributes.OnAttributeChanged -= HandleAttributeChanged;
+    }
+
+    /// <summary>
+    /// Updates the radius of the magnet to the value of the <c>MagnetRadius</c> attribute.
+    /// </summary>
+    public void UpdateRadius()
+    {
+        magnetCollider.radius = GameData.InGameAttributes.MagnetRadius;
     }
 
     /// <summary>
@@ -53,29 +69,13 @@ public class PlayerMagnet : MonoBehaviour
     private void HandleAttributeChanged(AttributeId id, Stat value)
     {
         if (id != AttributeId.MagnetRadius) return;
+
         if (magnetCollider == null)
         {
             magnetCollider = GetComponent<CircleCollider2D>();
             if (magnetCollider == null) return;
         }
-        magnetCollider.radius = value;
-    }
 
-    /// <summary>
-    /// Called when the magnet's trigger area is entered by another object.
-    /// </summary>
-    /// <param name="collision">The other object that entered the trigger area.</param>
-    /// <remarks>
-    /// If the other object is an <c>XpCrystal</c> and it is not already being attracted to the player, it starts the XP crystal's <c>MagnetToPlayerCoroutine</c> passing the serialized animation curve.
-    /// </remarks>
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out XpCrystal xpCrystal))
-        {
-            if (xpCrystal != null && !xpCrystal.IsFired)
-            {
-                xpCrystal.StartCoroutine(xpCrystal.MagnetToPlayerCoroutine(curve));
-            }
-        }
+        magnetCollider.radius = value;
     }
 }

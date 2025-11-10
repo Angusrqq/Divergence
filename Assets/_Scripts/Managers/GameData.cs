@@ -11,7 +11,6 @@ using UnityEngine.Tilemaps;
 /// It stores all the data that needs to persist between scenes, like player data, unlocked characters, maps, abilities, etc.
 /// It also handles the random seed for procedural generation, and keeps track of the current state of the game.
 /// </para>
-/// It should have methods to save and load the data from a file, but thats too much for now since im the only one working.
 /// </summary>
 public class GameData : MonoBehaviour
 {
@@ -22,28 +21,30 @@ public class GameData : MonoBehaviour
     // TODO: map selection in menu and display map info
     // TODO: ability tree in main menu <<< hard one, so optional for now
     [SerializeField] private List<Character> _Characters;
-    [SerializeField] private List<MapData> _Maps;
+    [SerializeField] private List<BetterMapData> _Maps;
     [SerializeField] private List<BaseAbilityScriptable> _Abilities;
     [SerializeField] private List<EnemyData> _Enemies;
 
     public static GameData instance;
     public static Player player;
-    public static SettingsData currentSettings { get; private set; } // TODO: Egor - Rename this variable to `CurrentSettings` and fix all issues with it
     public static int currentSeed;
     public static Random.State lastValuableState;
     public static Random.State lastInvaluableState;
-    public static List<Character> Characters;
+    public static List<Character> Characters = new();
     public static List<Character> unlockedCharacters;
     public static Character currentCharacter;
-    public static List<MapData> Maps;
-    public static List<MapData> unlockedMaps;
-    public static MapData currentMap;
-    public static List<BaseAbilityScriptable> Abilities;
+    public static List<BetterMapData> Maps = new();
+    public static List<BetterMapData> unlockedMaps;
+    public static BetterMapData currentMap;
+    public static List<BaseAbilityScriptable> Abilities = new();
     public static List<BaseAbilityScriptable> unlockedAbilities;
-    public static List<EnemyData> Enemies;
+    public static List<EnemyData> Enemies = new();
+    public static InGameAtributes InGameAttributes;
+    public static MetaprogressionData CurrentMetadata;
 
     public static Sprite LockedIcon { get; private set; } // not going to cut it, // TODO: figure out a way to store/load constant icons
     public static Tilemap TilemapToLoadMaps { get; set; }
+    public static SettingsData CurrentSettings { get; private set; }
 
     /// <summary>
     /// <para>
@@ -65,19 +66,35 @@ public class GameData : MonoBehaviour
         LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+        //loading all data from resources, idk if this is the best way tho
+        foreach (BaseAbilityScriptable ability in Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities"))
+        {
+            Abilities.Add(ability);
+        }
+        foreach (BetterMapData map in Resources.LoadAll<BetterMapData>("ObjectsData/Maps"))
+        {
+            Maps.Add(map);
+        }
+        foreach (Character character in Resources.LoadAll<Character>("ObjectsData/Characters"))
+        {
+            Characters.Add(character);
+        }
+        foreach (EnemyData enemy in Resources.LoadAll<EnemyData>("ObjectsData/Enemies"))
+        {
+            Enemies.Add(enemy);
+        }
+
         // TODO: Do something with this craziness
-        Abilities = _Abilities;
         unlockedAbilities = Abilities;
-        Maps = _Maps;
         unlockedMaps = Maps;
-        Characters = _Characters;
         unlockedCharacters = Characters;
-        Enemies = _Enemies;
+        //InGameAttributes = new InGameAtributes();
     }
 
     void Start()
     {
-        currentSettings = InitializeSettings();
+        CurrentSettings = InitializeSettings();
+        CurrentMetadata = InitializeProgData();
     }
 
     /// <summary>
@@ -150,8 +167,9 @@ public class GameData : MonoBehaviour
             ResetRandomToSeed();
 
             currentMap = currentMap != null ? currentMap : Maps[0];
-            currentMap.ApplyToTilemap(TilemapToLoadMaps);
-            
+            //currentMap.ApplyToTilemap(TilemapToLoadMaps);
+            Instantiate(currentMap.mapPrefab);
+            InGameAttributes = new(); // reconstruct to use the new values from starting attributes
             Debug.Log("Reset random to seed " + currentSeed);
         }
 
@@ -182,7 +200,7 @@ public class GameData : MonoBehaviour
     /// Used in the map selection menu.
     /// </summary>
     /// <param name="map"></param>
-    public static void ChooseMap(MapData map)
+    public static void ChooseMap(BetterMapData map)
     {
         currentMap = map;
         Debug.Log($"Chosen map: {map.name}");
@@ -218,6 +236,24 @@ public class GameData : MonoBehaviour
         return data;
     }
 
+    private static MetaprogressionData InitializeProgData()
+    {
+        MetaprogressionData data = DataSystem.LoadProgData() ?? new MetaprogressionData(0);
+        return data;
+    }
+
+    public static void SaveMetaData(MetaprogressionData data = null)
+    {
+        if (data != null)
+        {
+            DataSystem.SaveProgData(data);
+        }
+        else
+        {
+            DataSystem.SaveProgData(CurrentMetadata);
+        }
+    }
+
     private static void SetGameSettings(SettingsData data)
     {
         Screen.SetResolution(data.ScreenWidth, data.ScreenHeight, (FullScreenMode)System.Enum.Parse(typeof(FullScreenMode), data.FullScreen));
@@ -240,6 +276,6 @@ public class GameData : MonoBehaviour
             DataSystem.SaveSettingsData(data);
         }
 
-        currentSettings = data;
+        CurrentSettings = data;
     }
 }

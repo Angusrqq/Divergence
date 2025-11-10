@@ -9,15 +9,16 @@ using System.Collections.Generic;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy _prefab;
-    [SerializeField] public Stat SpawnDelay = 1f;
 
+    public Stat SpawnDelay = 1f;
     public MonoBehaviour Target;
     public int maxEnemyCount = 10000;
+    
     private Camera _camera;
+    private float delay;
+
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
-
-    private float delay;
 
     /// <summary>
     /// Initializes the enemy manager singleton and creates a new list for storing enemies.

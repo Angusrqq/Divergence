@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : InstantiatedAbilityMono
@@ -10,11 +10,12 @@ public class Fireball : InstantiatedAbilityMono
 
     private void Start()
     {
-        Enemy _target = FindClosest();
+        GetTargetForProjectile(Ability, out Target);
 
-        if (_target != null)
+        if (Target != null)
         {
-            direction = (FindClosest().transform.position - transform.position).normalized;
+            
+            direction = (Target.transform.position - transform.position).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
@@ -24,6 +25,7 @@ public class Fireball : InstantiatedAbilityMono
             Ability.StartCooldown();
         }
     }
+
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
@@ -34,5 +36,11 @@ public class Fireball : InstantiatedAbilityMono
             Destroy(gameObject);
             Ability.StartCooldown();
         }
+    }
+
+    public override void Upgrade(InstantiatedAbilityHandler ability)
+    {
+        ability.damage *= 1.05f;
+        ability.localProjectilesAmount += 1;
     }
 }

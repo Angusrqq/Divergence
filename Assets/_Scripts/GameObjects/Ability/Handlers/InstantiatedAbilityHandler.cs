@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class InstantiatedAbilityHandler : AbilityHandler
     private InstantiatedAbilityMono _standardPrefab;
     private InstantiatedAbilityMono _evoPrefab;
 
-    public float speed;
+    public Stat Speed;
+    public float SpawnDelay;
     public float damage;
     public Stat localProjectilesAmount = 1; // How many projectiles are fired in a single burst
     public Character nativeUser; // Character for which this ability is considered native; toggles evolved state when active.
@@ -26,10 +28,12 @@ public class InstantiatedAbilityHandler : AbilityHandler
         Instances = new List<InstantiatedAbilityMono>();
         _standardPrefab = source.StandardPrefab;
         _evoPrefab = source.EvoPrefab;
-        speed = source.speed;
+        Speed = source.speed;
+        Speed.AddModifier(GameData.InGameAttributes.ProjectileSpeedMultModifier);
+        SpawnDelay = source.SpawnDelay;
         damage = source.damage;
         localProjectilesAmount = source.localProjectilesAmount;
-        localProjectilesAmount.AddModifier(Attributes.ProjectilesAddModifier);
+        localProjectilesAmount.AddModifier(GameData.InGameAttributes.ProjectilesAddModifier);
         nativeUser = source.nativeUser;
         base.AfterInit();
     }
@@ -46,22 +50,29 @@ public class InstantiatedAbilityHandler : AbilityHandler
     {
         if (IsEvolved && _evoPrefab != null)
         {
-            for (int i = 0; i < localProjectilesAmount; i++)
-            {
-                var instance = Instantiate(_evoPrefab, GameData.player.transform.position, Quaternion.identity);
-                instance.Init(this);
-                Instances.Add(instance);
-            }
+            StartCoroutine(SpawnProjectiles(_evoPrefab, SpawnDelay));
         }
         else
         {
-            for (int i = 0; i < localProjectilesAmount; i++)
-            {
-                var instance = Instantiate(_standardPrefab, GameData.player.transform.position, Quaternion.identity);
-                instance.Init(this);
-                Instances.Add(instance);
-            }
+            StartCoroutine(SpawnProjectiles(_standardPrefab, SpawnDelay));
         }
         base.Activate();
+    }
+
+    protected IEnumerator SpawnProjectiles(InstantiatedAbilityMono prefab, float delay = 0f)
+    {
+        for (int i = 0; i < localProjectilesAmount; i++)
+        {
+            var instance = Instantiate(prefab, GameData.player.transform.position, Quaternion.identity);
+            instance.Init(this);
+            Instances.Add(instance);
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        _standardPrefab.Upgrade(this);
     }
 }

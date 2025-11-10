@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class BaseAbilityScriptable : BaseScriptableObjectInfo
 {
@@ -6,13 +7,5 @@ public class BaseAbilityScriptable : BaseScriptableObjectInfo
     public int MaxLevel;
     public bool IsEvolved = false;
     public virtual HandlerType Type => HandlerType.BaseAbility;
-
-    public virtual void Activate() { }
-
-    public virtual void Upgrade()
-    {
-        Level++;
-    }
-
-    public virtual void UpdateAbility() { }
+    public List<Action> upgradeActions;
 }

@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_particleSystem: {fileID: 7094119184735996351, guid: d5daf955686d6dd4c8ef747076455f34, type: 3}
   xpCrystalPrefab: {fileID: 7069377261818586785, guid: 9e1d252a1d403124683989ff5b0facde, type: 3}
+  ExperienceCrystalPrefab: {fileID: 9193372117981820440, guid: aba62842f8bad164bbed93968d737c14, type: 3}
   maxHealth:
     BaseValue: 100
     BaseModifier: 0

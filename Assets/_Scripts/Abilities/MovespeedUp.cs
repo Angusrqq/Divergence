@@ -8,7 +8,7 @@ public class MovespeedUp : PassiveAbilityMono
     public override void Activate()
     {
         _speedValue = 0.02f;
-        _speedValue.AddModifier(Attributes.PassiveAbilityEffectMultModifier);
+        _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Percent, this);
         GameData.player.MovementSpeed.AddModifier(_speedModifier);
         Debug.Log($"MovespeedUp activated, player speed: {GameData.player.MovementSpeed}, Base speed: {_speedValue.BaseValue}, Current speed: {_speedValue}");

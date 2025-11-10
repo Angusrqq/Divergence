@@ -61,6 +61,7 @@ public class AnimatedEntity : MonoBehaviour
     /// </summary>
     public virtual void ChangeAnimation(string animation)
     {
+        // Debug.Log("ChangeAnimation: " + animation);
         if (CurrentAnimation == animation) return;
 
         Animator.Play(animation);

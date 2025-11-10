@@ -1,6 +1,7 @@
 public class PassiveAbilityHandler : BaseAbilityHandler
 {
     private PassiveAbilityMono _monoLogic;
+
     protected override void AfterInit()
     {
         PassiveAbility source = _source as PassiveAbility;
@@ -8,6 +9,7 @@ public class PassiveAbilityHandler : BaseAbilityHandler
         base.AfterInit();
     }
 
+    
     public override void Activate() => _monoLogic.Activate();
 
     public override void Upgrade()

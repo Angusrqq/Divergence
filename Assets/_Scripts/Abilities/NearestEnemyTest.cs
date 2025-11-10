@@ -36,7 +36,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         direction = target ? (target.transform.position - transform.position).normalized : direction.normalized;
         
         // Move the rigidbody towards the target with the ability's speed
-        rb.MovePosition(Ability.speed * direction + rb.position);
+        rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
     /// <summary>

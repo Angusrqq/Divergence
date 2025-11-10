@@ -184,6 +184,6 @@ public class SettingsMenu : MonoBehaviour
     
     public void ResetSettings()
     {
-        GameData.UpdateSettings(GameData.currentSettings, refreshSettings: true);
+        GameData.UpdateSettings(GameData.CurrentSettings, refreshSettings: true);
     }
 }

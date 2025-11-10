@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 /// <summary>
 /// <para>
 /// <c>AbilityState</c> enum represents the different states an ability can be in.

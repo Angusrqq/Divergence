@@ -99,7 +99,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void SetMap()
     {
-        GameData.ChooseMap((MapData)_mapSelectorManager.CurrentSelectedData);
+        GameData.ChooseMap((BetterMapData)_mapSelectorManager.CurrentSelectedData);
     }
 
     /// <summary>

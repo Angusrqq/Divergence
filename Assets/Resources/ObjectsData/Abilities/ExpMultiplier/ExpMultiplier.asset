@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
+  m_Name: ExpMultiplier
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
+  _name: Exp Multiplier
+  _description: Multiply exp
+  _icon: {fileID: 0}
+  Level: 1
+  MaxLevel: 3
+  IsEvolved: 0
+  MonoLogic: {fileID: 3195371801307526527, guid: c7f5bebd7278a1e409359c4dab96d578, type: 3}
+  PassiveType: 0

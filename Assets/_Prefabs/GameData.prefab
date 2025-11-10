@@ -52,17 +52,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 883d13b904e313242986c316cd2793d2, type: 2}
   - {fileID: 11400000, guid: 6147f31fdf03ef34498e9ee3c33d9356, type: 2}
   _Maps:
-  - {fileID: 11400000, guid: 5371d769ead06754eae11e0ed9052228, type: 2}
+  - {fileID: 11400000, guid: 58e6c358d9f090e4b8c5fe5baa654ae3, type: 2}
   _Abilities:
   - {fileID: 11400000, guid: 7f9dfaae940bfe341881086766b956bf, type: 2}
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}
   - {fileID: 11400000, guid: 7e24527f0d284a6478d8f80f52f22fd8, type: 2}
-  - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}
   - {fileID: 11400000, guid: 358312a8ec0e39649a4814128646bb7d, type: 2}
+  - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}
   - {fileID: 11400000, guid: b741aa6e73563804b89467274f2fb651, type: 2}
   - {fileID: 11400000, guid: ce21f0c163c65cb488dd573e2049abb1, type: 2}
   - {fileID: 11400000, guid: bc668a2b9002fe94bacf19186c4b97b2, type: 2}
   - {fileID: 11400000, guid: 6968776bda6083544b116cab074409c9, type: 2}
+  - {fileID: 11400000, guid: ad432a34cc9709042a6d63500dd7530f, type: 2}
+  - {fileID: 11400000, guid: c21c1036b394fdf40a529cd545a65614, type: 2}
+  - {fileID: 11400000, guid: 9620dfbd12816904f8f36577916f2b8d, type: 2}
+  - {fileID: 11400000, guid: ec4191898230e6545a457be0bab7e01f, type: 2}
+  - {fileID: 11400000, guid: 270dad8ea85852e4fadcc17c6cad91c1, type: 2}
   _Enemies:
   - {fileID: 11400000, guid: ad1ceae49b9e54a4885f524163a6e72b, type: 2}
   - {fileID: 11400000, guid: d56e767442d59ba4fa9e6fd49874e103, type: 2}

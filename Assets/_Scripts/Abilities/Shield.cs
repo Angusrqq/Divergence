@@ -14,10 +14,10 @@ public class Shield : PassiveAbilityMono
     public override void Activate()
     {
         _resistValue = -0.1f;
-        _resistValue.AddModifier(Attributes.PassiveAbilityEffectMultModifier);
-        _shieldModifier = new(ref _resistValue, StatModifierType.Percent, this);
-        Attributes.PlayerResistsMult.AddModifier(_shieldModifier);
-        Debug.Log($"Shield Activated, player resist: {Attributes.PlayerResistsMult}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
+        _resistValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
+        _shieldModifier = new StatModifierByStat(ref _resistValue, StatModifierType.Percent, this);
+        GameData.InGameAttributes.PlayerResistsMult.AddModifier(_shieldModifier);
+        Debug.Log($"Shield Activated, player resist: {GameData.InGameAttributes.PlayerResistsMult}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
     }
 
     /// <summary>
@@ -26,6 +26,6 @@ public class Shield : PassiveAbilityMono
     public override void Upgrade()
     {
         _resistValue -= 0.05f;
-        Debug.Log($"Shield Upgraded, player resist: {Attributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
+        Debug.Log($"Shield Upgraded, player resist: {GameData.InGameAttributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
     }
 }

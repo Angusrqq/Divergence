@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
-// TODO: Evgeniy - Refactor this
 /// <summary>
 /// Base MonoBehaviour for runtime ability instances spawned by
 /// <see cref="InstantiatedAbilityScriptable"/> during <c>Activate()</c>.
@@ -19,17 +20,15 @@ using System.Linq;
 [RequireComponent(typeof(Collider2D))]
 public class InstantiatedAbilityMono : MonoBehaviour
 {
-    [System.NonSerialized] private InstantiatedAbilityHandler _ability;
-    public InstantiatedAbilityHandler Ability
-    {
-        get => _ability;
-        protected set => _ability = value;
-    }
+    [NonSerialized] private InstantiatedAbilityHandler _ability;
 
     protected Rigidbody2D rb;
     protected AnimatedEntity animatedEntity;
     protected Vector2 direction;
     protected float timer;
+    [NonSerialized] public Enemy Target;
+    
+    public InstantiatedAbilityHandler Ability { get => _ability; protected set => _ability = value; }
 
     /// <summary>
     /// Caches the <see cref="Rigidbody2D"/> and derives the initial movement direction
@@ -73,7 +72,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
     /// </summary>
     protected virtual void FixedUpdateLogic()
     {
-        rb.MovePosition(Ability.speed * direction + rb.position);
+        rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
     /// <summary>
@@ -111,7 +110,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
             enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
         }
     }
-    
+
     /// <summary>
     /// Returns the enemy closest to the player, or <c>null</c> if none exist.
     /// </summary>
@@ -119,5 +118,37 @@ public class InstantiatedAbilityMono : MonoBehaviour
     public static Enemy FindClosest()
     {
         return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
+    }
+
+    /// <summary>
+    /// Returns the closest enemy from a provided list of enemies, or <c>null</c> if none exist.
+    /// </summary>
+    /// <param name="enemies">List of enemies to search</param>
+    /// <returns></returns>
+    public static Enemy FindClosest(List<Enemy> enemies)
+    {
+        return enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
+    }
+
+    public static void GetTargetForProjectile(InstantiatedAbilityHandler ability,out Enemy target)
+    {
+        List<Enemy> enemies = new(EnemyManager.Enemies);
+        foreach (InstantiatedAbilityMono instance in ability.Instances)
+        {
+            if (instance.Target != null)
+            {
+                enemies.Remove(instance.Target);
+            }
+        }
+        target = FindClosest(enemies);
+        if (target == null)
+        {
+            target = FindClosest();
+        }
+    }
+    
+    public virtual void Upgrade(InstantiatedAbilityHandler ability)
+    {
+        
     }
 }

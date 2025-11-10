@@ -6,7 +6,7 @@ public class AcidBall : Fireball
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration, useSound: false);
+            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
             Acid acidEffect = new(GameData.player, enemy, damage: Ability.damage * 0.1f, percentSlow: -0.5f);
             enemy.Statuses.ApplyEffect(acidEffect);
             Destroy(gameObject);

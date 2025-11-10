@@ -2,20 +2,19 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+/// <summary>
+/// Base enemy class.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DamageableEntity))]
 [RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
-
-/// <summary>
-/// Base enemy class.
-/// </summary>
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private ParticleSystem m_particleSystem;
-    [SerializeField] private XpCrystal xpCrystalPrefab;
+    [SerializeField] private ExperienceCrystal ExperienceCrystalPrefab;
 
     [NonSerialized] public DamageableEntity damageableEntity;
     [NonSerialized] public AnimatedEntity animatedEntity;
@@ -160,7 +159,7 @@ public class Enemy : MonoBehaviour
 
             if (source.GetType() == typeof(Player))
             {
-                amount *= Attributes.PlayerDamageMult;
+                amount *= GameData.InGameAttributes.PlayerDamageMult;
             }
 
             damageableEntity.TakeDamage(source, amount, type);
@@ -194,12 +193,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     protected virtual void OnDeath(UnityEngine.Object source)
     {
-        // Debug.Log($"Enemy at {gameObject} died by {source}");
-
-        if (xpCrystalPrefab != null)
+        if (ExperienceCrystalPrefab != null)
         {
-            XpCrystal SpawnedCrystal = Instantiate(xpCrystalPrefab, transform.position, Quaternion.identity, transform.parent);
-            SpawnedCrystal.SetXpValue(xpDrop);
+            Instantiate(ExperienceCrystalPrefab, transform.position, Quaternion.identity, transform.parent);
         }
 
         Destroy(gameObject);

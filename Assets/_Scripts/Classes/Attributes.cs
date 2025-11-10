@@ -7,11 +7,16 @@ public enum AttributeId
 }
 
 /// <summary>
+/// StartingAttributes static class holds the default starting values for various player attributes.
 /// <para>
-/// <c>Attributes</c> is a static class that contains the attributes of the player.
+/// Used to initialize the player's attributes at the beginning of the game.
 /// </para>
+/// <para>
+/// The values of attributes should change only through main menu upgrades, unlocks, etc., or loaded from a save file.
+/// </para>
+/// Also holds corresponding <see cref="StatModifierByStat"/> instances for each attribute to facilitate modifications during gameplay.
 /// </summary>
-public static class Attributes
+public static class StartingAttributes
 {
     public static Stat Health = 100;
     public static Stat MaxHealth = 100;
@@ -26,6 +31,10 @@ public static class Attributes
     public static Stat ManuallyTriggeredAbilitySlots = 0;
     public static Stat PassiveAbilityEffectMult = 0f;
     public static Stat PierceTargets = 0;
+    public static Stat MagnetRadius = 0.5f;
+    public static Stat ExperienceMultiplier = 1f;
+    public static Stat ProjectileSpeedMult = 1f;
+    public static Stat AbilityActiveTimeMult = 1f;
 
     public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
@@ -37,11 +46,51 @@ public static class Attributes
     public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
     public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
-    public static event Action<AttributeId, Stat> OnAttributeChanged;
+}
 
-    private static Stat _magnetRadius = 0.5f;
 
-    public static Stat MagnetRadius
+/// <summary>
+/// InGameAtributes class represents the player's attributes during gameplay.
+/// <para>
+/// It holds instances of <see cref="Stat"/> for each attribute, initialized with either the starting values from <see cref="StartingAttributes"/> or custom values.
+/// </para>
+/// </summary>
+public class InGameAtributes
+{
+    public Stat Health = 100;
+    public Stat MaxHealth = 100;
+    public Stat PlayerDamageMult = 1f;
+    public Stat PlayerResistsMult = 1f;
+    public Stat ProjectilesAdd = 0;
+    public Stat ProjectileSpeedMult = 1f;
+    public Stat AbilityActiveTimeMult = 1f;
+    public Stat CastSpeedMult = 1f;
+    public Stat CooldownReductionMult = 1f;
+    public Stat ActiveAbilitySlots = 5;
+    public Stat AbilitiesPerLevel = 0;
+    public Stat PassiveAbilitySlots = 5;
+    public Stat ManuallyTriggeredAbilitySlots = 0;
+    public Stat PassiveAbilityEffectMult = 0f;
+    public Stat PierceTargets = 0;
+    public Stat ExperienceMultiplier = 1f;
+
+    public StatModifierByStat HealthModifier;
+    public StatModifierByStat MaxHealthModifier;
+    public StatModifierByStat PlayerDamageMultModifier;
+    public StatModifierByStat PlayerResistsMultModifier;
+    public StatModifierByStat ProjectilesAddModifier;
+    public StatModifierByStat ProjectileSpeedMultModifier;
+    public StatModifierByStat AbilityActiveTimeMultModifier;
+    public StatModifierByStat CastSpeedMultModifier;
+    public StatModifierByStat CooldownReductionMultModifier;
+    public StatModifierByStat AbilitiesPerLevelModifier;
+    public StatModifierByStat PassiveAbilityEffectMultModifier;
+    public StatModifierByStat PierceTargetsModifier;
+    public event Action<AttributeId, Stat> OnAttributeChanged;
+
+    private Stat _magnetRadius = 0.5f;
+
+    public Stat MagnetRadius
     {
         get => _magnetRadius;
         set
@@ -50,5 +99,56 @@ public static class Attributes
             _magnetRadius = value;
             OnAttributeChanged?.Invoke(AttributeId.MagnetRadius, _magnetRadius);
         }
+    }
+
+    /// <summary>
+    /// <c>InGameAtributes</c> constructor initializes a new instance of the InGameAtributes class with the specified or default attribute values.
+    /// <para>
+    /// It takes optional parameters for each attribute and assigns them to the corresponding <see cref="Stat"/> instance.
+    /// </para>
+    /// </summary>
+    public InGameAtributes(Stat health = null, Stat maxHealth = null, Stat playerDamageMult = null, Stat playerResistsMult = null, Stat projectilesAdd = null,
+    Stat castSpeedMult = null, Stat cooldownReductionMult = null, Stat passiveAbilityEffectMult = null, Stat pierceTargets = null, Stat magnetRadius = null,
+    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null)
+    {
+        Health = health ?? StartingAttributes.Health;
+        MaxHealth = maxHealth ?? StartingAttributes.MaxHealth;
+        PlayerDamageMult = playerDamageMult ?? StartingAttributes.PlayerDamageMult;
+        PlayerResistsMult = playerResistsMult ?? StartingAttributes.PlayerResistsMult;
+        ProjectilesAdd = projectilesAdd ?? StartingAttributes.ProjectilesAdd;
+        CastSpeedMult = castSpeedMult ?? StartingAttributes.CastSpeedMult;
+        CooldownReductionMult = cooldownReductionMult ?? StartingAttributes.CooldownReductionMult;
+        PassiveAbilityEffectMult = passiveAbilityEffectMult ?? StartingAttributes.PassiveAbilityEffectMult;
+        PierceTargets = pierceTargets ?? StartingAttributes.PierceTargets;
+        _magnetRadius = magnetRadius ?? StartingAttributes.MagnetRadius;
+        ExperienceMultiplier = experienceMultiplier ?? StartingAttributes.ExperienceMultiplier;
+        ProjectileSpeedMult = projectileSpeedMult ?? StartingAttributes.ProjectileSpeedMult;
+        AbilityActiveTimeMult = abilityActiveTimeMult ?? StartingAttributes.AbilityActiveTimeMult;
+
+        ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
+        PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;
+        ManuallyTriggeredAbilitySlots = StartingAttributes.ManuallyTriggeredAbilitySlots;
+        AbilitiesPerLevel = StartingAttributes.AbilitiesPerLevel;
+
+        CreateModifiers();
+    }
+
+    /// <summary>
+    /// <c>CreateModifiers</c> method initializes the <see cref="StatModifierByStat"/> instances for each attribute.
+    /// </summary>
+    private void CreateModifiers()
+    {
+        HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
+        MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
+        PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance, true);
+        PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance, true);
+        ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
+        CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance, true);
+        CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance, true);
+        AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
+        PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance, true);
+        PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+        ProjectileSpeedMultModifier = new(ref ProjectileSpeedMult, StatModifierType.Mult, GameData.instance, true);
+        AbilityActiveTimeMultModifier = new(ref AbilityActiveTimeMult, StatModifierType.Mult, GameData.instance, true);
     }
 }

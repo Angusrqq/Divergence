@@ -5,11 +5,12 @@ public class BaseAbilityHandler : MonoBehaviour
     public int Level = 1;
     public int MaxLevel;
     public bool IsEvolved = false;
+
+    protected BaseAbilityScriptable _source;
+    
     public string Name => _source.name;
     public string Description => _source.Description;
     public Sprite Icon => _source.Icon;
-
-    protected BaseAbilityScriptable _source;
 
     public void Init(BaseAbilityScriptable source)
     {

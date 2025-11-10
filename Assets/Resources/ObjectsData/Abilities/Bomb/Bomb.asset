@@ -26,6 +26,7 @@ MonoBehaviour:
   StandardPrefab: {fileID: 2879648600081668989, guid: 62c9baebc508c274e9fe4f0b1af058c3, type: 3}
   EvoPrefab: {fileID: 0}
   speed: 0.15
-  damage: 5
+  SpawnDelay: 0
+  damage: 25
   localProjectilesAmount: 1
   nativeUser: {fileID: 0}

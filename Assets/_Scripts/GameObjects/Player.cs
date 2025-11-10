@@ -22,9 +22,6 @@ public class Player : MonoBehaviour
     [NonSerialized] public SpriteRenderer SpriteRenderer;
     [NonSerialized] public Character CharacterData;
     [NonSerialized] public int Level = 0;
-    [NonSerialized] public int Exp = 0;
-    [NonSerialized] public int ExpNext = 100;
-    [NonSerialized] public Action<UnityEngine.Object, int> OnExpChange;
     [NonSerialized] public Action<UnityEngine.Object, int> OnLevelUp;
     [NonSerialized] public AbilityHolder AbilityHolder;
     public float MaxHealth = 100f;
@@ -37,8 +34,11 @@ public class Player : MonoBehaviour
     private Slider _healthSlider;
     private Slider _levelSlider;
     private TMPro.TMP_Text _levelLabel;
-    private bool _expDirty = false;
     private UnityEngine.Object _lastSource = null;
+    private float _experience;
+    private int _experienceToLevelUp = 5;
+    private Action<UnityEngine.Object, int> _onExperienceChange;
+    private bool _experienceDirty = false;
 
     public PlayerMagnet Magnet { get; private set; }
     public Stat MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
         DamageableEntity.OnDamageTaken += UpdateHealth;
         DamageableEntity.OnHeal += UpdateHealth;
-        OnExpChange += UpdateLevelBar;
+        _onExperienceChange += UpdateLevelBar;
 
         CharacterData = GameData.currentCharacter ? GameData.currentCharacter : GameData.Characters[0];
         BuildCharacter();
@@ -143,22 +143,10 @@ public class Player : MonoBehaviour
     {
         _rb.MovePosition(_rb.position + _movementSpeed * Time.fixedDeltaTime * MovementVector);
         UpdateHpBarPosition();
-        if (_expDirty)
+        if (_experienceDirty)
         {
             OverLevel();
         }
-    }
-
-    /// <summary>
-    /// <para>
-    /// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
-    /// </para>
-    /// Shows the death screen and logs the death.
-    /// </summary>
-    private void OnDeath(UnityEngine.Object source)
-    {
-        GUI.Death();
-        Debug.Log($"Player died by {source}");
     }
 
     /// <summary>
@@ -176,10 +164,38 @@ public class Player : MonoBehaviour
         {
             if (collision_dentity.CanDealDamage)
             {
-                float damage = collision_dentity.Damage * Attributes.PlayerResistsMult;
+                float damage = collision_dentity.Damage * GameData.InGameAttributes.PlayerResistsMult;
                 DamageableEntity.TakeDamage(collision.gameObject, damage);
             }
         }
+    }
+
+    /// <summary>
+    /// <para>
+    /// <c>OnDestroy</c> called when the GameObject is destroyed
+    /// </para>
+    /// Just unsubscribes from events
+    /// </summary>
+    void OnDestroy()
+    {
+        DamageableEntity.OnDamageTaken -= UpdateHealth;
+        DamageableEntity.OnHeal -= UpdateHealth;
+        DamageableEntity.OnDeath -= OnDeath;
+
+        _onExperienceChange = null;
+        OnLevelUp = null;
+    }
+
+    /// <summary>
+    /// <para>
+    /// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
+    /// </para>
+    /// Shows the death screen and logs the death.
+    /// </summary>
+    private void OnDeath(UnityEngine.Object source)
+    {
+        GUI.Death();
+        Debug.Log($"Player died by {source}");
     }
 
     /// <summary>
@@ -201,7 +217,7 @@ public class Player : MonoBehaviour
     void UpdateHpBarPosition()
     {
         float offset = -0.5f;
-        Vector2 pos = new Vector2(transform.position.x, -(SpriteRenderer.bounds.size.y / 2) + transform.position.y + offset);
+        Vector2 pos = new(transform.position.x, -(SpriteRenderer.bounds.size.y / 2) + transform.position.y + offset);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             HealthBar.parent.transform as RectTransform,
@@ -214,83 +230,94 @@ public class Player : MonoBehaviour
 
     /// <summary>
     /// <para>
-    /// <c>OnDestroy</c> called when the GameObject is destroyed
+    /// <c>LevelUp</c> is called when the player levels up.
     /// </para>
-    /// Just unsubscribes from events
+    /// Increments the player`s level, updates the experience required to level up, and invokes the <c>OnLevelUp</c> event.
     /// </summary>
-    void OnDestroy()
-    {
-        DamageableEntity.OnDamageTaken -= UpdateHealth;
-        DamageableEntity.OnHeal -= UpdateHealth;
-        DamageableEntity.OnDeath -= OnDeath;
-
-        OnExpChange = null;
-        OnLevelUp = null;
-    }
-
-    /// <summary>
-    /// <para>
-    /// Levels up the player, increases the experience required for the next level, and logs the level up event.
-    /// </para>
-    /// </summary>
+    /// <param name="source">Origin of the level up.</param>
     public void LevelUp(UnityEngine.Object source)
     {
         Level++;
 
-        if (Exp > ExpNext)
+        if (_experience > _experienceToLevelUp)
         {
-            _expDirty = true;
+            _experienceDirty = true;
         }
         else
         {
-            _expDirty = false;
+            _experienceDirty = false;
         }
 
-        ExpNext += Mathf.RoundToInt(ExpNext * 1.1f);
+        // Special walls
+        if (Level == 20)
+        {
+            _experienceToLevelUp += 10 + 300;
+        }
+        else if (Level == 40)
+        {
+            _experienceToLevelUp += 13 + 1200;
+        }
+        // Ranges
+        else if (Level <= 19)
+        {
+            _experienceToLevelUp += 10;
+        }
+        else if (Level <= 39)
+        {
+            _experienceToLevelUp += 13;
+        }
+        // Level >= 41
+        else
+        {
+            _experienceToLevelUp += 16;
+        }
+
         OnLevelUp?.Invoke(source, Level);
         Debug.Log($"Player {gameObject.name} leveled up to level {Level}");
     }
 
     /// <summary>
-    /// <para>
-    /// Adds experience points to the player.
-    /// </para>
-    /// If the experience points added are enough to level up the player, levels up the player and logs the level up.
+    /// Adds experience to the player, leveling up if necessary.
     /// </summary>
-    /// <param name="source">The source of the experience points.</param>
-    /// <param name="exp_to_add">Experience amount to add.</param>
-    public void AddExp(UnityEngine.Object source, int exp_to_add)
+    /// <param name="experienceSource">Origin of the experience.</param>
+    /// <param name="experienceToAdd">Amount of experience to add.</param>
+    public void AddExperience(UnityEngine.Object experienceSource, byte experienceToAdd)
     {
-        if (ExpNext - Exp <= exp_to_add)
+        int gainedExperience = experienceToAdd * GameData.InGameAttributes.ExperienceMultiplier;
+
+        if (_experienceToLevelUp - _experience <= gainedExperience)
         {
-            Exp = exp_to_add - (ExpNext - Exp);
-            LevelUp(source);
+            _experience = gainedExperience - (_experienceToLevelUp - _experience);
+            LevelUp(experienceSource);
         }
         else
         {
-            Exp += exp_to_add;
+            _experience += gainedExperience;
         }
 
-        OnExpChange?.Invoke(source, exp_to_add);
-        Debug.Log($"Player {gameObject.name} gained {exp_to_add} exp from {source.name}");
-        Debug.Log("current exp: " + Exp);
-    }
-
-    private void OverLevel()
-    {
-        Exp -= ExpNext;
-        LevelUp(_lastSource);
-        OnExpChange?.Invoke(_lastSource, ExpNext);
+        _onExperienceChange?.Invoke(experienceSource, gainedExperience);
+        Debug.Log($"Player {gameObject.name} gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
     }
 
     /// <summary>
-    /// Updates the level bar slider and label to reflect current XP progress.
+    /// Called when the player's experience goes over the required amount for the next level.
+    /// Resets the experience counter to 0 and levels up the player using <see cref="LevelUp"/>, then invokes the <see cref="_onExperienceChange"/> event.
     /// </summary>
-    /// <param name="source">Origin of the XP change.</param>
-    /// <param name="expValue">XP delta that triggered the update.</param>
-    public void UpdateLevelBar(UnityEngine.Object source, int expValue)
+    private void OverLevel()
     {
-        _levelSlider.value = (float)Exp / ExpNext;
+        _experience -= _experienceToLevelUp;
+        LevelUp(_lastSource);
+        _onExperienceChange?.Invoke(_lastSource, _experienceToLevelUp);
+    }
+
+    /// <summary>
+    /// Updates the level bar UI with the current experience and level.
+    /// </summary>
+    /// <param name="source">The source of the experience change.</param>
+    /// <param name="experienceValue">The amount of experience gained.</param>
+    public void UpdateLevelBar(UnityEngine.Object source, int experienceValue)
+    {
+        _levelSlider.value = (float)_experience / _experienceToLevelUp;
         _levelLabel.text = $"lv. {Level}";
     }
 
