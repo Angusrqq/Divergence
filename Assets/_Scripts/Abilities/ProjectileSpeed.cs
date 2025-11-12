@@ -16,7 +16,7 @@ public class ProjectileSpeed : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _speedValue.BaseValue += 0.2f;
+        _speedModifier.Value += 0.2f;
         Debug.Log($"ProjectileSpeed upgraded, projectile speed: {GameData.InGameAttributes.ProjectileSpeedMult}, Base speed: {_speedValue.BaseValue}, Current speed: {_speedValue}");
     }
 }

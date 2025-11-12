@@ -16,7 +16,7 @@ public class HeavyHitter : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _hitValue.BaseValue *= 1.5f;
+        _hitModifier.Value *= 1.5f;
         Debug.Log($"HeavyHitter upgraded, player damage: {GameData.InGameAttributes.PlayerDamageMult}, Base damage multiplier: {_hitValue.BaseValue}, Current damage multiplier: {_hitValue}");
     }
 }

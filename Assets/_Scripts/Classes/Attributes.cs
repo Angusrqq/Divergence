@@ -29,7 +29,7 @@ public static class StartingAttributes
     public static Stat AbilitiesPerLevel = 3;
     public static Stat PassiveAbilitySlots = 5;
     public static Stat ManuallyTriggeredAbilitySlots = 0;
-    public static Stat PassiveAbilityEffectMult = 0f;
+    public static Stat PassiveAbilityEffectMult = 1f;
     public static Stat PierceTargets = 0;
     public static Stat MagnetRadius = 0.5f;
     public static Stat ExperienceMultiplier = 1f;
@@ -70,7 +70,7 @@ public class InGameAtributes
     public Stat AbilitiesPerLevel = 0;
     public Stat PassiveAbilitySlots = 5;
     public Stat ManuallyTriggeredAbilitySlots = 0;
-    public Stat PassiveAbilityEffectMult = 0f;
+    public Stat PassiveAbilityEffectMult = 1f;
     public Stat PierceTargets = 0;
     public Stat ExperienceMultiplier = 1f;
 
@@ -141,7 +141,7 @@ public class InGameAtributes
         HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
         MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
         PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance, true);
-        PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance, true);
+        PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
         ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
         CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance, true);
         CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance, true);

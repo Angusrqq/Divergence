@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -15,29 +16,19 @@ using UnityEngine.Tilemaps;
 public class GameData : MonoBehaviour
 {
     // TODO: We need to do scary refactoring here because this is gonna break everything ☢️
-    // damn this is gonna be a lot
-    // some way of map data storage(todo in Map.cs)
-    // TODO: save/load system
-    // TODO: map selection in menu and display map info
-    // TODO: ability tree in main menu <<< hard one, so optional for now
-    [SerializeField] private List<Character> _Characters;
-    [SerializeField] private List<BetterMapData> _Maps;
-    [SerializeField] private List<BaseAbilityScriptable> _Abilities;
-    [SerializeField] private List<EnemyData> _Enemies;
-
     public static GameData instance;
     public static Player player;
     public static int currentSeed;
     public static Random.State lastValuableState;
     public static Random.State lastInvaluableState;
     public static List<Character> Characters = new();
-    public static List<Character> unlockedCharacters;
+    public static List<Character> unlockedCharacters = new();
     public static Character currentCharacter;
     public static List<BetterMapData> Maps = new();
-    public static List<BetterMapData> unlockedMaps;
+    public static List<BetterMapData> unlockedMaps = new();
     public static BetterMapData currentMap;
     public static List<BaseAbilityScriptable> Abilities = new();
-    public static List<BaseAbilityScriptable> unlockedAbilities;
+    public static List<BaseAbilityScriptable> unlockedAbilities = new();
     public static List<EnemyData> Enemies = new();
     public static InGameAtributes InGameAttributes;
     public static MetaprogressionData CurrentMetadata;
@@ -63,21 +54,37 @@ public class GameData : MonoBehaviour
             instance = this;
         }
 
-        LockedIcon = Resources.Load<Sprite>("Assets/Icons/locked_icon.png");
+        LockedIcon = Resources.Load<Sprite>("Icons/locked_icon");
+        if (LockedIcon == null)
+        {
+            Debug.LogError("Locked icon not found in Resources/Icons/locked_icon");
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         //loading all data from resources, idk if this is the best way tho
         foreach (BaseAbilityScriptable ability in Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities"))
         {
             Abilities.Add(ability);
+            if (ability.IsUnlocked)
+            {
+                unlockedAbilities.Add(ability);
+            }
         }
         foreach (BetterMapData map in Resources.LoadAll<BetterMapData>("ObjectsData/Maps"))
         {
             Maps.Add(map);
+            if(map.IsUnlocked)
+            {
+                unlockedMaps.Add(map);
+            }
         }
         foreach (Character character in Resources.LoadAll<Character>("ObjectsData/Characters"))
         {
             Characters.Add(character);
+            if(character.IsUnlocked)
+            {
+                unlockedCharacters.Add(character);
+            }
         }
         foreach (EnemyData enemy in Resources.LoadAll<EnemyData>("ObjectsData/Enemies"))
         {
@@ -85,9 +92,9 @@ public class GameData : MonoBehaviour
         }
 
         // TODO: Do something with this craziness
-        unlockedAbilities = Abilities;
-        unlockedMaps = Maps;
-        unlockedCharacters = Characters;
+        //unlockedAbilities = Abilities;
+        // unlockedMaps = Maps;
+        // unlockedCharacters = Characters;
         //InGameAttributes = new InGameAtributes();
     }
 
@@ -167,8 +174,8 @@ public class GameData : MonoBehaviour
             ResetRandomToSeed();
 
             currentMap = currentMap != null ? currentMap : Maps[0];
-            //currentMap.ApplyToTilemap(TilemapToLoadMaps);
-            Instantiate(currentMap.mapPrefab);
+            GameObject temp = Instantiate(currentMap.mapPrefab);
+            Camera.main.transform.parent.GetComponentInChildren<CinemachineConfiner2D>().BoundingShape2D = temp.GetComponent<Collider2D>();
             InGameAttributes = new(); // reconstruct to use the new values from starting attributes
             Debug.Log("Reset random to seed " + currentSeed);
         }

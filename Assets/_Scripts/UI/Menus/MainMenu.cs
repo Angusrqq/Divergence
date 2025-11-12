@@ -13,7 +13,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _divergenceMeterObject;
     [SerializeField] private SelectorManager _characterSelectorManager;
     [SerializeField] private SelectorManager _mapSelectorManager;
+    [SerializeField] private SelectorManagerUnlockables _abilityUnlockablesSelectorManager;
+    [SerializeField] private SelectorManagerUnlockables _characterUnlockableSelectorManager;
+    [SerializeField] private SelectorManagerUnlockables _mapUnlockableSelectorManager;
     [SerializeField] private SelectorItemWithInfo _selectorItemPrefab;
+    [SerializeField] private SelectorUnlockable _selectorUnlockablePrefab;
 
     private DivergenceMeter _divergenceMeter;
     private Canvas _mainMenuCanvas;
@@ -37,8 +41,11 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     void Start()
     {
-        BuildSelector(GameData.unlockedCharacters, _characterSelectorManager);
-        BuildSelector(GameData.unlockedMaps, _mapSelectorManager);
+        BuildSelector(GameData.Characters, _characterSelectorManager);
+        BuildSelector(GameData.Maps, _mapSelectorManager);
+        BuildSelectorUnlockables(GameData.Abilities, GameData.unlockedAbilities, _abilityUnlockablesSelectorManager);
+        BuildSelectorUnlockables(GameData.Characters, GameData.unlockedCharacters, _characterUnlockableSelectorManager);
+        BuildSelectorUnlockables(GameData.Maps, GameData.unlockedMaps, _mapUnlockableSelectorManager);
         _idleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
     }
 
@@ -117,6 +124,27 @@ public class MainMenu : MonoBehaviour
         {
             SelectorItemWithInfo infoButton = Instantiate(_selectorItemPrefab, selectorManager.contentContainer);
             infoButton.Init(objectInfo, selectorManager);
+            infoButtons.Add(infoButton);
+        }
+        if (infoButtons.Count > 0)
+        {
+            infoButtons[0].OnSelect(null); // Select first item by default
+            infoButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
+        }
+    }
+
+    //TODO: Refactor all the shit about unlockable selectors
+    //TODO: Evgeniy jenek refactor delay davai
+    public void BuildSelectorUnlockables<T>(ICollection<T> objectInfos, ICollection<T> unlockedObjectInfos, SelectorManagerUnlockables selectorManager) where T : BaseScriptableObjectUnlockable
+    {
+        List<SelectorUnlockable> infoButtons = new();
+        foreach (T objectInfo in objectInfos)
+        {
+            SelectorUnlockable infoButton = Instantiate(_selectorUnlockablePrefab, selectorManager.contentContainer);
+            infoButton.Init(objectInfo, selectorManager);
+            infoButton.IsUnlocked = unlockedObjectInfos.Contains(objectInfo);
+            infoButton.ButtonImage.sprite = unlockedObjectInfos.Contains(objectInfo) ? infoButton.ButtonImage.sprite : GameData.LockedIcon; // TODO: change to locked sprite
+            infoButton.nameText.text = unlockedObjectInfos.Contains(objectInfo) ? infoButton.Data.Name : "???";
             infoButtons.Add(infoButton);
         }
         if (infoButtons.Count > 0)

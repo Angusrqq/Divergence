@@ -27,7 +27,7 @@ public class SelectorItemWithInfo : SelectorItem
     /// </summary>
     /// <param name="data"><c>Data</c> to be associated with this button</param>
     /// <param name="manager"><c>SelectorManager</c> parent that will contain this button</param>
-    public void Init(BaseScriptableObjectInfo data, SelectorManager manager)
+    public virtual void Init(BaseScriptableObjectInfo data, SelectorManager manager)
     {
         nameText = GetComponentInChildren<TMPro.TMP_Text>();
         Data = data;
@@ -64,7 +64,7 @@ public class SelectorItemWithInfo : SelectorItem
     /// <c>SetUI</c> method sets the button image and name text based on whether the character is unlocked or not.
     /// </para>
     /// </summary>
-    public void SetUI()
+    public virtual void SetUI()
     {
         ButtonImage.sprite = Data.Icon;
         nameText.text = Data.name;

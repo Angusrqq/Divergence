@@ -15,8 +15,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AbilityHolder))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Stat _movementSpeed = 12f;
-
     [NonSerialized] public DamageableEntity DamageableEntity;
     [NonSerialized] public AnimatedEntity AnimatedEntity;
     [NonSerialized] public SpriteRenderer SpriteRenderer;
@@ -29,6 +27,7 @@ public class Player : MonoBehaviour
     public RectTransform LevelBar;
     public Vector2 MovementVector;
     public GUI GUI;
+    public Stat MovementSpeed = 12f;
 
     private Rigidbody2D _rb;
     private Slider _healthSlider;
@@ -41,7 +40,6 @@ public class Player : MonoBehaviour
     private bool _experienceDirty = false;
 
     public PlayerMagnet Magnet { get; private set; }
-    public Stat MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
 
     /// <summary>
     /// Initializes global player reference.
@@ -141,7 +139,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _movementSpeed * Time.fixedDeltaTime * MovementVector);
+        _rb.MovePosition(_rb.position + MovementSpeed * Time.fixedDeltaTime * MovementVector);
         UpdateHpBarPosition();
         if (_experienceDirty)
         {
@@ -283,7 +281,7 @@ public class Player : MonoBehaviour
     /// <param name="experienceToAdd">Amount of experience to add.</param>
     public void AddExperience(UnityEngine.Object experienceSource, byte experienceToAdd)
     {
-        int gainedExperience = experienceToAdd * GameData.InGameAttributes.ExperienceMultiplier;
+        float gainedExperience = experienceToAdd * GameData.InGameAttributes.ExperienceMultiplier;
 
         if (_experienceToLevelUp - _experience <= gainedExperience)
         {
@@ -295,7 +293,7 @@ public class Player : MonoBehaviour
             _experience += gainedExperience;
         }
 
-        _onExperienceChange?.Invoke(experienceSource, gainedExperience);
+        _onExperienceChange?.Invoke(experienceSource, (int)gainedExperience);
         Debug.Log($"Player {gameObject.name} gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
     }
 
@@ -332,7 +330,7 @@ public class Player : MonoBehaviour
     {
         AnimatedEntity.SetAnimatorController(CharacterData.CharacterAnimatorController);
 
-        _movementSpeed = CharacterData.MovementSpeed;
+        MovementSpeed = CharacterData.MovementSpeed;
         MaxHealth = CharacterData.MaxHealth;
         Level = CharacterData.StartLevel;
 

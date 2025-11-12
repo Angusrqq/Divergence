@@ -17,7 +17,7 @@ public class Strudy : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _healthValue.BaseValue += 0.25f;
+        _healthModifier.Value += 0.25f;
         Debug.Log($"Strudy upgraded, player max health: {GameData.InGameAttributes.MaxHealth}, Base max health multiplier: {_healthValue.BaseValue}, Current max health multiplier: {_healthValue}");
     }
 }

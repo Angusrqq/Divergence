@@ -17,7 +17,7 @@ public class SelectorManager : MonoBehaviour
 
     private SelectorItem _currentSelectedItem;
 
-    public SelectorItem CurrentSelectedItem
+    public virtual SelectorItem CurrentSelectedItem
     {
         get => _currentSelectedItem;
         set
@@ -34,7 +34,7 @@ public class SelectorManager : MonoBehaviour
     /// </para>
     /// </summary>
     /// <param name="elements">Initial list of items to be instantiated</param>
-    public void InitElements(List<SelectorItem> elements)
+    public virtual void InitElements(List<SelectorItem> elements)
     {
         foreach (SelectorItem element in elements)
         {

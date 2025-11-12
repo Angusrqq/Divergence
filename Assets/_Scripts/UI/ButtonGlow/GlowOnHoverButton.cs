@@ -38,6 +38,7 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <param name="eventData">Pointer event data</param>
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        if (!_button.interactable) return;
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
     }
@@ -50,6 +51,7 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <param name="eventData">Pointer event data</param>
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+        if (!_button.interactable) return;
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }
@@ -62,6 +64,7 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <param name="eventData">Pointer event data</param>
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (!_button.interactable) return;
         _tmp.fontMaterial.SetFloat("_GlowOffset", 1f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
     }
@@ -74,6 +77,7 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <param name="eventData">Pointer event data</param>
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+        if (!_button.interactable) return;
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }

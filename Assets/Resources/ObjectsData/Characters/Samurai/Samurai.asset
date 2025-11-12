@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Samurai
   _description: Real samurai
   _icon: {fileID: -1501021414962227678, guid: b7d84f2f71366de4aa67469855a98786, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   _unlockCost: 0
   _startLevel: 0
   _maxHealth: 100
@@ -22,6 +24,5 @@ MonoBehaviour:
   _damageScale: 1
   _cooldownReduction: 1
   _characterAnimatorController: {fileID: 9100000, guid: 7a23bb2214c271a44adbb4445cfc4f27, type: 2}
-  _characterAnimationClips: []
   _startingAbilities:
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}

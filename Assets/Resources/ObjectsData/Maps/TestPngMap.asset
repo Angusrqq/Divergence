@@ -15,4 +15,6 @@ MonoBehaviour:
   _name: TestMap
   _description: test
   _icon: {fileID: 2099480439481394926, guid: 59b99c8504fc49147b3cfb26aaaf249b, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   mapPrefab: {fileID: 5771986481898824704, guid: 6198f452f7f407d429ba442482c35417, type: 3}

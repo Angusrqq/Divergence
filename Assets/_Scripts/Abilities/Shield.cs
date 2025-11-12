@@ -25,7 +25,7 @@ public class Shield : PassiveAbilityMono
     /// </summary>
     public override void Upgrade()
     {
-        _resistValue -= 0.05f;
+        _shieldModifier.Value -= 0.05f;
         Debug.Log($"Shield Upgraded, player resist: {GameData.InGameAttributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
     }
 }

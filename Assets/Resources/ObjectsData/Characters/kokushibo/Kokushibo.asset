@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Kokushibo
   _description: Him
   _icon: {fileID: 2410635517405602792, guid: 9f902761138df7243bdd4a8cfff44923, type: 3}
+  _cost: 100
+  _isUnlocked: 0
   _unlockCost: 0
   _startLevel: 0
   _maxHealth: 100
@@ -22,6 +24,5 @@ MonoBehaviour:
   _damageScale: 1
   _cooldownReduction: 1
   _characterAnimatorController: {fileID: 9100000, guid: a24a753b6d1c61242aa6984a9fc33175, type: 2}
-  _characterAnimationClips: []
   _startingAbilities:
   - {fileID: 11400000, guid: 9a0e4994e877b8640a3df4c5a9715c75, type: 2}

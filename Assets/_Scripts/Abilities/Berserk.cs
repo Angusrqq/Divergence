@@ -38,8 +38,8 @@ public class Berserk : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _damageValue.BaseValue += 0.1f;
-        _speedValue.BaseValue += 0.05f;
+        _damageModifier.Value += 0.1f;
+        _speedModifier.Value += 0.05f;
     }
 
     void ActivateEffect()

@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Satiro
   _description: Little demon
   _icon: {fileID: -7751219071525288297, guid: cadc6332fd48ec242a6c95768600d2fc, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   _unlockCost: 0
   _startLevel: 0
   _maxHealth: 100
@@ -22,6 +24,5 @@ MonoBehaviour:
   _damageScale: 1
   _cooldownReduction: 1
   _characterAnimatorController: {fileID: 9100000, guid: 4bb54e4b0308e444cbfe897565c43674, type: 2}
-  _characterAnimationClips: []
   _startingAbilities:
   - {fileID: 11400000, guid: 80693559ee6d2df4092789de3ce56574, type: 2}

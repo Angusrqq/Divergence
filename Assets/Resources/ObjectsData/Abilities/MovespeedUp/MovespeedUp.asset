@@ -15,8 +15,10 @@ MonoBehaviour:
   _name: Movespeed up
   _description: Run faster
   _icon: {fileID: -8996511375018434408, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
   MonoLogic: {fileID: 1261545234695685180, guid: e62ba8b0353840f429c51b0ffbf8033f, type: 3}
-  Type: 0
+  PassiveType: 0

@@ -8,7 +8,7 @@ using UnityEngine;
 /// It contains character data such as name, description, icon, animator controller, unlock cost, starting abilities, stats and methods to unlock and upgrade the character.
 /// </summary>
 [CreateAssetMenu(fileName = "New Character", menuName = "Game/Character")]
-public class Character : BaseScriptableObjectInfo //TODO: open to suggestions on how do we store character data and if we need any methods here
+public class Character : BaseScriptableObjectUnlockable //TODO: open to suggestions on how do we store character data and if we need any methods here
 {
     [Header("Character Unlock")]
     [SerializeField] private int _unlockCost;

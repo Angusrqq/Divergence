@@ -43,9 +43,9 @@ public class AbilityHolder : MonoBehaviour
     //Example: currently AddAbility adds the Instantiated version. Either rename it or make it use the base Ability class or split the functions(if splitting, where is DRY???)
     public void AddAbility(Ability ability)
     {
-        if (_abilityNames.Contains(ability.name))
+        if (_abilityNames.Contains(ability.Name))
         {
-            BaseAbilityHandler temp = GetAbilityByName(ability.name);
+            BaseAbilityHandler temp = GetAbilityByName(ability.Name);
             if (temp.Level < temp.MaxLevel)
             {
                 temp.Upgrade();
@@ -71,8 +71,10 @@ public class AbilityHolder : MonoBehaviour
     /// <param name="passive"></param>
     public void AddPassive(PassiveAbility passive)
     {
+        Debug.Log("Adding passive: " + passive.Name);
         if (_passiveNames.Contains(passive.Name))
         {
+            Debug.Log("Passive already exists, upgrading if possible: " + passive.Name);
             BaseAbilityHandler temp = GetPassiveByName(passive.Name);
             if (temp.Level < temp.MaxLevel)
             {
@@ -80,11 +82,13 @@ public class AbilityHolder : MonoBehaviour
             }
             return;
         }
+        Debug.Log("Passive does not exist, creating new: " + passive.Name);
         BaseAbilityHandler passiveInstance = CreateHandler(passive.Type, passive.Name);
         passiveInstance.Init(passive);
         passiveInstance.Activate();
         Passives.Add(passiveInstance);
         _passiveNames.Add(passiveInstance.Name);
+        Debug.Log("Passive added: " + passiveInstance.Name);
     }
 
     /// <summary>

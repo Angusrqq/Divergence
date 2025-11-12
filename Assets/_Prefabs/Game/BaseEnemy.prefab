@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   m_particleSystem: {fileID: 7094119184735996351, guid: d5daf955686d6dd4c8ef747076455f34, type: 3}
-  xpCrystalPrefab: {fileID: 7069377261818586785, guid: 9e1d252a1d403124683989ff5b0facde, type: 3}
   ExperienceCrystalPrefab: {fileID: 9193372117981820440, guid: aba62842f8bad164bbed93968d737c14, type: 3}
   maxHealth:
     BaseValue: 100
@@ -156,10 +155,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

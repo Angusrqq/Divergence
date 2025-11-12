@@ -10,4 +10,15 @@ public class BaseScriptableObjectInfo : ScriptableObject
     public string Name {get => _name; set => _name = value;}
     public string Description => _description;
     public Sprite Icon => _icon;
+
+    // public override bool Equals(object other)
+    // {
+    //     BaseScriptableObjectInfo obj = (BaseScriptableObjectInfo)other;
+    //     return obj != null && obj.Name == Name;
+    // }
+
+    // public override int GetHashCode()
+    // {
+    //     return Name.GetHashCode();
+    // }
 }

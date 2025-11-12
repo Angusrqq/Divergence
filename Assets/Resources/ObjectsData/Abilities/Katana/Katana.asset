@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Katana
   _description: Slashes stuff
   _icon: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
@@ -26,6 +28,7 @@ MonoBehaviour:
   StandardPrefab: {fileID: 5151721436561418865, guid: 43353bcbba6b6f241b682699d2f94c35, type: 3}
   EvoPrefab: {fileID: 8681463279908197005, guid: 99f1bb4aed65b7e40958ba081987263e, type: 3}
   speed: 0
+  SpawnDelay: 0
   damage: 20
   localProjectilesAmount: 1
   nativeUser: {fileID: 11400000, guid: 6147f31fdf03ef34498e9ee3c33d9356, type: 2}

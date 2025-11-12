@@ -16,7 +16,7 @@ public class ExpMultiplier : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _expValue.BaseValue *= 2f;
+        _expModifier.Value *= 2f;
         Debug.Log($"ExpMultiplier upgraded, player exp: {GameData.InGameAttributes.ExperienceMultiplier}, Base exp multiplier: {_expValue.BaseValue}, Current exp multiplier: {_expValue}");
     }
 }

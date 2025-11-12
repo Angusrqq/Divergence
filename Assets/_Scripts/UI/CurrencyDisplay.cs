@@ -8,4 +8,9 @@ public class CurrencyDisplay : MonoBehaviour
     {
         _currencyText.text = GameData.CurrentMetadata?.TimeKnowledge.ToString();
     }
+
+    public void UpdateText()
+    {
+        _currencyText.text = GameData.CurrentMetadata?.TimeKnowledge.ToString();
+    }
 }

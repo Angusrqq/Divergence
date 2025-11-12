@@ -15,8 +15,10 @@ MonoBehaviour:
   _name: Cooldown reduction
   _description: 'cool '
   _icon: {fileID: 8341783019637210984, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
   MonoLogic: {fileID: -3597935648404957314, guid: 095badc37279ca0459fc10574d570017, type: 3}
-  Type: 0
+  PassiveType: 0

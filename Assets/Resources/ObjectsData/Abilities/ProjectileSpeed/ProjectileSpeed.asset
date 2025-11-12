@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Projectile Speed Up
   _description: Projectiles move faster
   _icon: {fileID: 646348143477169675, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0

@@ -16,7 +16,7 @@ public class HawkEye : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _distanceValue.BaseValue *= 2f;
+        _distanceModifier.Value *= 2f;
         Debug.Log($"HawkEye upgraded, active time: {GameData.InGameAttributes.AbilityActiveTimeMult}, Base active time multiplier: {_distanceValue.BaseValue}, Current active time multiplier: {_distanceValue}");
     }
 }

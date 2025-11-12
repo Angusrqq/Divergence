@@ -8,7 +8,7 @@ public class BaseAbilityHandler : MonoBehaviour
 
     protected BaseAbilityScriptable _source;
     
-    public string Name => _source.name;
+    public string Name => _source.Name;
     public string Description => _source.Description;
     public Sprite Icon => _source.Icon;
 

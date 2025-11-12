@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class BaseAbilityScriptable : BaseScriptableObjectInfo
+public class BaseAbilityScriptable : BaseScriptableObjectUnlockable
 {
     public int Level = 1;
     public int MaxLevel;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Type of the stat modifier: Flat, Percent, or Multiplier.
@@ -49,7 +50,7 @@ public class Stat
     public int TotalModifiers => _flatModifiers.Count + _percentModifiers.Count + _multModifiers.Count;
     public static implicit operator float(Stat stat) => stat.Value;
     public static implicit operator Stat(float value) => new(value);
-    public static implicit operator int(Stat stat) => (int)stat.Value;
+    //public static implicit operator int(Stat stat) => (int)stat.Value;
 
     /// <summary>
     /// <c>Stat</c> constructor initializes a new instance of the Stat class with the specified base value, modifier, multiplier, and optional lists of modifiers.
@@ -129,7 +130,11 @@ public class Stat
             }
             return _value;
         }
-        set => BaseValue = value;
+        set
+        {
+            BaseValue = value;
+            _recalculationNeeded = true;
+        }
     }
 
     /// <summary>
@@ -194,7 +199,7 @@ public class StatModifier
     /// <param name="Source">Source that applied the modifier</param>
     public StatModifier(float Value, StatModifierType type, object Source)
     {
-        this.Value = Value;
+        _value = Value;
         this.type = type;
         this.Source = Source;
     }
@@ -227,7 +232,7 @@ public class StatModifierByStat : StatModifier
         }
         set
         {
-            Stat = value;
+            Stat.Value = value;
             ValueChanged();
         }
     }

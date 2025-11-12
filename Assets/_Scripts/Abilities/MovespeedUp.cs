@@ -16,7 +16,7 @@ public class MovespeedUp : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _speedValue.BaseValue *= 2.3f;
+        _speedModifier.Value *= 2.3f;
         Debug.Log($"MovespeedUp upgraded, player speed: {GameData.player.MovementSpeed}, Base speed: {_speedValue.BaseValue}, Current speed: {_speedValue}");
     }
 }

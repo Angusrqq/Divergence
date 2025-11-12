@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Reddveil
   _description: Blast from the past
   _icon: {fileID: 3713219614965599903, guid: cc76acfbb7d9ba842a398b732be124c5, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   _unlockCost: 0
   _startLevel: 0
   _maxHealth: 100

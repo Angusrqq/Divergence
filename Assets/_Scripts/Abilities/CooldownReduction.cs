@@ -16,7 +16,7 @@ public class CooldownReduction : PassiveAbilityMono
 
     public override void Upgrade()
     {
-        _cooldownValue.BaseValue -= 0.05f;
+        _cooldownModifier.Value -= 0.05f;
         Debug.Log($"CooldownReduction upgraded, player cooldown reduction: {GameData.InGameAttributes.CooldownReductionMult}, Base cooldown reduction: {_cooldownValue.BaseValue}, Current cooldown reduction: {_cooldownValue}");
     }
 }

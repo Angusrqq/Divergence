@@ -15,8 +15,10 @@ MonoBehaviour:
   _name: Heavy hitter
   _description: heavy hit and etc
   _icon: {fileID: 8295224864411331983, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
   MonoLogic: {fileID: -1005157012370643185, guid: 0161c687c71628d41a27329830a65978, type: 3}
-  Type: 0
+  PassiveType: 0
