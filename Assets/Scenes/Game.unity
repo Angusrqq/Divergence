@@ -885,15 +885,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b516bdb06b1d0bf4cbdf6caf6b30cfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  MovementSpeed:
-    BaseValue: 12
-    BaseModifier: 1
-    BaseMultiplier: 1
   MaxHealth: 100
   HealthBar: {fileID: 1891997699}
   LevelBar: {fileID: 857850897}
   MovementVector: {x: 0, y: 0}
   GUI: {fileID: 311524805}
+  MovementSpeed:
+    BaseValue: 12
+    BaseModifier: 1
+    BaseMultiplier: 1
 --- !u!212 &625024056
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3375241597187343837, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1700
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375241597187343837, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3512103013631645458, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_Name
@@ -1527,7 +1531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975887521575230813, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1700
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 7975887521575230813, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1567,7 +1571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975887521575230813, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 525
       objectReference: {fileID: 0}
     - target: {fileID: 7975887521575230813, guid: 0c577c92b2127cf48bbf827e8bf61f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
