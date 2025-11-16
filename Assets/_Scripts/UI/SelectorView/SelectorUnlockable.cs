@@ -1,6 +1,8 @@
 
 using UnityEngine.EventSystems;
 
+//holy shit this is insane
+//TODO: Refactor
 public class SelectorUnlockable : SelectorItemWithInfo
 {
     public bool IsUnlocked;
@@ -21,32 +23,10 @@ public class SelectorUnlockable : SelectorItemWithInfo
         selectorManager.UpdateCost(((BaseScriptableObjectUnlockable)Data).Cost);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>OnDeselect</c> method hides the border image when this button is deselected.
-    /// </para>
-    /// </summary>
-    public override void OnDeselect()
-    {
-        base.OnDeselect();
-    }
-
     public void OnUnlock()
     {
         IsUnlocked = true;
         ((SelectorManagerUnlockables)SelectorManager).UpdateDescription(Data.Description);
         SetUI();
-    }
-
-    /// <summary>
-    /// <para>
-    /// <c>SetUI</c> method sets the button image and name text based on whether the character is unlocked or not.
-    /// </para>
-    /// </summary>
-    public override void SetUI()
-    {
-        //BaseScriptableObjectUnlockable tempdata = (BaseScriptableObjectUnlockable)Data;
-        ButtonImage.sprite = Data.Icon;
-        nameText.text = Data.Name;
     }
 }

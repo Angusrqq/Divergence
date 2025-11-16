@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Exp Multiplier
   _description: Multiply exp
-  _icon: {fileID: 0}
+  _icon: {fileID: -5622090537077989995, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
   _cost: 0
   _isUnlocked: 1
   Level: 1

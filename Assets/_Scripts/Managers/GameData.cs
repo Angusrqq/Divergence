@@ -29,6 +29,8 @@ public class GameData : MonoBehaviour
     public static BetterMapData currentMap;
     public static List<BaseAbilityScriptable> Abilities = new();
     public static List<BaseAbilityScriptable> unlockedAbilities = new();
+    public static List<UpgradeScriptable> Upgrades = new();
+    public static List<UpgradeScriptable> unlockedUpgrades = new();
     public static List<EnemyData> Enemies = new();
     public static InGameAtributes InGameAttributes;
     public static MetaprogressionData CurrentMetadata;
@@ -86,16 +88,18 @@ public class GameData : MonoBehaviour
                 unlockedCharacters.Add(character);
             }
         }
+        foreach (UpgradeScriptable upgrade in Resources.LoadAll<UpgradeScriptable>("ObjectsData/Upgrades"))
+        {
+            Upgrades.Add(upgrade);
+            if (upgrade.IsUnlocked)
+            {
+                unlockedUpgrades.Add(upgrade);
+            }
+        }
         foreach (EnemyData enemy in Resources.LoadAll<EnemyData>("ObjectsData/Enemies"))
         {
             Enemies.Add(enemy);
         }
-
-        // TODO: Do something with this craziness
-        //unlockedAbilities = Abilities;
-        // unlockedMaps = Maps;
-        // unlockedCharacters = Characters;
-        //InGameAttributes = new InGameAtributes();
     }
 
     void Start()

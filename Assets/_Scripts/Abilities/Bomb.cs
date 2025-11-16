@@ -55,7 +55,7 @@ public class Bomb : InstantiatedAbilityMono
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(gameObject, Ability.damage * 2);
+                enemy.TakeDamage(GameData.player.gameObject, Ability.damage * 2, GetType());
             }
         }
         yield return new WaitForSeconds(animatedEntity.AnimatorController.animationClips[1].length); // wonky shit picking animation by index

@@ -16,8 +16,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SelectorManagerUnlockables _abilityUnlockablesSelectorManager;
     [SerializeField] private SelectorManagerUnlockables _characterUnlockableSelectorManager;
     [SerializeField] private SelectorManagerUnlockables _mapUnlockableSelectorManager;
+    [SerializeField] private SelectorManagerUpgrades _upgradeSelectorManager;
     [SerializeField] private SelectorItemWithInfo _selectorItemPrefab;
     [SerializeField] private SelectorUnlockable _selectorUnlockablePrefab;
+    [SerializeField] private SelectorUpgrade _selectorUpgradePrefab;
 
     private DivergenceMeter _divergenceMeter;
     private Canvas _mainMenuCanvas;
@@ -46,6 +48,7 @@ public class MainMenu : MonoBehaviour
         BuildSelectorUnlockables(GameData.Abilities, GameData.unlockedAbilities, _abilityUnlockablesSelectorManager);
         BuildSelectorUnlockables(GameData.Characters, GameData.unlockedCharacters, _characterUnlockableSelectorManager);
         BuildSelectorUnlockables(GameData.Maps, GameData.unlockedMaps, _mapUnlockableSelectorManager);
+        BuildSelectorUpgrades(GameData.Upgrades, GameData.unlockedUpgrades, _upgradeSelectorManager);
         _idleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
     }
 
@@ -141,6 +144,25 @@ public class MainMenu : MonoBehaviour
         foreach (T objectInfo in objectInfos)
         {
             SelectorUnlockable infoButton = Instantiate(_selectorUnlockablePrefab, selectorManager.contentContainer);
+            infoButton.Init(objectInfo, selectorManager);
+            infoButton.IsUnlocked = unlockedObjectInfos.Contains(objectInfo);
+            infoButton.ButtonImage.sprite = unlockedObjectInfos.Contains(objectInfo) ? infoButton.ButtonImage.sprite : GameData.LockedIcon; // TODO: change to locked sprite
+            infoButton.nameText.text = unlockedObjectInfos.Contains(objectInfo) ? infoButton.Data.Name : "???";
+            infoButtons.Add(infoButton);
+        }
+        if (infoButtons.Count > 0)
+        {
+            infoButtons[0].OnSelect(null); // Select first item by default
+            infoButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
+        }
+    }
+
+    public void BuildSelectorUpgrades<T>(ICollection<T> objectInfos, ICollection<T> unlockedObjectInfos, SelectorManagerUnlockables selectorManager) where T : UpgradeScriptable
+    {
+        List<SelectorUnlockable> infoButtons = new();
+        foreach (T objectInfo in objectInfos)
+        {
+            SelectorUpgrade infoButton = Instantiate(_selectorUpgradePrefab, selectorManager.contentContainer);
             infoButton.Init(objectInfo, selectorManager);
             infoButton.IsUnlocked = unlockedObjectInfos.Contains(objectInfo);
             infoButton.ButtonImage.sprite = unlockedObjectInfos.Contains(objectInfo) ? infoButton.ButtonImage.sprite : GameData.LockedIcon; // TODO: change to locked sprite

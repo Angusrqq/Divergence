@@ -7,6 +7,7 @@ public class ExperienceCrystal : MonoBehaviour
     private const byte SPEED = 1;
 
     private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _lifetime = 180f;
 
     public bool IsFired { get; private set; }
 
@@ -16,6 +17,15 @@ public class ExperienceCrystal : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    /// <summary>
+    /// Called when the <c>ExperienceCrystal</c> is enabled.
+    /// Starts a coroutine that will destroy the experience crystal after a certain amount of time.
+    /// </summary>
+    private void OnEnable()
+    {
+        StartCoroutine(LifetimeCoroutine());
     }
 
     /// <summary>
@@ -30,6 +40,22 @@ public class ExperienceCrystal : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Player player))
         {
             player.AddExperience(gameObject, 1);
+            Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Coroutine that counts down the lifetime of the experience crystal and destroys it when the lifetime expires.
+    /// </summary>
+    /// <remarks>
+    /// The coroutine waits for <c>_lifetime</c> seconds and then destroys the GameObject if it still exists.
+    /// </remarks>
+    private IEnumerator LifetimeCoroutine()
+    {
+        yield return new WaitForSeconds(_lifetime);
+
+        if (this != null && gameObject != null)
+        {
             Destroy(gameObject);
         }
     }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
+  _name: Axe
+  _description: big and strong
+  _icon: {fileID: 1897457715974365829, guid: 8a6309f36d8da9b4a91e48cb2db96910, type: 3}
+  _cost: 0
+  _isUnlocked: 0
+  Level: 1
+  MaxLevel: 1
+  IsEvolved: 0
+  CooldownTime: 3
+  ActiveTime: 2
+  KnockbackForce: 4
+  KnockbackDuration: 0.25
+  CountActiveTimeInCooldown: 1
+  StandardPrefab: {fileID: -5931609667377895400, guid: 962707f769532d1418e38eb53890bf8e, type: 3}
+  EvoPrefab: {fileID: 0}
+  speed: 0.4
+  SpawnDelay: 0
+  damage: 30
+  localProjectilesAmount: 1
+  nativeUser: {fileID: 0}
