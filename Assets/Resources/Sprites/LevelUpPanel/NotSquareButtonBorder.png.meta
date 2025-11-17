@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b445b8bebcccb464090c29186095081f
+guid: 1679da25b1ec6c045ab0e6210d2c7d1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -895929198638282891
-    second: stupid_woman (2)_0
+      213: -748962094257698448
+    second: NotSquareButtonBorder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BorderV2Colored
+      name: NotSquareButtonBorder_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 13
-        width: 102
-        height: 102
+        x: 0
+        y: 0
+        width: 965
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 577c34304250193f0800000000000000
-      internalID: -895929198638282891
+      spriteID: 079898581f62b95f0800000000000000
+      internalID: -748962094257698448
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2b9a0c98814b8374fb1d34b9895f2c8a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BorderV2Colored: -895929198638282891
+      NotSquareButtonBorder_0: -748962094257698448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
