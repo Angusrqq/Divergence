@@ -46,14 +46,18 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(int index)
     {
-        _sfxSource.clip = _sfxClips[index];
-        _sfxSource.Play();
+        _sfxSource.PlayOneShot(_sfxClips[index]);
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        _sfxSource.clip = clip;
-        _sfxSource.Play();
+        _sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlaySFXPitched(AudioClip clip, float pitch)
+    {
+        _mixer.SetFloat("sfxPitch", pitch);
+        _sfxSource.PlayOneShot(clip);
     }
 
     public void SetMasterVolume(float volume) => _mixer.SetFloat("masterVolume", volume);
@@ -62,9 +66,20 @@ public class AudioManager : MonoBehaviour
 
     public void SetSFXVolume(float volume) => _mixer.SetFloat("sfxVolume", volume);
 
-    public void GetMasterVolume(out float volume) => _mixer.GetFloat("masterVolume", out volume);
+    public float GetMasterVolume()
+    {
+        _mixer.GetFloat("masterVolume", out float volume);
+        return volume;
+    }
 
-    public void GetMusicVolume(out float volume) => _mixer.GetFloat("musicVolume", out volume);
+    public float GetMusicVolume() 
+    {
+        _mixer.GetFloat("musicVolume", out float volume);
+        return volume;
+    }
 
-    public void GetSFXVolume(out float volume) => _mixer.GetFloat("sfxVolume", out volume);
+    public float GetSFXVolume() {
+        _mixer.GetFloat("sfxVolume", out float volume);
+        return volume;
+    }
 }

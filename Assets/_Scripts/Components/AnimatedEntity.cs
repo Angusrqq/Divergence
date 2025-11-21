@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,7 @@ public class AnimatedEntity : MonoBehaviour
 {
     public Animator Animator;
     public RuntimeAnimatorController AnimatorController;
-    public string CurrentAnimation;
+    [NonSerialized] public string CurrentAnimation;
 
     public enum AnimationsList { Default }
 

@@ -15,11 +15,13 @@ public class GUI : MonoBehaviour
     public Image PauseScreenPanel;
     public Image LevelUpPanel;
     public Image DeathScreenPanel;
+    public Button ReviveButton;
     public AbilityButton AbilityButtonPrefab;
     [NonSerialized] public static bool Paused = false;
     [NonSerialized] public static bool CanPause = true;
     public List<BaseAbilityScriptable> AbilityChoices { get; private set; } = new();
     private List<AbilityButton> _abilityButtons = new();
+    private List<BaseAbilityScriptable> _availableAbilities;
 
     /// <summary>
     /// Subscribes to the player's level-up event to trigger the level-up UI flow.
@@ -27,6 +29,7 @@ public class GUI : MonoBehaviour
     void Start()
     {
         GameData.player.OnLevelUp += OnLevelUp;
+        _availableAbilities = new(GameData.unlockedAbilities);
     }
 
     /// <summary>
@@ -75,7 +78,12 @@ public class GUI : MonoBehaviour
     public void Death()
     {
         PauseInternal();
+
+        if(GameData.InGameAttributes.Lives > 0f) ReviveButton.gameObject.SetActive(true);
+        else ReviveButton.gameObject.SetActive(false);
+
         DeathScreenPanel.gameObject.SetActive(true);
+        GameData.InGameAttributes.Lives--;
     }
 
     /// <summary>
@@ -154,16 +162,41 @@ public class GUI : MonoBehaviour
     {
         PauseInternal();
         AbilityChoices.Clear();
-        List<BaseAbilityScriptable> unlockedAbilities = new(GameData.unlockedAbilities);
+        List<BaseAbilityScriptable> toRemove = new();
+        foreach(BaseAbilityScriptable ability in _availableAbilities)
+        {
+            BaseAbilityHandler handler = null;
+            if(ability.Type == HandlerType.Passive) handler = GameData.player.AbilityHolder.GetPassiveByName(ability.Name);
+            if(ability.Type == HandlerType.InstantiatedAbility) handler = GameData.player.AbilityHolder.GetAbilityByName(ability.Name);
+            if(handler == null)
+            {
+                if(ability.Type == HandlerType.Passive && GameData.player.AbilityHolder.Passives.Count >= GameData.InGameAttributes.PassiveAbilitySlots)
+                {
+                    toRemove.Add(ability);
+                }
+                if(ability.Type == HandlerType.InstantiatedAbility && GameData.player.AbilityHolder.Abilities.Count >= GameData.InGameAttributes.ActiveAbilitySlots)
+                {
+                    toRemove.Add(ability);
+                }
+                continue;
+            } 
+            if(handler.Level >= handler.MaxLevel) toRemove.Add(ability);
+        }
+
+        foreach(BaseAbilityScriptable ability in toRemove) _availableAbilities.Remove(ability);
+
+        List<BaseAbilityScriptable> availableAbilities = new(_availableAbilities);
+
         for (int i = 0; i < GameData.InGameAttributes.AbilitiesPerLevel; i++)
         {
-            if (unlockedAbilities.Count == 0) break;
-            BaseAbilityScriptable rolled = unlockedAbilities[GameData.ValuableRoll(0, unlockedAbilities.Count)];
-            unlockedAbilities.Remove(rolled);
+            if (availableAbilities.Count == 0) break;
+            BaseAbilityScriptable rolled = availableAbilities[GameData.ValuableRoll(0, availableAbilities.Count)];
+            availableAbilities.Remove(rolled);
             AbilityChoices.Add(rolled);
         }
         RebuildAbilities();
         LevelUpPanel.gameObject.SetActive(true);
+        if(AbilityChoices.Count == 0) CloseLevelUp();
     }
 
     /// <summary>
@@ -211,5 +244,6 @@ public class GUI : MonoBehaviour
         CanPause = true;
         DeathScreenPanel.gameObject.SetActive(false);
         //Some ability specific code here 
+        GameData.player.DamageableEntity.Heal(this, GameData.player.DamageableEntity.MaxHealth, GetType());
     }
 }

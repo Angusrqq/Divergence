@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
+  m_Name: Paracetamol
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
+  _name: Paracetamol
+  _description: Is it?
+  _icon: {fileID: 4343528361783417165, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
+  Level: 1
+  MaxLevel: 3
+  IsEvolved: 0
+  MonoLogic: {fileID: -6638191430015705204, guid: 3961c06e075e3174382f442bfd865362, type: 3}
+  PassiveType: 0

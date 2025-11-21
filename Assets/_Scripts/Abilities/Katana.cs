@@ -48,7 +48,7 @@ public class Katana : InstantiatedAbilityMono
     /// <remarks>
     /// If the ability is evolved, calls the EvoSlash coroutine, otherwise calls the Slash coroutine.
     /// </remarks>
-    void Start()
+    protected override void Start()
     {
         if (Ability.IsEvolved)
         {
@@ -58,6 +58,7 @@ public class Katana : InstantiatedAbilityMono
         {
             StartCoroutine(Slash());
         }
+        base.Start();
     }
 
     /// <summary>

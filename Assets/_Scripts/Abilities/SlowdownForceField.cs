@@ -7,19 +7,18 @@ public class SlowdownForceField : InstantiatedAbilityMono
     protected override void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        doesDamage = false;
     }
 
     protected override void FixedUpdateLogic()
     {
         rb.position = GameData.player.transform.position;
+        transform.RotateAround(transform.position, Vector3.forward, 2);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.moveSpeed.AddModifier(_slowdownModifier);
-        }
+        enemy.moveSpeed.AddModifier(_slowdownModifier);
     }
 
     protected void OnTriggerExit2D(Collider2D other)

@@ -11,16 +11,20 @@ public class MetaprogressionData
     public int TimeKnowledge;
     public List<Character> UnlockedCharacters = new();
     public List<Ability> UnlockedAbilities = new();
-    // public List<Upgrade> Upgrades = new(); //TODO: Implement Upgrade class
+    public List<UpgradeScriptable> Upgrades = new();
     public List<MapData> UnlockedMaps = new();
+    public StartingAttributesInitializer StartingAttributesInitializer = new();
 
     // some parameters that need to be saved here
 
-    public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<Ability> unlockedAbilities = null, List<MapData> unlockedMaps = null)
+    public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<Ability> unlockedAbilities = null,
+                            List<MapData> unlockedMaps = null, List<UpgradeScriptable> upgrades = null, StartingAttributesInitializer startingAttributes = null)
     {
         TimeKnowledge = timeKnowledge;
-        UnlockedCharacters = unlockedCharacters ?? new List<Character>();
-        UnlockedAbilities = unlockedAbilities ?? new List<Ability>();
-        UnlockedMaps = unlockedMaps ?? new List<MapData>();
+        UnlockedCharacters = unlockedCharacters ?? new();
+        UnlockedAbilities = unlockedAbilities ?? new();
+        Upgrades = upgrades ?? new();
+        UnlockedMaps = unlockedMaps ?? new();
+        StartingAttributesInitializer = startingAttributes ?? new();
     }
 }

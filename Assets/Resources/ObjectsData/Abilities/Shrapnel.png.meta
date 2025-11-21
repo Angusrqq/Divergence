@@ -1,0 +1,907 @@
+fileFormatVersion: 2
+guid: e0ad9ae8213a287428e01f125fb2c382
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7352648317119044060
+    second: Shrapnel_0
+  - first:
+      213: -6149766011139240149
+    second: Shrapnel_1
+  - first:
+      213: -845434899124773182
+    second: Shrapnel_2
+  - first:
+      213: -1072485610893453633
+    second: Shrapnel_3
+  - first:
+      213: -1112419357358793599
+    second: Shrapnel_4
+  - first:
+      213: 8504968441125950615
+    second: Shrapnel_5
+  - first:
+      213: 2924450998047704150
+    second: Shrapnel_6
+  - first:
+      213: -797026686156041963
+    second: Shrapnel_7
+  - first:
+      213: -8641175246362112807
+    second: Shrapnel_8
+  - first:
+      213: 1528363655165110235
+    second: Shrapnel_9
+  - first:
+      213: 3049124470760603194
+    second: Shrapnel_10
+  - first:
+      213: -5103375250000205168
+    second: Shrapnel_11
+  - first:
+      213: -2547387583154935974
+    second: Shrapnel_12
+  - first:
+      213: -950687232816355658
+    second: Shrapnel_13
+  - first:
+      213: 8148480593142507353
+    second: Shrapnel_14
+  - first:
+      213: 6124711303415136544
+    second: Shrapnel_15
+  - first:
+      213: 559039967028531411
+    second: Shrapnel_16
+  - first:
+      213: -2335587629017331156
+    second: Shrapnel_17
+  - first:
+      213: -4739108136554264280
+    second: Shrapnel_18
+  - first:
+      213: 4327081619119794192
+    second: Shrapnel_19
+  - first:
+      213: 1165697494956984810
+    second: Shrapnel_20
+  - first:
+      213: -3427751843764305085
+    second: Shrapnel_21
+  - first:
+      213: 3724032561321526619
+    second: Shrapnel_22
+  - first:
+      213: -7400174470215421676
+    second: Shrapnel_23
+  - first:
+      213: 9088789673303832758
+    second: Shrapnel_24
+  - first:
+      213: -1342223694082991578
+    second: Shrapnel_25
+  - first:
+      213: -5196081113676245098
+    second: Shrapnel_26
+  - first:
+      213: -2494753555111736982
+    second: Shrapnel_27
+  - first:
+      213: 4506319298690590326
+    second: Shrapnel_28
+  - first:
+      213: -1102044246426194269
+    second: Shrapnel_29
+  - first:
+      213: 1535839916269047459
+    second: Shrapnel_30
+  - first:
+      213: -2651119842448271541
+    second: Shrapnel_31
+  - first:
+      213: 5949833435197296235
+    second: Shrapnel_32
+  - first:
+      213: -247826236260535706
+    second: Shrapnel_33
+  - first:
+      213: -4707546759199728721
+    second: Shrapnel_34
+  - first:
+      213: -5631558993367716125
+    second: Shrapnel_35
+  - first:
+      213: -5292311697447686252
+    second: Shrapnel_36
+  - first:
+      213: -4808802300731397126
+    second: Shrapnel_37
+  - first:
+      213: 2202323615408180941
+    second: Shrapnel_38
+  - first:
+      213: -6687789455991634329
+    second: Shrapnel_39
+  - first:
+      213: 1251969485455163162
+    second: Shrapnel_40
+  - first:
+      213: 3063465289292338188
+    second: Shrapnel_41
+  - first:
+      213: -5258581994518959535
+    second: Shrapnel_42
+  - first:
+      213: 4326514209479645531
+    second: Shrapnel_43
+  - first:
+      213: 5743147286925515283
+    second: Shrapnel_44
+  - first:
+      213: 7736729189477779201
+    second: Shrapnel_45
+  - first:
+      213: 6313051780870888797
+    second: Shrapnel_46
+  - first:
+      213: -7890736157040333898
+    second: Shrapnel_47
+  - first:
+      213: 5172545602597242570
+    second: Shrapnel_48
+  - first:
+      213: -6536820039687598170
+    second: Shrapnel_49
+  - first:
+      213: -2071459648984699895
+    second: Shrapnel_50
+  - first:
+      213: -9036571256863629813
+    second: Shrapnel_51
+  - first:
+      213: 5385912283181532565
+    second: Shrapnel_52
+  - first:
+      213: -8972806997918574654
+    second: Shrapnel_53
+  - first:
+      213: 7013371523677242249
+    second: Shrapnel_54
+  - first:
+      213: 5773015522674893909
+    second: Shrapnel_55
+  - first:
+      213: -7147082318521303378
+    second: Shrapnel_56
+  - first:
+      213: 5252207772045377672
+    second: Shrapnel_57
+  - first:
+      213: 3998967326874433114
+    second: Shrapnel_58
+  - first:
+      213: 4200281539220283416
+    second: Shrapnel_59
+  - first:
+      213: 8593010399777365778
+    second: Shrapnel_60
+  - first:
+      213: -8604601264645036543
+    second: Shrapnel_61
+  - first:
+      213: 7835939284890520989
+    second: Shrapnel_62
+  - first:
+      213: -1955219416611155996
+    second: Shrapnel_63
+  - first:
+      213: 5521739796949908340
+    second: Shrapnel_64
+  - first:
+      213: -4775597113666324547
+    second: Shrapnel_65
+  - first:
+      213: 2815450829741281681
+    second: Shrapnel_66
+  - first:
+      213: 713858117967916282
+    second: Shrapnel_67
+  - first:
+      213: -8745583452505192030
+    second: Shrapnel_68
+  - first:
+      213: 2175267388229710105
+    second: Shrapnel_69
+  - first:
+      213: 5537768172990989215
+    second: Shrapnel_70
+  - first:
+      213: -6145557787337104078
+    second: Shrapnel_71
+  - first:
+      213: 3575488776676638769
+    second: Shrapnel_72
+  - first:
+      213: 3478658903904184660
+    second: Shrapnel_73
+  - first:
+      213: 9145303200686962414
+    second: Shrapnel_74
+  - first:
+      213: -4784575566833360508
+    second: Shrapnel_75
+  - first:
+      213: -3612056447996042352
+    second: Shrapnel_76
+  - first:
+      213: 3567674997160575905
+    second: Shrapnel_77
+  - first:
+      213: 3492237254238921566
+    second: Shrapnel_78
+  - first:
+      213: -7671160724880094673
+    second: Shrapnel_79
+  - first:
+      213: -7659197688090985379
+    second: Shrapnel_80
+  - first:
+      213: -628721973946673023
+    second: Shrapnel_81
+  - first:
+      213: -7639357194539722763
+    second: Shrapnel_82
+  - first:
+      213: 1010066977590839413
+    second: Shrapnel_83
+  - first:
+      213: 5471106439296747383
+    second: Shrapnel_84
+  - first:
+      213: 1766001393066164842
+    second: Shrapnel_85
+  - first:
+      213: -6311656248919952076
+    second: Shrapnel_86
+  - first:
+      213: 6928287651869810363
+    second: Shrapnel_87
+  - first:
+      213: -1290761467528257293
+    second: Shrapnel_88
+  - first:
+      213: -7480906268079890519
+    second: Shrapnel_89
+  - first:
+      213: -7974009491540310065
+    second: Shrapnel_90
+  - first:
+      213: 8879440056127163924
+    second: Shrapnel_91
+  - first:
+      213: 2678635289910262834
+    second: Shrapnel_92
+  - first:
+      213: -8980931280166254914
+    second: Shrapnel_93
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shrapnel_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 426eeb3cf4526f990800000000000000
+      internalID: -7352648317119044060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2f464e4564a7aaa0800000000000000
+      internalID: -6149766011139240149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce13f440796444f0800000000000000
+      internalID: -845434899124773182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_3
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb65af7e404cd11f0800000000000000
+      internalID: -1072485610893453633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_4
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18c5c530d74ef80f0800000000000000
+      internalID: -1112419357358793599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_5
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79458376cb7b70670800000000000000
+      internalID: 8504968441125950615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_6
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6548ba530bcb59820800000000000000
+      internalID: 2924450998047704150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_7
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5119927a37460f4f0800000000000000
+      internalID: -797026686156041963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_8
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dc00b675e0641880800000000000000
+      internalID: -8641175246362112807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_9
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd7ebb195a6d53510800000000000000
+      internalID: 1528363655165110235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_10
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3ef2ab1d8aa05a20800000000000000
+      internalID: 3049124470760603194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_11
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09aa73cbf3b2d29b0800000000000000
+      internalID: -5103375250000205168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_12
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a572fc06d7cd5acd0800000000000000
+      internalID: -2547387583154935974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_13
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b66b7baffa7ec2f0800000000000000
+      internalID: -950687232816355658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_14
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9576c6d4de7351170800000000000000
+      internalID: 8148480593142507353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_15
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02101e7fa785ff450800000000000000
+      internalID: 6124711303415136544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_16
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d05bf953eb12c700800000000000000
+      internalID: 559039967028531411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_17
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2a00a60d63569fd0800000000000000
+      internalID: -2335587629017331156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_18
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8290588324e4b3eb0800000000000000
+      internalID: -4739108136554264280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_19
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 018e1c58ec1ec0c30800000000000000
+      internalID: 4327081619119794192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_20
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae9497e02b36d2010800000000000000
+      internalID: 1165697494956984810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrapnel_21
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3430d3eebdd2e60d0800000000000000
+      internalID: -3427751843764305085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 368075ce292d401489e89f50f768dc21
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":20.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Shrapnel_0: -7352648317119044060
+      Shrapnel_1: -6149766011139240149
+      Shrapnel_10: 3049124470760603194
+      Shrapnel_11: -5103375250000205168
+      Shrapnel_12: -2547387583154935974
+      Shrapnel_13: -950687232816355658
+      Shrapnel_14: 8148480593142507353
+      Shrapnel_15: 6124711303415136544
+      Shrapnel_16: 559039967028531411
+      Shrapnel_17: -2335587629017331156
+      Shrapnel_18: -4739108136554264280
+      Shrapnel_19: 4327081619119794192
+      Shrapnel_2: -845434899124773182
+      Shrapnel_20: 1165697494956984810
+      Shrapnel_21: -3427751843764305085
+      Shrapnel_3: -1072485610893453633
+      Shrapnel_4: -1112419357358793599
+      Shrapnel_5: 8504968441125950615
+      Shrapnel_6: 2924450998047704150
+      Shrapnel_7: -797026686156041963
+      Shrapnel_8: -8641175246362112807
+      Shrapnel_9: 1528363655165110235
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

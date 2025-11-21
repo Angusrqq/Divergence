@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 2877500028719138929}
   - component: {fileID: 7543738850137435980}
   - component: {fileID: 2800599835213710089}
+  - component: {fileID: -3645386424023729465}
   m_Layer: 5
   m_Name: ItemButtonTemplate
   m_TagString: Untagged
@@ -439,3 +440,16 @@ MonoBehaviour:
   _selectorManager: {fileID: 0}
   SelectedImage: {fileID: 1714134962019201862}
   ButtonImage: {fileID: 6137338354419277653}
+--- !u!114 &-3645386424023729465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8548922892615242641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e386abc0aacc346b00e68f56adf951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemClick
+  _onClick: {fileID: 8300000, guid: 28912ef7b9bc5b241a8b5e0dea2cf96b, type: 3}

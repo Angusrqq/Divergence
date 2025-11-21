@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
+  m_Name: Shrapnel
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
+  _name: Shrapnel
+  _description: i am the danger
+  _icon: {fileID: 3275149530380210373, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _cost: 0
+  _isUnlocked: 1
+  Level: 1
+  MaxLevel: 3
+  IsEvolved: 0
+  MonoLogic: {fileID: -7586009721794966930, guid: 5a7852d408f667b4abb5e829fbbd89e2, type: 3}
+  PassiveType: 1

@@ -8,7 +8,7 @@ public class Fireball : InstantiatedAbilityMono
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         GetTargetForProjectile(Ability, out Target);
 
@@ -22,19 +22,18 @@ public class Fireball : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            return;
         }
+        base.Start();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration, useSound: false);
-            Burn burnEffect = new(GameData.player, enemy, damage: Ability.damage * 0.1f);
-            enemy.Statuses.ApplyEffect(burnEffect);
-            Destroy(gameObject);
-            Ability.StartCooldown();
-        }
+        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration, useSound: false);
+        Burn burnEffect = new(GameData.player, enemy, damage: Damage * 0.1f);
+        enemy.Statuses.ApplyEffect(burnEffect);
+        Destroy(gameObject);
+        Ability.StartCooldown();
     }
 
     public override void Upgrade(InstantiatedAbilityHandler ability)

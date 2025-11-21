@@ -10,7 +10,7 @@ public class Berserk : PassiveAbilityMono
     private Stat _thresholdMult = 0.1f;
     private bool _isActive = false;
 
-    void OnHealthChanged(UnityEngine.Object source, float amount, Type type = null)
+    void OnPlayerDamageTaken(UnityEngine.Object source, float amount, Type type = null)
     {
         if (GameData.player.DamageableEntity.Health <= GameData.player.DamageableEntity.MaxHealth * _thresholdMult && !_isActive)
         {
@@ -33,7 +33,7 @@ public class Berserk : PassiveAbilityMono
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Mult, this);
 
-        GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;
+        GameData.player.DamageableEntity.OnDamageTaken += OnPlayerDamageTaken;
     }
 
     public override void Upgrade()

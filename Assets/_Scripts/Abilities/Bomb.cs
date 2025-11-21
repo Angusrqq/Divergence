@@ -19,7 +19,7 @@ public class Bomb : InstantiatedAbilityMono
     /// Acquires the closest enemy and sets the initial movement direction.
     /// If no enemy is found, the bomb is destroyed and the ability cooldown starts.
     /// </summary>
-    private void Start()
+    protected override void Start()
     {
         Enemy _target = FindClosest();
 
@@ -31,15 +31,16 @@ public class Bomb : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            return;
         }
+        base.Start();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
         if (isExploded) return;
-        if (!other.gameObject.TryGetComponent(out Enemy enemy)) return;
 
-        enemy.TakeDamage(gameObject, Ability.damage);
+        enemy.TakeDamage(GameData.player.gameObject, Damage);
 
         isExploded = true;
         StartCoroutine(Explode());
@@ -55,7 +56,7 @@ public class Bomb : InstantiatedAbilityMono
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(GameData.player.gameObject, Ability.damage * 2, GetType());
+                enemy.TakeDamage(GameData.player.gameObject, Damage * 2, GetType());
             }
         }
         yield return new WaitForSeconds(animatedEntity.AnimatorController.animationClips[1].length); // wonky shit picking animation by index

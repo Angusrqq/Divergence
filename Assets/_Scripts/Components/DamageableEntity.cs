@@ -75,7 +75,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     public void Heal(UnityEngine.Object source, float amount, Type type)
     {
         if (!CanHeal) return;
-        if (Health <= 0 || Health >= MaxHealth) return;
+        if (Health >= MaxHealth) return;
 
         if (Health + amount >= MaxHealth)
         {
@@ -85,6 +85,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         }
 
         Health += amount;
+        OnHeal?.Invoke(source, amount, type);
     }
 
     /// <summary>

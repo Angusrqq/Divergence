@@ -7,7 +7,7 @@ public class Shuriken : InstantiatedAbilityMono
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         Enemy _target = FindClosest();
 
@@ -19,7 +19,9 @@ public class Shuriken : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            return;
         }
+        base.Start();
     }
 
     protected override void FixedUpdateLogic()
@@ -28,13 +30,10 @@ public class Shuriken : InstantiatedAbilityMono
         rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
-            Destroy(gameObject);
-            Ability.StartCooldown();
-        }
+        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration);
+        Destroy(gameObject);
+        Ability.StartCooldown();
     }
 }

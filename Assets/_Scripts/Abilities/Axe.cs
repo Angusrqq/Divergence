@@ -11,7 +11,7 @@ public class Axe : InstantiatedAbilityMono
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         Enemy _target = FindClosest();
         _forceTimer = Ability.ActiveTime / 1.8f;
@@ -24,9 +24,11 @@ public class Axe : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            return;
         }
 
         _intialDirection = direction;
+        base.Start();
     }
 
     protected override void FixedUpdateLogic()
@@ -37,12 +39,8 @@ public class Axe : InstantiatedAbilityMono
         rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage * (math.abs(direction.x) + math.abs(direction.y)), GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
-            Debug.Log($"Damage given: {Ability.damage * (math.abs(direction.x) + math.abs(direction.y))}");  
-        }
+        enemy.TakeDamage(GameData.player.gameObject, Damage /* *(math.abs(direction.x) + math.abs(direction.y))*/, GetType(), KnockbackForce, Ability.KnockbackDuration);
     }
 }

@@ -19,7 +19,7 @@ public class NearestEnemyTest : InstantiatedAbilityMono
     /// Called when the script instance is being loaded.
     /// Finds the closest enemy and destroys this ability if no enemy is found.
     /// </summary>
-    public void Start()
+    protected override void Start()
     {
         target = FindClosest();
 
@@ -27,7 +27,9 @@ public class NearestEnemyTest : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            return;
         }
+        base.Start();
     }
 
     protected override void FixedUpdateLogic()
@@ -44,16 +46,13 @@ public class NearestEnemyTest : InstantiatedAbilityMono
     /// Checks if the collided object is an enemy and applies damage if true.
     /// </summary>
     /// <param name="other">The collider of the object this ability collided with.</param>
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            // Apply damage, knockback, and other effects to the enemy
-            enemy.TakeDamage(gameObject, Ability.damage, knockbackForce: Ability.KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
+        // Apply damage, knockback, and other effects to the enemy
+        enemy.TakeDamage(GameData.player.gameObject, Damage, knockbackForce: KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
 
-            Destroy(gameObject);
-            Ability.StartCooldown();
-        }
+        Destroy(gameObject);
+        Ability.StartCooldown();
     }
 
     // public Enemy FindClosest()

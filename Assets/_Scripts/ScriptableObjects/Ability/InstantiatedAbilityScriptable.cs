@@ -12,6 +12,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New InstantiatedAbility", menuName = "Abilities/InstantiatedAbility")]
 public class InstantiatedAbilityScriptable : Ability
 {
+    [Header("Projectile info")]
     public InstantiatedAbilityMono StandardPrefab;
     public InstantiatedAbilityMono EvoPrefab;
 

@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour
             Vector2 viewportCoords = vertical ? new(Random.Range(0, 2), Random.Range(0f, 1f)) : new(Random.Range(0f, 1f), Random.Range(0, 2));
             Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
             SpawnEnemy(spawnPos, Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
-            delay = SpawnDelay;
+            delay = SpawnDelay / (1f + (GameData.GameTimerInstance.currentTime / 60f));
         }
         else
         {

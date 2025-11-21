@@ -15,9 +15,10 @@ public class ForceField : InstantiatedAbilityMono
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         _damageTimer = Ability.KnockbackDuration;
+        base.Start();
     }
 
     protected override void FixedUpdateLogic()
@@ -44,22 +45,20 @@ public class ForceField : InstantiatedAbilityMono
         {
             foreach (var enemy in _enemiesInside)
             {
-                enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType());
+                enemy.TakeDamage(GameData.player.gameObject, Damage, GetType());
             }
             _damageTimer = Ability.KnockbackDuration;
         }
+        transform.RotateAround(transform.position, Vector3.forward, 2);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        if (!_enemiesInside.Contains(enemy) && !_enemiesToAdd.Contains(enemy))
         {
-            if (!_enemiesInside.Contains(enemy) && !_enemiesToAdd.Contains(enemy))
-            {
-                _enemiesToAdd.Add(enemy);
-            }
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType());
+            _enemiesToAdd.Add(enemy);
         }
+        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType());
     }
 
     protected void OnTriggerExit2D(Collider2D other)

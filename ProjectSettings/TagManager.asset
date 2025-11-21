@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
@@ -44,6 +44,9 @@ TagManager:
   - name: Tilemap
     uniqueID: 76483025
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 1971875061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -52,6 +55,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 279688957
+    locked: 0
+  - name: Player
+    uniqueID: 3984805801
     locked: 0
   m_RenderingLayers:
   - Default

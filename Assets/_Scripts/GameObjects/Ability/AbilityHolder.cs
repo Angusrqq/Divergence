@@ -21,24 +21,28 @@ public class AbilityHolder : MonoBehaviour
     public List<BaseAbilityHandler> Passives;
     public GameObject ParentHolder;
 
+    public event Action<Type, Enemy, float, InstantiatedAbilityMono> OnEnemyHit;
+    public event Action<Type, InstantiatedAbilityMono> OnProjectileFired;
+    public event Action<Type, Vector2> OnProjectileHit;
+    public event Action<Type, InstantiatedAbilityHandler, InstantiatedAbilityMono> OnAbilityActivated;
+
     private readonly List<string> _abilityNames = new();
     private readonly List<string> _passiveNames = new();
 
+    public List<string> AbilityNames => _abilityNames;
+    public List<string> PassiveNames => _passiveNames;
+
     void Update()
     {
-        foreach (AbilityHandler a in Abilities)
+        foreach (BaseAbilityHandler a in Abilities)
         {
             a.UpdateAbility();
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// Adds passed <c>Ability</c> to the <c>Abilities</c> List if <c>_abilityNames</c> does not contain the name of added ability.
-    /// </para>
-    /// else, if the ability is already present and its level is less than its max level, upgrades the ability.
-    /// </summary>
-    /// <param name="a"></param>
+    public List<BaseAbilityHandler> GetActiveAbilitiesList() => Abilities;
+    public List<BaseAbilityHandler> GetPassiveAbilitiesList() => Passives;
+
     //TODO: refactor the whole ability system, currently it's a mess (im meaning not just changing the naming, but make the code more concise/readable).
     //Example: currently AddAbility adds the Instantiated version. Either rename it or make it use the base Ability class or split the functions(if splitting, where is DRY???)
     public void AddAbility(Ability ability)
@@ -57,6 +61,9 @@ public class AbilityHolder : MonoBehaviour
         abilityInstance.Init(ability);
         Abilities.Add(abilityInstance);
         _abilityNames.Add(abilityInstance.Name);
+        Debug.Log("Active ability added: " + abilityInstance.Name);
+
+        GameData.player.PlayerAbilityIconDisplay.UpdateActiveAbilitiesIcons(Abilities);
     }
 
     /// <summary>
@@ -85,10 +92,18 @@ public class AbilityHolder : MonoBehaviour
         Debug.Log("Passive does not exist, creating new: " + passive.Name);
         BaseAbilityHandler passiveInstance = CreateHandler(passive.Type, passive.Name);
         passiveInstance.Init(passive);
-        passiveInstance.Activate();
         Passives.Add(passiveInstance);
         _passiveNames.Add(passiveInstance.Name);
+        if(passive.PassiveType == PassiveAbilityType.Updated)
+        {
+            var logic = Instantiate(passive.MonoLogic, passiveInstance.transform);
+            var temp = passiveInstance as PassiveAbilityHandler;
+            temp.SetMonoLogic(logic);
+        }
+        passiveInstance.Activate();
         Debug.Log("Passive added: " + passiveInstance.Name);
+
+        GameData.player.PlayerAbilityIconDisplay.UpdatePassiveAbilitiesIcons(Passives);
     }
 
     /// <summary>
@@ -100,6 +115,7 @@ public class AbilityHolder : MonoBehaviour
     /// <returns></returns>
     public BaseAbilityHandler GetPassiveByName(string name)
     {
+        if(_passiveNames.IndexOf(name) == -1) return null;
         return Passives[_passiveNames.IndexOf(name)];
     }
 
@@ -112,6 +128,7 @@ public class AbilityHolder : MonoBehaviour
     /// <returns></returns>
     public BaseAbilityHandler GetAbilityByName(string name)
     {
+        if (_abilityNames.IndexOf(name) == -1) return null;
         return Abilities[_abilityNames.IndexOf(name)];
     }
 
@@ -128,4 +145,17 @@ public class AbilityHolder : MonoBehaviour
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }
+
+    void OnDestroy()
+    {
+        OnEnemyHit = null;
+        OnProjectileFired = null;
+        OnProjectileHit = null;
+        OnAbilityActivated = null;
+    }
+
+    public void TriggerOnEnemyHit(Type abilityType, Enemy target, float damage, InstantiatedAbilityMono projectile = null) => OnEnemyHit?.Invoke(abilityType, target, damage, projectile);
+    public void TriggerOnProjectileFired(Type abilityType, InstantiatedAbilityMono projectile) => OnProjectileFired?.Invoke(abilityType, projectile);
+    public void TriggerOnProjectileHit(Type abilityType, Vector2 position) => OnProjectileHit?.Invoke(abilityType, position);
+    public void TriggerOnAbilityActivated(Type abilityType, InstantiatedAbilityHandler ability, InstantiatedAbilityMono prefab) => OnAbilityActivated?.Invoke(abilityType, ability, prefab);
 }

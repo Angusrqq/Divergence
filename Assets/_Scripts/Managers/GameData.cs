@@ -19,8 +19,10 @@ public class GameData : MonoBehaviour
     public static GameData instance;
     public static Player player;
     public static int currentSeed;
-    public static Random.State lastValuableState;
-    public static Random.State lastInvaluableState;
+    private static Random.State lastValuableState;
+    private static Random.State lastInvaluableState;
+    private static Random.State lastMidValueState;
+    private static Random.State lastLowValueState;
     public static List<Character> Characters = new();
     public static List<Character> unlockedCharacters = new();
     public static Character currentCharacter;
@@ -34,6 +36,7 @@ public class GameData : MonoBehaviour
     public static List<EnemyData> Enemies = new();
     public static InGameAtributes InGameAttributes;
     public static MetaprogressionData CurrentMetadata;
+    public static GameTimer GameTimerInstance;
 
     public static Sprite LockedIcon { get; private set; } // not going to cut it, // TODO: figure out a way to store/load constant icons
     public static Tilemap TilemapToLoadMaps { get; set; }
@@ -50,6 +53,7 @@ public class GameData : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            return;
         }
         else
         {
@@ -118,6 +122,8 @@ public class GameData : MonoBehaviour
         Random.InitState(currentSeed);
         lastValuableState = Random.state;
         lastInvaluableState = Random.state;
+        lastMidValueState = Random.state;
+        lastLowValueState = Random.state;
     }
 
     //  USE THESE FUNCTIONS WHEN YOU WANT TO KEEP TRACK OF THE IMPORTANT EVENTS (like rolling abilities after levelling up).
@@ -145,6 +151,85 @@ public class GameData : MonoBehaviour
         lastValuableState = Random.state;
         Random.state = lastInvaluableState;
         return res;
+    }
+
+    public static int MidValueRoll(int minInclusive, int maxExclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastMidValueState;
+        int res = Random.Range(minInclusive, maxExclusive);
+        lastMidValueState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
+    }
+
+    public static float MidValueRoll(float minInclusive, float maxInclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastMidValueState;
+        float res = Random.Range(minInclusive, maxInclusive);
+        lastMidValueState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
+    }
+
+    public static int LowValueRoll(int minInclusive, int maxExclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastLowValueState;
+        int res = Random.Range(minInclusive, maxExclusive);
+        lastLowValueState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
+    }
+
+    public static float LowValueRoll(float minInclusive, float maxInclusive)
+    {
+        lastInvaluableState = Random.state;
+        Random.state = lastLowValueState;
+        float res = Random.Range(minInclusive, maxInclusive);
+        lastLowValueState = Random.state;
+        Random.state = lastInvaluableState;
+        return res;
+    }
+
+    public static float ValuableValue
+    {
+        get
+        {
+            lastInvaluableState = Random.state;
+            Random.state = lastValuableState;
+            float res = Random.value;
+            lastValuableState = Random.state;
+            Random.state = lastInvaluableState;
+            return res;
+        }
+    }
+
+    public static float MidValue
+    {
+        get
+        {
+            lastInvaluableState = Random.state;
+            Random.state = lastMidValueState;
+            float res = Random.value;
+            lastMidValueState = Random.state;
+            Random.state = lastInvaluableState;
+            return res;
+        }
+    }
+
+    public static float LowValue
+    {
+        get
+        {
+            lastInvaluableState = Random.state;
+            Random.state = lastLowValueState;
+            float res = Random.value;
+            lastLowValueState = Random.state;
+            Random.state = lastInvaluableState;
+            return res;
+        }
     }
 
     /// <summary>
@@ -181,6 +266,9 @@ public class GameData : MonoBehaviour
             GameObject temp = Instantiate(currentMap.mapPrefab);
             Camera.main.transform.parent.GetComponentInChildren<CinemachineConfiner2D>().BoundingShape2D = temp.GetComponent<Collider2D>();
             InGameAttributes = new(); // reconstruct to use the new values from starting attributes
+            Debug.Log($"Loaded map: {currentMap.name}");
+            Debug.Log($"Lives ingame: {InGameAttributes.Lives}");
+            Debug.Log($"Lives Starting: {StartingAttributes.Lives}");
             Debug.Log("Reset random to seed " + currentSeed);
         }
 
@@ -229,13 +317,25 @@ public class GameData : MonoBehaviour
         player = _player;
     }
 
+    public static void UpdateTimerRef(GameTimer timer)
+    {
+        GameTimerInstance = timer;
+    }
+
     /// <summary>
     /// Called when the object is destroyed.
     /// Unsubscribes from the <c>SceneManager.sceneLoaded</c> event to prevent memory leaks.
     /// </summary>
     void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // if (instance == this)
+        // {
+        //     SaveMetaData();
+        // }
+        if(instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 
     private static SettingsData InitializeSettings()
@@ -243,7 +343,6 @@ public class GameData : MonoBehaviour
         SettingsData data = new();
         data = DataSystem.LoadSettingsData() ?? data;
         SetGameSettings(data);
-
         return data;
     }
 

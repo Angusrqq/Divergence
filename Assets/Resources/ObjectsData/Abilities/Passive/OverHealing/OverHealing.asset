@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
+  m_Name: OverHealing
+  m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
+  _name: Over healing
+  _description: This was to much..
+  _icon: {fileID: -8077885897058716430, guid: c0af6ae0ba05f254cb36b8ae8e5dce20, type: 3}
+  _cost: 0
+  _isUnlocked: 1
+  Level: 1
+  MaxLevel: 3
+  IsEvolved: 0
+  MonoLogic: {fileID: -3639515103929393457, guid: 4ff81da80e2de31479d7cec9793147a4, type: 3}
+  PassiveType: 0

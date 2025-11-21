@@ -9,7 +9,7 @@ public class InstantiatedAbilityHandler : AbilityHandler
 
     public Stat Speed;
     public float SpawnDelay;
-    public float damage;
+    public Stat damage;
     public Stat localProjectilesAmount = 1; // How many projectiles are fired in a single burst
     public Character nativeUser; // Character for which this ability is considered native; toggles evolved state when active.
     public List<InstantiatedAbilityMono> Instances { get; private set; }
@@ -57,15 +57,18 @@ public class InstantiatedAbilityHandler : AbilityHandler
             StartCoroutine(SpawnProjectiles(_standardPrefab, SpawnDelay));
         }
         base.Activate();
+        GameData.player.AbilityHolder.TriggerOnAbilityActivated(GetType(), this, IsEvolved && _evoPrefab != null ? _evoPrefab : _standardPrefab);
     }
 
     protected IEnumerator SpawnProjectiles(InstantiatedAbilityMono prefab, float delay = 0f)
     {
         for (int i = 0; i < localProjectilesAmount; i++)
         {
-            var instance = Instantiate(prefab, GameData.player.transform.position, Quaternion.identity);
+            Vector2 pos = (Vector2)GameData.player.transform.position + Random.insideUnitCircle;
+            var instance = Instantiate(prefab, pos, Quaternion.identity);
             instance.Init(this);
             Instances.Add(instance);
+            GameData.player.AbilityHolder.TriggerOnProjectileFired(GetType(), instance);
             yield return new WaitForSeconds(delay);
         }
     }

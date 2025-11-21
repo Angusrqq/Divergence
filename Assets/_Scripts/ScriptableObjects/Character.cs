@@ -24,7 +24,7 @@ public class Character : BaseScriptableObjectUnlockable //TODO: open to suggesti
     [SerializeField] private RuntimeAnimatorController _characterAnimatorController;
 
     [Header("Starting Abilities")]
-    [SerializeField] private List<Ability> _startingAbilities;
+    [SerializeField] private List<BaseAbilityScriptable> _startingAbilities;
     
     public int UnlockCost => _unlockCost;
     public int StartLevel => _startLevel;
@@ -33,7 +33,7 @@ public class Character : BaseScriptableObjectUnlockable //TODO: open to suggesti
     public float DamageScale => _damageScale;
     public float CooldownReduction => _cooldownReduction;
     public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
-    public List<Ability> StartingAbilities => _startingAbilities;
+    public List<BaseAbilityScriptable> StartingAbilities => _startingAbilities;
 
     /// <summary>
     /// <para>

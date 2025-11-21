@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// <para>
 /// <c>AbilityState</c> enum represents the different states an ability can be in.
@@ -10,6 +12,7 @@
 /// </summary>
 public class Ability : BaseAbilityScriptable
 {
+    [Header("Ability Properties")]
     public float CooldownTime;
     public float ActiveTime;
     public float KnockbackForce = 2f;

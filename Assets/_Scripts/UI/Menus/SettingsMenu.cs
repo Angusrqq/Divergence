@@ -102,6 +102,15 @@ public class SettingsMenu : MonoBehaviour
         _refreshRateDropdown.AddOptions(refreshRateOptions);
         _refreshRateDropdown.value = _currentRefreshRateIndex;
         _refreshRateDropdown.RefreshShownValue();
+
+        DefaultValues();
+    }
+
+    private void DefaultValues()
+    {
+        _masterVolumeSlider.value = AudioManager.instance.GetMasterVolume();
+        _musicVolumeSlider.value = AudioManager.instance.GetMusicVolume();
+        _sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
     }
 
     /// <summary>

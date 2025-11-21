@@ -38,11 +38,8 @@ public class BombExplosion : InstantiatedAbilityMono
     /// Applies damage and knockback to enemies that enter the explosion's trigger area.
     /// </summary>
     /// <param name="other">The collider that entered the trigger.</param>
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public override void EnemyCollision(Enemy enemy)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.TakeDamage(gameObject, Ability.damage * 2, knockbackForce: Ability.KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
-        }
+        enemy.TakeDamage(GameData.player.gameObject, Damage * 2, knockbackForce: KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
     }
 }

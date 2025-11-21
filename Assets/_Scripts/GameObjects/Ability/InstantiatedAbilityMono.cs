@@ -10,7 +10,7 @@ using System;
 /// </summary>
 /// <remarks>
 /// Instances are created by <see cref="InstantiatedAbilityScriptable.Activate"/>, which calls
-/// <see cref="Init(InstantiatedAbilityScriptable)"/> and adds the instance to
+/// <see cref="Init"/> and adds the instance to
 /// <see cref="InstantiatedAbilityScriptable.Instances"/>. This component moves every physics tick
 /// using the player's current movement vector or facing as a fallback, and destroys itself when the
 /// configured active time elapses. On destruction, it removes itself from the owning ability's
@@ -21,14 +21,21 @@ using System;
 public class InstantiatedAbilityMono : MonoBehaviour
 {
     [NonSerialized] private InstantiatedAbilityHandler _ability;
+    private bool _hit = false;
 
     protected Rigidbody2D rb;
     protected AnimatedEntity animatedEntity;
     protected Vector2 direction;
     protected float timer;
+    protected bool doesDamage = true;
     [NonSerialized] public Enemy Target;
     
     public InstantiatedAbilityHandler Ability { get => _ability; protected set => _ability = value; }
+    public Stat Damage;
+    public Stat KnockbackForce;
+    public AudioClip OnActivation;
+    public AudioClip OnHit;
+    public Action<InstantiatedAbilityMono> OnDeath;
 
     /// <summary>
     /// Caches the <see cref="Rigidbody2D"/> and derives the initial movement direction
@@ -46,6 +53,14 @@ public class InstantiatedAbilityMono : MonoBehaviour
         }
     }
 
+    protected virtual void Start()
+    {
+        if (OnActivation != null)
+        {
+            AudioManager.instance.PlaySFXPitched(OnActivation, UnityEngine.Random.Range(0.95f, 1.05f));
+        }
+    }
+
     /// <summary>
     /// Initializes the instance with its owning ability and lifetime.
     /// Called by <see cref="InstantiatedAbilityHandler.Activate"/> right after instantiation.
@@ -54,6 +69,8 @@ public class InstantiatedAbilityMono : MonoBehaviour
     public virtual void Init(InstantiatedAbilityHandler ability)
     {
         Ability = ability;
+        Damage = (float)ability.damage;
+        KnockbackForce = (float)ability.KnockbackForce;
         timer = ability.ActiveTime;
     }
 
@@ -94,21 +111,50 @@ public class InstantiatedAbilityMono : MonoBehaviour
     /// </summary>
     protected virtual void OnDestroy()
     {
+        OnDeath?.Invoke(this);
         Ability.Instances.Remove(this);
+        OnDeath = null;
     }
 
     /// <summary>
     /// Called when another object enters a 2D collider trigger and checks if the other object has an Enemy component to apply damage, knockback force, and knockback duration to the enemy.
     /// </summary>
     /// <param name="other">The Collider2D of the other object</param>
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the other object has an Enemy component
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            // Apply damage, knockback force, and knockback duration to the enemy
-            enemy.TakeDamage(GameData.player.gameObject, Ability.damage, GetType(), Ability.KnockbackForce, Ability.KnockbackDuration);
+            if(OnHit != null && !_hit)
+            {
+                AudioManager.instance.PlaySFXPitched(OnHit, UnityEngine.Random.Range(-3f, 3f));
+                _hit = true;
+            }
+            EnemyCollision(enemy);
+            if (doesDamage)
+            {
+                GameData.player.AbilityHolder.TriggerOnEnemyHit(GetType(), enemy, Damage, this);
+            }
         }
+        OtherCollision(other);
+        GameData.player.AbilityHolder.TriggerOnProjectileHit(GetType(), rb.position);
+    }
+
+    /// <summary>
+    /// Called when another object enters a 2D collider trigger that is an Enemy.
+    /// </summary>
+    /// <param name="enemy"></param>
+    public virtual void EnemyCollision(Enemy enemy)
+    {
+        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration);
+    }
+    /// <summary>
+    /// Called when another object enters a 2D collider trigger that is not an Enemy.
+    /// </summary>
+    /// <param name="other"></param>
+    protected virtual void OtherCollision(Collider2D other)
+    {
+        // override
     }
 
     /// <summary>

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247957c0da869e4bb1688db73eb905d, type: 3}
   m_Name: TestUpgrade
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScriptable
-  _name: Test
-  _description: this is some bs
+  _name: testing
+  _description: desc
   _icon: {fileID: 0}
   _cost: 0
   _isUnlocked: 0

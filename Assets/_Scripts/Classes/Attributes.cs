@@ -35,6 +35,33 @@ public static class StartingAttributes
     public static Stat ExperienceMultiplier = 1f;
     public static Stat ProjectileSpeedMult = 1f;
     public static Stat AbilityActiveTimeMult = 1f;
+    public static Stat CritChance = 0f;
+    public static Stat CritMult = 1.5f;
+    public static Stat Lives = 1f;
+
+    public static void ReloadStats(StartingAttributesInitializer startingAttributes)
+    {
+        Health = startingAttributes.Health;
+        MaxHealth = startingAttributes.MaxHealth;
+        PlayerDamageMult = startingAttributes.PlayerDamageMult;
+        PlayerResistsMult = startingAttributes.ProjectilesAdd;
+        ProjectilesAdd = startingAttributes.ProjectilesAdd;
+        CastSpeedMult = startingAttributes.CastSpeedMult;
+        CooldownReductionMult = startingAttributes.CooldownReductionMult;
+        ActiveAbilitySlots = startingAttributes.ActiveAbilitySlots;
+        AbilitiesPerLevel = startingAttributes.AbilitiesPerLevel;
+        PassiveAbilitySlots = startingAttributes.PassiveAbilitySlots;
+        ManuallyTriggeredAbilitySlots = startingAttributes.ManuallyTriggeredAbilitySlots;
+        PassiveAbilityEffectMult = startingAttributes.PassiveAbilityEffectMult;
+        PierceTargets = startingAttributes.PierceTargets;
+        MagnetRadius = startingAttributes.MagnetRadius;
+        ExperienceMultiplier = startingAttributes.ExperienceMultiplier;
+        ProjectileSpeedMult = startingAttributes.ProjectileSpeedMult;
+        AbilityActiveTimeMult = startingAttributes.AbilityActiveTimeMult;
+        CritChance = startingAttributes.CritChance;
+        CritMult = startingAttributes.CritMult;
+        Lives = startingAttributes.Lives;
+    }
 
     public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
@@ -46,6 +73,55 @@ public static class StartingAttributes
     public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
     public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+}
+
+
+public class StartingAttributesInitializer
+{
+    public Stat Health = 100;
+    public Stat MaxHealth = 100;
+    public Stat PlayerDamageMult = 1f;
+    public Stat PlayerResistsMult = 1f;
+    public Stat ProjectilesAdd = 0;
+    public Stat CastSpeedMult = 1f;
+    public Stat CooldownReductionMult = 1f;
+    public Stat ActiveAbilitySlots = 5;
+    public Stat AbilitiesPerLevel = 3;
+    public Stat PassiveAbilitySlots = 5;
+    public Stat ManuallyTriggeredAbilitySlots = 0;
+    public Stat PassiveAbilityEffectMult = 1f;
+    public Stat PierceTargets = 0;
+    public Stat MagnetRadius = 0.5f;
+    public Stat ExperienceMultiplier = 1f;
+    public Stat ProjectileSpeedMult = 1f;
+    public Stat AbilityActiveTimeMult = 1f;
+    public Stat CritChance = 0f;
+    public Stat CritMult = 1.5f;
+    public Stat Lives = 1f;
+
+    public StartingAttributesInitializer()
+    {
+        Health = StartingAttributes.Health;
+        MaxHealth = StartingAttributes.MaxHealth;
+        PlayerDamageMult = StartingAttributes.PlayerDamageMult;
+        PlayerResistsMult = StartingAttributes.ProjectilesAdd;
+        ProjectilesAdd = StartingAttributes.ProjectilesAdd;
+        CastSpeedMult = StartingAttributes.CastSpeedMult;
+        CooldownReductionMult = StartingAttributes.CooldownReductionMult;
+        ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
+        AbilitiesPerLevel = StartingAttributes.AbilitiesPerLevel;
+        PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;
+        ManuallyTriggeredAbilitySlots = StartingAttributes.ManuallyTriggeredAbilitySlots;
+        PassiveAbilityEffectMult = StartingAttributes.PassiveAbilityEffectMult;
+        PierceTargets = StartingAttributes.PierceTargets;
+        MagnetRadius = StartingAttributes.MagnetRadius;
+        ExperienceMultiplier = StartingAttributes.ExperienceMultiplier;
+        ProjectileSpeedMult = StartingAttributes.ProjectileSpeedMult;
+        AbilityActiveTimeMult = StartingAttributes.AbilityActiveTimeMult;
+        CritChance = StartingAttributes.CritChance;
+        CritMult = StartingAttributes.CritMult;
+        Lives = StartingAttributes.Lives;
+    }
 }
 
 
@@ -73,6 +149,9 @@ public class InGameAtributes
     public Stat PassiveAbilityEffectMult = 1f;
     public Stat PierceTargets = 0;
     public Stat ExperienceMultiplier = 1f;
+    public Stat CritChance = 0f;
+    public Stat CritMult = 1.5f;
+    public Stat Lives = 1f;
 
     public StatModifierByStat HealthModifier;
     public StatModifierByStat MaxHealthModifier;
@@ -109,7 +188,7 @@ public class InGameAtributes
     /// </summary>
     public InGameAtributes(Stat health = null, Stat maxHealth = null, Stat playerDamageMult = null, Stat playerResistsMult = null, Stat projectilesAdd = null,
     Stat castSpeedMult = null, Stat cooldownReductionMult = null, Stat passiveAbilityEffectMult = null, Stat pierceTargets = null, Stat magnetRadius = null,
-    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null)
+    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null, Stat critChance = null, Stat critMult = null, Stat lives = null)
     {
         Health = health ?? StartingAttributes.Health;
         MaxHealth = maxHealth ?? StartingAttributes.MaxHealth;
@@ -124,6 +203,9 @@ public class InGameAtributes
         ExperienceMultiplier = experienceMultiplier ?? StartingAttributes.ExperienceMultiplier;
         ProjectileSpeedMult = projectileSpeedMult ?? StartingAttributes.ProjectileSpeedMult;
         AbilityActiveTimeMult = abilityActiveTimeMult ?? StartingAttributes.AbilityActiveTimeMult;
+        CritChance = critChance ?? StartingAttributes.CritChance;
+        CritMult = critMult ?? StartingAttributes.CritMult;
+        Lives = lives ?? StartingAttributes.Lives;
 
         ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
         PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;

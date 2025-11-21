@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour
     /// Starts the <c>DamageFlash</c> coroutine and applies the knockback if there is one.
     /// </summary>
     public virtual void TakeDamage(GameObject source, float amount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f,
-    Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, bool useSound = true, int sfxIndex = default)
+    Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, bool useSound = false, int sfxIndex = default)
     {
         flashColor = flashColor == default ? this.flashColor : flashColor;
         damageFlashDuration = damageFlashDuration == default ? this.damageFlashDuration : damageFlashDuration;
@@ -139,6 +139,7 @@ public class Enemy : MonoBehaviour
 
         if (damageableEntity.CanTakeDamage())
         {
+            StopAllCoroutines();
             StartCoroutine(DamageFlash(flashColor, damageFlashDuration));
 
             if (useParticles)
@@ -157,9 +158,14 @@ public class Enemy : MonoBehaviour
                 Knockback(knockbackDirection * knockbackForce, knockbackDuration);
             }
 
-            if (source.GetType() == typeof(Player))
+            if (source.TryGetComponent(out Player t))
             {
                 amount *= GameData.InGameAttributes.PlayerDamageMult;
+                if(GameData.LowValue < GameData.InGameAttributes.CritChance)
+                {
+                    amount *= GameData.InGameAttributes.CritMult;
+                    Debug.Log($"Critical hit! Damage: {amount}, Crit multiplier: {GameData.InGameAttributes.CritMult}, crit chance: {GameData.InGameAttributes.CritChance}");
+                }
             }
 
             damageableEntity.TakeDamage(source, amount, type);

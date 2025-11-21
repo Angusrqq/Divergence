@@ -40,6 +40,7 @@ public class Stat
     public float BaseValue;
     public float BaseModifier;
     public float BaseMultiplier;
+    public Action OnRecalculation;
 
     private bool _recalculationNeeded;
     private float _value;
@@ -126,6 +127,7 @@ public class Stat
             if (_recalculationNeeded)
             {
                 _value = Calculate();
+                OnRecalculation?.Invoke();
                 _recalculationNeeded = false;
             }
             return _value;
@@ -233,9 +235,10 @@ public class StatModifierByStat : StatModifier
         set
         {
             Stat.Value = value;
-            ValueChanged();
         }
     }
+
+    private void OnStatValueChanged() => ValueChanged();
 
     /// <summary>
     /// <c>StatModifierByStat</c> constructor initializes a new instance of the StatModifierByStat class with the specified Stat, type, and source.
@@ -246,6 +249,7 @@ public class StatModifierByStat : StatModifier
     public StatModifierByStat(ref Stat Stat, StatModifierType type, object Source, bool subtractOne = false) : base(Stat, type, Source)
     {
         this.Stat = Stat;
+        Stat.OnRecalculation += OnStatValueChanged;
         _subtractOne = subtractOne;
     }
 }

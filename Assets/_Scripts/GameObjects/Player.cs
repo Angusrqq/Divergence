@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +13,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AbilityHolder))]
 [RequireComponent(typeof(AnimatedEntity))]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(AbilityHolder))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private AbilityIconDisplay _playerAbilityIconDisplay;
+
     [NonSerialized] public DamageableEntity DamageableEntity;
     [NonSerialized] public AnimatedEntity AnimatedEntity;
     [NonSerialized] public SpriteRenderer SpriteRenderer;
@@ -37,9 +39,11 @@ public class Player : MonoBehaviour
     private float _experience;
     private int _experienceToLevelUp = 5;
     private Action<UnityEngine.Object, int> _onExperienceChange;
+    public Action<int> OnCrystalPickup;
     private bool _experienceDirty = false;
 
     public PlayerMagnet Magnet { get; private set; }
+    public AbilityIconDisplay PlayerAbilityIconDisplay => _playerAbilityIconDisplay;
 
     /// <summary>
     /// Initializes global player reference.
@@ -78,6 +82,9 @@ public class Player : MonoBehaviour
 
         DamageableEntity.OnDeath += OnDeath;
         DamageableEntity.Init(MaxHealth);
+
+        // _abilityIconDisplay.UpdateActiveAbilitiesIcons(AbilityHolder.GetActiveAbilitiesList());
+        // _abilityIconDisplay.UpdatePassiveAbilitiesIcons(AbilityHolder.GetPassiveAbilitiesList());
     }
 
     /// <summary>
@@ -271,7 +278,7 @@ public class Player : MonoBehaviour
         }
 
         OnLevelUp?.Invoke(source, Level);
-        Debug.Log($"Player {gameObject.name} leveled up to level {Level}");
+        Debug.Log($"Player leveled up to level {Level}");
     }
 
     /// <summary>
@@ -294,7 +301,11 @@ public class Player : MonoBehaviour
         }
 
         _onExperienceChange?.Invoke(experienceSource, (int)gainedExperience);
-        Debug.Log($"Player {gameObject.name} gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
+        if(experienceSource.GetComponent<ExperienceCrystal>() != null)
+        {
+            OnCrystalPickup?.Invoke((int)gainedExperience);
+        }
+        Debug.Log($"Player gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
     }
 
     /// <summary>
@@ -315,7 +326,7 @@ public class Player : MonoBehaviour
     /// <param name="experienceValue">The amount of experience gained.</param>
     public void UpdateLevelBar(UnityEngine.Object source, int experienceValue)
     {
-        _levelSlider.value = (float)_experience / _experienceToLevelUp;
+        _levelSlider.value = _experience / _experienceToLevelUp;
         _levelLabel.text = $"lv. {Level}";
     }
 
@@ -334,12 +345,18 @@ public class Player : MonoBehaviour
         MaxHealth = CharacterData.MaxHealth;
         Level = CharacterData.StartLevel;
 
-        foreach (Ability ability in CharacterData.StartingAbilities)
+        foreach (BaseAbilityScriptable ability in CharacterData.StartingAbilities)
         {
             if (ability.GetType() == typeof(InstantiatedAbilityScriptable))
             {
                 AbilityHolder.AddAbility((InstantiatedAbilityScriptable)ability);
             }
+            if (ability.GetType() == typeof(PassiveAbility))
+            {
+                AbilityHolder.AddPassive((PassiveAbility)ability);
+            }
         }
     }
+
+    public void TriggerOnCrystalPickup(int expGained) => OnCrystalPickup?.Invoke(expGained);
 }
