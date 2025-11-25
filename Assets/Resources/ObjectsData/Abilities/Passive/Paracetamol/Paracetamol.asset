@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paracetamol
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Paracetamol
-  _description: Is it?
+  _description: Collecting XP crystals also heals you.
   _icon: {fileID: 4343528361783417165, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

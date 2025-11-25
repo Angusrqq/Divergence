@@ -51,6 +51,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip)
     {
+        _mixer.SetFloat("sfxPitch", 1f);
         _sfxSource.PlayOneShot(clip);
     }
 

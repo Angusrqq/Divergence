@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -80,5 +81,28 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (!_button.interactable) return;
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
+    }
+
+    public static IEnumerator MaterialFloatPropertyLerp(Material material, string propertyName, float speed, AnimationCurve curve = null, float from = 0f, float to = 1f)
+    {
+        float timePassed = 0f;
+        if (curve != null)
+        {
+            while (timePassed <= 1f)
+            {
+                timePassed += Time.deltaTime * speed;
+                material.SetFloat(propertyName, curve.Evaluate(timePassed));
+                yield return null;
+            }
+        }
+        else
+        {
+            while (timePassed <= 1f)
+            {
+                timePassed += Time.deltaTime * speed;
+                material.SetFloat(propertyName, Mathf.Lerp(from, to, timePassed));
+                yield return null;
+            }
+        }
     }
 }

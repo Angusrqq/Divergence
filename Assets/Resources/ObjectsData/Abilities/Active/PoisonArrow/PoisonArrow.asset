@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: PoisonArrow
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  _name: PoisonArrow
-  _description: toxic
+  _name: Poison arrow
+  _description: Shoots a poisoned arrow at the nearest enemy. Applies poison for
+    5 ticks.
   _icon: {fileID: -890758179379066591, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeavyHitter
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Heavy hitter
-  _description: heavy hit and etc
+  _description: Increases all damage.
   _icon: {fileID: 8295224864411331983, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

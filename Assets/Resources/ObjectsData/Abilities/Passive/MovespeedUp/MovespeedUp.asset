@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MovespeedUp
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Movespeed up
-  _description: Run faster
+  _description: Increases movement speed.
   _icon: {fileID: -8996511375018434408, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

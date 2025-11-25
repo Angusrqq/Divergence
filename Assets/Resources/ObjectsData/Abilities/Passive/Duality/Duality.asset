@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Duality
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Duality
-  _description: Wow, so many
+  _description: Every projectile spawns a weaker copy with stronger knockback.
   _icon: {fileID: 2752649814888968227, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
   _cost: 0
   _isUnlocked: 1

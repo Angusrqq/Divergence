@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
-  m_Name: ExpMultiplier
+  m_Name: Shrapnel
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
-  _name: Exp Multiplier
-  _description: Multiply exp
-  _icon: {fileID: -5622090537077989995, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  _name: Shrapnel
+  _description: After taking enough damage, releases spikes that hit nearby enemies
+    once.
+  _icon: {fileID: 3275149530380210373, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
-  MonoLogic: {fileID: 3195371801307526527, guid: c7f5bebd7278a1e409359c4dab96d578, type: 3}
-  PassiveType: 0
+  MonoLogic: {fileID: -7586009721794966930, guid: 5a7852d408f667b4abb5e829fbbd89e2, type: 3}
+  PassiveType: 1

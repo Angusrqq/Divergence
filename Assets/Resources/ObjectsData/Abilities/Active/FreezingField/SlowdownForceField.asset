@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7fe4ba3ba37c46b987eaa384ec0f1, type: 3}
   m_Name: SlowdownForceField
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
-  _name: Slowdown Froce Field
-  _description: slowdown your enemies
+  _name: Freezing field
+  _description: Spawns a cold zone that slows all enemies within its radius.
   _icon: {fileID: -3995549226574457110, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

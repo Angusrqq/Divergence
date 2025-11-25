@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2728829294635287879}
   - component: {fileID: 3195371801307526527}
   m_Layer: 0
-  m_Name: ExpMultiplier
+  m_Name: WisdomGain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

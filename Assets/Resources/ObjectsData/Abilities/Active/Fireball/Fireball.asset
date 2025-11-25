@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
   _name: Fireball
-  _description: Burn..burn..burn..
+  _description: Fires a fireball at the nearest enemy. Burns the target for 5 ticks.
   _icon: {fileID: 5685157490742104129, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

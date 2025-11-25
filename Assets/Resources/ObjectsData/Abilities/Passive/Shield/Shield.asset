@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Shield
-  _description: +10% damage resistance
+  _description: Increases damage resistance.
   _icon: {fileID: -727713798360024150, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1
