@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 64563511505219701}
   - component: {fileID: 7865244823035567771}
   - component: {fileID: 1138309099172459596}
-  - component: {fileID: 7389105907030167008}
+  - component: {fileID: 5415123365664210578}
+  - component: {fileID: -309318431146614516}
+  - component: {fileID: -8395083997758614843}
+  - component: {fileID: -6180674862945101512}
   m_Layer: 0
   m_Name: ShrapnelInstance
   m_TagString: Untagged
@@ -102,8 +105,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -7352648317119044060, guid: e0ad9ae8213a287428e01f125fb2c382, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 5439307966221200742, guid: 384b7b96b40cbef49adc20209f3a0555, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7389105907030167008
+--- !u!114 &5415123365664210578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +126,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 4943583530167835032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c172eab9ae66de45b5077b85faf6b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 24a6c89ceadcfe248af9a92199f9f874, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShrapnelInstance
+  m_EditorClassIdentifier: Assembly-CSharp::ShrapnelInstanceV2
+--- !u!50 &-309318431146614516
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943583530167835032}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &-8395083997758614843
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943583530167835032}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.13, y: -0.13}
+  m_Radius: 0.03
+--- !u!114 &-6180674862945101512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943583530167835032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c6b04341122c74e87d72a63c4d6d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedEntity
+  Animator: {fileID: 0}
+  AnimatorController: {fileID: 0}

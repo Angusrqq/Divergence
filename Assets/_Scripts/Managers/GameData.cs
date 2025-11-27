@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEditor.Overlays;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
@@ -36,6 +38,7 @@ public class GameData : MonoBehaviour
     public static List<EnemyData> Enemies = new();
     public static InGameAtributes InGameAttributes;
     public static MetaprogressionData CurrentMetadata;
+    public static InputActionAsset PlayerInputAsset;
     public static GameTimer GameTimerInstance;
 
     public static Sprite LockedIcon { get; private set; } // not going to cut it, // TODO: figure out a way to store/load constant icons
@@ -66,6 +69,8 @@ public class GameData : MonoBehaviour
             Debug.LogError("Locked icon not found in Resources/Icons/locked_icon");
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        PlayerInputAsset = Resources.Load<InputActionAsset>("Input/PlayerControls");
 
         //loading all data from resources, idk if this is the best way tho
         foreach (BaseAbilityScriptable ability in Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities"))
@@ -104,6 +109,7 @@ public class GameData : MonoBehaviour
         {
             Enemies.Add(enemy);
         }
+        InitializeBindings();
     }
 
     void Start()
@@ -344,6 +350,30 @@ public class GameData : MonoBehaviour
         data = DataSystem.LoadSettingsData() ?? data;
         SetGameSettings(data);
         return data;
+    }
+
+    private static void InitializeBindings()
+    {
+        if (!PlayerPrefs.HasKey("Bindings"))
+            PlayerPrefs.SetString("Bindings", PlayerInputAsset.SaveBindingOverridesAsJson());
+
+        PlayerInputAsset.LoadBindingOverridesFromJson(PlayerPrefs.GetString("Bindings"));
+    }
+
+    public static bool SaveBindings(InputActionAsset asset = null)
+    {
+        if (asset == PlayerInputAsset && PlayerPrefs.GetString("Bindings") != PlayerInputAsset.SaveBindingOverridesAsJson())
+        {
+            PlayerPrefs.SetString("Bindings", PlayerInputAsset.SaveBindingOverridesAsJson());
+            return true;
+        }
+        return false;
+    }
+
+    public static void LoadBindings(InputActionAsset asset = null)
+    {
+        if (asset == PlayerInputAsset)
+            asset.LoadBindingOverridesFromJson(PlayerPrefs.GetString("Bindings"));
     }
 
     private static MetaprogressionData InitializeProgData()

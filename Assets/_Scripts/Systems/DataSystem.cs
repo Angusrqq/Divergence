@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System;
+using UnityEngine.InputSystem;
 
 // TODO: Implement this class because we cant save any data right now
 /// <summary>

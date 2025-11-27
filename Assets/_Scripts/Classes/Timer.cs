@@ -17,7 +17,7 @@ public class GameTimer : MonoBehaviour
         timerText.text = FormatTime(currentTime);
     }
 
-    private static string FormatTime(float time, bool showMilliseconds = false, bool showHours = false)
+    public static string FormatTime(float time, bool showMilliseconds = false, bool showHours = false)
     {
         string res = "";
         int hours = (int)(time / 3600);

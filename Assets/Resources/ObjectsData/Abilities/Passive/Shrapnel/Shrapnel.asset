@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Shrapnel
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Shrapnel
-  _description: After taking enough damage, releases spikes that hit nearby enemies
-    once.
+  _description: After taking enough damage, releases spikes that shatter inside enemies.
   _icon: {fileID: 3275149530380210373, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   _cost: 0
   _isUnlocked: 1

@@ -4,60 +4,75 @@ using UnityEngine;
 public class ShrapnelInstance : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+    private AnimatedEntity _animatedEntity;
     private float _damage;
+    private Vector2 _direction;
+    private float _speed;
+    private Rigidbody2D _rb;
+    private bool _hit = false;
+    private Enemy _hitEnemy = null;
+    private float _maxActiveTime = 2f;
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
+        _animatedEntity = GetComponent<AnimatedEntity>();
+        StartCoroutine(Timer());
     }
 
-    public void Init(float damage, float radius)
+    public void Init(float damage, float radius, Vector2 direction, float speed)
     {
         _damage = damage;
         transform.localScale = new Vector3(radius, radius, 0f);
+        _direction = direction;
+        _speed = speed;
     }
 
-    public void AnimEvent()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector3 size = _spriteRenderer.bounds.extents * 2f;
-        float radius = Mathf.Max(size.x, size.y);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(GameData.player.transform.position, radius);
-        bool hit = false;
-        foreach (var collider in colliders)
+        if(collision.gameObject.TryGetComponent(out Enemy enemy) && !_hit)
         {
-            if (collider.gameObject.TryGetComponent(out Enemy enemy))
-            {
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(GameData.player.gameObject, _damage, GetType(), 10f, 0.2f);
-                    hit = true;
-                }
-                
-            }
-        }
-        if (hit)
-        {
+            enemy.TakeDamage(GameData.player.gameObject, _damage, GetType(), 10f, 0.2f);
+            _hit = true;
+            _hitEnemy = enemy;
+            _animatedEntity.ChangeAnimation("Shrapnel_hit");
             StopAllCoroutines();
-            StartCoroutine(HitFlash(0.01f));
+            StartCoroutine(HitFlash(2f));
         }
     }
 
     void FixedUpdate()
     {
-        transform.position = GameData.player.transform.position;
+        if (!_hit)
+        {
+            _rb.MovePosition(_direction * _speed + _rb.position);
+        }
+        if (_hitEnemy != null)
+        {
+            _rb.MovePosition(_hitEnemy.transform.position);
+        }
     }
 
     private IEnumerator HitFlash(float duration)
     {
         float timePassed = 0f;
+
         while (timePassed < duration)
         {
-            _spriteRenderer.color = Color.Lerp(Color.red, Color.white, timePassed / duration);
+            _spriteRenderer.color = Color.Lerp(Color.white, Color.red, timePassed / duration);
+            timePassed += Time.fixedDeltaTime;
             yield return null;
         }
     }
     public void LastFrame()
     {
         StopAllCoroutines();
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(_maxActiveTime);
         Destroy(gameObject);
     }
 }

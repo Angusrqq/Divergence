@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Reddveil
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _name: Reddveil
-  _description: Blast from the past
-  _icon: {fileID: 3713219614965599903, guid: cc76acfbb7d9ba842a398b732be124c5, type: 3}
+  _description: 'A mysterious wanderer in a crimson cloak, with only faint eyes glowing
+    beneath the hood. He appears where the night grows unnaturally deep, said to
+    move between worlds - armed with an oddly effective weapon: rice balls.'
+  _icon: {fileID: 1308278266, guid: cc76acfbb7d9ba842a398b732be124c5, type: 3}
   _cost: 0
   _isUnlocked: 1
   _unlockCost: 0

@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,6 +17,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [SerializeField] private AbilityIconDisplay _playerAbilityIconDisplay;
+    [SerializeField] private InputActionReference _movementAction;
 
     [NonSerialized] public DamageableEntity DamageableEntity;
     [NonSerialized] public AnimatedEntity AnimatedEntity;
@@ -95,41 +97,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        MovementVector = Vector2.zero;
+        MovementVector = _movementAction.action.ReadValue<Vector2>();
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            MovementVector.y += 1;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            MovementVector.y += -1;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            MovementVector.x += -1;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            MovementVector.x += 1;
-        }
-
-        // Normalize to prevent faster diagonal movement
-        MovementVector = MovementVector.normalized;
         if (MovementVector != Vector2.zero)
         {
-            if (MovementVector.x < 0)
-            {
-                SpriteRenderer.flipX = true;
-            }
-            else if (MovementVector.x > 0)
-            {
-                SpriteRenderer.flipX = false;
-            }
-
+            SpriteRenderer.flipX = MovementVector.x < 0;
             AnimatedEntity.ChangeAnimation("Run");
         }
         else

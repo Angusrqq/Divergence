@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(ExperienceCrystalPrefab, transform.position, Quaternion.identity, transform.parent);
         }
-
+        EnemyManager.Instance.TriggerEnemyDeath(this);
         Destroy(gameObject);
     }
 

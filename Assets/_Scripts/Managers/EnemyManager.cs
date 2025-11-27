@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// <para>
@@ -19,6 +20,12 @@ public class EnemyManager : MonoBehaviour
 
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
+    public Action<Enemy> OnEnemyDeath;
+
+    public void TriggerEnemyDeath(Enemy enemy)
+    {
+        OnEnemyDeath?.Invoke(enemy);
+    }
 
     /// <summary>
     /// Initializes the enemy manager singleton and creates a new list for storing enemies.
@@ -27,13 +34,10 @@ public class EnemyManager : MonoBehaviour
     {
         _camera = Camera.main;
         delay = SpawnDelay;
-    }
-
-    void Start()
-    {
         Instance = this;
         Enemies = new List<Enemy>();
     }
+
 
     /// <summary>
     /// Updates the enemy spawning timer. If the timer is up, an enemy is spawned and the timer is reset.
@@ -42,12 +46,12 @@ public class EnemyManager : MonoBehaviour
     {
         if (delay - Time.deltaTime <= 0)
         {
-            bool vertical = Random.Range(0, 2) == 1;
+            bool vertical = UnityEngine.Random.Range(0, 2) == 1;
             // Vector2 offset = new(10f, 10f);
             //TODO: apply an offset to this shit, dk how to explain (enemies spawn right at the edge, their sprite size is not included here)
-            Vector2 viewportCoords = vertical ? new(Random.Range(0, 2), Random.Range(0f, 1f)) : new(Random.Range(0f, 1f), Random.Range(0, 2));
+            Vector2 viewportCoords = vertical ? new(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0f, 1f)) : new(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0, 2));
             Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
-            SpawnEnemy(spawnPos, Quaternion.identity, Random.Range(0, GameData.Enemies.Count));
+            SpawnEnemy(spawnPos, Quaternion.identity, UnityEngine.Random.Range(0, GameData.Enemies.Count));
             delay = SpawnDelay / (1f + (GameData.GameTimerInstance.currentTime / 60f));
         }
         else

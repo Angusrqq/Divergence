@@ -44,8 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e59abee052dad241a0938b5505a1683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnergyBlast
-  Prefab: {fileID: 7389105907030167008, guid: b96c3483784fa9845949cbc06ecdd347, type: 3}
-  Damage:
-    BaseValue: 0
-    BaseModifier: 0
-    BaseMultiplier: 0
+  AudioClips: []
+  Prefab: {fileID: 5415123365664210578, guid: b96c3483784fa9845949cbc06ecdd347, type: 3}
