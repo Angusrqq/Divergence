@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8703df5ce19286248bc28fdc8fbf7b93
+guid: b4f34970b6f83fb4d9ee93ac75426654
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6269959304502295772
-    second: kill_counter_0
+      213: -594491116778234855
+    second: Fleetfoot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kill_counter_0
+      name: Fleetfoot_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 60
-        height: 60
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4234cf27b31acf8a0800000000000000
-      internalID: -6269959304502295772
+      spriteID: 91cde42aa71ffb7f0800000000000000
+      internalID: -594491116778234855
       vertices: []
       indices: 
       edges: []
@@ -125,19 +125,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dbbe60b787654fa41b57d341a21cf3e6
+    spriteID: 74c0e0d3a5b697d42a575679212d29ce
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 850b104c15a7e5d47bebf348dd840fb7, type: 3}
-      name: _Emission
+    secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kill_counter_0: -6269959304502295772
+      Fleetfoot_0: -594491116778234855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

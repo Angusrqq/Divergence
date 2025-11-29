@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
-  m_Name: CooldownReduction
+  m_Name: Swiftshot
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
-  _name: Cooldown reduction
-  _description: 'cool '
-  _icon: {fileID: 8341783019637210984, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _name: Swiftshot
+  _description: Increases projectile speed.
+  _icon: {fileID: 346657572414775950, guid: 3f78be9f45bc3944cb076f602852923b, type: 3}
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
-  MonoLogic: {fileID: -3597935648404957314, guid: 095badc37279ca0459fc10574d570017, type: 3}
+  MonoLogic: {fileID: 3777150647724499320, guid: d6495a97e39e28641bd967cb8d0838ec, type: 3}
   PassiveType: 0

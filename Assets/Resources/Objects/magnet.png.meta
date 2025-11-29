@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8703df5ce19286248bc28fdc8fbf7b93
+guid: 8438b9acc19dce04b8a1cca272d31c9d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6269959304502295772
-    second: kill_counter_0
+      213: 4877825377717948546
+    second: magnet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kill_counter_0
+      name: magnet_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 60
-        height: 60
+        x: 14
+        y: 28
+        width: 99
+        height: 67
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4234cf27b31acf8a0800000000000000
-      internalID: -6269959304502295772
+      spriteID: 2809343565481b340800000000000000
+      internalID: 4877825377717948546
       vertices: []
       indices: 
       edges: []
@@ -125,19 +125,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dbbe60b787654fa41b57d341a21cf3e6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 850b104c15a7e5d47bebf348dd840fb7, type: 3}
-      name: _Emission
+    secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kill_counter_0: -6269959304502295772
+      magnet_0: 4877825377717948546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8703df5ce19286248bc28fdc8fbf7b93
+guid: 850b104c15a7e5d47bebf348dd840fb7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6269959304502295772
-    second: kill_counter_0
+      213: -8024969340746748461
+    second: kill_counterEmission_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kill_counter_0
+      name: kill_counterEmission_0
       rect:
         serializedVersion: 2
         x: 2
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4234cf27b31acf8a0800000000000000
-      internalID: -6269959304502295772
+      spriteID: 3dda36717e491a090800000000000000
+      internalID: -8024969340746748461
       vertices: []
       indices: 
       edges: []
@@ -125,19 +125,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dbbe60b787654fa41b57d341a21cf3e6
+    spriteID: 7082f322a97964f42a0e8f3e6cfdbaec
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 850b104c15a7e5d47bebf348dd840fb7, type: 3}
-      name: _Emission
+    secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kill_counter_0: -6269959304502295772
+      kill_counterEmission_0: -8024969340746748461
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -54,6 +54,41 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 23f69b3392a72074d9394e4c5f9f4677, type: 3}
   - {fileID: 8300000, guid: b16c435ea5d730e4ca69c7583de3b416, type: 3}
   _mixer: {fileID: 24100000, guid: 75928051081585444aef9b28506061a8, type: 2}
+  groups:
+  - mixerGroup: {fileID: 30324528524523735, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_0
+    inUse: 0
+  - mixerGroup: {fileID: -5020379308604629920, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_1
+    inUse: 0
+  - mixerGroup: {fileID: 3527053794698142288, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_2
+    inUse: 0
+  - mixerGroup: {fileID: 7180853703548379227, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_3
+    inUse: 0
+  - mixerGroup: {fileID: -5772469265682673694, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_4
+    inUse: 0
+  - mixerGroup: {fileID: 3997307074043265512, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_5
+    inUse: 0
+  - mixerGroup: {fileID: -2117897659129079944, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_6
+    inUse: 0
+  - mixerGroup: {fileID: -5942169177539883474, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_7
+    inUse: 0
+  - mixerGroup: {fileID: -7730837457178339872, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_8
+    inUse: 0
+  - mixerGroup: {fileID: -7361861286436657056, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_9
+    inUse: 0
+  - mixerGroup: {fileID: -866858528798015664, guid: 75928051081585444aef9b28506061a8, type: 2}
+    exposedPitchParam: sfxPitch_10
+    inUse: 0
+  mixer: {fileID: 24100000, guid: 75928051081585444aef9b28506061a8, type: 2}
 --- !u!1 &3238429274749635518
 GameObject:
   m_ObjectHideFlags: 0

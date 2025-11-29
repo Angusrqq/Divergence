@@ -13,12 +13,16 @@ public class MetaprogressionData
     public List<Ability> UnlockedAbilities = new();
     public List<UpgradeScriptable> Upgrades = new();
     public List<MapData> UnlockedMaps = new();
-    public StartingAttributesInitializer StartingAttributesInitializer = new();
+    public StartingAttributesSnapshot StartingAttributesInitializer = new();
+
+    public GameRecords Records = new();
+    public GameStats gameStats = new();
 
     // some parameters that need to be saved here
 
     public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<Ability> unlockedAbilities = null,
-                            List<MapData> unlockedMaps = null, List<UpgradeScriptable> upgrades = null, StartingAttributesInitializer startingAttributes = null)
+                            List<MapData> unlockedMaps = null, List<UpgradeScriptable> upgrades = null, StartingAttributesSnapshot startingAttributes = null,
+                            GameRecords records = null, GameStats gameStats = null)
     {
         TimeKnowledge = timeKnowledge;
         UnlockedCharacters = unlockedCharacters ?? new();
@@ -26,5 +30,7 @@ public class MetaprogressionData
         Upgrades = upgrades ?? new();
         UnlockedMaps = unlockedMaps ?? new();
         StartingAttributesInitializer = startingAttributes ?? new();
+        Records = records ?? new();
+        this.gameStats = gameStats ?? new();
     }
 }

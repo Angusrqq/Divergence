@@ -32,7 +32,9 @@ public class MaskedGlowOnHover : GlowOnHoverButton
     /// <param name="eventData">Pointer event data</param>
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        base.OnPointerEnter(eventData);
+        if (!_button.interactable) return;
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
         MaskUtilities.NotifyStencilStateChanged(_mask);
     }
 
@@ -69,6 +71,18 @@ public class MaskedGlowOnHover : GlowOnHoverButton
     public override void OnPointerUp(PointerEventData eventData)
     {
         //base.OnPointerUp(eventData);
+        MaskUtilities.NotifyStencilStateChanged(_mask);
+    }
+
+    public override void OnSelect(BaseEventData eventData)
+    {
+        base.OnSelect(eventData);
+        MaskUtilities.NotifyStencilStateChanged(_mask);
+    }
+
+    public override void OnDeselect(BaseEventData eventData)
+    {
+        base.OnDeselect(eventData);
         MaskUtilities.NotifyStencilStateChanged(_mask);
     }
 }

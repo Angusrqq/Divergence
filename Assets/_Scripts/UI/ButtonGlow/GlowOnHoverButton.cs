@@ -13,7 +13,7 @@ using UnityEngine.UI;
 /// </para>
 /// </summary>
 [RequireComponent(typeof(Button))]
-public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler
 {
     protected TMP_Text _tmp;
     protected Button _button;
@@ -24,10 +24,11 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <c>Start</c> method initializes the button and text components, and stores the default glow color.
     /// </para>
     /// </summary>
-    public virtual void Start()
+    protected void Start()
     {
         _button = GetComponent<Button>();
         _tmp = GetComponentInChildren<TMP_Text>();
+        _tmp.fontMaterial = new(_tmp.fontMaterial);
         _defaultColor = _tmp.fontMaterial.GetColor("_GlowColor");
     }
 
@@ -40,6 +41,7 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
         if (!_button.interactable) return;
+        EventSystem.current.SetSelectedGameObject(gameObject);
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
     }
@@ -79,6 +81,26 @@ public class GlowOnHoverButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         if (!_button.interactable) return;
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
+    }
+
+    public virtual void OnSelect(BaseEventData eventData)
+    {
+        if (!_button.interactable) return;
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 1f);
+    }
+
+    public virtual void OnDeselect(BaseEventData eventData)
+    {
+        if (!_button.interactable) return;
+        _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
+        _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
+    }
+
+    protected void OnDisable()
+    {
         _tmp.fontMaterial.SetFloat("_GlowOffset", -0.39f);
         _tmp.fontMaterial.SetFloat("_GlowPower", 0f);
     }

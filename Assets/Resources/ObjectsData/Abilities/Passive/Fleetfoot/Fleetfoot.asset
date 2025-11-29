@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Fleetfoot
   _description: Increases movement speed.
-  _icon: {fileID: -8996511375018434408, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _icon: {fileID: -594491116778234855, guid: b4f34970b6f83fb4d9ee93ac75426654, type: 3}
   _cost: 0
   _isUnlocked: 1
   Level: 1

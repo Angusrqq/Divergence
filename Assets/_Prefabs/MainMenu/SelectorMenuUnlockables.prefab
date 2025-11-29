@@ -261,13 +261,13 @@ MonoBehaviour:
       - m_Target: {fileID: 2011651645506956945}
         m_TargetAssemblyTypeName: SelectorManagerUnlockables, Assembly-CSharp
         m_MethodName: Unlock
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: character
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1012382952947649297
@@ -430,6 +430,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 8642112315429244359, guid: ddf676ac0d220a84eb9c031b9a84a430, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 721.02
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 658993095305488226, guid: ddf676ac0d220a84eb9c031b9a84a430, type: 3}
     m_RemovedGameObjects: []
@@ -467,7 +471,10 @@ MonoBehaviour:
   descriptionText: {fileID: 3912865796118505097}
   contentContainer: {fileID: 1530587833821845801}
   Mask: {fileID: 7090595224401433662}
+  scrollDuration: 0.25
+  centerOffset: 0
   CurrencyDisplay: {fileID: 0}
+  UnlockButton: {fileID: 2393182271201234182}
 --- !u!224 &3508797246736126936 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8005166768540763678, guid: ddf676ac0d220a84eb9c031b9a84a430, type: 3}

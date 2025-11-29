@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 ////TODO: localization support
 
@@ -279,6 +280,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     {
                         button.interactable = true;
                     }
+                    EventSystem.current.SetSelectedGameObject(actionLabel.gameObject.GetComponentInParent<Button>().gameObject);
                 }
 
                 action.actionMap.Enable();

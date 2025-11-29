@@ -39,7 +39,7 @@ public static class StartingAttributes
     public static Stat CritMult = 1.5f;
     public static Stat Lives = 1f;
 
-    public static void ReloadStats(StartingAttributesInitializer startingAttributes)
+    public static void ReloadStats(StartingAttributesSnapshot startingAttributes)
     {
         Health = startingAttributes.Health;
         MaxHealth = startingAttributes.MaxHealth;
@@ -76,7 +76,7 @@ public static class StartingAttributes
 }
 
 
-public class StartingAttributesInitializer
+public class StartingAttributesSnapshot
 {
     public Stat Health = 100;
     public Stat MaxHealth = 100;
@@ -99,7 +99,7 @@ public class StartingAttributesInitializer
     public Stat CritMult = 1.5f;
     public Stat Lives = 1f;
 
-    public StartingAttributesInitializer()
+    public StartingAttributesSnapshot()
     {
         Health = StartingAttributes.Health;
         MaxHealth = StartingAttributes.MaxHealth;
@@ -234,3 +234,84 @@ public class InGameAtributes
         AbilityActiveTimeMultModifier = new(ref AbilityActiveTimeMult, StatModifierType.Mult, GameData.instance, true);
     }
 }
+
+public class GameStats
+{
+    public ulong TotalTime = 0;
+    public ulong TotalRuns = 0;
+    public ulong RunsFinished = 0;
+    //public ulong TotalDeaths = 0;
+    public ulong TotalCurrency = 0;
+    public ulong TotalKills = 0;
+    public ulong TotalDamageDealt = 0;
+    public ulong TotalDamageTaken = 0;
+
+    public enum StatType { Time, Runs, Deaths, Currency, Kills, DamageDealt, DamageTaken, RunsFinished };
+
+    public string GetStat(StatType type)
+    {
+        return type switch
+        {
+            StatType.Time => TotalTime.ToString(),
+            StatType.Runs => TotalRuns.ToString(),
+            //StatType.Deaths => TotalDeaths.ToString(),
+            StatType.Currency => TotalCurrency.ToString(),
+            StatType.Kills => TotalKills.ToString(),
+            StatType.DamageDealt => TotalDamageDealt.ToString(),
+            StatType.DamageTaken => TotalDamageTaken.ToString(),
+            StatType.RunsFinished => RunsFinished.ToString(),
+            _ => "0"
+        };
+    }
+
+    public GameStats(ulong totalTime, ulong totalRuns, ulong totalCurrency, ulong totalKills, ulong totalDamageDealt, ulong totalDamageTaken, ulong totalRunsFinished)
+    {
+        TotalTime = totalTime;
+        TotalRuns = totalRuns;
+        //TotalDeaths = totalDeaths;
+        TotalCurrency = totalCurrency;
+        TotalKills = totalKills;
+        TotalDamageDealt = totalDamageDealt;
+        TotalDamageTaken = totalDamageTaken;
+        RunsFinished = totalRunsFinished;
+    }
+    public GameStats(){}
+}
+
+public class GameRecords
+{
+    public uint MaxLevel = 0;
+    public uint MaxCurrency = 0;
+    public float MaxCritChance = 0f;
+    public float MaxCritMult = 0f;
+    public float MaxDamageMult = 0f;
+    public uint MaxDamageDealt = 0;
+
+    public enum RecordType { Level, Currency, CritChance, CritMult, DamageMult, DamageDealt };
+
+    public string GetRecord(RecordType type)
+    {
+        return type switch
+        {
+            RecordType.Level => MaxLevel.ToString(),
+            RecordType.Currency => MaxCurrency.ToString(),
+            RecordType.CritChance => MaxCritChance.ToString("F2"),
+            RecordType.CritMult => MaxCritMult.ToString("F2"),
+            RecordType.DamageMult => MaxDamageMult.ToString("F2"),
+            RecordType.DamageDealt => MaxDamageDealt.ToString(),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
+        };
+    }
+
+    public GameRecords(uint maxLevel, uint maxCurrency, float maxCritChance, float maxCritMult, float maxDamageMult, uint maxDamageDealt)
+    {
+        MaxLevel = maxLevel;
+        MaxCurrency = maxCurrency;
+        MaxCritChance = maxCritChance;
+        MaxCritMult = maxCritMult;
+        MaxDamageMult = maxDamageMult;
+        MaxDamageDealt = maxDamageDealt;
+    }
+    public GameRecords() { }
+}
+

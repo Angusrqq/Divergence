@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum AbilityState
@@ -136,7 +137,7 @@ public class AbilityHolder : MonoBehaviour
     {
         GameObject container = new(abilityName + "Handler");
         container.transform.parent = ParentHolder.transform;
-        return type switch
+        BaseAbilityHandler handler = type switch
         {
             HandlerType.BaseAbility => container.AddComponent<BaseAbilityHandler>(),
             HandlerType.Ability => container.AddComponent<AbilityHandler>(),
@@ -144,6 +145,9 @@ public class AbilityHolder : MonoBehaviour
             HandlerType.Passive => container.AddComponent<PassiveAbilityHandler>(),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
+        AudioSource source = handler.AddComponent<AudioSource>();
+        source.outputAudioMixerGroup = AudioManager.instance.Mixer.FindMatchingGroups("SFX")[0];
+        return handler;
     }
 
     void OnDestroy()

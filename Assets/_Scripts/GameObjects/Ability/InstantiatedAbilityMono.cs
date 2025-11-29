@@ -28,8 +28,9 @@ public class InstantiatedAbilityMono : MonoBehaviour
     protected Vector2 direction;
     protected float timer;
     protected bool doesDamage = true;
+
     [NonSerialized] public Enemy Target;
-    
+
     public InstantiatedAbilityHandler Ability { get => _ability; protected set => _ability = value; }
     public Stat Damage;
     public Stat KnockbackForce;
@@ -57,7 +58,8 @@ public class InstantiatedAbilityMono : MonoBehaviour
     {
         if (OnActivation != null)
         {
-            AudioManager.instance.PlaySFXPitched(OnActivation, UnityEngine.Random.Range(0.95f, 1.05f));
+            //AudioManager.instance.PlaySFXPitched(OnActivation, UnityEngine.Random.Range(0.95f, 1.05f));
+            AudioManager.instance.PlaySound(Ability.AudioSource, UnityEngine.Random.Range(0.95f, 1.05f), OnActivation);
         }
     }
 
@@ -127,7 +129,8 @@ public class InstantiatedAbilityMono : MonoBehaviour
         {
             if(OnHit != null && !_hit)
             {
-                AudioManager.instance.PlaySFXPitched(OnHit, UnityEngine.Random.Range(-3f, 3f));
+                //AudioManager.instance.PlaySFXPitched(OnHit, UnityEngine.Random.Range(-3f, 3f));
+                AudioManager.instance.PlaySound(Ability.AudioSource, UnityEngine.Random.Range(0.95f, 1.05f), OnHit);
                 _hit = true;
             }
             EnemyCollision(enemy);

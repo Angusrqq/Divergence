@@ -10,16 +10,14 @@ public class Shrapnel : PassiveAbilityMono
     private float _buffer = 0f;
     private float _radius = 5f;
     [NonSerialized] public Stat Damage = 20f;
-    [NonSerialized] public Stat Speed = 0.4f;
+    [NonSerialized] public Stat Speed = 1f;
     [NonSerialized] public byte _localProjectiles = 5;
-    private static ShrapnelInstance _instance;
 
     private const byte SPRITE_OFFSET = 45;
 
     void OnPlayerDamageTaken(UnityEngine.Object source, float amount, Type type = null)
     {
-        if(_instance != null) return;
-        if(amount >= _lastHealth - (_healthThreshold - _buffer) || amount >= _healthThreshold - _buffer)
+        if(amount >= _healthThreshold - _buffer)
         {
             _lastHealth = GameData.player.DamageableEntity.Health;
             ActivateEffect(Damage + _buffer);
@@ -33,7 +31,7 @@ public class Shrapnel : PassiveAbilityMono
         for(int i = 0; i < _localProjectiles + GameData.InGameAttributes.ProjectilesAdd; i++)
         {
             float instanceCircleRotation = 360f / (_localProjectiles + GameData.InGameAttributes.ProjectilesAdd) * i;
-            _instance = Instantiate(Prefab, GameData.player.transform.position, Quaternion.AngleAxis(instanceCircleRotation + SPRITE_OFFSET, Vector3.forward));
+            var _instance = Instantiate(Prefab, GameData.player.transform.position, Quaternion.AngleAxis(instanceCircleRotation + SPRITE_OFFSET, Vector3.forward));
             Vector2 direction = new Vector2(Mathf.Cos(instanceCircleRotation * Mathf.Deg2Rad), Mathf.Sin(instanceCircleRotation * Mathf.Deg2Rad));
             _instance.Init(damage, _radius, direction, Speed);
         }

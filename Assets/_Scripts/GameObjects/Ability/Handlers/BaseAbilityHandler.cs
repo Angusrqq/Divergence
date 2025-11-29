@@ -11,6 +11,7 @@ public class BaseAbilityHandler : MonoBehaviour
     public string Name => _source.Name;
     public string Description => _source.Description;
     public Sprite Icon => _source.Icon;
+    public AudioSource AudioSource;
 
     public void Init(BaseAbilityScriptable source)
     {
@@ -18,6 +19,7 @@ public class BaseAbilityHandler : MonoBehaviour
         MaxLevel = source.MaxLevel;
         _source = source;
         IsEvolved = source.IsEvolved;
+        AudioSource = GetComponent<AudioSource>();
         AfterInit();
     }
 

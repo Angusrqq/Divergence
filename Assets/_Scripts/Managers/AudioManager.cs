@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,6 +20,63 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] MusicClips => _musicClips;
     public AudioClip[] SFXClips => _sfxClips;
     public AudioMixer Mixer => _mixer;
+
+    [Header("SfxPool")]
+    public List<PitchGroup> groups = new List<PitchGroup>();
+    public AudioMixer mixer;
+
+    public PitchGroup GetAvailableGroup()
+    {
+        foreach (var g in groups)
+        {
+            if (!g.inUse)
+            {
+                g.inUse = true;
+                return g;
+            }
+        }
+
+        // No free group? Just reuse the first one.
+        // (Optional: Expand pool or add round-robin logic)
+        return groups[0];
+    }
+
+    public void ReleaseGroup(PitchGroup g)
+    {
+        g.inUse = false;
+    }
+
+    public void PlaySound(AudioSource source, float pitch)
+    {
+        var g = GetAvailableGroup();
+
+        source.outputAudioMixerGroup = g.mixerGroup;
+
+        mixer.SetFloat(g.exposedPitchParam, pitch);
+
+        source.Play();
+
+        StartCoroutine(ReleaseAfter(source, g));
+    }
+
+    public void PlaySound(AudioSource source, float pitch, AudioClip clip)
+    {
+        var g = GetAvailableGroup();
+
+        source.outputAudioMixerGroup = g.mixerGroup;
+
+        mixer.SetFloat(g.exposedPitchParam, pitch);
+
+        source.PlayOneShot(clip);
+
+        StartCoroutine(ReleaseAfter(source, g));
+    }
+
+    private System.Collections.IEnumerator ReleaseAfter(AudioSource src, PitchGroup group)
+    {
+        yield return new WaitWhile(() => src != null && src.isPlaying);
+        ReleaseGroup(group);
+    }
 
     private void Awake()
     {
@@ -83,4 +141,11 @@ public class AudioManager : MonoBehaviour
         _mixer.GetFloat("sfxVolume", out float volume);
         return volume;
     }
+}
+[System.Serializable]
+public class PitchGroup
+{
+    public AudioMixerGroup mixerGroup;
+    public string exposedPitchParam; // e.g. "Pitch_1"
+    [HideInInspector] public bool inUse;
 }
