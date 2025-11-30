@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,15 +7,19 @@ public class KillCounter : MonoBehaviour
 {
     [SerializeField] private TMPro.TMP_Text _killCounterText;
     private int _kills = 0;
-    private float _timer = 0f;
     private float _killsPerSecond = 0f;
-    private int _lastKillsValueBeforeUpdate = 0;
     private Material _iconMaterial;
+    private RectTransform _iconTransform;
     private Color _initialColor;
+    private List<float> _killTimes = new();
+    private const float _KPSWINDOW = 3f;
+    private float _shakeMagnitude = 0f;
+    private Coroutine _shakeCoroutine;
 
     private void Awake()
     {
-        Image temp = transform.Find("Icon").GetComponent<Image>();
+        _iconTransform = transform.Find("Icon").GetComponent<RectTransform>();
+        Image temp = _iconTransform.GetComponent<Image>();
         temp.material = Instantiate(temp.material);
         _iconMaterial = temp.material;
 
@@ -23,28 +29,36 @@ public class KillCounter : MonoBehaviour
     private void Start()
     {
         EnemyManager.Instance.OnEnemyDeath += OnEnemyDeath;
+        _shakeCoroutine = StartCoroutine(ShakeIcon());
     }
 
     private void OnEnemyDeath(Enemy enemy)
     {
         _kills++;
         _killCounterText.text = _kills.ToString();
-        // Debug.Log($"Time passed: {timePassed}");
-        // Debug.Log($"1/kills * timePassed: {1/(_kills-1f)}");
+
+        float now = Time.time;
+        _killTimes.Add(now);
+
+        // Remove kills older than the window
+        _killTimes.RemoveAll(t => t < now - _KPSWINDOW);
+
+        // calculate KPS
+        _killsPerSecond = _killTimes.Count / _KPSWINDOW;
+        _shakeMagnitude = (_killsPerSecond - 25f) / 10f;
+
+        Debug.Log($"Kills per second: {_killsPerSecond}");
+        _iconMaterial.SetColor("_Color", _initialColor * (_killsPerSecond-30) * 10f);
     }
 
-    //TODO: figure out how to get kills per second on enemy death instead of over a period of time
-
-    private void Update()
+    private IEnumerator ShakeIcon()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= 1f)
+        Vector2 startPos = _iconTransform.localPosition;
+        while (true)
         {
-            _killsPerSecond = _kills -_lastKillsValueBeforeUpdate / _timer;
-            _lastKillsValueBeforeUpdate = _kills;
-            _timer = 0f;
-            Debug.Log($"Kills per second: {_killsPerSecond}");
-            _iconMaterial.SetColor("_Color", _initialColor * _killsPerSecond);
+            if(_shakeMagnitude <= 0f) yield return null;
+            else _iconTransform.localPosition = startPos + Random.insideUnitCircle * _shakeMagnitude;
+            yield return null;
         }
     }
 

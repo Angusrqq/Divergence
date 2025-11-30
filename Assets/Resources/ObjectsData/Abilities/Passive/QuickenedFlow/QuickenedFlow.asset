@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Quickened Flow
   _description: Reduces the cooldown of all abilities, letting you unleash skills
     more frequently.
-  _icon: {fileID: 8341783019637210984, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _icon: {fileID: -387787249, guid: f5fdc078ea09601428c08fe2cc543242, type: 3}
   _cost: 0
   _isUnlocked: 1
   Level: 1

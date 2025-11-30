@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 8438b9acc19dce04b8a1cca272d31c9d
+guid: f5fdc078ea09601428c08fe2cc543242
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4877825377717948546
-    second: magnet_0
+      213: -1577681901061965010
+    second: clockcock_0
+  - first:
+      213: -1292383239230216601
+    second: clockcock_1
+  - first:
+      213: -2893362416182518960
+    second: clockcock_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +106,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: magnet_0
+      name: Quickened Flow_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 28
-        width: 99
-        height: 67
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2809343565481b340800000000000000
-      internalID: 4877825377717948546
+      spriteID: 02554f9b18443694d89c9679f26b5943
+      internalID: -387787249
       vertices: []
       indices: 
       edges: []
@@ -125,7 +131,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2105d1d3a231220428cc5adb71208e7a
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +139,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      magnet_0: 4877825377717948546
+      Quickened Flow_0: -387787249
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

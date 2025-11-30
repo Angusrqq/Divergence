@@ -277,7 +277,7 @@ public class Player : MonoBehaviour
         {
             OnCrystalPickup?.Invoke((int)gainedExperience);
         }
-        Debug.Log($"Player gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
+        //Debug.Log($"Player gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
     }
 
     /// <summary>
