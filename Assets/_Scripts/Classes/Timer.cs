@@ -1,3 +1,4 @@
+using System;
 using System.Timers;
 using UnityEngine;
 
@@ -30,5 +31,16 @@ public class GameTimer : MonoBehaviour
         res += seconds.ToString("00");
         if (showMilliseconds) res += "." + milliseconds.ToString("000");
         return res;
+    }
+
+    public static string FormatTimeConditionally(float time)
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        string result =
+            (timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "") +
+            (timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "") +
+            $"{timeSpan.Seconds}s";
+
+        return result;
     }
 }

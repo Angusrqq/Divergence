@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Shuriken
   _description: Throws a shuriken at the nearest enemy.
   _icon: {fileID: 8483471649807275646, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  Guid: 17680698-58f5-4eef-9eac-1bc89ce4c160
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
+  Tier: 1
   CooldownTime: 3
   ActiveTime: 3
   KnockbackForce: 2

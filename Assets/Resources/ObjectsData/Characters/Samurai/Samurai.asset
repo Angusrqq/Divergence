@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Samurai
   _description: Real samurai
   _icon: {fileID: -1501021414962227678, guid: b7d84f2f71366de4aa67469855a98786, type: 3}
+  Guid: e18e863b-3774-40e5-819f-5442ee8c7bd0
   _cost: 0
   _isUnlocked: 1
   _unlockCost: 0

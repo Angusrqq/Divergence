@@ -18,7 +18,6 @@ public class EnemyManager : MonoBehaviour
     private Camera _camera;
     private float delay;
 
-    public static Transform Container { get; private set; }
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
     public Action<Enemy> OnEnemyDeath;
@@ -37,7 +36,6 @@ public class EnemyManager : MonoBehaviour
         delay = SpawnDelay;
         Instance = this;
         Enemies = new List<Enemy>();
-        Container = transform;
     }
 
 

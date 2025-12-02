@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Strudy
   _description: Bigger, better, stronger
   _icon: {fileID: -8838299409037085554, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 998769d3-35d6-4a1f-a695-171a47e58222
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 1
   MonoLogic: {fileID: 8160234471515031682, guid: 8753af26c3ed80949b5d6dfa6c5c5e08, type: 3}
   PassiveType: 0

@@ -108,9 +108,10 @@ public class SettingsMenu : MonoBehaviour
 
     private void DefaultValues()
     {
-        _masterVolumeSlider.value = AudioManager.instance.GetMasterVolume();
-        _musicVolumeSlider.value = AudioManager.instance.GetMusicVolume();
-        _sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
+        // inverse of Mathf.Log10(volume) * 20f
+        _masterVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetMasterVolume() / 20f);
+        _musicVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetMusicVolume() / 20f);
+        _sfxVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetSFXVolume() / 20f);
     }
 
     /// <summary>
@@ -154,17 +155,17 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetMasterVolume()
     {
-        AudioManager.instance.SetMasterVolume(_masterVolumeSlider.value);
+        AudioManager.instance.SetMasterVolume(Mathf.Log10(_masterVolumeSlider.value) * 20f);
     }
 
     public void SetMusicVolume()
     {
-        AudioManager.instance.SetMusicVolume(_musicVolumeSlider.value);
+        AudioManager.instance.SetMusicVolume(Mathf.Log10(_musicVolumeSlider.value) * 20f);
     }
 
     public void SetSFXVolume()
     {
-        AudioManager.instance.SetSFXVolume(_sfxVolumeSlider.value);
+        AudioManager.instance.SetSFXVolume(Mathf.Log10(_sfxVolumeSlider.value) * 20f);
     }
 
     //TODO: tie methods above for sliders and this one to the sliders and a button respectfully and make it save the settings

@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: testing
   _description: desc
   _icon: {fileID: 0}
+  Guid: c1cef57c-0cf2-4414-9471-4f5c1f078847
   _cost: 0
   _isUnlocked: 0
   _level: 0

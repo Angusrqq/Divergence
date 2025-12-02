@@ -15,9 +15,16 @@ public class KillCounter : MonoBehaviour
     private const float _KPSWINDOW = 3f;
     private float _shakeMagnitude = 0f;
     private Coroutine _shakeCoroutine;
+    private const float _MIN_KPS_FOR_SHAKE = 25f;
+    private const float _MIN_KPS_FOR_GLOW = 30f;
+    private const float _HDR_MULT = 10f;
+
+    public static KillCounter Instance { get; private set; }
+    public static int Kills => Instance._kills;
 
     private void Awake()
     {
+        Instance = this;
         _iconTransform = transform.Find("Icon").GetComponent<RectTransform>();
         Image temp = _iconTransform.GetComponent<Image>();
         temp.material = Instantiate(temp.material);
@@ -45,10 +52,10 @@ public class KillCounter : MonoBehaviour
 
         // calculate KPS
         _killsPerSecond = _killTimes.Count / _KPSWINDOW;
-        _shakeMagnitude = (_killsPerSecond - 25f) / 10f;
+        _shakeMagnitude = (_killsPerSecond - _MIN_KPS_FOR_SHAKE) / 10f;
 
         Debug.Log($"Kills per second: {_killsPerSecond}");
-        _iconMaterial.SetColor("_Color", _initialColor * (_killsPerSecond-30) * 10f);
+        _iconMaterial.SetColor("_Color", _initialColor * (_killsPerSecond -_MIN_KPS_FOR_GLOW) * _HDR_MULT);
     }
 
     private IEnumerator ShakeIcon()

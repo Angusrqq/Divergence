@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using MessagePack;
 
 public enum AttributeId
 {
@@ -38,6 +39,7 @@ public static class StartingAttributes
     public static Stat CritChance = 0f;
     public static Stat CritMult = 1.5f;
     public static Stat Lives = 1f;
+    public static Stat Luck = 0f;
 
     public static void ReloadStats(StartingAttributesSnapshot startingAttributes)
     {
@@ -61,6 +63,7 @@ public static class StartingAttributes
         CritChance = startingAttributes.CritChance;
         CritMult = startingAttributes.CritMult;
         Lives = startingAttributes.Lives;
+        Luck = startingAttributes.Luck;
     }
 
     public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
@@ -76,28 +79,30 @@ public static class StartingAttributes
 }
 
 
+[MessagePackObject]
 public class StartingAttributesSnapshot
 {
-    public Stat Health = 100;
-    public Stat MaxHealth = 100;
-    public Stat PlayerDamageMult = 1f;
-    public Stat PlayerResistsMult = 1f;
-    public Stat ProjectilesAdd = 0;
-    public Stat CastSpeedMult = 1f;
-    public Stat CooldownReductionMult = 1f;
-    public Stat ActiveAbilitySlots = 5;
-    public Stat AbilitiesPerLevel = 3;
-    public Stat PassiveAbilitySlots = 5;
-    public Stat ManuallyTriggeredAbilitySlots = 0;
-    public Stat PassiveAbilityEffectMult = 1f;
-    public Stat PierceTargets = 0;
-    public Stat MagnetRadius = 0.5f;
-    public Stat ExperienceMultiplier = 1f;
-    public Stat ProjectileSpeedMult = 1f;
-    public Stat AbilityActiveTimeMult = 1f;
-    public Stat CritChance = 0f;
-    public Stat CritMult = 1.5f;
-    public Stat Lives = 1f;
+    [Key(0)] public Stat Health = 100;
+    [Key(1)] public Stat MaxHealth = 100;
+    [Key(2)] public Stat PlayerDamageMult = 1f;
+    [Key(3)] public Stat PlayerResistsMult = 1f;
+    [Key(4)] public Stat ProjectilesAdd = 0;
+    [Key(5)] public Stat CastSpeedMult = 1f;
+    [Key(6)] public Stat CooldownReductionMult = 1f;
+    [Key(7)] public Stat ActiveAbilitySlots = 5;
+    [Key(8)] public Stat AbilitiesPerLevel = 3;
+    [Key(9)] public Stat PassiveAbilitySlots = 5;
+    [Key(10)] public Stat ManuallyTriggeredAbilitySlots = 0;
+    [Key(11)] public Stat PassiveAbilityEffectMult = 1f;
+    [Key(12)] public Stat PierceTargets = 0;
+    [Key(13)] public Stat MagnetRadius = 0.5f;
+    [Key(14)] public Stat ExperienceMultiplier = 1f;
+    [Key(15)] public Stat ProjectileSpeedMult = 1f;
+    [Key(16)] public Stat AbilityActiveTimeMult = 1f;
+    [Key(17)] public Stat CritChance = 0f;
+    [Key(18)] public Stat CritMult = 1.5f;
+    [Key(19)] public Stat Lives = 1f;
+    [Key(20)] public Stat Luck = 0f;
 
     public StartingAttributesSnapshot()
     {
@@ -121,6 +126,35 @@ public class StartingAttributesSnapshot
         CritChance = StartingAttributes.CritChance;
         CritMult = StartingAttributes.CritMult;
         Lives = StartingAttributes.Lives;
+        Luck = StartingAttributes.Luck;
+    }
+
+    // i didn't sign up for this shit
+    [SerializationConstructor]
+    public StartingAttributesSnapshot(float key1, float key2, float key3, float key4, float key5, float key6, float key7, float key8, float key9, float key10,
+                                    float key11, float key12, float key13, float key14, float key15, float key16, float key17, float key18, float key19, float key20, float key21)
+    {
+        Health = key1;
+        MaxHealth = key2;
+        PlayerDamageMult = key3;
+        PlayerResistsMult = key4;
+        ProjectilesAdd = key5;
+        CastSpeedMult = key6;
+        CooldownReductionMult = key7;
+        ActiveAbilitySlots = key8;
+        AbilitiesPerLevel = key9;
+        PassiveAbilitySlots = key10;
+        ManuallyTriggeredAbilitySlots = key11;
+        PassiveAbilityEffectMult = key12;
+        PierceTargets = key13;
+        MagnetRadius = key14;
+        ExperienceMultiplier = key15;
+        ProjectileSpeedMult = key16;
+        AbilityActiveTimeMult = key17;
+        CritChance = key18;
+        CritMult = key19;
+        Lives = key20;
+        Luck = key21;
     }
 }
 
@@ -152,6 +186,9 @@ public class InGameAtributes
     public Stat CritChance = 0f;
     public Stat CritMult = 1.5f;
     public Stat Lives = 1f;
+    public Stat Luck = 0f;
+
+    public float DamageDealt = 0;
 
     public StatModifierByStat HealthModifier;
     public StatModifierByStat MaxHealthModifier;
@@ -188,7 +225,7 @@ public class InGameAtributes
     /// </summary>
     public InGameAtributes(Stat health = null, Stat maxHealth = null, Stat playerDamageMult = null, Stat playerResistsMult = null, Stat projectilesAdd = null,
     Stat castSpeedMult = null, Stat cooldownReductionMult = null, Stat passiveAbilityEffectMult = null, Stat pierceTargets = null, Stat magnetRadius = null,
-    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null, Stat critChance = null, Stat critMult = null, Stat lives = null)
+    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null, Stat critChance = null, Stat critMult = null, Stat lives = null, Stat luck = null)
     {
         Health = health ?? StartingAttributes.Health;
         MaxHealth = maxHealth ?? StartingAttributes.MaxHealth;
@@ -206,6 +243,7 @@ public class InGameAtributes
         CritChance = critChance ?? StartingAttributes.CritChance;
         CritMult = critMult ?? StartingAttributes.CritMult;
         Lives = lives ?? StartingAttributes.Lives;
+        Luck = luck ?? StartingAttributes.Luck;
 
         ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
         PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;
@@ -235,16 +273,17 @@ public class InGameAtributes
     }
 }
 
+[MessagePackObject]
 public class GameStats
 {
-    public ulong TotalTime = 0;
-    public ulong TotalRuns = 0;
-    public ulong RunsFinished = 0;
+    [Key(0)] public ulong TotalTime = 0;
+    [Key(1)] public ulong TotalRuns = 0;
+    [Key(2)] public ulong RunsFinished = 0;
     //public ulong TotalDeaths = 0;
-    public ulong TotalCurrency = 0;
-    public ulong TotalKills = 0;
-    public ulong TotalDamageDealt = 0;
-    public ulong TotalDamageTaken = 0;
+    [Key(3)] public ulong TotalCurrency = 0;
+    [Key(4)] public ulong TotalKills = 0;
+    [Key(5)] public ulong TotalDamageDealt = 0;
+    [Key(6)] public ulong TotalDamageTaken = 0;
 
     public enum StatType { Time, Runs, Deaths, Currency, Kills, DamageDealt, DamageTaken, RunsFinished };
 
@@ -264,7 +303,7 @@ public class GameStats
         };
     }
 
-    public GameStats(ulong totalTime, ulong totalRuns, ulong totalCurrency, ulong totalKills, ulong totalDamageDealt, ulong totalDamageTaken, ulong totalRunsFinished)
+    public GameStats(ulong totalTime, ulong totalRuns, ulong totalRunsFinished, ulong totalCurrency, ulong totalKills, ulong totalDamageDealt, ulong totalDamageTaken)
     {
         TotalTime = totalTime;
         TotalRuns = totalRuns;
@@ -278,14 +317,15 @@ public class GameStats
     public GameStats(){}
 }
 
+[MessagePackObject]
 public class GameRecords
 {
-    public uint MaxLevel = 0;
-    public uint MaxCurrency = 0;
-    public float MaxCritChance = 0f;
-    public float MaxCritMult = 0f;
-    public float MaxDamageMult = 0f;
-    public uint MaxDamageDealt = 0;
+    [Key(0)] public uint MaxLevel = 0;
+    [Key(1)] public uint MaxCurrency = 0;
+    [Key(2)] public float MaxCritChance = 0f;
+    [Key(3)] public float MaxCritMult = 0f;
+    [Key(4)] public float MaxDamageMult = 0f;
+    [Key(5)] public uint MaxDamageDealt = 0;
 
     public enum RecordType { Level, Currency, CritChance, CritMult, DamageMult, DamageDealt };
 
@@ -314,4 +354,3 @@ public class GameRecords
     }
     public GameRecords() { }
 }
-

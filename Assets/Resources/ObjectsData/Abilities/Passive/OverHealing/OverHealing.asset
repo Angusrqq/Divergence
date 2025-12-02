@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Overhealing
   _description: Excess healing converts into bonus damage for a short time.
   _icon: {fileID: -8077885897058716430, guid: c0af6ae0ba05f254cb36b8ae8e5dce20, type: 3}
+  Guid: da3329f0-ee60-4012-bc68-0bb86ee78b3b
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 2
   MonoLogic: {fileID: -3639515103929393457, guid: 4ff81da80e2de31479d7cec9793147a4, type: 3}
   PassiveType: 0

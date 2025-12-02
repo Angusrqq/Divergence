@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Axe
   _description: Throws an axe that travels forward, then turns back and speeds up.
   _icon: {fileID: 1897457715974365829, guid: 8a6309f36d8da9b4a91e48cb2db96910, type: 3}
+  Guid: ac00fa39-96df-48aa-a2c0-13250c5a3ccb
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
+  Tier: 3
   CooldownTime: 3
   ActiveTime: 2
   KnockbackForce: 4

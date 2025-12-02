@@ -17,6 +17,7 @@ MonoBehaviour:
     beneath the hood. He appears where the night grows unnaturally deep, said to
     move between worlds - armed with an oddly effective weapon: rice balls.'
   _icon: {fileID: 1308278266, guid: cc76acfbb7d9ba842a398b732be124c5, type: 3}
+  Guid: c8b60a1c-d0ad-4b47-945c-85b391265a95
   _cost: 0
   _isUnlocked: 1
   _unlockCost: 0

@@ -158,7 +158,11 @@ public class AbilityHolder : MonoBehaviour
         OnAbilityActivated = null;
     }
 
-    public void TriggerOnEnemyHit(Type abilityType, Enemy target, float damage, InstantiatedAbilityMono projectile = null) => OnEnemyHit?.Invoke(abilityType, target, damage, projectile);
+    public void TriggerOnEnemyHit(Type abilityType, Enemy target, float damage, InstantiatedAbilityMono projectile = null)
+    {
+        OnEnemyHit?.Invoke(abilityType, target, damage, projectile);
+        GameData.InGameAttributes.DamageDealt += damage;
+    } 
     public void TriggerOnProjectileFired(Type abilityType, InstantiatedAbilityMono projectile) => OnProjectileFired?.Invoke(abilityType, projectile);
     public void TriggerOnProjectileHit(Type abilityType, Vector2 position) => OnProjectileHit?.Invoke(abilityType, position);
     public void TriggerOnAbilityActivated(Type abilityType, InstantiatedAbilityHandler ability, InstantiatedAbilityMono prefab) => OnAbilityActivated?.Invoke(abilityType, ability, prefab);

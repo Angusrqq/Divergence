@@ -16,10 +16,12 @@ MonoBehaviour:
   _description: Builds combo on consecutive hits; resets on miss. Higher combo increases
     all damage.
   _icon: {fileID: -3306201139672504968, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  Guid: c14ccf53-d89c-4b34-87e9-00dc5d4804e4
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 2
   MonoLogic: {fileID: 3024719137699547501, guid: c75ecd3b95fdd5d41a87f6215e5176ca, type: 3}
   PassiveType: 0

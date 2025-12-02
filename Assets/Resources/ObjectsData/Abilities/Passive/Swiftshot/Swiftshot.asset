@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Swiftshot
   _description: Increases projectile speed.
   _icon: {fileID: 346657572414775950, guid: 3f78be9f45bc3944cb076f602852923b, type: 3}
+  Guid: 2a3ce043-b244-4232-b826-2f7138e6336a
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 1
   MonoLogic: {fileID: 3777150647724499320, guid: d6495a97e39e28641bd967cb8d0838ec, type: 3}
   PassiveType: 0

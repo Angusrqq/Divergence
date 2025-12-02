@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using UnityEngine.InputSystem;
+using MessagePack;
 
 // TODO: Implement this class because we cant save any data right now
 /// <summary>
@@ -20,11 +20,8 @@ public static class DataSystem
     /// <param name="data">The metaprogression data to be saved.</param>
     public static void SaveProgData(MetaprogressionData data)
     {
-        BinaryFormatter formatter = new();
-        FileStream stream = new(SAVE_FILE_PATH, FileMode.Create);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
+        byte[] bytes = MessagePackSerializer.Serialize(data);
+        File.WriteAllBytes(SAVE_FILE_PATH, bytes);
     }
 
     /// <summary>
@@ -36,16 +33,13 @@ public static class DataSystem
     {
         if (File.Exists(SAVE_FILE_PATH))
         {
-            BinaryFormatter formatter = new();
-            FileStream stream = new(SAVE_FILE_PATH, FileMode.Open);
-
-            MetaprogressionData data = formatter.Deserialize(stream) as MetaprogressionData;
-            stream.Close();
-
+            byte[] bytes = File.ReadAllBytes(SAVE_FILE_PATH);
+            var data = MessagePackSerializer.Deserialize<MetaprogressionData>(bytes);
             return data;
         }
         else
         {
+            Debug.LogWarning("Save file not found.");
             return null;
         }
     }

@@ -16,10 +16,12 @@ MonoBehaviour:
   _description: Reduces the cooldown of all abilities, letting you unleash skills
     more frequently.
   _icon: {fileID: -387787249, guid: f5fdc078ea09601428c08fe2cc543242, type: 3}
+  Guid: e2b033e6-cd3b-421a-a664-5aac72e99f2b
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 2
   MonoLogic: {fileID: -3597935648404957314, guid: 095badc37279ca0459fc10574d570017, type: 3}
   PassiveType: 0

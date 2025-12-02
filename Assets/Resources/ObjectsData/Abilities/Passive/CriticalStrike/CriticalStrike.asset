@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Critical Strike
   _description: You're lucky one
   _icon: {fileID: -4289354037535779264, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: c1ef1111-ed4a-41c7-b8c6-bd092aaba4e8
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 4
   MonoLogic: {fileID: 1789955093598720297, guid: df33fd99e477bcf41ba22c0c78e69f40, type: 3}
   PassiveType: 0

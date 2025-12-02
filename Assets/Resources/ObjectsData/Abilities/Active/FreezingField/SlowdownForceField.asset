@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Freezing field
   _description: Spawns a cold zone that slows all enemies within its radius.
   _icon: {fileID: -3995549226574457110, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 3dd9be0f-221d-4aa7-8ce6-a00f911e2bed
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
+  Tier: 3
   CooldownTime: 15
   ActiveTime: 5
   KnockbackForce: 0

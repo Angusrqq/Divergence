@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Rice Balls
   _description: very asian
   _icon: {fileID: 0}
+  Guid: fda41971-9f78-42fd-85e3-714a4836b6f4
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
+  Tier: 2
   CooldownTime: 0.1
   ActiveTime: 1
   KnockbackForce: 2

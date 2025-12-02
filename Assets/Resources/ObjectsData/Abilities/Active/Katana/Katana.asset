@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Katana
   _description: Slashes stuff
   _icon: {fileID: 439545428370905045, guid: 50debcf5d0dca1b4da39aa0d9681c5c0, type: 3}
+  Guid: b67e32c7-8c3d-4c0e-a910-3d56749cdca4
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 0
+  Tier: 1
   CooldownTime: 0.7
   ActiveTime: 0.2
   KnockbackForce: 4

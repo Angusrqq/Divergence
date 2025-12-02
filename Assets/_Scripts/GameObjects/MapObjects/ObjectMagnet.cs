@@ -9,7 +9,7 @@ public class ObjectMagnet : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        var enemyManager = EnemyManager.Container;
+        var enemyManager = EnemyManager.Instance.transform;
         if (enemyManager == null) return;
 
         for (int i = 0; i < enemyManager.childCount; i++)
@@ -17,7 +17,9 @@ public class ObjectMagnet : MonoBehaviour
             if (enemyManager.GetChild(i).TryGetComponent(out ExperienceCrystal crystal))
             {
                 if (!crystal.IsFired)
+                {
                     crystal.StartCoroutine(crystal.MagnetToPlayerCoroutine(curve));
+                }
             }
         }
 

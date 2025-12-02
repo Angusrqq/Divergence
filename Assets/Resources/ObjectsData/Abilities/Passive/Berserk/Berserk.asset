@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Berserk
   _description: Boosts stats while at low HP.
   _icon: {fileID: 1916770088336961771, guid: f04c307f237def64abdfd8854bc0cfb8, type: 3}
+  Guid: 016e9e28-b061-4f01-886c-aa0cf4dadcb6
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 3
   MonoLogic: {fileID: 5672800922628063012, guid: d80e4cb599f500e4e985b7613b365cac, type: 3}
   PassiveType: 0

@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Shrapnel
   _description: After taking enough damage, releases spikes that shatter inside enemies.
   _icon: {fileID: 3275149530380210373, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 0f3020b2-68a2-4f03-bf79-2a4c4064b030
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 2
   MonoLogic: {fileID: -7586009721794966930, guid: 5a7852d408f667b4abb5e829fbbd89e2, type: 3}
   PassiveType: 1

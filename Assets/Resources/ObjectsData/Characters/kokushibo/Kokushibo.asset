@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Kokushibo
   _description: Him
   _icon: {fileID: 2410635517405602792, guid: 9f902761138df7243bdd4a8cfff44923, type: 3}
+  Guid: a6749644-5ae6-4ae1-be69-19a13c42b35e
   _cost: 0
   _isUnlocked: 1
   _unlockCost: 0

@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Answered prayer
   _description: At low HP, occasionally emits a shockwave that pushes enemies away.
   _icon: {fileID: -5439692155646363009, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  Guid: 25474a23-aaec-4dd7-9d3e-96d53e42ec54
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 2
   MonoLogic: {fileID: -1318311921815308197, guid: a433b0047f3223b428110ad8273bcd4a, type: 3}
   PassiveType: 1

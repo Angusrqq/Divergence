@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Hawk eye
   _description: Increases projectile lifetime.
   _icon: {fileID: -5364074142465631101, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 21ac02fd-13b5-4c86-9b38-4c10996fde3c
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 1
   MonoLogic: {fileID: -3441046702161675776, guid: ea43109851d539745850b5374fcac832, type: 3}
   PassiveType: 0

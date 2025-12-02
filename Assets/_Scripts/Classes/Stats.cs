@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using MessagePack;
 
 /// <summary>
 /// Type of the stat modifier: Flat, Percent, or Multiplier.
@@ -34,13 +34,13 @@ public enum StatModifierType
 /// </para>
 /// Order of operations: <see cref="StatModifierType.Flat"/> -> <see cref="StatModifierType.Percent"/> -> <see cref="StatModifierType.Mult"/>
 /// </summary>
-[Serializable]
+[MessagePackObject]
 public class Stat
 {
-    public float BaseValue;
-    public float BaseModifier;
-    public float BaseMultiplier;
-    public Action OnRecalculation;
+    [Key(0)] public float BaseValue;
+    [Key(1)] public float BaseModifier;
+    [Key(2)] public float BaseMultiplier;
+    [IgnoreMember] public Action OnRecalculation;
 
     private bool _recalculationNeeded;
     private float _value;
@@ -48,7 +48,11 @@ public class Stat
     private readonly List<StatModifier> _percentModifiers;
     private readonly List<StatModifier> _multModifiers;
 
-    public int TotalModifiers => _flatModifiers.Count + _percentModifiers.Count + _multModifiers.Count;
+    [Key(3)] public List<StatModifier> FlatModifiers => _flatModifiers;
+    [Key(4)] public List<StatModifier> PercentModifiers => _percentModifiers;
+    [Key(5)] public List<StatModifier> MultModifiers => _multModifiers;
+
+    [IgnoreMember] public int TotalModifiers => _flatModifiers.Count + _percentModifiers.Count + _multModifiers.Count;
     public static implicit operator float(Stat stat) => stat.Value;
     public static implicit operator Stat(float value) => new(value);
     //public static implicit operator int(Stat stat) => (int)stat.Value;
@@ -119,7 +123,7 @@ public class Stat
     /// <summary>
     /// <c>Value</c> property gets or sets the calculated value of the stat, recalculating it if necessary.
     /// </summary>
-    public virtual float Value
+    [IgnoreMember] public virtual float Value
     {
         get
         {
@@ -174,10 +178,11 @@ public class Stat
 /// <summary>
 /// StatModifier class represents a modification to a Stat, with a float value, <see cref="StatModifierType"/> type, and object source.
 /// </summary>
+[MessagePackObject]
 public class StatModifier
 {
     private float _value;
-    public virtual float Value
+    [Key(0)] public virtual float Value
     {
         get
         {
@@ -190,8 +195,8 @@ public class StatModifier
         }
     }
     public event Action<StatModifier> OnValueChanged;
-    public readonly object Source;
-    public StatModifierType type;
+    [Key(2)] public readonly object Source;
+    [Key(1)] public StatModifierType type;
 
     /// <summary>
     /// <c>StatModifier</c> constructor initializes a new instance of the StatModifier class with the specified value, type, and source.
@@ -222,10 +227,12 @@ public class StatModifier
 /// </para>
 /// If the referenced Stat is the same as the Stat being modified, an <see cref="ArgumentException"/> is thrown to prevent infinite recursion.
 /// </summary>
+[MessagePackObject]
 public class StatModifierByStat : StatModifier
 {
-    public Stat Stat;
+    [Key(3)] public Stat Stat;
     private readonly bool _subtractOne;
+    [Key(4)] public bool SubtractOne => _subtractOne;
     public override float Value
     {
         get
@@ -249,6 +256,14 @@ public class StatModifierByStat : StatModifier
     public StatModifierByStat(ref Stat Stat, StatModifierType type, object Source, bool subtractOne = false) : base(Stat, type, Source)
     {
         this.Stat = Stat;
+        Stat.OnRecalculation += OnStatValueChanged;
+        _subtractOne = subtractOne;
+    }
+
+    [SerializationConstructor]
+    public StatModifierByStat(float value, StatModifierType type, object Source, Stat stat, bool subtractOne) : base(stat, type, Source)
+    {
+        Stat = stat;
         Stat.OnRecalculation += OnStatValueChanged;
         _subtractOne = subtractOne;
     }

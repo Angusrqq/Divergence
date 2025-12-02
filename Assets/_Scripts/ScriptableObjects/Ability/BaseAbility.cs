@@ -7,5 +7,6 @@ public class BaseAbilityScriptable : BaseScriptableObjectUnlockable
     public int MaxLevel;
     public bool IsEvolved = false;
     public virtual HandlerType Type => HandlerType.BaseAbility;
+    public Utilities.AbilityTier Tier;
     public List<Action> upgradeActions;
 }

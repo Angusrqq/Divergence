@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Shield
   _description: Increases damage resistance.
   _icon: {fileID: -727713798360024150, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 024a45ce-9cc5-4e2c-8679-061c89cc5b8d
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 1
   MonoLogic: {fileID: -5458697453704288132, guid: 5985099975ef7624b82a280c520ee02b, type: 3}
   PassiveType: 0

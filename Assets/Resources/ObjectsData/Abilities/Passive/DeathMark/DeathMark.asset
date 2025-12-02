@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Deathmark
   _description: Chance to mark enemies. Marked enemies explode on death.
   _icon: {fileID: -8450460308789729245, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  Guid: 73b64b49-9538-46e9-bbcb-90dd021d1eb3
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 5
   MonoLogic: {fileID: -4819679348387593384, guid: 2bf3cb35fdf2ad448bb7937adbf07faa, type: 3}
   PassiveType: 1

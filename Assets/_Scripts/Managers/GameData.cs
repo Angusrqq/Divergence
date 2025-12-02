@@ -72,6 +72,20 @@ public class GameData : MonoBehaviour
 
         PlayerInputAsset = Resources.Load<InputActionAsset>("Input/PlayerControls");
 
+        InitializeBindings();
+        CurrentSettings = InitializeSettings();
+        CurrentMetadata = InitializeProgData();
+        LoadAssets();
+    }
+
+    void Start()
+    {
+        SetGameSettings(CurrentSettings);
+    }
+
+    private void LoadAssets()
+    {
+        //TODO: check the shit thats unlocked in the metadata
         //loading all data from resources, idk if this is the best way tho
         foreach (BaseAbilityScriptable ability in Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities"))
         {
@@ -109,13 +123,11 @@ public class GameData : MonoBehaviour
         {
             Enemies.Add(enemy);
         }
-        InitializeBindings();
     }
 
-    void Start()
+    private void OnApplicationQuit()
     {
-        CurrentSettings = InitializeSettings();
-        CurrentMetadata = InitializeProgData();
+        SaveMetaData();
     }
 
     /// <summary>
@@ -348,7 +360,6 @@ public class GameData : MonoBehaviour
     {
         SettingsData data = new();
         data = DataSystem.LoadSettingsData() ?? data;
-        SetGameSettings(data);
         return data;
     }
 

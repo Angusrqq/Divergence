@@ -15,10 +15,12 @@ MonoBehaviour:
   _name: Fleetfoot
   _description: Increases movement speed.
   _icon: {fileID: -594491116778234855, guid: b4f34970b6f83fb4d9ee93ac75426654, type: 3}
+  Guid: 1da0a455-515f-495f-a913-1047ba8e1ca2
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 1
   MonoLogic: {fileID: 1261545234695685180, guid: e62ba8b0353840f429c51b0ffbf8033f, type: 3}
   PassiveType: 0

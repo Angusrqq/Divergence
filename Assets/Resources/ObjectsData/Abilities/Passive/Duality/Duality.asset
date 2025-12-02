@@ -16,10 +16,12 @@ MonoBehaviour:
   _description: With a chance on every projectile cast, creates a weaker copy that
     deals reduced damage but delivers stronger knockback.
   _icon: {fileID: 2752649814888968227, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
+  Guid: b39f2279-d5bb-414c-873d-74de5d108072
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 3
   IsEvolved: 0
+  Tier: 3
   MonoLogic: {fileID: 2169166307889097995, guid: ec9871ae82d69c6448b4f5858cb4e9d5, type: 3}
   PassiveType: 0

@@ -15,11 +15,13 @@ MonoBehaviour:
   _name: Fireball
   _description: Fires a fireball at the nearest enemy. Burns the target for 5 ticks.
   _icon: {fileID: 5685157490742104129, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  Guid: 77422da5-3995-40c6-af8a-dee6150bb66b
   _cost: 0
   _isUnlocked: 1
   Level: 1
   MaxLevel: 5
   IsEvolved: 1
+  Tier: 1
   CooldownTime: 4
   ActiveTime: 2
   KnockbackForce: 0
