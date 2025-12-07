@@ -13,20 +13,19 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class BombExplosion : InstantiatedAbilityMono
 {
+    protected override void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     /// <summary>
     /// Initializes the explosion instance with a lifetime and ability configuration.
     /// </summary>
     /// <param name="timer">Lifetime in seconds before the explosion despawns.</param>
-    /// <param name="ability">Ability data that provides damage and knockback values.</param>
     public void Init(float timer, InstantiatedAbilityHandler ability)
     {
         this.timer = timer;
         Ability = ability;
-    }
-
-    protected override void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
     }
 
     protected override void FixedUpdate()
@@ -34,12 +33,13 @@ public class BombExplosion : InstantiatedAbilityMono
         CountDownActiveTimer(Time.fixedDeltaTime);
     }
 
-    /// <summary>
-    /// Applies damage and knockback to enemies that enter the explosion's trigger area.
-    /// </summary>
-    /// <param name="other">The collider that entered the trigger.</param>
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage") * 2, knockbackForce: Ability.GetStat("KnockbackForce"), knockbackDuration: Ability.KnockbackDuration);
+        enemy.TakeDamage(
+            source: GameData.player.gameObject,
+            amount: Ability.GetStat("Damage") * 2,
+            knockbackForce: Ability.GetStat("KnockbackForce"),
+            knockbackDuration: Ability.KnockbackDuration
+        );
     }
 }

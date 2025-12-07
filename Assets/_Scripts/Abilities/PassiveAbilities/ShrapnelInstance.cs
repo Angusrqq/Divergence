@@ -12,11 +12,13 @@ public class ShrapnelInstance : MonoBehaviour
     private bool _hit = false;
     private Enemy _hitEnemy = null;
     private float _maxActiveTime = 2f;
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _animatedEntity = GetComponent<AnimatedEntity>();
+
         StartCoroutine(Timer());
     }
 
@@ -30,7 +32,7 @@ public class ShrapnelInstance : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out Enemy enemy) && !_hit)
+        if (collision.gameObject.TryGetComponent(out Enemy enemy) && !_hit)
         {
             enemy.TakeDamage(GameData.player.gameObject, _damage, GetType(), 10f, 0.2f, useSound: true);
             _hit = true;
@@ -61,9 +63,11 @@ public class ShrapnelInstance : MonoBehaviour
         {
             _spriteRenderer.color = Color.Lerp(Color.white, Color.red, timePassed / duration);
             timePassed += Time.fixedDeltaTime;
+
             yield return null;
         }
     }
+    
     public void LastFrame()
     {
         StopAllCoroutines();
@@ -72,8 +76,21 @@ public class ShrapnelInstance : MonoBehaviour
 
     public void DamageFrame()
     {
-        if(_hitEnemy == null) Destroy(gameObject);
-        else _hitEnemy.TakeDamage(GameData.player.gameObject, _damage/4, GetType(), 3f, 0.2f, useSound: true);
+        if (_hitEnemy != null)
+        {
+            _hitEnemy.TakeDamage(
+                source: GameData.player.gameObject,
+                amount: _damage / 4,
+                type: GetType(),
+                knockbackForce: 3f,
+                knockbackDuration: 0.2f,
+                useSound: true
+            );
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator Timer()

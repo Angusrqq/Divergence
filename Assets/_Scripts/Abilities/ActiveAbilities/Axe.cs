@@ -35,12 +35,19 @@ public class Axe : InstantiatedAbilityMono
     {
         _forceTimer -= Time.fixedDeltaTime;
         direction = Vector2.LerpUnclamped(_intialDirection, -_intialDirection, (Ability.ActiveTime / 2) - _forceTimer);
+
         transform.RotateAround(transform.position, Vector3.forward, 10);
         rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
+        enemy.TakeDamage(
+            source: GameData.player.gameObject,
+            amount: Ability.GetStat("Damage"),
+            type: GetType(),
+            knockbackForce: Ability.GetStat("Knockback Force"),
+            knockbackDuration: Ability.KnockbackDuration
+        );
     }
 }

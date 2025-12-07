@@ -29,6 +29,7 @@ public class Berserk : PassiveAbilityMono
         _damageValue = Ability.GetStat("Damage");
         _damageValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _damageModifier = new StatModifierByStat(ref _damageValue, StatModifierType.Mult, this);
+
         _speedValue = Ability.GetStat("Movement speed");
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Mult, this);
@@ -36,16 +37,11 @@ public class Berserk : PassiveAbilityMono
         GameData.player.DamageableEntity.OnDamageTaken += OnPlayerDamageTaken;
     }
 
-    // public override void Upgrade()
-    // {
-    //     _damageModifier.Value += 0.1f;
-    //     _speedModifier.Value += 0.05f;
-    // }
-
     void ActivateEffect()
     {
         GameData.InGameAttributes.PlayerDamageMult.AddModifier(_damageModifier);
         GameData.player.MovementSpeed.AddModifier(_speedModifier);
+
         Debug.Log($"Berserk activated, player damage mult: {GameData.InGameAttributes.PlayerDamageMult}, damage bonus: {_damageValue}, player speed: {GameData.player.MovementSpeed}, speed bonus: {_speedValue}");
     }
     
@@ -53,6 +49,7 @@ public class Berserk : PassiveAbilityMono
     {
         GameData.InGameAttributes.PlayerDamageMult.RemoveModifier(_damageModifier);
         GameData.player.MovementSpeed.RemoveModifier(_speedModifier);
+        
         Debug.Log($"Berserk deactivated, player damage mult: {GameData.InGameAttributes.PlayerDamageMult}, player speed: {GameData.player.MovementSpeed}");
     }
 }

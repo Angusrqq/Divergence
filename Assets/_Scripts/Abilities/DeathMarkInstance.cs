@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeathMarkInstance : MonoBehaviour
 {
     public Action OnDeath;
+    
     private SpriteRenderer _spriteRenderer;
     private AnimatedEntity _animatedEntity;
     private Enemy _target;
@@ -31,16 +32,23 @@ public class DeathMarkInstance : MonoBehaviour
         _animatedEntity.ChangeAnimation("MarkExplosion");
         Vector3 size = _spriteRenderer.bounds.extents;
         float radius = Mathf.Max(size.x, size.y);
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach(var collider in colliders)
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                if(enemy == null) continue;
-                enemy.TakeDamage(gameObject, _damage, GetType());
+                if (enemy == null) continue;
+
+                enemy.TakeDamage(
+                    source: gameObject,
+                    amount: _damage,
+                    type: GetType()
+                );
             }
         }
         yield return new WaitForSeconds(_animatedEntity.AnimatorController.animationClips[1].length);
+
         Destroy(gameObject);
     }
 
@@ -60,22 +68,24 @@ public class DeathMarkInstance : MonoBehaviour
     private IEnumerator Idle(float speed = 4f)
     {
         float timer = 0f;
-        float minDeg =-45f;
-        float maxDeg =45f;
+        float minDeg = -45f;
+        float maxDeg = 45f;
+
         while (true)
         {
-            if(_target == null)
+            if (_target == null)
             {
                 OnEnemyDeath(null);
                 yield break;
             }
+
             float t = (Mathf.Sin(timer * speed) + 1) / 2f;
             Vector3 offsetPos = _target.transform.position + new Vector3(0f, 0.5f, 0f);
             transform.SetPositionAndRotation(offsetPos, Quaternion.Euler(new Vector3(0f, 0f, Mathf.Lerp(minDeg, maxDeg, t))));
             timer += Time.fixedDeltaTime;
+
             yield return new WaitForFixedUpdate();
         }
-        
     }
 
     private void OnDestroy()

@@ -1,6 +1,4 @@
 
-using UnityEngine;
-
 /// <summary>
 /// This class represents a test ability that targets the nearest enemy.
 /// It inherits from InstantiatedAbilityMono, which suggests it's a component
@@ -17,13 +15,13 @@ public class RiceBall : InstantiatedAbilityMono
     protected override void Start()
     {
         target = FindClosest();
-
         if (target == null)
         {
             Destroy(gameObject);
             Ability.StartCooldown();
             return;
         }
+
         base.Start();
     }
 
@@ -42,7 +40,12 @@ public class RiceBall : InstantiatedAbilityMono
     /// <param name="other">The collider of the object this ability collided with.</param>
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), knockbackForce: Ability.GetStat("Knockback Force"), knockbackDuration: Ability.KnockbackDuration);
+        enemy.TakeDamage(
+            source: GameData.player.gameObject,
+            amount: Ability.GetStat("Damage"),
+            knockbackForce: Ability.GetStat("Knockback Force"),
+            knockbackDuration: Ability.KnockbackDuration
+        );
 
         Destroy(gameObject);
         Ability.StartCooldown();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnsweredPrayer : PassiveAbilityMono
 {
     public PrayerShockwave FieldPrefab;
+    
     private Stat _thresholdMult = 0.15f;
     private bool _isActive = false;
     private Coroutine _activeCoroutine = null;
@@ -30,8 +31,10 @@ public class AnsweredPrayer : PassiveAbilityMono
 
     private void DeactivateEffect()
     {
-        if (_activeCoroutine == null) return;
-        StopCoroutine(_activeCoroutine);
+        if (_activeCoroutine != null)
+        {
+            StopCoroutine(_activeCoroutine);
+        }
     }
 
     private IEnumerator Effect()
@@ -43,6 +46,7 @@ public class AnsweredPrayer : PassiveAbilityMono
             {
                 Instantiate(FieldPrefab, GameData.player.transform.position, Quaternion.identity);
             }
+
             yield return new WaitForSeconds(Ability.GetStat("Cooldown"));
         }
     }
@@ -51,12 +55,7 @@ public class AnsweredPrayer : PassiveAbilityMono
     {
         Ability.GetStat("Wave spawn chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         Ability.GetStat("Cooldown").AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
+
         GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;
     }
-
-    // public override void Upgrade()
-    // {
-    //     _chance.Value *= 2f;
-    //     _cooldown.Value -= 1f;
-    // }
 }

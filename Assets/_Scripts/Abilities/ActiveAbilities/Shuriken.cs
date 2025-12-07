@@ -33,7 +33,12 @@ public class Shuriken : InstantiatedAbilityMono
 
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
+        enemy.TakeDamage(
+            source: GameData.player.gameObject,
+            amount: Ability.GetStat("Damage"),
+            type: GetType(),
+            knockbackForce: Ability.GetStat("Knockback Force"),
+            knockbackDuration: Ability.KnockbackDuration);
         
         Destroy(gameObject);
         Ability.StartCooldown();
