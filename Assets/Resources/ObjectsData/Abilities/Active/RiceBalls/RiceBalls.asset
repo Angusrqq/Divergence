@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstantiatedAbilityScriptable
   _name: Rice Balls
   _description: very asian
-  _icon: {fileID: 0}
+  _icon: {fileID: 7947206455912048130, guid: 7db1ea96ac023174ba09aaf59209f20a, type: 3}
   Guid: fda41971-9f78-42fd-85e3-714a4836b6f4
   _cost: 0
   _isUnlocked: 1
@@ -22,6 +22,63 @@ MonoBehaviour:
   MaxLevel: 5
   IsEvolved: 0
   Tier: 2
+  Stats:
+  - Name: Damage
+    type: 0
+    BaseValue: 15
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 20
+        inSlope: 0.6122449
+        outSlope: 0.6122449
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 50
+        inSlope: 0.6122449
+        outSlope: 0.6122449
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 1
+  - Name: Knockback Force
+    type: 0
+    BaseValue: 4
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 4
+        inSlope: 0.93877554
+        outSlope: 0.93877554
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 50
+        inSlope: 0.93877554
+        outSlope: 0.93877554
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 2
   CooldownTime: 0.1
   ActiveTime: 1
   KnockbackForce: 2
@@ -31,6 +88,6 @@ MonoBehaviour:
   EvoPrefab: {fileID: 0}
   speed: 0.35
   SpawnDelay: 0
-  damage: 40
+  damage: 20
   localProjectilesAmount: 1
   nativeUser: {fileID: 0}

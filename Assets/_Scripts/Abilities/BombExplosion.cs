@@ -40,6 +40,6 @@ public class BombExplosion : InstantiatedAbilityMono
     /// <param name="other">The collider that entered the trigger.</param>
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Damage * 2, knockbackForce: KnockbackForce, knockbackDuration: Ability.KnockbackDuration);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage") * 2, knockbackForce: Ability.GetStat("KnockbackForce"), knockbackDuration: Ability.KnockbackDuration);
     }
 }

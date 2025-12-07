@@ -16,10 +16,9 @@ MonoBehaviour:
   Icon: {fileID: -7505095618505130590, guid: aca8f61c7be024545b7a580909d2587b, type: 3}
   AnimatorController: {fileID: 9100000, guid: d011f73a67f580749a7a58e94599d68a, type: 2}
   AnimationClips: []
-  BaseMaxHealth: 100
+  BaseMaxHealth: 50
   BaseMovementSpeed: 9
   Damage: 1
-  BaseExp: 10
   Abilities: []
   ColliderRadius: 0.07
   ColliderOffset: {x: 0, y: 0}

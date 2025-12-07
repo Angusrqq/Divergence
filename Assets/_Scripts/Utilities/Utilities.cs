@@ -4,6 +4,61 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Normal,
+    Boss
+}
+
+public enum AbilityTier
+{
+    Tier1 = 1,
+    Tier2,
+    Tier3,
+    Tier4,
+    Tier5
+}
+
+public enum AbilityType
+{
+    Regular,
+    Chance,
+    Custom,
+    Percent
+}
+
+public enum UniversalAbilityType
+{
+    None,
+    Damage,
+    KnockbackForce,
+    KnockbackDuration,
+    Projectiles,
+    ActiveTime,
+    Cooldown,
+    Size
+}
+
+[Serializable]
+public struct AbilityStatDefinition
+{
+    public string Name;
+    public AbilityType type;
+    public float BaseValue;
+    public AnimationCurve Scaling;
+    public UniversalAbilityType UniversalType;
+}
+
+public struct RuntimeStatHolder
+{
+    public AbilityType type;
+    public UniversalAbilityType universalType;
+    public Stat stat;
+
+    public RuntimeStatHolder(AbilityType type, Stat stat, UniversalAbilityType universalType = UniversalAbilityType.None) =>
+        (this.type, this.stat, this.universalType) = (type, stat, universalType);
+}
+
 public static class Utilities
 {
     public static async Task AsyncAnimation<T>(float speed, T start, T end, Action<T, T, float> LerpCallback = null)
@@ -15,15 +70,6 @@ public static class Utilities
             LerpCallback.Invoke(start, end, elapsedTime);
             await Awaitable.NextFrameAsync();
         }
-    }
-
-    public enum AbilityTier
-    {
-        Tier1 = 1,
-        Tier2,
-        Tier3,
-        Tier4,
-        Tier5
     }
 
     public static readonly Dictionary<AbilityTier, float> BaseTierWeights = new()
@@ -76,11 +122,17 @@ public static class Utilities
 
     public static BaseAbilityScriptable GetAbilityFromTier(List<BaseAbilityScriptable> unlockedAbilities, AbilityTier tier)
     {
-        var abilitylist = unlockedAbilities.Where(x => x.Tier == tier).ToList();
-        if(abilitylist.Count == 0) 
-            return null; // no ability found in this tier
-        
-        return abilitylist[GameData.ValuableRoll(0, abilitylist.Count)];
+        int t = (int)tier;
+        while(t >= 0)
+        {
+            var abilitylist = unlockedAbilities.Where(x => (int)x.Tier == t).ToList();
+            if(abilitylist.Count > 0) 
+                return abilitylist[GameData.ValuableRoll(0, abilitylist.Count)];
+            Debug.LogWarning("Could not find ability in tier: " + t);
+            t--;
+        }
+        Debug.LogError($"Could not find ability in tiers: from {tier} to {AbilityTier.Tier1}");
+        return null;
     }
 
     public static List<BaseAbilityScriptable> GetRandomAbilities(List<BaseAbilityScriptable> unlockedAbilities, float luck, int amount = 1)
@@ -97,7 +149,6 @@ public static class Utilities
                 if(pool.Count == 0) return result;
 
                 ability = pool[GameData.ValuableRoll(0, pool.Count)];
-                Debug.Log("Could not find ability in tier: " + tier);
             }
             pool.Remove(ability);
             result.Add(ability);
@@ -105,6 +156,36 @@ public static class Utilities
 
         return result;
     }
+
+    public static string FormatAbilityValue(float value, AbilityType type, string name, int floatingPoints = 1)
+    {
+        string format = $"F{floatingPoints}";
+        string result = type switch
+        {
+            AbilityType.Regular => value.ToString(format),
+            AbilityType.Chance => $"{(value * 100f).ToString(format)}%",
+            AbilityType.Percent => (value > 0f ? "+" : "") + (value * 100f).ToString(format) + "%",
+            AbilityType.Custom => name switch
+                { "Resist" => "+" + (Mathf.Abs(value) * 100f).ToString(format) + "%",
+                _ => (value * 100f).ToString(format) + "%" },
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
+        };
+        return result;
+    }
+
+    public static Color GetTierColor(AbilityTier tier)
+    {
+        return tier switch
+        {
+            AbilityTier.Tier1 => new Color32(168, 168, 168, 255),
+            AbilityTier.Tier2 => new Color32(76, 175, 80, 255),
+            AbilityTier.Tier3 => new Color32(90, 50, 134, 255),
+            AbilityTier.Tier4 => new Color32(255, 215, 0, 255),
+            AbilityTier.Tier5 => Color.black,
+            _ => Color.white
+        };
+    }
+    
 
     public static Type GetHandlerTypeByEnum(HandlerType type)
     {

@@ -40,7 +40,7 @@ public class Bomb : InstantiatedAbilityMono
     {
         if (isExploded) return;
 
-        enemy.TakeDamage(GameData.player.gameObject, Damage);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"));
 
         isExploded = true;
         StartCoroutine(Explode());
@@ -50,16 +50,19 @@ public class Bomb : InstantiatedAbilityMono
     {
         direction = Vector2.zero;
         gameObject.transform.localScale *= 5f;
+
         animatedEntity.ChangeAnimation("BombExplosionClip");
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 5f);
         foreach (var collider in colliders)
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(GameData.player.gameObject, Damage * 2, GetType());
+                enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage") * 2, GetType());
             }
         }
-        yield return new WaitForSeconds(animatedEntity.AnimatorController.animationClips[1].length); // wonky shit picking animation by index
+        yield return new WaitForSeconds(animatedEntity.AnimatorController.animationClips[1].length);
+        
         Destroy(gameObject);
     }
 }

@@ -181,7 +181,7 @@ public class Stat
 [MessagePackObject]
 public class StatModifier
 {
-    private float _value;
+    protected float _value;
     [Key(0)] public virtual float Value
     {
         get
@@ -230,7 +230,7 @@ public class StatModifier
 [MessagePackObject]
 public class StatModifierByStat : StatModifier
 {
-    [Key(3)] public Stat Stat;
+    [IgnoreMember] public Stat Stat;
     private readonly bool _subtractOne;
     [Key(4)] public bool SubtractOne => _subtractOne;
     public override float Value
@@ -261,9 +261,9 @@ public class StatModifierByStat : StatModifier
     }
 
     [SerializationConstructor]
-    public StatModifierByStat(float value, StatModifierType type, object Source, Stat stat, bool subtractOne) : base(stat, type, Source)
+    public StatModifierByStat(float value, StatModifierType type, object Source, bool subtractOne) : base(value, type, Source)
     {
-        Stat = stat;
+        Stat = value;
         Stat.OnRecalculation += OnStatValueChanged;
         _subtractOne = subtractOne;
     }

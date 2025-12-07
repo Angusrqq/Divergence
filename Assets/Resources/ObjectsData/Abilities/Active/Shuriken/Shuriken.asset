@@ -22,6 +22,63 @@ MonoBehaviour:
   MaxLevel: 5
   IsEvolved: 0
   Tier: 1
+  Stats:
+  - Name: Damage
+    type: 0
+    BaseValue: 20
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 20
+        inSlope: 3.6734693
+        outSlope: 3.6734693
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 200
+        inSlope: 3.6734693
+        outSlope: 3.6734693
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 1
+  - Name: Knockback Force
+    type: 0
+    BaseValue: 2
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 2
+        inSlope: 0.1632653
+        outSlope: 0.1632653
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 10
+        inSlope: 0.1632653
+        outSlope: 0.1632653
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   CooldownTime: 3
   ActiveTime: 3
   KnockbackForce: 2
@@ -31,6 +88,6 @@ MonoBehaviour:
   EvoPrefab: {fileID: 0}
   speed: 0.2
   SpawnDelay: 0.2
-  damage: 40
+  damage: 20
   localProjectilesAmount: 3
   nativeUser: {fileID: 0}

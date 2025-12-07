@@ -1379,10 +1379,6 @@ MonoBehaviour:
   LevelBar: {fileID: 857850897}
   MovementVector: {x: 0, y: 0}
   GUI: {fileID: 311524805}
-  MovementSpeed:
-    BaseValue: 12
-    BaseModifier: 1
-    BaseMultiplier: 1
 --- !u!212 &625024056
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4893,10 +4889,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _prefab: {fileID: 6211102340784009416, guid: 0e63ed629cfc9cb459dd4c37759c4ae0, type: 3}
-  SpawnDelay:
-    BaseValue: 1
-    BaseModifier: 1
-    BaseMultiplier: 1
   Target: {fileID: 625024055}
   maxEnemyCount: 10000
 --- !u!4 &2070413853

@@ -22,5 +22,87 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 2
+  Stats:
+  - Name: Required damage
+    type: 0
+    BaseValue: 20
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 20
+        inSlope: -0.40814286
+        outSlope: -0.40814286
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 0.001
+        inSlope: -0.40814286
+        outSlope: -0.40814286
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - Name: Thorn size
+    type: 0
+    BaseValue: 5
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 5
+        inSlope: 0.10204082
+        outSlope: 0.10204082
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 10
+        inSlope: 0.10204082
+        outSlope: 0.10204082
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - Name: Thorns released
+    type: 0
+    BaseValue: 5
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 5
+        inSlope: 0.30612245
+        outSlope: 0.30612245
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 20
+        inSlope: 0.30612245
+        outSlope: 0.30612245
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   MonoLogic: {fileID: -7586009721794966930, guid: 5a7852d408f667b4abb5e829fbbd89e2, type: 3}
   PassiveType: 1

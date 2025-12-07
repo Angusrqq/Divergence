@@ -95,12 +95,9 @@ public class AbilityHolder : MonoBehaviour
         passiveInstance.Init(passive);
         Passives.Add(passiveInstance);
         _passiveNames.Add(passiveInstance.Name);
-        if(passive.PassiveType == PassiveAbilityType.Updated)
-        {
-            var logic = Instantiate(passive.MonoLogic, passiveInstance.transform);
-            var temp = passiveInstance as PassiveAbilityHandler;
-            temp.SetMonoLogic(logic);
-        }
+        var logic = Instantiate(passive.MonoLogic, passiveInstance.transform);
+        var tempHandler = passiveInstance as PassiveAbilityHandler;
+        tempHandler.SetMonoLogic(logic);
         passiveInstance.Activate();
         Debug.Log("Passive added: " + passiveInstance.Name);
 

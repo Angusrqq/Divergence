@@ -17,6 +17,7 @@ public class PassiveAbility : BaseAbilityScriptable
 {
     [SerializeReference] public PassiveAbilityMono MonoLogic;
 
+    public override BaseAbilityMono Behaviour => MonoLogic;
     public PassiveAbilityType PassiveType;
     public override HandlerType Type => HandlerType.Passive;
 }

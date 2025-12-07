@@ -1,14 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
-
 /// <summary>
 /// The Katana class represents a projectile ability that creates a slash effect. 
 /// It inherits from InstantiatedAbilityMono and handles the visual representation and animation of the slash.
 /// The class supports both regular and evolved versions of the slash, with the evolved version including additional particle effects.
 /// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Katana : InstantiatedAbilityMono
 {
     [SerializeField] private ParticleSystem _evoParticles;
@@ -21,26 +20,14 @@ public class Katana : InstantiatedAbilityMono
     /// </summary>
     protected override void Awake()
     {
-        /// Get the Rigidbody2D component attached to the projectile.
         rb = GetComponent<Rigidbody2D>();
-        
-        /// Get the SpriteRenderer component attached to the projectile.
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        /// Determine the initial direction based on the player's sprite flip state.
         direction = new Vector2(GameData.player.SpriteRenderer.flipX ? -1 : 1, 0);
-        
-        /// Match the projectile's sprite flip state with the player's sprite flip state.
         spriteRenderer.flipX = GameData.player.SpriteRenderer.flipX;
-        
-        /// Set the initial position of the projectile based on the player's position and direction.
         transform.position = new Vector2(GameData.player.transform.position.x, GameData.player.transform.position.y) + (direction * 2);
     }
 
-    protected override void FixedUpdate()
-    {
-        return;
-    }
+    protected override void FixedUpdate() { }
 
     /// <summary>
     /// Called when the script instance is being loaded.

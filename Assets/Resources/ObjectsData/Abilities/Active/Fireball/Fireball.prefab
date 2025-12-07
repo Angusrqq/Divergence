@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2945982262987997774, guid: 90ae71cabbc1e09489504a5e33731627, type: 3}
+  m_Sprite: {fileID: -6607481912129624618, guid: 503e4eead32658b43ac540e8c109545c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.14}
+  m_Size: {x: 0.29, y: 0.14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -134,14 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72ea46f7a835348b867a71a57537ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
-  Damage:
-    BaseValue: 0
-    BaseModifier: 0
-    BaseMultiplier: 0
-  KnockbackForce:
-    BaseValue: 0
-    BaseModifier: 0
-    BaseMultiplier: 0
   OnActivation: {fileID: 0}
   OnHit: {fileID: 8300000, guid: 987a42dfe251e9240aee72d24cf46e07, type: 3}
 --- !u!58 &-7876841829100119754

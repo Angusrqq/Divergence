@@ -5,9 +5,7 @@ using UnityEngine;
 public class AnsweredPrayer : PassiveAbilityMono
 {
     public PrayerShockwave FieldPrefab;
-    private Stat _chance = 0.03f;
     private Stat _thresholdMult = 0.15f;
-    private Stat _cooldown = 5f;
     private bool _isActive = false;
     private Coroutine _activeCoroutine = null;
 
@@ -41,24 +39,24 @@ public class AnsweredPrayer : PassiveAbilityMono
         AudioManager.instance.PlaySFX(AudioClips[0]);
         while (true)
         {
-            if (GameData.MidValue < _chance)
+            if (GameData.MidValue < Ability.GetStat("Wave spawn chance"))
             {
                 Instantiate(FieldPrefab, GameData.player.transform.position, Quaternion.identity);
             }
-            yield return new WaitForSeconds(_cooldown);
+            yield return new WaitForSeconds(Ability.GetStat("Cooldown"));
         }
     }
 
     public override void Activate()
     {
-        _chance.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
-        _cooldown.AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
+        Ability.GetStat("Wave spawn chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
+        Ability.GetStat("Cooldown").AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
         GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;
     }
 
-    public override void Upgrade()
-    {
-        _chance.Value *= 2f;
-        _cooldown.Value -= 1f;
-    }
+    // public override void Upgrade()
+    // {
+    //     _chance.Value *= 2f;
+    //     _cooldown.Value -= 1f;
+    // }
 }

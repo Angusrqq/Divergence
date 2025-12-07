@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1365396595417832060}
   - component: {fileID: 7531767928548574074}
   m_Layer: 0
-  m_Name: Riceball
+  m_Name: RiceBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

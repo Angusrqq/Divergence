@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     public Stat maxHealth = 100f;
     public Stat moveSpeed = 12f;
     public Stat damage = 1f;
-    public Stat xpDrop = 10;
     public Color flashColor;
     public float damageFlashDuration = 0.2f;
 
@@ -47,7 +46,6 @@ public class Enemy : MonoBehaviour
         enemyData = data;
         maxHealth = data.BaseMaxHealth;
         damage = data.Damage;
-        xpDrop = data.BaseExp;
         moveSpeed = data.BaseMovementSpeed;
         target = newTarget;
         animatedEntity = GetComponent<AnimatedEntity>();

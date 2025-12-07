@@ -16,6 +16,8 @@ public class InstantiatedAbilityScriptable : Ability
     public InstantiatedAbilityMono StandardPrefab;
     public InstantiatedAbilityMono EvoPrefab;
 
+    public override BaseAbilityMono Behaviour => IsEvolved ? EvoPrefab : StandardPrefab;
+
     public float speed;
     public float SpawnDelay = 0f;
     public float damage;

@@ -23,6 +23,63 @@ MonoBehaviour:
   MaxLevel: 5
   IsEvolved: 1
   Tier: 1
+  Stats:
+  - Name: Damage
+    type: 0
+    BaseValue: 20
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 20
+        inSlope: 2.6530612
+        outSlope: 2.6530612
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 150
+        inSlope: 2.6530612
+        outSlope: 2.6530612
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 1
+  - Name: Knockback Force
+    type: 0
+    BaseValue: 2
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 2
+        inSlope: 0.12244898
+        outSlope: 0.12244898
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 8
+        inSlope: 0.12244898
+        outSlope: 0.12244898
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   CooldownTime: 1
   ActiveTime: 1
   KnockbackForce: 2

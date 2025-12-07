@@ -22,5 +22,34 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 1
+  Stats:
+  - Name: Projectile lifetime
+    type: 3
+    BaseValue: 0.05
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 0.05
+        inSlope: 0.013265305
+        outSlope: 0.013265305
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 0.7
+        inSlope: 0.013265305
+        outSlope: 0.013265305
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: -3441046702161675776, guid: ea43109851d539745850b5374fcac832, type: 3}
   PassiveType: 0

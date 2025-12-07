@@ -7,8 +7,6 @@ public class ChainStrikes : PassiveAbilityMono
 {
     private List<InstantiatedAbilityMono> trackedProjectiles = new();
     private int comboCounter = 0;
-    private int maxCombo = 5;
-    private float percentDamagePerCombo = 0.01f;
     private StatModifier damageModifier;
 
     private void OnProjectileFired(Type abilityType, InstantiatedAbilityMono projectile)
@@ -20,10 +18,10 @@ public class ChainStrikes : PassiveAbilityMono
     private void OnProjectileHitEnemy(Type type, Enemy enemy, float damage, InstantiatedAbilityMono projectile)
     {
         if (!trackedProjectiles.Contains(projectile)) return;
-        if (comboCounter < maxCombo)
+        if (comboCounter < Ability.GetStat("Max combo"))
         {
             comboCounter++;
-            damageModifier.Value = comboCounter * percentDamagePerCombo;
+            damageModifier.Value = comboCounter * Ability.GetStat("Damage per combo");
         } 
         projectile.OnDeath -= OnProjectileDeath;
         trackedProjectiles.Remove(projectile);
@@ -45,9 +43,9 @@ public class ChainStrikes : PassiveAbilityMono
         GameData.player.AbilityHolder.OnEnemyHit += OnProjectileHitEnemy;
     }
 
-    public override void Upgrade()
-    {
-        maxCombo += 3;
-        percentDamagePerCombo += 0.02f;
-    }
+    // public override void Upgrade()
+    // {
+    //     maxCombo += 3;
+    //     percentDamagePerCombo += 0.02f;
+    // }
 }

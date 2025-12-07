@@ -6,7 +6,7 @@ public class PostGameStat : MonoBehaviour
     [SerializeField] private PostGameStatType statType;
     [SerializeField] private AbilityIconDisplay abilityIconDisplayPrefab;
 
-    public async void OnEnable()
+    public /*async*/ void OnEnable()
     {
         switch (statType)
         {
@@ -31,13 +31,13 @@ public class PostGameStat : MonoBehaviour
         }
     }
 
-    private async void SetTime()
+    private /*async*/ void SetTime()
     {
         valueText.text = GameTimer.FormatTimeConditionally(GameData.GameTimerInstance.currentTime);
         GameData.CurrentMetadata.gameStats.TotalTime += (uint)GameData.GameTimerInstance.currentTime;
     }
 
-    private async void SetLevel()
+    private /*async*/ void SetLevel()
     {
         valueText.text = GameData.player.Level.ToString();
         if(GameData.player.Level > GameData.CurrentMetadata.Records.MaxLevel)
@@ -47,20 +47,20 @@ public class PostGameStat : MonoBehaviour
         }
     }
 
-    private async void SetCurrency()
+    private /*async*/ void SetCurrency()
     {
         valueText.text = "0";
         Debug.LogWarning("Currency not implemented yet");
     }
 
-    private async void SetKills()
+    private /*async*/ void SetKills()
     {
         valueText.text = KillCounter.Kills.ToString();
         GameData.CurrentMetadata.gameStats.TotalKills += (uint)KillCounter.Kills;
         
     }
 
-    private async void SetDamageDealt()
+    private /*async*/ void SetDamageDealt()
     {
         valueText.text = GameData.InGameAttributes.DamageDealt.ToString();
         GameData.CurrentMetadata.gameStats.TotalDamageDealt += (ulong)GameData.InGameAttributes.DamageDealt;

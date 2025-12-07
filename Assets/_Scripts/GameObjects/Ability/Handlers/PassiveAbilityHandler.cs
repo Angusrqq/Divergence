@@ -17,6 +17,10 @@ public class PassiveAbilityHandler : BaseAbilityHandler
         _monoLogic.Upgrade();
     }
 
-    public void SetMonoLogic(PassiveAbilityMono monoLogic) => _monoLogic = monoLogic;
+    public void SetMonoLogic(PassiveAbilityMono monoLogic)
+    {
+        _monoLogic = monoLogic;
+        _monoLogic.Init(this);
+    }
     public override void UpdateAbility() => _monoLogic.UpdateBehaviour();
 }

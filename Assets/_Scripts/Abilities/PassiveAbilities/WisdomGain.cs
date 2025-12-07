@@ -7,16 +7,16 @@ public class WisdomGain : PassiveAbilityMono
 
     public override void Activate()
     {
-        _expValue = 0.25f;
+        _expValue = Ability.GetStat("Experience multiplier");
         _expValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _expModifier = new StatModifierByStat(ref _expValue, StatModifierType.Mult, this);
         GameData.InGameAttributes.ExperienceMultiplier.AddModifier(_expModifier);
         Debug.Log($"WisdomGain activated, player exp: {GameData.InGameAttributes.ExperienceMultiplier}, Base exp multiplier: {_expValue.BaseValue}, Current exp multiplier: {_expValue}");
     }
 
-    public override void Upgrade()
-    {
-        _expModifier.Value *= 2f;
-        Debug.Log($"WisdomGain upgraded, player exp: {GameData.InGameAttributes.ExperienceMultiplier}, Base exp multiplier: {_expValue.BaseValue}, Current exp multiplier: {_expValue}");
-    }
+    // public override void Upgrade()
+    // {
+    //     _expModifier.Value *= 2f;
+    //     Debug.Log($"WisdomGain upgraded, player exp: {GameData.InGameAttributes.ExperienceMultiplier}, Base exp multiplier: {_expValue.BaseValue}, Current exp multiplier: {_expValue}");
+    // }
 }

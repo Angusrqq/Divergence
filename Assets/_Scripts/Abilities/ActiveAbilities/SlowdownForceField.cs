@@ -1,9 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class SlowdownForceField : InstantiatedAbilityMono
 {
     private StatModifier _slowdownModifier = new(-0.5f, StatModifierType.Percent, GameData.player);
+    
     protected override void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

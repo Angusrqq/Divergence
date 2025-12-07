@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Fireball : InstantiatedAbilityMono
 {
     protected override void Awake()
@@ -28,8 +29,8 @@ public class Fireball : InstantiatedAbilityMono
 
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration, useSound: false);
-        Burn burnEffect = new(GameData.player, enemy, damage: Damage * 0.1f);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration, useSound: false);
+        Burn burnEffect = new(GameData.player, enemy, damage: Ability.GetStat("Damage") * 0.1f);
         enemy.Statuses.ApplyEffect(burnEffect);
         Destroy(gameObject);
         Ability.StartCooldown();

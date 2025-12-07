@@ -22,5 +22,34 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 1
+  Stats:
+  - Name: Resist
+    type: 2
+    BaseValue: -0.1
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: -0.1
+        inSlope: -0.008163266
+        outSlope: -0.008163266
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: -0.5
+        inSlope: -0.008163266
+        outSlope: -0.008163266
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: -5458697453704288132, guid: 5985099975ef7624b82a280c520ee02b, type: 3}
   PassiveType: 0

@@ -23,5 +23,62 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 2
+  Stats:
+  - Name: Max combo
+    type: 0
+    BaseValue: 5
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 5
+        inSlope: 0.30612245
+        outSlope: 0.30612245
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 20
+        inSlope: 0.30612245
+        outSlope: 0.30612245
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
+  - Name: Damage per combo
+    type: 3
+    BaseValue: 0.01
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 0.01
+        inSlope: 0.020204082
+        outSlope: 0.020204082
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 1
+        inSlope: 0.020204082
+        outSlope: 0.020204082
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: 3024719137699547501, guid: c75ecd3b95fdd5d41a87f6215e5176ca, type: 3}
   PassiveType: 0

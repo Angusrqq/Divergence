@@ -26,21 +26,21 @@ public class Berserk : PassiveAbilityMono
 
     public override void Activate()
     {
-        _damageValue = 0.25f;
+        _damageValue = Ability.GetStat("Damage");
         _damageValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _damageModifier = new StatModifierByStat(ref _damageValue, StatModifierType.Mult, this);
-        _speedValue = 0.05f;
+        _speedValue = Ability.GetStat("Movement speed");
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Mult, this);
 
         GameData.player.DamageableEntity.OnDamageTaken += OnPlayerDamageTaken;
     }
 
-    public override void Upgrade()
-    {
-        _damageModifier.Value += 0.1f;
-        _speedModifier.Value += 0.05f;
-    }
+    // public override void Upgrade()
+    // {
+    //     _damageModifier.Value += 0.1f;
+    //     _speedModifier.Value += 0.05f;
+    // }
 
     void ActivateEffect()
     {

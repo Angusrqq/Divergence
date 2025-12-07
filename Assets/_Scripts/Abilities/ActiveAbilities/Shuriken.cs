@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Shuriken : InstantiatedAbilityMono
 {
     protected override void Awake()
@@ -32,7 +33,8 @@ public class Shuriken : InstantiatedAbilityMono
 
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
+        
         Destroy(gameObject);
         Ability.StartCooldown();
     }

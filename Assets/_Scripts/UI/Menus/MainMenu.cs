@@ -12,7 +12,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Canvas))]
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject _divergenceMeterObject;
+    [SerializeField] private DivergenceMeter _divergenceMeter;
     [SerializeField] private SelectorManager _characterSelectorManager;
     [SerializeField] private SelectorManager _mapSelectorManager;
     [SerializeField] private SelectorManagerUnlockables _abilityUnlockablesSelectorManager;
@@ -22,21 +22,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SelectorItemWithInfo _selectorItemPrefab;
     [SerializeField] private SelectorUnlockable _selectorUnlockablePrefab;
     [SerializeField] private SelectorUpgrade _selectorUpgradePrefab;
-
-    private DivergenceMeter _divergenceMeter;
-    private Canvas _mainMenuCanvas;
+    [SerializeField] private GameObject _mainMenuButtons;
     private Coroutine _idleAnim;
-
-    /// <summary>
-    /// <para>
-    /// <c>Awake</c> method initializes components when the object is created.
-    /// </para>
-    /// </summary>
-    void Awake()
-    {
-        _divergenceMeter = _divergenceMeterObject.GetComponent<DivergenceMeter>();
-        _mainMenuCanvas = GetComponent<Canvas>();
-    }
 
     /// <summary>
     /// <para>
@@ -77,11 +64,12 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        _mainMenuCanvas.enabled = false;
+        _mainMenuButtons.SetActive(false);
 
         if (_idleAnim != null)
         {
             StopCoroutine(_idleAnim);
+            Debug.Log("Stopping idle animation");
             _idleAnim = null;
         }
 
@@ -174,7 +162,7 @@ public class MainMenu : MonoBehaviour
         if (infoButtons.Count > 0)
         {
             infoButtons[0].OnSelect(null); // Select first item by default
-            infoButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
+            infoButtons[0].GetComponent<Selectable>().Select();
         }
     }
 

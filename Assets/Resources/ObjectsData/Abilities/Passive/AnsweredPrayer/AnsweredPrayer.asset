@@ -19,8 +19,63 @@ MonoBehaviour:
   _cost: 0
   _isUnlocked: 1
   Level: 1
-  MaxLevel: 3
+  MaxLevel: 50
   IsEvolved: 0
   Tier: 2
+  Stats:
+  - Name: Wave spawn chance
+    type: 1
+    BaseValue: 0.03
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 0.03
+        inSlope: 0.019795919
+        outSlope: 0.019795919
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 1
+        inSlope: 0.019795919
+        outSlope: 0.019795919
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - Name: Cooldown
+    type: 0
+    BaseValue: 5
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 5
+        inSlope: -0.10202041
+        outSlope: -0.10202041
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 0.001
+        inSlope: -0.10202041
+        outSlope: -0.10202041
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   MonoLogic: {fileID: -1318311921815308197, guid: a433b0047f3223b428110ad8273bcd4a, type: 3}
   PassiveType: 1

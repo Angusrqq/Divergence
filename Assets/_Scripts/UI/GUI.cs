@@ -158,7 +158,7 @@ public class GUI : MonoBehaviour
     /// <c>LevelUp</c> is called when the player levels up.
     /// </para> Shows the level up screen.
     /// </summary>
-    public void OnLevelUp(UnityEngine.Object source, int level)
+    public void OnLevelUp_Deprecated(UnityEngine.Object source, int level)
     {
         PauseInternal();
         AbilityChoices.Clear();
@@ -199,6 +199,44 @@ public class GUI : MonoBehaviour
         if(AbilityChoices.Count == 0) CloseLevelUp();
     }
 
+    public void OnLevelUp(UnityEngine.Object source, int level)
+    {
+        PauseInternal();
+        AbilityChoices.Clear();
+        RefreshAvailableAbilities();
+        List<BaseAbilityScriptable> options = Utilities.GetRandomAbilities(_availableAbilities, GameData.InGameAttributes.Luck, (int)GameData.InGameAttributes.AbilitiesPerLevel);
+        foreach(BaseAbilityScriptable ability in options) AbilityChoices.Add(ability);
+        RebuildAbilities();
+        LevelUpPanel.gameObject.SetActive(true);
+        if(AbilityChoices.Count == 0) CloseLevelUp();
+    }
+
+    private void RefreshAvailableAbilities()
+    {
+        List<BaseAbilityScriptable> toRemove = new();
+        foreach(BaseAbilityScriptable ability in _availableAbilities)
+        {
+            BaseAbilityHandler handler = null;
+            if(ability.Type == HandlerType.Passive) handler = GameData.player.AbilityHolder.GetPassiveByName(ability.Name);
+            if(ability.Type == HandlerType.InstantiatedAbility) handler = GameData.player.AbilityHolder.GetAbilityByName(ability.Name);
+            if(handler == null)
+            {
+                if(ability.Type == HandlerType.Passive && GameData.player.AbilityHolder.Passives.Count >= GameData.InGameAttributes.PassiveAbilitySlots)
+                {
+                    toRemove.Add(ability);
+                }
+                if(ability.Type == HandlerType.InstantiatedAbility && GameData.player.AbilityHolder.Abilities.Count >= GameData.InGameAttributes.ActiveAbilitySlots)
+                {
+                    toRemove.Add(ability);
+                }
+                continue;
+            } 
+            //if(handler.Level >= handler.MaxLevel) toRemove.Add(ability);
+        }
+
+        foreach(BaseAbilityScriptable ability in toRemove) _availableAbilities.Remove(ability);
+    }
+
     /// <summary>
     /// Closes the level-up UI and returns the game to an unpaused state.
     /// </summary>
@@ -227,6 +265,7 @@ public class GUI : MonoBehaviour
         foreach(BaseAbilityScriptable a in AbilityChoices)
         {
             AbilityButton button = Instantiate(AbilityButtonPrefab, LevelUpPanel.transform);
+            bool acquired = a.Type == HandlerType.Passive ? GameData.player.AbilityHolder.GetPassiveByName(a.Name) != null : GameData.player.AbilityHolder.GetAbilityByName(a.Name) != null;
             button.Init(a);
             _abilityButtons.Add(button);
         }

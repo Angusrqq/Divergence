@@ -5,24 +5,28 @@ public class Duality : PassiveAbilityMono
 {
     private StatModifier _damageModifier;
     private StatModifier _knockBackForceModifier;
-    private float _cloneChance = 0.1f;
+    private Stat _cloneDamage;
+    private Stat _knockbackForce;
 
     public override void Activate()
     {
-        _damageModifier = new StatModifier(-0.25f, StatModifierType.Percent, this);
-        _knockBackForceModifier = new StatModifier(0.05f, StatModifierType.Percent, this);
+        _cloneDamage = Ability.GetStat("Clone damage");
+        _knockbackForce = Ability.GetStat("KnockbackForce");
+
+        _damageModifier = new StatModifierByStat(ref _cloneDamage, StatModifierType.Percent, this);
+        _knockBackForceModifier = new StatModifierByStat(ref _knockbackForce, StatModifierType.Percent, this);
         GameData.player.AbilityHolder.OnAbilityActivated += CloneProjectile;
     }
 
 
     private void CloneProjectile(Type type, InstantiatedAbilityHandler ability, InstantiatedAbilityMono projectile)
     {
-        if(GameData.LowValue > _cloneChance) return;
+        if(GameData.LowValue > Ability.GetStat("Clone chance")) return;
         Vector2 initial_pos = (Vector2)GameData.player.transform.position + UnityEngine.Random.insideUnitCircle;
         var instance = Instantiate(projectile, initial_pos, Quaternion.identity);
         instance.Init(ability);
-        instance.Damage.AddModifier(_damageModifier);
-        instance.KnockbackForce.AddModifier(_knockBackForceModifier);
+        instance.Ability.GetStat("Damage").AddModifier(_damageModifier);
+        instance.Ability.GetStat("KnockbackForce").AddModifier(_knockBackForceModifier);
         instance.TryGetComponent<SpriteRenderer>(out var sr);
         if (sr != null)
         {
@@ -32,16 +36,16 @@ public class Duality : PassiveAbilityMono
         ability.Instances.Add(instance);
     }
 
-    public override void Upgrade()
-    {
-        _knockBackForceModifier.Value *= 2f;
-        _damageModifier.Value += 0.05f;
-        _cloneChance *= 1.3f;
-    }
+    // public override void Upgrade()
+    // {
+    //     _knockBackForceModifier.Value *= 2f;
+    //     _damageModifier.Value += 0.05f;
+    //     _cloneChance *= 1.3f;
+    // }
 
     private void OnProjectileDeath(InstantiatedAbilityMono instance)
     {
-        instance.Damage.RemoveModifier(_damageModifier);
-        instance.KnockbackForce.RemoveModifier(_knockBackForceModifier);
+        instance.Ability.GetStat("Damage").RemoveModifier(_damageModifier);
+        instance.Ability.GetStat("KnockbackForce").RemoveModifier(_knockBackForceModifier);
     }
 }

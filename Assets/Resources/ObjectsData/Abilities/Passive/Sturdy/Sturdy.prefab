@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6832638649053698050}
   - component: {fileID: 8160234471515031682}
   m_Layer: 0
-  m_Name: Strudy
+  m_Name: Sturdy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

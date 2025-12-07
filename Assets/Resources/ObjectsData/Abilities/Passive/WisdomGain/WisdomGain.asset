@@ -22,5 +22,34 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 3
+  Stats:
+  - Name: Experience multiplier
+    type: 3
+    BaseValue: 0.25
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 0.25
+        inSlope: 0.035714287
+        outSlope: 0.035714287
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 2
+        inSlope: 0.035714287
+        outSlope: 0.035714287
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: 3195371801307526527, guid: c7f5bebd7278a1e409359c4dab96d578, type: 3}
   PassiveType: 0

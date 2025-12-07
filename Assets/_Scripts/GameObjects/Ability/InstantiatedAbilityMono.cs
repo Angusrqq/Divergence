@@ -16,9 +16,9 @@ using System;
 /// configured active time elapses. On destruction, it removes itself from the owning ability's
 /// <see cref="InstantiatedAbilityScriptable.Instances"/> list.
 /// </remarks>
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
-public class InstantiatedAbilityMono : MonoBehaviour
+// [RequireComponent(typeof(Rigidbody2D))]
+// [RequireComponent(typeof(Collider2D))]
+public class InstantiatedAbilityMono : BaseAbilityMono
 {
     [NonSerialized] private InstantiatedAbilityHandler _ability;
     private bool _hit = false;
@@ -32,8 +32,6 @@ public class InstantiatedAbilityMono : MonoBehaviour
     [NonSerialized] public Enemy Target;
 
     public InstantiatedAbilityHandler Ability { get => _ability; protected set => _ability = value; }
-    public Stat Damage;
-    public Stat KnockbackForce;
     public AudioClip OnActivation;
     public AudioClip OnHit;
     public Action<InstantiatedAbilityMono> OnDeath;
@@ -71,8 +69,6 @@ public class InstantiatedAbilityMono : MonoBehaviour
     public virtual void Init(InstantiatedAbilityHandler ability)
     {
         Ability = ability;
-        Damage = (float)ability.damage;
-        KnockbackForce = (float)ability.KnockbackForce;
         timer = ability.ActiveTime;
     }
 
@@ -114,7 +110,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
     protected virtual void OnDestroy()
     {
         OnDeath?.Invoke(this);
-        Ability.Instances.Remove(this);
+        Ability?.Instances.Remove(this);
         OnDeath = null;
     }
 
@@ -136,7 +132,7 @@ public class InstantiatedAbilityMono : MonoBehaviour
             EnemyCollision(enemy);
             if (doesDamage)
             {
-                GameData.player.AbilityHolder.TriggerOnEnemyHit(GetType(), enemy, Damage, this);
+                GameData.player.AbilityHolder.TriggerOnEnemyHit(GetType(), enemy, Ability.GetStat("Damage"), this);
             }
         }
         OtherCollision(other);
@@ -149,8 +145,9 @@ public class InstantiatedAbilityMono : MonoBehaviour
     /// <param name="enemy"></param>
     public virtual void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType(), KnockbackForce, Ability.KnockbackDuration);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("KnockbackForce"), Ability.KnockbackDuration);
     }
+
     /// <summary>
     /// Called when another object enters a 2D collider trigger that is not an Enemy.
     /// </summary>

@@ -2,7 +2,6 @@ using System;
 
 public class Vampirism : PassiveAbilityMono
 {
-    [NonSerialized] public Stat PercentageHealing = 0.1f;
     [NonSerialized] public Stat chance = 0.2f;
     public override void Activate()
     {
@@ -13,7 +12,7 @@ public class Vampirism : PassiveAbilityMono
     {
         if(GameData.LowValue < chance)
         {
-            GameData.player.DamageableEntity.Heal(this, Damage * PercentageHealing, GetType());
+            GameData.player.DamageableEntity.Heal(this, Damage * Ability.GetStat("Healing by damage"), GetType());
         }
     }
 }

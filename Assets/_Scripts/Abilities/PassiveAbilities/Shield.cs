@@ -13,7 +13,7 @@ public class Shield : PassiveAbilityMono
     /// </summary>
     public override void Activate()
     {
-        _resistValue = -0.1f;
+        _resistValue = Ability.GetStat("Resist");
         _resistValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _shieldModifier = new StatModifierByStat(ref _resistValue, StatModifierType.Percent, this);
         GameData.InGameAttributes.PlayerResistsMult.AddModifier(_shieldModifier);
@@ -23,9 +23,9 @@ public class Shield : PassiveAbilityMono
     /// <summary>
     /// Strengthens the shield by increasing the magnitude of the resistance.
     /// </summary>
-    public override void Upgrade()
-    {
-        _shieldModifier.Value -= 0.05f;
-        Debug.Log($"Shield Upgraded, player resist: {GameData.InGameAttributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
-    }
+    // public override void Upgrade()
+    // {
+    //     _shieldModifier.Value -= 0.05f;
+    //     Debug.Log($"Shield Upgraded, player resist: {GameData.InGameAttributes.PlayerResistsMultModifier}, resistBase: {_resistValue.BaseValue}, resistCurrent {_resistValue}");
+    // }
 }

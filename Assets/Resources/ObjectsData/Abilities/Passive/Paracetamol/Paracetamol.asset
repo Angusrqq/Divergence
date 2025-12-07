@@ -22,5 +22,6 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 4
+  Stats: []
   MonoLogic: {fileID: -6638191430015705204, guid: 3961c06e075e3174382f442bfd865362, type: 3}
   PassiveType: 0

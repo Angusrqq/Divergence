@@ -22,5 +22,33 @@ MonoBehaviour:
   MaxLevel: 3
   IsEvolved: 0
   Tier: 4
+  Stats:
+  - Name: Crit Chance
+    type: 1
+    BaseValue: 0.1
+    Scaling:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 1
+        value: 0.1
+        inSlope: 0.018367346
+        outSlope: 0.018367346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 50
+        value: 1
+        inSlope: 0.018367346
+        outSlope: 0.018367346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   MonoLogic: {fileID: 1789955093598720297, guid: df33fd99e477bcf41ba22c0c78e69f40, type: 3}
   PassiveType: 0

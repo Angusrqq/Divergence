@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ArcanePulse : InstantiatedAbilityMono
 {
-    private List<Enemy> _enemiesInside = new();
-    private List<Enemy> _enemiesToAdd = new();
-    private List<Enemy> _enemiesToRemove = new();
+    private readonly List<Enemy> _enemiesInside = new();
+    private readonly List<Enemy> _enemiesToAdd = new();
+    private readonly List<Enemy> _enemiesToRemove = new();
     private float _damageTimer;
 
     protected override void Awake()
@@ -45,10 +44,11 @@ public class ArcanePulse : InstantiatedAbilityMono
         {
             foreach (var enemy in _enemiesInside)
             {
-                enemy.TakeDamage(GameData.player.gameObject, Damage, GetType());
+                enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType());
             }
             _damageTimer = Ability.KnockbackDuration;
         }
+
         transform.RotateAround(transform.position, Vector3.forward, 2);
     }
 
@@ -58,7 +58,8 @@ public class ArcanePulse : InstantiatedAbilityMono
         {
             _enemiesToAdd.Add(enemy);
         }
-        enemy.TakeDamage(GameData.player.gameObject, Damage, GetType());
+        
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType());
     }
 
     protected void OnTriggerExit2D(Collider2D other)

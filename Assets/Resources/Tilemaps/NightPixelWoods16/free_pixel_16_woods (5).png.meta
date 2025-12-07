@@ -608,7 +608,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_19
+      name: Rock_Pixel16_0
       rect:
         serializedVersion: 2
         x: 224
@@ -916,7 +916,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_33
+      name: Grass_Pixel16_0
       rect:
         serializedVersion: 2
         x: 224
@@ -1334,7 +1334,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_52
+      name: Flowers_Yellow_Pixel16_0
       rect:
         serializedVersion: 2
         x: 80
@@ -1356,7 +1356,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_53
+      name: Flowers_Red_Pixel16_0
       rect:
         serializedVersion: 2
         x: 96
@@ -1488,7 +1488,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_59
+      name: Lantern_Pixel16_0
       rect:
         serializedVersion: 2
         x: 208
@@ -1510,7 +1510,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: free_pixel_16_woods (5)_60
+      name: Lantern_Pixel16_1
       rect:
         serializedVersion: 2
         x: 256
@@ -2801,6 +2801,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Flowers_Red_Pixel16_0: -920315479
+      Flowers_Yellow_Pixel16_0: -388403760
+      Grass_Pixel16_0: 1673750275
+      Lantern_Pixel16_0: -785395222
+      Lantern_Pixel16_1: 1890649638
+      Rock_Pixel16_0: -9122948069036465459
       free_pixel_16_woods (5)_0: -9141835352811440108
       free_pixel_16_woods (5)_1: 6194365714084088262
       free_pixel_16_woods (5)_10: -7929519903980238949
@@ -2830,7 +2836,6 @@ TextureImporter:
       free_pixel_16_woods (5)_16: 584153177196715240
       free_pixel_16_woods (5)_17: 1865308581451886980
       free_pixel_16_woods (5)_18: 539993784537962304
-      free_pixel_16_woods (5)_19: -9122948069036465459
       free_pixel_16_woods (5)_2: 1762926070287368569
       free_pixel_16_woods (5)_20: -2973963690338019525
       free_pixel_16_woods (5)_21: -2463033165250058210
@@ -2846,7 +2851,6 @@ TextureImporter:
       free_pixel_16_woods (5)_30: 6697596785153972462
       free_pixel_16_woods (5)_31: 1365296075
       free_pixel_16_woods (5)_32: -8004916
-      free_pixel_16_woods (5)_33: 1673750275
       free_pixel_16_woods (5)_34: 312197492
       free_pixel_16_woods (5)_35: -1963449392
       free_pixel_16_woods (5)_36: -551840980
@@ -2867,16 +2871,12 @@ TextureImporter:
       free_pixel_16_woods (5)_5: 5401834136343825318
       free_pixel_16_woods (5)_50: -516105974
       free_pixel_16_woods (5)_51: -201161460
-      free_pixel_16_woods (5)_52: -388403760
-      free_pixel_16_woods (5)_53: -920315479
       free_pixel_16_woods (5)_54: -38724564
       free_pixel_16_woods (5)_55: 1135642172
       free_pixel_16_woods (5)_56: 970917994
       free_pixel_16_woods (5)_57: 1825950228
       free_pixel_16_woods (5)_58: 91814243
-      free_pixel_16_woods (5)_59: -785395222
       free_pixel_16_woods (5)_6: 1621349514252518647
-      free_pixel_16_woods (5)_60: 1890649638
       free_pixel_16_woods (5)_61: 1331782225
       free_pixel_16_woods (5)_62: 561436130
       free_pixel_16_woods (5)_63: -1272192638

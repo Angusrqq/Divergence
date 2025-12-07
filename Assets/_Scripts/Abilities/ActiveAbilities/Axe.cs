@@ -1,6 +1,6 @@
-using Unity.Mathematics;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Axe : InstantiatedAbilityMono
 {
     private float _forceTimer;
@@ -41,6 +41,6 @@ public class Axe : InstantiatedAbilityMono
 
     public override void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Damage /* *(math.abs(direction.x) + math.abs(direction.y))*/, GetType(), KnockbackForce, Ability.KnockbackDuration);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
     }
 }
