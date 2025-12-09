@@ -50,6 +50,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    UniversalType: 0
   - Name: Explosion Radius
     type: 0
     BaseValue: 15
@@ -77,7 +78,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  - Name: Chance to mark
+    UniversalType: 0
+  - Name: Chance to Mark
     type: 1
     BaseValue: 0.1
     Scaling:
@@ -104,7 +106,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  - Name: Maximum marks
+    UniversalType: 0
+  - Name: Maximum Marks
     type: 0
     BaseValue: 1
     Scaling:
@@ -131,5 +134,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: -4819679348387593384, guid: 2bf3cb35fdf2ad448bb7937adbf07faa, type: 3}
   PassiveType: 1

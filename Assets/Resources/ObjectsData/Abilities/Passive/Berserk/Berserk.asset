@@ -51,7 +51,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     UniversalType: 0
-  - Name: Movement speed
+  - Name: Movement Speed
     type: 3
     BaseValue: 0.05
     Scaling:

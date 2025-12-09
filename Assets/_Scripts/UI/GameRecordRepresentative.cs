@@ -11,6 +11,12 @@ public class GameRecordRepresentative : MonoBehaviour
     }
     void Start()
     {
-        _valueText.text = GameData.CurrentMetadata.Records.GetRecord(RecordType);
+        _valueText.text = RecordType switch
+        {
+            GameRecords.RecordType.CritMult => GameData.CurrentMetadata.Records.MaxCritMult.ToString() + "%",
+            GameRecords.RecordType.DamageMult => GameData.CurrentMetadata.Records.MaxDamageMult.ToString() + "%",
+            GameRecords.RecordType.CritChance => GameData.CurrentMetadata.Records.MaxCritChance.ToString() + "%",
+            _ => GameData.CurrentMetadata.Records.GetRecord(RecordType)
+        };
     }
 }

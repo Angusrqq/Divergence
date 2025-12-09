@@ -10,8 +10,8 @@ public class Duality : PassiveAbilityMono
 
     public override void Activate()
     {
-        _cloneDamage = Ability.GetStat("Clone damage");
-        _knockbackForce = Ability.GetStat("KnockbackForce");
+        _cloneDamage = Ability.GetStat("Clone Damage");
+        _knockbackForce = Ability.GetStat("Knockback Force");
 
         _damageModifier = new StatModifierByStat(ref _cloneDamage, StatModifierType.Percent, this);
         _knockBackForceModifier = new StatModifierByStat(ref _knockbackForce, StatModifierType.Percent, this);
@@ -21,13 +21,13 @@ public class Duality : PassiveAbilityMono
 
     private void CloneProjectile(Type type, InstantiatedAbilityHandler ability, InstantiatedAbilityMono projectile)
     {
-        if (GameData.LowValue > Ability.GetStat("Clone chance")) return;
+        if (GameData.LowValue > Ability.GetStat("Clone Chance")) return;
         Vector2 initial_pos = (Vector2)GameData.player.transform.position + UnityEngine.Random.insideUnitCircle;
 
         var instance = Instantiate(projectile, initial_pos, Quaternion.identity);
         instance.Init(ability);
         instance.Ability.GetStat("Damage").AddModifier(_damageModifier);
-        instance.Ability.GetStat("KnockbackForce").AddModifier(_knockBackForceModifier);
+        instance.Ability.GetStat("Knockback Force").AddModifier(_knockBackForceModifier);
         instance.TryGetComponent<SpriteRenderer>(out var sr);
 
         if (sr != null)
@@ -42,6 +42,6 @@ public class Duality : PassiveAbilityMono
     private void OnProjectileDeath(InstantiatedAbilityMono instance)
     {
         instance.Ability.GetStat("Damage").RemoveModifier(_damageModifier);
-        instance.Ability.GetStat("KnockbackForce").RemoveModifier(_knockBackForceModifier);
+        instance.Ability.GetStat("Knockback Force").RemoveModifier(_knockBackForceModifier);
     }
 }

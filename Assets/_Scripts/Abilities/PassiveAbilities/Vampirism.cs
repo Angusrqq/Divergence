@@ -13,7 +13,7 @@ public class Vampirism : PassiveAbilityMono
     {
         if (GameData.LowValue < chance)
         {
-            GameData.player.DamageableEntity.Heal(this, Damage * Ability.GetStat("Healing by damage"), GetType());
+            GameData.player.DamageableEntity.Heal(this, Damage * Ability.GetStat("Healing by Damage"), GetType());
         }
     }
 }

@@ -24,7 +24,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 2
   Stats:
-  - Name: Cooldown reduction
+  - Name: Cooldown Reduction
     type: 3
     BaseValue: -0.15
     Scaling:

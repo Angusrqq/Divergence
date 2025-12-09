@@ -81,4 +81,31 @@ public class ExperienceCrystal : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
+
+    public IEnumerator PullToPlayerSmoothlyCoroutine(AnimationCurve curve)
+    {
+        IsFired = true;
+
+        float t = 0f;
+
+        while (gameObject != null)
+        {
+            if (GameData.player != null)
+            {
+                t += Time.fixedDeltaTime;
+
+                float speed = curve.Evaluate(t) * 15f;
+
+                Vector3 target = GameData.player.transform.position;
+
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    target,
+                    speed * Time.fixedDeltaTime + 1
+                );
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
 }

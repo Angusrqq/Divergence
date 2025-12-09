@@ -11,6 +11,10 @@ public class GameStatRepresentative : MonoBehaviour
     }
     void Start()
     {
-        valueText.text = GameData.CurrentMetadata.gameStats.GetStat(statType);
+        valueText.text = statType switch
+        {
+            GameStats.StatType.Time => GameTimer.FormatTimeConditionally(GameData.CurrentMetadata.gameStats.TotalTime),
+            _ => GameData.CurrentMetadata.gameStats.GetStat(statType),
+        };
     }
 }

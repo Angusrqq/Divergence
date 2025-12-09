@@ -7,7 +7,7 @@ public class CooldownReduction : PassiveAbilityMono
 
     public override void Activate()
     {
-        _cooldownValue = Ability.GetStat("Cooldown reduction");
+        _cooldownValue = Ability.GetStat("Cooldown Reduction");
         _cooldownValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _cooldownModifier = new StatModifierByStat(ref _cooldownValue, StatModifierType.Percent, this);
         GameData.InGameAttributes.CooldownReductionMult.AddModifier(_cooldownModifier);

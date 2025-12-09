@@ -24,7 +24,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 3
   Stats:
-  - Name: Clone chance
+  - Name: Clone Chance
     type: 1
     BaseValue: 0.1
     Scaling:
@@ -52,7 +52,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     UniversalType: 0
-  - Name: Clone damage
+  - Name: Clone Damage
     type: 3
     BaseValue: -0.25
     Scaling:

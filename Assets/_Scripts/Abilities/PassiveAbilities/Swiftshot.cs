@@ -7,7 +7,7 @@ public class Swiftshot : PassiveAbilityMono
 
     public override void Activate()
     {
-        _speedValue = Ability.GetStat("Projectile speed");
+        _speedValue = Ability.GetStat("Projectile Speed");
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Percent, this);
         GameData.InGameAttributes.ProjectileSpeedMult.AddModifier(_speedModifier);

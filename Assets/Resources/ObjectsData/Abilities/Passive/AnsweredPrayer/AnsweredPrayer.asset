@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ef2e5ed987f344e82ecc7b70122497, type: 3}
   m_Name: AnsweredPrayer
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
-  _name: Answered prayer
+  _name: Answered Prayer
   _description: At low HP, occasionally emits a shockwave that pushes enemies away.
   _icon: {fileID: -5439692155646363009, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
   Guid: 25474a23-aaec-4dd7-9d3e-96d53e42ec54
@@ -23,7 +23,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 2
   Stats:
-  - Name: Wave spawn chance
+  - Name: Wave Spawn Chance
     type: 1
     BaseValue: 0.03
     Scaling:
@@ -50,6 +50,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    UniversalType: 0
   - Name: Cooldown
     type: 0
     BaseValue: 5
@@ -77,5 +78,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: -1318311921815308197, guid: a433b0047f3223b428110ad8273bcd4a, type: 3}
   PassiveType: 1

@@ -42,7 +42,7 @@ public class AnsweredPrayer : PassiveAbilityMono
         AudioManager.instance.PlaySFX(AudioClips[0]);
         while (true)
         {
-            if (GameData.MidValue < Ability.GetStat("Wave spawn chance"))
+            if (GameData.MidValue < Ability.GetStat("Wave Spawn Chance"))
             {
                 Instantiate(FieldPrefab, GameData.player.transform.position, Quaternion.identity);
             }
@@ -53,7 +53,7 @@ public class AnsweredPrayer : PassiveAbilityMono
 
     public override void Activate()
     {
-        Ability.GetStat("Wave spawn chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
+        Ability.GetStat("Wave Spawn Chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         Ability.GetStat("Cooldown").AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
 
         GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;

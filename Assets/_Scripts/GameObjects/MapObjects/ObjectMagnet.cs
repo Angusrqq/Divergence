@@ -14,12 +14,9 @@ public class ObjectMagnet : MonoBehaviour
 
         for (int i = 0; i < enemyManager.childCount; i++)
         {
-            if (enemyManager.GetChild(i).TryGetComponent(out ExperienceCrystal crystal))
+            if (enemyManager.GetChild(i).TryGetComponent(out ExperienceCrystal crystal) && !crystal.IsFired)
             {
-                if (!crystal.IsFired)
-                {
-                    crystal.StartCoroutine(crystal.MagnetToPlayerCoroutine(curve));
-                }
+                crystal.StartCoroutine(crystal.PullToPlayerSmoothlyCoroutine(curve));
             }
         }
 

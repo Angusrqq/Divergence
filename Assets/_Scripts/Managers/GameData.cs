@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -284,6 +283,7 @@ public class GameData : MonoBehaviour
             GameObject temp = Instantiate(currentMap.mapPrefab);
             Camera.main.transform.parent.GetComponentInChildren<CinemachineConfiner2D>().BoundingShape2D = temp.GetComponent<Collider2D>();
             InGameAttributes = new(); // reconstruct to use the new values from starting attributes
+            CurrentMetadata.gameStats.TotalRuns += 1;
             Debug.Log($"Loaded map: {currentMap.name}");
             Debug.Log($"Lives ingame: {InGameAttributes.Lives}");
             Debug.Log($"Lives Starting: {StartingAttributes.Lives}");

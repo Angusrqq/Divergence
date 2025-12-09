@@ -27,6 +27,7 @@ public enum StatModifierType
     /// </summary>
     Mult
 }
+
 /// <summary>
 /// Stat class represents a character or object attribute that can be modified by various modifiers.
 /// <para>
@@ -85,7 +86,11 @@ public class Stat
     /// <exception cref="ArgumentException">thrown to prevent stack overflow (i think)</exception>
     public virtual void AddModifier(StatModifier modifier)
     {
-        if (modifier.GetType() == typeof(StatModifierByStat) && ((StatModifierByStat)modifier).Stat == this) throw new ArgumentException("Cannot add modifier that contains a stat reference to itself");
+        if (modifier.GetType() == typeof(StatModifierByStat) && ((StatModifierByStat)modifier).Stat == this)
+        {
+            throw new ArgumentException("Cannot add modifier that contains a stat reference to itself");
+        }
+
         _recalculationNeeded = true;
         switch (modifier.type)
         {
@@ -99,6 +104,7 @@ public class Stat
                 _multModifiers.Add(modifier);
                 break;
         }
+        
         modifier.OnValueChanged += OnModifierValueChanged;
     }
 

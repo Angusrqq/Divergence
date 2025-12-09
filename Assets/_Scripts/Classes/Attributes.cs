@@ -189,6 +189,7 @@ public class InGameAtributes
     public Stat Luck = 0f;
 
     public float DamageDealt = 0;
+    public float DamageTaken = 0;
 
     public StatModifierByStat HealthModifier;
     public StatModifierByStat MaxHealthModifier;

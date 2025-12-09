@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
         circleCollider2D.radius = data.ColliderRadius;
         circleCollider2D.offset = data.ColliderOffset;
+        damageableEntity.Init(maxHealth, true, damage);
 
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
@@ -71,7 +72,6 @@ public class Enemy : MonoBehaviour
         }
 
         damageableEntity.OnDeath += OnDeath;
-        damageableEntity.Init(maxHealth, true, damage);
 
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();

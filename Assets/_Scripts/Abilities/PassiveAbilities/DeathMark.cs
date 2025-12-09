@@ -12,9 +12,9 @@ public class DeathMark : PassiveAbilityMono
     private void OnProjectileHitEnemy(Type type, Enemy enemy, float damage, InstantiatedAbilityMono projectile)
     {
         if (markedEnemies.Contains(enemy)) return;
-        if (_isCapped && _currentMarks >= Ability.GetStat("Maximum marks")) return;
+        if (_isCapped && _currentMarks >= Ability.GetStat("Maximum Marks")) return;
 
-        if (GameData.LowValue < Ability.GetStat("Chance to mark"))
+        if (GameData.LowValue < Ability.GetStat("Chance to Mark"))
         {
             var instance = Instantiate(Prefab, EnemyManager.Instance.transform);
             markedEnemies.Add(enemy);

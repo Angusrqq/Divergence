@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
 
         DamageableEntity.OnDeath += OnDeath;
         DamageableEntity.Init(MaxHealth);
+        DamageableEntity.OnDamageTaken += (source, amount, type) => GameData.InGameAttributes.DamageTaken += amount;
 
         // _abilityIconDisplay.UpdateActiveAbilitiesIcons(AbilityHolder.GetActiveAbilitiesList());
         // _abilityIconDisplay.UpdatePassiveAbilitiesIcons(AbilityHolder.GetPassiveAbilitiesList());

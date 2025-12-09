@@ -7,7 +7,7 @@ public class WisdomGain : PassiveAbilityMono
 
     public override void Activate()
     {
-        _expValue = Ability.GetStat("Experience multiplier");
+        _expValue = Ability.GetStat("Experience Multiplier");
         _expValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _expModifier = new StatModifierByStat(ref _expValue, StatModifierType.Mult, this);
         GameData.InGameAttributes.ExperienceMultiplier.AddModifier(_expModifier);

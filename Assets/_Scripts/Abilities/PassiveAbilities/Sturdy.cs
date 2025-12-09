@@ -7,7 +7,7 @@ public class Sturdy : PassiveAbilityMono
 
     public override void Activate()
     {
-        _healthValue = Ability.GetStat("Max health");
+        _healthValue = Ability.GetStat("Max Health");
         _healthValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _healthModifier = new StatModifierByStat(ref _healthValue, StatModifierType.Percent, this);
         GameData.InGameAttributes.MaxHealth.AddModifier(_healthModifier);

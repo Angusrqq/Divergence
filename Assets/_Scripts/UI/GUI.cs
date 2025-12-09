@@ -142,6 +142,16 @@ public class GUI : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void EndRun()
+    {
+        GameData.CurrentMetadata.gameStats.RunsFinished += 1;
+        GameData.CurrentMetadata.gameStats.TotalDamageDealt += (ulong)GameData.InGameAttributes.DamageDealt;
+        GameData.CurrentMetadata.gameStats.TotalDamageTaken += (ulong)GameData.InGameAttributes.DamageTaken;
+        GameData.CurrentMetadata.Records.MaxCritMult = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxCritMult, GameData.InGameAttributes.CritMult * 100f);
+        GameData.CurrentMetadata.Records.MaxDamageMult = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxDamageMult, GameData.InGameAttributes.PlayerDamageMult * 100f);
+        GameData.CurrentMetadata.Records.MaxCritChance = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxCritChance, GameData.InGameAttributes.CritChance * 100f);
+    }
+
     /// <summary>
     /// <para>
     /// <c>Reset</c> is called when the Reset button is pressed.

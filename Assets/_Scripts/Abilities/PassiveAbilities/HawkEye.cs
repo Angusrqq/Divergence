@@ -7,7 +7,7 @@ public class HawkEye : PassiveAbilityMono
 
     public override void Activate()
     {
-        _distanceValue = Ability.GetStat("Projectile lifetime");
+        _distanceValue = Ability.GetStat("Projectile Lifetime");
         _distanceValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _distanceModifier = new StatModifierByStat(ref _distanceValue, StatModifierType.Percent, this);
         GameData.InGameAttributes.AbilityActiveTimeMult.AddModifier(_distanceModifier);

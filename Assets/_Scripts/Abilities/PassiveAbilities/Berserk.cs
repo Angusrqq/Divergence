@@ -30,7 +30,7 @@ public class Berserk : PassiveAbilityMono
         _damageValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _damageModifier = new StatModifierByStat(ref _damageValue, StatModifierType.Mult, this);
 
-        _speedValue = Ability.GetStat("Movement speed");
+        _speedValue = Ability.GetStat("Movement Speed");
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Mult, this);
 

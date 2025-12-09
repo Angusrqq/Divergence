@@ -39,6 +39,11 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
     {
         _selectorManager.CurrentSelectedItem = this;
         SelectedImage.enabled = true;
+        try
+        {
+            SelectedImage.material.SetColor("_Color", Utilities.GetTierColor(((BaseAbilityScriptable)_itemData).Tier) * 4f);
+        }
+        catch { SelectedImage.material.SetColor("_Color", new Color(3.56486797f,1.9095813f,0,2) * 1f); }
     }
 
     /// <summary>

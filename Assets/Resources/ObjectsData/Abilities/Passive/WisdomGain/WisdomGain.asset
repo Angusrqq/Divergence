@@ -23,7 +23,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 3
   Stats:
-  - Name: Experience multiplier
+  - Name: Experience Multiplier
     type: 3
     BaseValue: 0.25
     Scaling:

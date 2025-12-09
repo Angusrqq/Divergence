@@ -23,7 +23,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 4
   Stats:
-  - Name: Healing by damage
+  - Name: Healing by Damage
     type: 2
     BaseValue: 0.1
     Scaling:
