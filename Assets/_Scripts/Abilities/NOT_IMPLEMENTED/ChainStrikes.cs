@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+
 //TODO: implement
 // maybe some kind of ui elements to tell player what combo they're on 
 public class ChainStrikes : PassiveAbilityMono
@@ -18,10 +18,10 @@ public class ChainStrikes : PassiveAbilityMono
     private void OnProjectileHitEnemy(Type type, Enemy enemy, float damage, InstantiatedAbilityMono projectile)
     {
         if (!trackedProjectiles.Contains(projectile)) return;
-        if (comboCounter < Ability.GetStat("Max combo"))
+        if (comboCounter < Ability.GetStat("Max Combo"))
         {
             comboCounter++;
-            damageModifier.Value = comboCounter * Ability.GetStat("Damage per combo");
+            damageModifier.Value = comboCounter * Ability.GetStat("Combo Damage Bonus");
         } 
         projectile.OnDeath -= OnProjectileDeath;
         trackedProjectiles.Remove(projectile);
@@ -42,10 +42,4 @@ public class ChainStrikes : PassiveAbilityMono
         GameData.player.AbilityHolder.OnProjectileFired += OnProjectileFired;
         GameData.player.AbilityHolder.OnEnemyHit += OnProjectileHitEnemy;
     }
-
-    // public override void Upgrade()
-    // {
-    //     maxCombo += 3;
-    //     percentDamagePerCombo += 0.02f;
-    // }
 }

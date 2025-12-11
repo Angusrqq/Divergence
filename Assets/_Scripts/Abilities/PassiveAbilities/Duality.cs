@@ -21,6 +21,7 @@ public class Duality : PassiveAbilityMono
 
     private void CloneProjectile(Type type, InstantiatedAbilityHandler ability, InstantiatedAbilityMono projectile)
     {
+        if(type == typeof(ArcanePulse)) return;
         if (GameData.LowValue > Ability.GetStat("Clone Chance")) return;
         Vector2 initial_pos = (Vector2)GameData.player.transform.position + UnityEngine.Random.insideUnitCircle;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sturdy
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Sturdy
-  _description: Increase max health.
+  _description: Increases your maximum HP.
   _icon: {fileID: -8838299409037085554, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Guid: 998769d3-35d6-4a1f-a695-171a47e58222
   _cost: 0

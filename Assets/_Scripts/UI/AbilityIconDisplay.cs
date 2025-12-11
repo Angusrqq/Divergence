@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +44,9 @@ public class AbilityIconDisplay : MonoBehaviour
 
             Sprite abilityIcon = abilities[abilityIndex].Icon;
             image.sprite = abilityIcon;
+
+            TMP_Text abilityLevel = image.GetComponentInChildren<TMP_Text>();
+            abilityLevel.text = "lv. " + abilities[abilityIndex].Level.ToString();
 
             image.color = Color.white;
 

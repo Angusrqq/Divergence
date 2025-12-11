@@ -11,16 +11,15 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy _prefab;
 
-    public Stat SpawnDelay = 1f;
     public MonoBehaviour Target;
     public int maxEnemyCount = 10000;
     
     private Camera _camera;
-    private float delay;
 
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
     public Action<Enemy> OnEnemyDeath;
+    private float _spawnCredits = 0f;
 
     public void TriggerEnemyDeath(Enemy enemy)
     {
@@ -33,7 +32,6 @@ public class EnemyManager : MonoBehaviour
     void Awake()
     {
         _camera = Camera.main;
-        delay = SpawnDelay;
         Instance = this;
         Enemies = new List<Enemy>();
     }
@@ -44,20 +42,22 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (delay - Time.deltaTime <= 0)
+        float rate = SpawnRate(GameData.GameTimerInstance.currentTime, KillCounter.KillsPerSecond);
+        _spawnCredits += rate * Time.deltaTime;
+
+        while(_spawnCredits >= 1f && Enemies.Count < maxEnemyCount)
         {
-            bool vertical = UnityEngine.Random.Range(0, 2) == 1;
-            // Vector2 offset = new(10f, 10f);
-            //TODO: apply an offset to this shit, dk how to explain (enemies spawn right at the edge, their sprite size is not included here)
-            Vector2 viewportCoords = vertical ? new(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0f, 1f)) : new(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0, 2));
-            Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
-            SpawnEnemy(spawnPos, Quaternion.identity, UnityEngine.Random.Range(0, GameData.Enemies.Count));
-            delay = SpawnDelay / (1f + (GameData.GameTimerInstance.currentTime / 60f));
+            SpawnEnemy(UnityEngine.Random.Range(0, GameData.Enemies.Count));
+            _spawnCredits -= 1f;
         }
-        else
-        {
-            delay -= Time.deltaTime;
-        }
+    }
+
+    private static float SpawnRate(float time, float kps)
+    {
+        float baseRate = 0.3f;
+        float timeScale = 1f + time * 0.03f;
+        float kpsScale = 1f + kps * 0.01f;
+        return baseRate * timeScale * kpsScale;
     }
 
     /// <summary>
@@ -74,6 +74,16 @@ public class EnemyManager : MonoBehaviour
         enemy.gameObject.SetActive(true);
 
         Enemies.Add(enemy);
+    }
+
+    private void SpawnEnemy(int enemyIndex)
+    {
+        bool vertical = UnityEngine.Random.Range(0, 2) == 1;
+        // Vector2 offset = new(10f, 10f);
+        //TODO: apply an offset to this shit, dk how to explain (enemies spawn right at the edge, their sprite size is not included here)
+        Vector2 viewportCoords = vertical ? new(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0f, 1f)) : new(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0, 2));
+        Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
+        SpawnEnemy(spawnPos, Quaternion.identity, enemyIndex);
     }
 
     private void SpawnEnemy(Vector2 pos, Quaternion rot, EnemyData enemyData)

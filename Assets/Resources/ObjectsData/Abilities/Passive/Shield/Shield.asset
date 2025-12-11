@@ -23,7 +23,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 1
   Stats:
-  - Name: Resist
+  - Name: Resistance
     type: 2
     BaseValue: -0.1
     Scaling:

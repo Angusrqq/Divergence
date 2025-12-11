@@ -55,6 +55,7 @@ public class AbilityHolder : MonoBehaviour
             {
                 temp.Upgrade();
             }
+            GameData.player.PlayerAbilityIconDisplay.UpdateActiveAbilitiesIcons(Abilities);
             return;
         }
         
@@ -88,6 +89,7 @@ public class AbilityHolder : MonoBehaviour
             {
                 temp.Upgrade();
             }
+            GameData.player.PlayerAbilityIconDisplay.UpdatePassiveAbilitiesIcons(Passives);
             return;
         }
         Debug.Log("Passive does not exist, creating new: " + passive.Name);

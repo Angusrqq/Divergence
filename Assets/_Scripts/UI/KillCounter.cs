@@ -21,6 +21,7 @@ public class KillCounter : MonoBehaviour
 
     public static KillCounter Instance { get; private set; }
     public static int Kills => Instance._kills;
+    public static float KillsPerSecond => Instance._killsPerSecond;
 
     private void Awake()
     {

@@ -24,7 +24,7 @@ MonoBehaviour:
   IsEvolved: 0
   Tier: 2
   Stats:
-  - Name: Max combo
+  - Name: Max Combo
     type: 0
     BaseValue: 5
     Scaling:
@@ -52,7 +52,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     UniversalType: 0
-  - Name: Damage per combo
+  - Name: Combo Damage Bonus
     type: 3
     BaseValue: 0.01
     Scaling:

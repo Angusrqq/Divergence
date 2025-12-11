@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 
         if (MovementVector != Vector2.zero)
         {
-            SpriteRenderer.flipX = MovementVector.x < 0;
+            SpriteRenderer.flipX = MovementVector.x != 0 ? MovementVector.x < 0 : SpriteRenderer.flipX;
             AnimatedEntity.ChangeAnimation("Run");
         }
         else

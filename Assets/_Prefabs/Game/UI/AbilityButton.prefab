@@ -428,6 +428,7 @@ MonoBehaviour:
   Icon: {fileID: 9074411333147073521}
   Ability: {fileID: 0}
   TierBorder: {fileID: 8274301394902639394}
+  NewAbilityText: {fileID: 7786740050102103238}
 --- !u!114 &6083763712103454434
 MonoBehaviour:
   m_ObjectHideFlags: 0

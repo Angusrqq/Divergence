@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CriticalStrike
   m_EditorClassIdentifier: Assembly-CSharp::PassiveAbility
   _name: Critical Strike
-  _description: You're lucky one
+  _description: Boosts your critical hit chance, allowing your attacks to deal powerful
+    crits.
   _icon: {fileID: -4289354037535779264, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Guid: c1ef1111-ed4a-41c7-b8c6-bd092aaba4e8
   _cost: 0
@@ -50,5 +51,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    UniversalType: 0
   MonoLogic: {fileID: 1789955093598720297, guid: df33fd99e477bcf41ba22c0c78e69f40, type: 3}
   PassiveType: 0

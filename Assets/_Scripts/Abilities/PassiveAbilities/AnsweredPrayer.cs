@@ -39,12 +39,12 @@ public class AnsweredPrayer : PassiveAbilityMono
 
     private IEnumerator Effect()
     {
-        AudioManager.instance.PlaySFX(AudioClips[0]);
         while (true)
         {
             if (GameData.MidValue < Ability.GetStat("Wave Spawn Chance"))
             {
                 Instantiate(FieldPrefab, GameData.player.transform.position, Quaternion.identity);
+                AudioManager.instance.PlaySFX(AudioClips[0]);
             }
 
             yield return new WaitForSeconds(Ability.GetStat("Cooldown"));

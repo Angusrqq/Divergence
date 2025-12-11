@@ -11,6 +11,7 @@ public class AbilityButton : MonoBehaviour
     public Image Icon;
     public BaseAbilityScriptable Ability;
     public Image TierBorder;
+    public TMP_Text NewAbilityText;
 
     public void Init(BaseAbilityScriptable ability)
     {
@@ -33,7 +34,11 @@ public class AbilityButton : MonoBehaviour
             }
             Description.text = string.Join("\n", statStrings);
         }
-        else Description.text = ability.Description;
+        else 
+        {
+            Description.text = ability.Description;
+            NewAbilityText.gameObject.SetActive(true);
+        }
         Icon.sprite = ability.Icon;
         Ability = ability;
     }

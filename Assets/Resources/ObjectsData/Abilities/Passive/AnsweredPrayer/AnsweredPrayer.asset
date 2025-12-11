@@ -53,15 +53,15 @@ MonoBehaviour:
     UniversalType: 0
   - Name: Cooldown
     type: 0
-    BaseValue: 5
+    BaseValue: 2
     Scaling:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 1
-        value: 5
-        inSlope: -0.10202041
-        outSlope: -0.10202041
+        value: 2
+        inSlope: -0.04079592
+        outSlope: -0.04079592
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
@@ -69,8 +69,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 50
         value: 0.001
-        inSlope: -0.10202041
-        outSlope: -0.10202041
+        inSlope: -0.04079592
+        outSlope: -0.04079592
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
