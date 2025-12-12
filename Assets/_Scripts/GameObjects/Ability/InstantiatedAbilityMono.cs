@@ -157,23 +157,29 @@ public class InstantiatedAbilityMono : BaseAbilityMono
         // override
     }
 
-    /// <summary>
-    /// Returns the enemy closest to the player, or <c>null</c> if none exist.
-    /// </summary>
-    /// <returns>The nearest <see cref="Enemy"/> to the player, or <c>null</c>.</returns>
     public static Enemy FindClosest()
     {
-        return EnemyManager.Enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
-    }
+        var enemies = EnemyManager.Enemies;
+        if (enemies == null || enemies.Count == 0) return null;
 
-    /// <summary>
-    /// Returns the closest enemy from a provided list of enemies, or <c>null</c> if none exist.
-    /// </summary>
-    /// <param name="enemies">List of enemies to search</param>
-    /// <returns></returns>
-    public static Enemy FindClosest(List<Enemy> enemies)
-    {
-        return enemies.OrderBy(enemy => Vector2.Distance(enemy.transform.position, GameData.player.transform.position)).FirstOrDefault(enemy => enemy != null);
+        var playerPos = GameData.player.transform.position;
+        Enemy closest = null;
+        float minDist = float.MaxValue;
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            var e = enemies[i];
+            if (e == null) continue;
+
+            float dist = (e.transform.position - playerPos).sqrMagnitude;
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = e;
+            }
+        }
+
+        return closest;
     }
 
     public static void GetTargetForProjectile(InstantiatedAbilityHandler ability,out Enemy target)
@@ -186,7 +192,7 @@ public class InstantiatedAbilityMono : BaseAbilityMono
                 enemies.Remove(instance.Target);
             }
         }
-        target = FindClosest(enemies);
+        target = FindClosest();
         if (target == null)
         {
             target = FindClosest();

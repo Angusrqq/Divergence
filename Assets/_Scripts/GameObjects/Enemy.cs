@@ -57,6 +57,22 @@ public class Enemy : MonoBehaviour
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
+    public void Init(EnemyData data, Transform newTarget, float maxHealth, float damage, float moveSpeed)
+    {
+        enemyData = data;
+        this.maxHealth = maxHealth;
+        this.damage = damage;
+        this.moveSpeed = moveSpeed;
+        target = newTarget;
+        animatedEntity = GetComponent<AnimatedEntity>();
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        circleCollider2D.radius = data.ColliderRadius;
+        circleCollider2D.offset = data.ColliderOffset;
+        damageableEntity.Init(maxHealth, true, damage);
+
+        animatedEntity.SetAnimatorController(data.AnimatorController);
+    }
+
     /// <summary>
     /// <para>
     /// <c>Awake</c> is a method for initializing the enemy.

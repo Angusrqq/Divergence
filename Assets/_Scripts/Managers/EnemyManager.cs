@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 /// <summary>
 /// <para>
@@ -19,7 +20,31 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
     public static List<Enemy> Enemies { get; private set; }
     public Action<Enemy> OnEnemyDeath;
+
+    private Coroutine _advanceCoroutine;
     private float _spawnCredits = 0f;
+    private float _minKillRateToAdvance = 4f;
+    private float _minKillsToAdvance = 200; //200
+    private int _currentPhase = 1;
+    public int CurrentPhase => _currentPhase;
+
+    private int m_currentEnemyIndex = 0;
+
+    private int _currentEnemyIndex
+    {
+        get => m_currentEnemyIndex;
+        set
+        {
+            if(value >= GameData.Enemies.Count)
+            {
+                m_currentEnemyIndex = 0;
+            }
+            else
+            {
+                m_currentEnemyIndex = value;
+            }
+        }
+    }
 
     public void TriggerEnemyDeath(Enemy enemy)
     {
@@ -42,13 +67,17 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if((KillCounter.Kills >= _minKillsToAdvance || KillCounter.KillsPerSecond >= _minKillRateToAdvance) && _advanceCoroutine == null)
+        {
+            _advanceCoroutine = StartCoroutine(AdvanceCoroutine());
+        }
         float rate = SpawnRate(GameData.GameTimerInstance.currentTime, KillCounter.KillsPerSecond);
         _spawnCredits += rate * Time.deltaTime;
 
-        while(_spawnCredits >= 1f && Enemies.Count < maxEnemyCount)
+        while(_spawnCredits >= _currentPhase && Enemies.Count < maxEnemyCount)
         {
-            SpawnEnemy(UnityEngine.Random.Range(0, GameData.Enemies.Count));
-            _spawnCredits -= 1f;
+            SpawnEnemy(_currentEnemyIndex, _currentPhase, _currentPhase * 0.4f);
+            _spawnCredits -= _currentPhase;
         }
     }
 
@@ -58,6 +87,36 @@ public class EnemyManager : MonoBehaviour
         float timeScale = 1f + time * 0.03f;
         float kpsScale = 1f + kps * 0.01f;
         return baseRate * timeScale * kpsScale;
+    }
+
+    private void Advance()
+    {
+        //multiply existing values of minKillsToAdvance and minKillRateToAdvance by some factor
+        _currentPhase++;
+        _minKillsToAdvance *= 0.4f + _currentPhase;
+        _minKillRateToAdvance *= 0.4f + _currentPhase;
+        _currentEnemyIndex++;
+    }
+
+    private IEnumerator AdvanceCoroutine()
+    {
+        int nextPhase = _currentPhase + 1;
+        int count = 1;
+        int enemies = 1;
+        int nextEnemyIndex = _currentEnemyIndex + 1 >= GameData.Enemies.Count ? 0 : _currentEnemyIndex + 1;
+        while(count <= 4)
+        {
+            for(int i = 0; i <= enemies; i++)
+            {
+                SpawnEnemy(nextEnemyIndex, nextPhase * (4 / count), nextPhase * (4 / count) * 0.4f);
+                //_spawnCredits -= _currentPhase;
+            }
+            count++;
+            enemies *= 2;
+            yield return new WaitForSeconds(5f);
+        }
+        Advance();
+        _advanceCoroutine = null;
     }
 
     /// <summary>
@@ -76,6 +135,7 @@ public class EnemyManager : MonoBehaviour
         Enemies.Add(enemy);
     }
 
+
     private void SpawnEnemy(int enemyIndex)
     {
         bool vertical = UnityEngine.Random.Range(0, 2) == 1;
@@ -84,6 +144,22 @@ public class EnemyManager : MonoBehaviour
         Vector2 viewportCoords = vertical ? new(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0f, 1f)) : new(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0, 2));
         Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
         SpawnEnemy(spawnPos, Quaternion.identity, enemyIndex);
+    }
+
+    private void SpawnEnemy(int enemyIndex, float maxHealthMult, float damageMult, float moveSpeedMult = 1f)
+    {
+        bool vertical = UnityEngine.Random.Range(0, 2) == 1;
+        Vector2 viewportCoords = vertical ? new(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0f, 1f)) : new(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0, 2));
+        Vector2 spawnPos = _camera.ViewportToWorldPoint(viewportCoords);
+        
+        Enemy enemy = Instantiate(_prefab, spawnPos, Quaternion.identity);
+
+        enemy.transform.parent = transform;
+        EnemyData data = GameData.Enemies[enemyIndex];
+        enemy.Init(data, Target.transform, data.BaseMaxHealth * maxHealthMult, data.Damage * damageMult, data.BaseMovementSpeed * moveSpeedMult);
+        enemy.gameObject.SetActive(true);
+
+        Enemies.Add(enemy);
     }
 
     private void SpawnEnemy(Vector2 pos, Quaternion rot, EnemyData enemyData)

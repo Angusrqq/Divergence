@@ -49,8 +49,18 @@ public class PostGameStat : MonoBehaviour
 
     private /*async*/ void SetCurrency()
     {
-        valueText.text = "0";
-        Debug.LogWarning("Currency not implemented yet");
+        float averageKPS = KillCounter.Kills / GameData.GameTimerInstance.currentTime;
+        float phaseMultiplier = 1f + (EnemyManager.Instance.CurrentPhase * 0.5f);
+        float baseReward = (KillCounter.Kills * 0.3f) + (GameData.GameTimerInstance.currentTime * 0.15f);
+        int currency = (int)((baseReward * phaseMultiplier) + (averageKPS * 50f));
+        valueText.text = currency.ToString();
+        GameData.CurrentMetadata.TimeKnowledge += currency;
+        GameData.CurrentMetadata.gameStats.TotalCurrency += (uint)currency;
+        if(GameData.CurrentMetadata.Records.MaxCurrency < currency)
+        {
+            GameData.CurrentMetadata.Records.MaxCurrency = (uint)currency;
+            //TODO: add feedback (text like PB or something), applies for everything
+        }
     }
 
     private /*async*/ void SetKills()
