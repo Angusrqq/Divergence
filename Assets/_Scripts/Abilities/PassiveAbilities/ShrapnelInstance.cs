@@ -32,7 +32,7 @@ public class ShrapnelInstance : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Enemy enemy) && !_hit)
+        if (!_hit && collision.gameObject.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(GameData.player.gameObject, _damage, GetType(), 10f, 0.2f, useSound: true);
             _hit = true;

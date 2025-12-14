@@ -11,23 +11,21 @@ public class DeathMark : PassiveAbilityMono
 
     private void OnProjectileHitEnemy(Type type, Enemy enemy, float damage, InstantiatedAbilityMono projectile)
     {
-        if (markedEnemies.Contains(enemy)) return;
+        if (GameData.LowValue > Ability.GetStat("Chance to Mark")) return;
         if (_isCapped && _currentMarks >= Ability.GetStat("Maximum Marks")) return;
+        if (markedEnemies.Contains(enemy)) return;
 
-        if (GameData.LowValue < Ability.GetStat("Chance to Mark"))
+        var instance = Instantiate(Prefab, EnemyManager.Instance.transform);
+        markedEnemies.Add(enemy);
+        instance.Init(enemy, Ability.GetStat("Damage"), Ability.GetStat("Explosion Radius"));
+        _currentMarks += 1;
+
+        instance.OnDeath += () => 
         {
-            var instance = Instantiate(Prefab, EnemyManager.Instance.transform);
-            markedEnemies.Add(enemy);
-            instance.Init(enemy, Ability.GetStat("Damage"), Ability.GetStat("Explosion Radius"));
-            _currentMarks += 1;
-
-            instance.OnDeath += () => 
-            {
-                _currentMarks -= 1;
-                AudioManager.instance.PlaySFX(AudioClips[0]);
-                markedEnemies.Remove(enemy);
-            };
-        }
+            _currentMarks -= 1;
+            AudioManager.instance.PlaySFX(AudioClips[0]);
+            markedEnemies.Remove(enemy);
+        };
     }
 
     public override void Activate()

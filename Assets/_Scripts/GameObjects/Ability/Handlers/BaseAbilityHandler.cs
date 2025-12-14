@@ -43,6 +43,7 @@ public class BaseAbilityHandler : MonoBehaviour
         {
             Debug.LogWarning($"Multiple stats with the same type '{type}' exist in ability '{Name}'. Use the stat name instead.");
         }
+
         return stats.First().Value.stat;
     }
 
@@ -53,6 +54,7 @@ public class BaseAbilityHandler : MonoBehaviour
             Debug.LogWarning($"Attempt to access the non-existent stat '{name}' in ability '{Name}'");
             return 0;
         }
+
         return Stats[name].stat;
     }
 
@@ -80,6 +82,7 @@ public class BaseAbilityHandler : MonoBehaviour
             {
                 Stats[lookup] = new (s.type, s.BaseValue);
             }
+            
             Stats[lookup].stat.BaseValue = _source.GetValue(lookup, Level);
         }
     }

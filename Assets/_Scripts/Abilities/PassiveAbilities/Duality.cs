@@ -18,20 +18,18 @@ public class Duality : PassiveAbilityMono
         GameData.player.AbilityHolder.OnAbilityActivated += CloneProjectile;
     }
 
-
     private void CloneProjectile(Type type, InstantiatedAbilityHandler ability, InstantiatedAbilityMono projectile)
     {
-        if(type == typeof(ArcanePulse)) return;
+        if (type == typeof(ArcanePulse) || type == typeof(FreezingField)) return;
         if (GameData.LowValue > Ability.GetStat("Clone Chance")) return;
+
         Vector2 initial_pos = (Vector2)GameData.player.transform.position + UnityEngine.Random.insideUnitCircle;
 
         var instance = Instantiate(projectile, initial_pos, Quaternion.identity);
         instance.Init(ability);
         instance.Ability.GetStat("Damage").AddModifier(_damageModifier);
         instance.Ability.GetStat("Knockback Force").AddModifier(_knockBackForceModifier);
-        instance.TryGetComponent<SpriteRenderer>(out var sr);
-
-        if (sr != null)
+        if (instance.TryGetComponent<SpriteRenderer>(out var sr))
         {
             sr.color = new Color(0f, 0f, 0.2f, 0.8f);
         }

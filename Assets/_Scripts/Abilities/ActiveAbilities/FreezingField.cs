@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SlowdownForceField : InstantiatedAbilityMono
+public class FreezingField : InstantiatedAbilityMono
 {
     private StatModifier _slowdownModifier = new(-0.5f, StatModifierType.Percent, GameData.player);
     

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2332658420480329156}
   - component: {fileID: 8146364675745673151}
   m_Layer: 0
-  m_Name: SlowdownForceField
+  m_Name: FreezingField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

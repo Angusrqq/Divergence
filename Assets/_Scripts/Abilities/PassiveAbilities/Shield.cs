@@ -1,8 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Passive ability that increases the player's damage resistance via stat modifiers.
-/// </summary>
 public class Shield : PassiveAbilityMono
 {
     private StatModifierByStat _shieldModifier;
