@@ -23,10 +23,11 @@ public class EnemyManager : MonoBehaviour
 
     private Coroutine _advanceCoroutine;
     private float _spawnCredits = 0f;
-    private float _minKillRateToAdvance = 4f;
-    private float _minKillsToAdvance = 200; //200
+    private float _minKillRateToAdvance = 6f;
+    private float _minKillsToAdvance = 2000f;
     private int _currentPhase = 1;
     public int CurrentPhase => _currentPhase;
+    private float _currentExperience = 1f;
 
     private int m_currentEnemyIndex = 0;
 
@@ -96,6 +97,7 @@ public class EnemyManager : MonoBehaviour
         _minKillsToAdvance *= 0.4f + _currentPhase;
         _minKillRateToAdvance *= 0.4f + _currentPhase;
         _currentEnemyIndex++;
+        _currentExperience *= 2;
     }
 
     private IEnumerator AdvanceCoroutine()
@@ -156,7 +158,7 @@ public class EnemyManager : MonoBehaviour
 
         enemy.transform.parent = transform;
         EnemyData data = GameData.Enemies[enemyIndex];
-        enemy.Init(data, Target.transform, data.BaseMaxHealth * maxHealthMult, data.Damage * damageMult, data.BaseMovementSpeed * moveSpeedMult);
+        enemy.Init(data, Target.transform, data.BaseMaxHealth * maxHealthMult, data.Damage * damageMult, data.BaseMovementSpeed * moveSpeedMult, _currentExperience);
         enemy.gameObject.SetActive(true);
 
         Enemies.Add(enemy);

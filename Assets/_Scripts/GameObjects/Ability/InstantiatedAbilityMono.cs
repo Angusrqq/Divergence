@@ -120,21 +120,22 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     /// <param name="other">The Collider2D of the other object</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the other object has an Enemy component
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            if(OnHit != null && !_hit)
+            if (OnHit != null && !_hit)
             {
                 //AudioManager.instance.PlaySFXPitched(OnHit, UnityEngine.Random.Range(-3f, 3f));
                 AudioManager.instance.PlaySound(Ability.AudioSource, UnityEngine.Random.Range(0.95f, 1.05f), OnHit);
                 _hit = true;
             }
+
             EnemyCollision(enemy);
             if (doesDamage)
             {
                 GameData.player.AbilityHolder.TriggerOnEnemyHit(GetType(), enemy, Ability.GetStat("Damage"), this);
             }
         }
+
         OtherCollision(other);
         GameData.player.AbilityHolder.TriggerOnProjectileHit(GetType(), rb.position);
     }
@@ -152,10 +153,7 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     /// Called when another object enters a 2D collider trigger that is not an Enemy.
     /// </summary>
     /// <param name="other"></param>
-    protected virtual void OtherCollision(Collider2D other)
-    {
-        // override
-    }
+    protected virtual void OtherCollision(Collider2D other) { }
 
     public static Enemy FindClosest()
     {

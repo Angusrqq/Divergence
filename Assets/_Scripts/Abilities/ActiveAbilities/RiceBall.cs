@@ -1,17 +1,7 @@
-
-/// <summary>
-/// This class represents a test ability that targets the nearest enemy.
-/// It inherits from InstantiatedAbilityMono, which suggests it's a component
-/// that represents an instantiated ability in the game world.
-/// </summary>
 public class RiceBall : InstantiatedAbilityMono
 {
     private Enemy target;
 
-    /// <summary>
-    /// Called when the script instance is being loaded.
-    /// Finds the closest enemy and destroys this ability if no enemy is found.
-    /// </summary>
     protected override void Start()
     {
         target = FindClosest();
@@ -33,11 +23,6 @@ public class RiceBall : InstantiatedAbilityMono
         rb.MovePosition(Ability.Speed * direction + rb.position);
     }
 
-    /// <summary>
-    /// Called when this ability collides with another object.
-    /// Checks if the collided object is an enemy and applies damage if true.
-    /// </summary>
-    /// <param name="other">The collider of the object this ability collided with.</param>
     public override void EnemyCollision(Enemy enemy)
     {
         enemy.TakeDamage(

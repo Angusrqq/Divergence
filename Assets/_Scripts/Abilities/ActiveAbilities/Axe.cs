@@ -18,7 +18,10 @@ public class Axe : InstantiatedAbilityMono
 
         if (_target != null)
         {
-            direction = (FindClosest().transform.position - transform.position).normalized;
+            direction = (_target.transform.position - transform.position).normalized;
+            
+            _intialDirection = direction;
+            base.Start();
         }
         else
         {
@@ -26,9 +29,6 @@ public class Axe : InstantiatedAbilityMono
             Ability.StartCooldown();
             return;
         }
-
-        _intialDirection = direction;
-        base.Start();
     }
 
     protected override void FixedUpdateLogic()

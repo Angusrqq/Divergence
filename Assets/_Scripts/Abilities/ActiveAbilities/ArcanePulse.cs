@@ -4,15 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ArcanePulse : InstantiatedAbilityMono
 {
-    private readonly List<Enemy> _enemiesInside = new();
-    private readonly List<Enemy> _enemiesToAdd = new();
-    private readonly List<Enemy> _enemiesToRemove = new();
+    private readonly HashSet<Enemy> _enemiesInside = new();
+    private readonly List<Enemy> _damageBuffer = new();
     private float _damageTimer;
-
-    protected override void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
 
     protected override void Start()
     {
@@ -23,29 +17,19 @@ public class ArcanePulse : InstantiatedAbilityMono
     protected override void FixedUpdateLogic()
     {
         rb.position = GameData.player.transform.position;
-        if (_damageTimer > 0)
-        {
-            _damageTimer -= Time.fixedDeltaTime;
-        }
-        
-        foreach (var enemy in _enemiesToAdd)
-        {
-            _enemiesInside.Add(enemy);
-        }
-        _enemiesToAdd.Clear();
 
-        foreach (var enemy in _enemiesToRemove)
-        {
-            _enemiesInside.Remove(enemy);
-        }
-        _enemiesToRemove.Clear();
+        _damageTimer -= Time.fixedDeltaTime;
 
         if (_damageTimer <= 0)
         {
-            foreach (var enemy in _enemiesInside)
+            _damageBuffer.Clear();
+            _damageBuffer.AddRange(_enemiesInside);
+
+            foreach (var enemy in _damageBuffer)
             {
                 enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType());
             }
+
             _damageTimer = Ability.KnockbackDuration;
         }
 
@@ -54,26 +38,14 @@ public class ArcanePulse : InstantiatedAbilityMono
 
     public override void EnemyCollision(Enemy enemy)
     {
-        if (!_enemiesInside.Contains(enemy) && !_enemiesToAdd.Contains(enemy))
-        {
-            _enemiesToAdd.Add(enemy);
-        }
-        
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType());
+        _enemiesInside.Add(enemy);
     }
 
     protected void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Enemy enemy))
         {
-            if (_enemiesInside.Contains(enemy) && !_enemiesToRemove.Contains(enemy))
-            {
-                _enemiesToRemove.Add(enemy);
-            }
-            if (_enemiesToAdd.Contains(enemy))
-            {
-                _enemiesToAdd.Remove(enemy);
-            }
+            _enemiesInside.Remove(enemy);
         }
     }
 }

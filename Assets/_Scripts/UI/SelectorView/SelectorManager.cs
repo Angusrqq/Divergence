@@ -66,7 +66,7 @@ public class SelectorManager : MonoBehaviour
 
     private void ScrollToItem(RectTransform target)
     {
-        if (_scrollRect == null || target == null)
+        if (_scrollRect == null || target == null || gameObject.activeInHierarchy == false)
             return;
 
         // Stop previous smooth scroll

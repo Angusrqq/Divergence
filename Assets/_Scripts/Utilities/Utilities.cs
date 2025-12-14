@@ -159,18 +159,22 @@ public static class Utilities
 
     public static string FormatAbilityValue(float value, AbilityType type, string name, int floatingPoints = 1)
     {
-        string format = $"F{floatingPoints}";
-        string result = type switch
+        return type switch
         {
-            AbilityType.Regular => value.ToString(format),
-            AbilityType.Chance => $"{(value * 100f).ToString(format)}%",
-            AbilityType.Percent => (value > 0f ? "+" : "") + (value * 100f).ToString(format) + "%",
+            AbilityType.Regular => FormatFloat(value, floatingPoints),
+            AbilityType.Chance => $"{FormatFloat(value * 100f, floatingPoints)}%",
+            AbilityType.Percent => (value > 0f ? "+" : "") + FormatFloat(value * 100f, floatingPoints) + "%",
             AbilityType.Custom => name switch
-                { "Resist" => "+" + (Mathf.Abs(value) * 100f).ToString(format) + "%",
-                _ => (value * 100f).ToString(format) + "%" },
+                { "Resist" => "+" + FormatFloat(Mathf.Abs(value) * 100f, floatingPoints) + "%",
+                _ => FormatFloat(value * 100f, floatingPoints) + "%" },
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
-        return result;
+    }
+
+    public static string FormatFloat(float value, int floatingPoints = 1)
+    {
+        string format = $"F{floatingPoints}";
+        return value % 1 == 0 ? ((int)value).ToString() : value.ToString(format);
     }
 
     public static Color GetTierColor(AbilityTier tier)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectorSwitcher : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SelectorSwitcher : MonoBehaviour
             _currentSelectorManager.transform.parent.gameObject.SetActive(false);
         }
         _currentSelectorManager = manager;
+        _currentSelectorManager.CurrentSelectedItem.OnSelect(new PointerEventData(EventSystem.current));
         _currentSelectorManager.transform.parent.gameObject.SetActive(true);
     }
     public void Deactivate()

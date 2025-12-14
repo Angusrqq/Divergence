@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Arcane Pulse
   _description: Creates a brief field that damages all enemies inside after a short
     delay.
-  _icon: {fileID: -926733279370872471, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
+  _icon: {fileID: -5297724541878534130, guid: a733a9349385dde43aac483dbcc32bbe, type: 3}
   Guid: f0ea7641-06ed-4c15-9899-8f32ecc4ba45
   _cost: 0
   _isUnlocked: 1

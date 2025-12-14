@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     private ParticleSystem _particleSystemInstance;
     private Vector2 _knockbackVelocity;
     private float _knockbackDuration;
+    private float _experience = 1f;
 
     /// <summary>
     /// Initializes the enemy with the provided data and target.
@@ -57,12 +58,13 @@ public class Enemy : MonoBehaviour
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
-    public void Init(EnemyData data, Transform newTarget, float maxHealth, float damage, float moveSpeed)
+    public void Init(EnemyData data, Transform newTarget, float maxHealth, float damage, float moveSpeed, float experience = 1f)
     {
         enemyData = data;
         this.maxHealth = maxHealth;
         this.damage = damage;
         this.moveSpeed = moveSpeed;
+        _experience = experience;
         target = newTarget;
         animatedEntity = GetComponent<AnimatedEntity>();
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
@@ -179,8 +181,14 @@ public class Enemy : MonoBehaviour
                 {
                     amount *= GameData.InGameAttributes.CritMult;
                     Debug.Log($"Critical hit! Damage: {amount}, Crit multiplier: {GameData.InGameAttributes.CritMult}, crit chance: {GameData.InGameAttributes.CritChance}");
+                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized, true);
+                }
+                else
+                {
+                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized);
                 }
             }
+
 
             damageableEntity.TakeDamage(source, amount, type);
         }
@@ -215,7 +223,7 @@ public class Enemy : MonoBehaviour
     {
         if (ExperienceCrystalPrefab != null)
         {
-            Instantiate(ExperienceCrystalPrefab, transform.position, Quaternion.identity, transform.parent);
+            ExperienceCrystal.Create(ExperienceCrystalPrefab, transform.position, transform.parent, _experience);
         }
         EnemyManager.Instance.TriggerEnemyDeath(this);
         Destroy(gameObject);

@@ -25,7 +25,8 @@ public class Bomb : InstantiatedAbilityMono
 
         if (_target != null)
         {
-            direction = (FindClosest().transform.position - transform.position).normalized;
+            direction = (_target.transform.position - transform.position).normalized;
+            base.Start();
         }
         else
         {
@@ -33,7 +34,6 @@ public class Bomb : InstantiatedAbilityMono
             Ability.StartCooldown();
             return;
         }
-        base.Start();
     }
 
     public override void EnemyCollision(Enemy enemy)

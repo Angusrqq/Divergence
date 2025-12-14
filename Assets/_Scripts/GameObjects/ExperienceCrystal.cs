@@ -7,9 +7,17 @@ public class ExperienceCrystal : MonoBehaviour
     private const byte SPEED = 1;
 
     private SpriteRenderer _spriteRenderer;
+    private float _experience = 1f;
     [SerializeField] private float _lifetime = 180f;
 
     public bool IsFired { get; private set; }
+
+    public static ExperienceCrystal Create(ExperienceCrystal prefab, Vector3 position, Transform parent, float experience = 1f)
+    {
+        ExperienceCrystal crystal = Instantiate(prefab, position, Quaternion.identity, parent);
+        crystal._experience = experience;
+        return crystal;
+    }
 
     /// <summary>
     /// Caches required component references.
@@ -39,7 +47,7 @@ public class ExperienceCrystal : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            player.AddExperience(gameObject, 1);
+            player.AddExperience(gameObject, _experience);
             Destroy(gameObject);
         }
     }

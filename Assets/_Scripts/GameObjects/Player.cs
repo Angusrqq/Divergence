@@ -259,7 +259,7 @@ public class Player : MonoBehaviour
     /// </summary>
     /// <param name="experienceSource">Origin of the experience.</param>
     /// <param name="experienceToAdd">Amount of experience to add.</param>
-    public void AddExperience(UnityEngine.Object experienceSource, byte experienceToAdd)
+    public void AddExperience(UnityEngine.Object experienceSource, float experienceToAdd)
     {
         float gainedExperience = experienceToAdd * GameData.InGameAttributes.ExperienceMultiplier;
 

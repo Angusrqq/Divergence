@@ -14,7 +14,8 @@ public class Shuriken : InstantiatedAbilityMono
 
         if (_target != null)
         {
-            direction = (FindClosest().transform.position - transform.position).normalized;
+            direction = (_target.transform.position - transform.position).normalized;
+            base.Start();
         }
         else
         {
@@ -22,7 +23,6 @@ public class Shuriken : InstantiatedAbilityMono
             Ability.StartCooldown();
             return;
         }
-        base.Start();
     }
 
     protected override void FixedUpdateLogic()
