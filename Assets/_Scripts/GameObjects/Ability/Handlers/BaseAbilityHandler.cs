@@ -9,6 +9,8 @@ public class BaseAbilityHandler : MonoBehaviour
     public bool IsEvolved = false;
 
     protected BaseAbilityScriptable _source;
+
+    public BaseAbilityScriptable Source => _source;
     
     public string Name => _source.Name;
     public string Description => _source.Description;

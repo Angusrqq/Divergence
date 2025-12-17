@@ -11,10 +11,10 @@ public class DamagePopup : MonoBehaviour
 
     private static int sortingOrder;
 
-    public static DamagePopup Create(Vector3 position, float damage, Vector2 direction, bool isCritical = false, Transform parent = null)
+    public static DamagePopup Create(Vector3 position, float damage, Vector2 direction, bool isCritical = false, Transform parent = null, Color textColor = default)
     {
         DamagePopup damagePopup = Instantiate(isCritical ? AssetManager.Instance.criticalDamagePopupPrefab : AssetManager.Instance.damagePopupPrefab, position, Quaternion.identity, parent);
-        damagePopup.Setup(damage, direction);
+        damagePopup.Setup(damage, direction, textColor);
         return damagePopup;
     }
 
@@ -24,8 +24,9 @@ public class DamagePopup : MonoBehaviour
         _textMesh = GetComponent<TextMeshPro>();
     }
 
-    public void Setup(float damage, Vector2 direction)
+    public void Setup(float damage, Vector2 direction, Color textColor = default)
     {
+        _text.color = textColor == default ? _text.color : textColor;
         _text.SetText(Utilities.FormatFloat(damage));
         sortingOrder++;
         _textMesh.sortingOrder = sortingOrder;

@@ -27,7 +27,7 @@ public class StatusEffect
     protected Enemy _target;
     protected MonoBehaviour _sender;
     protected float _delayBetweenTicks = 0f;
-    protected Action _tickMethod;
+    protected Action<StatusEffect> _tickMethod;
     protected double _lastTickTime;
 
     /// <summary>
@@ -41,7 +41,7 @@ public class StatusEffect
     /// <param name="timesApplied">i forgot what this does, but probably used in <see cref="Tick"/> to update current ticks left</param>
     /// <param name="delayBetweenTicks">delay in seconds between ticks</param>
     /// <param name="ticks">total amount of ticks</param>
-    public StatusEffect(StatusType type, MonoBehaviour sender, string name, Enemy target, Action tickMethod = null,
+    public StatusEffect(StatusType type, MonoBehaviour sender, string name, Enemy target, Action<StatusEffect> tickMethod = null,
         int timesApplied = 1, float delayBetweenTicks = 0f, int ticks = 1)
     {
         Type = type;
@@ -68,7 +68,7 @@ public class StatusEffect
     public static StatusEffect operator +(StatusEffect left, StatusEffect right)
     {
         if (left != right) throw new SystemException("StatusEffects with differing names and types cannot be combined");
-        Action method = left._tickMethod; //== right._tickMethod ? left._tickMethod : left._tickMethod + right._tickMethod;
+        Action<StatusEffect> method = left._tickMethod; //== right._tickMethod ? left._tickMethod : left._tickMethod + right._tickMethod;
         // if(left._tickMethod != right._tickMethod)
         // {
         //     Debug.LogWarning($"[StatusEffect operator +] {left} tickMethod differs from {right}, they will be combined");
@@ -78,7 +78,7 @@ public class StatusEffect
             left._sender,
             left._name,
             left._target,
-            method,
+            left._tickMethod,
             left.TimesApplied + right.TimesApplied,
             left._delayBetweenTicks,
             left._ticks > right._ticks ? left._ticks : right._ticks);
@@ -135,15 +135,11 @@ public class StatusEffect
     {
         if (Time.timeAsDouble - _lastTickTime >= _delayBetweenTicks && _timesApplied > 0)
         {
-            _tickMethod();
+            _tickMethod(this);
             _lastTickTime = Time.timeAsDouble;
             _ticks--;
         }
         if (_ticks <= 0)
-        {
-            _timesApplied--; //TODO: wtf did i write, _timesApplied does nothing rn, should it reset ticks also?
-        }
-        if (_timesApplied <= 0)
         {
             _target.Statuses.RemoveStatusEffect(this);
             OnRemove();
@@ -157,7 +153,7 @@ public class StatusEffect
     /// </para>
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    protected virtual void TickMethod()
+    protected virtual void TickMethod(StatusEffect source)
     {
         throw new NotImplementedException();
     }
@@ -176,34 +172,34 @@ public class NegativeStatusEffect : StatusEffect
 {
     protected float _damage;
 
-    public NegativeStatusEffect(MonoBehaviour sender, string name, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 0f, int ticks = 1, float damage = 0f)
+    public NegativeStatusEffect(MonoBehaviour sender, string name, Enemy target, Action<StatusEffect> tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 0f, int ticks = 1, float damage = 0f)
     : base(StatusType.Negative, sender, name, target, tickMethod, timesApplied, delayBetweenTicks, ticks)
     {
         _damage = damage;
     }
 
-    protected override void TickMethod()
+    protected override void TickMethod(StatusEffect source)
     {
-        _target.TakeDamage(_sender.gameObject, _damage * _timesApplied, GetType(), flashColor: Color.red, useParticles: false);
+        _target.TakeDamage(_sender.gameObject, _damage * source.TimesApplied, GetType(), flashColor: Color.red, useParticles: false);
     }
 }
 
 public class PositiveStatusEffect : StatusEffect // i feel stupid
 {
-    public PositiveStatusEffect(MonoBehaviour sender, string name, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 0f)
+    public PositiveStatusEffect(MonoBehaviour sender, string name, Enemy target, Action<StatusEffect> tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 0f)
     : base(StatusType.Positive, sender, name, target, tickMethod, timesApplied, delayBetweenTicks) { }
 }
 
 public class Burn : NegativeStatusEffect
 {
-    public Burn(MonoBehaviour sender, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f)
+    public Burn(MonoBehaviour sender, Enemy target, Action<StatusEffect> tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f)
     : base(sender, "burn", target, tickMethod, timesApplied, delayBetweenTicks, ticks, damage) { }
 }
 
 public class Acid : NegativeStatusEffect
 {
     private StatModifier _slowModifier;
-    public Acid(MonoBehaviour sender, Enemy target, Action tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f, float percentSlow = 0f)
+    public Acid(MonoBehaviour sender, Enemy target, Action<StatusEffect> tickMethod = null, int timesApplied = 1, float delayBetweenTicks = 1f, int ticks = 5, float damage = 0f, float percentSlow = 0f)
     : base(sender, "acid", target, tickMethod, timesApplied, delayBetweenTicks, ticks, damage)
     {
         _slowModifier = new(percentSlow, StatModifierType.Percent, this);
@@ -214,9 +210,9 @@ public class Acid : NegativeStatusEffect
         _target.moveSpeed.AddModifier(_slowModifier);
     }
 
-    protected override void TickMethod()
+    protected override void TickMethod(StatusEffect source)
     {
-        _target.TakeDamage(_sender.gameObject, _damage * _timesApplied, GetType(), flashColor: Color.green, useParticles: false);
+        _target.TakeDamage(_sender.gameObject, _damage * source.TimesApplied, GetType(), flashColor: Color.green, useParticles: false);
     }
 
     protected override void OnRemove()

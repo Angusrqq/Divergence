@@ -181,11 +181,11 @@ public class Enemy : MonoBehaviour
                 {
                     amount *= GameData.InGameAttributes.CritMult;
                     Debug.Log($"Critical hit! Damage: {amount}, Crit multiplier: {GameData.InGameAttributes.CritMult}, crit chance: {GameData.InGameAttributes.CritChance}");
-                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized, true);
+                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized, true, textColor: flashColor);
                 }
                 else
                 {
-                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized);
+                    DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized, textColor: flashColor);
                 }
             }
 

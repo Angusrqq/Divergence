@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -214,7 +215,14 @@ public class GUI : MonoBehaviour
         PauseInternal();
         AbilityChoices.Clear();
         RefreshAvailableAbilities();
-        List<BaseAbilityScriptable> options = Utilities.GetRandomAbilities(_availableAbilities, GameData.InGameAttributes.Luck, (int)GameData.InGameAttributes.AbilitiesPerLevel);
+
+        if(GameData.player.AbilityHolder.GetPassiveByName("Rabbit's paw")) AbilityChoices.Add(GameData.player.AbilityHolder.GetPassiveByName("Rabbit's paw").Source);
+        if(GameData.ValuableValue <= 0.65f && AbilityChoices.Count == 0) // chance to roll a guaranteed upgrade
+        {
+            BaseAbilityScriptable rolledUpgrade = GameData.player.AbilityHolder.GetAllAbilities()[GameData.ValuableRoll(0, GameData.player.AbilityHolder.GetAllAbilities().Count)].Source;
+            AbilityChoices.Add(rolledUpgrade);
+        }
+        List<BaseAbilityScriptable> options = Utilities.GetRandomAbilities(_availableAbilities.Except(AbilityChoices).ToList(), GameData.InGameAttributes.Luck, (int)GameData.InGameAttributes.AbilitiesPerLevel - AbilityChoices.Count);
         foreach(BaseAbilityScriptable ability in options) AbilityChoices.Add(ability);
         RebuildAbilities();
         LevelUpPanel.gameObject.SetActive(true);

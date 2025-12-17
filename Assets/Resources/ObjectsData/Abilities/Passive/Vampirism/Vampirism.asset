@@ -16,8 +16,8 @@ MonoBehaviour:
   _description: Chance to restore health based on damage dealt.
   _icon: {fileID: 3334511835353551136, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Guid: 3a15e9d4-173c-4364-9ee6-8b777f7fd4ed
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 800
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 3
   IsEvolved: 0

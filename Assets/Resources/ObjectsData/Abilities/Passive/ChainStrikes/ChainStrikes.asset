@@ -17,8 +17,8 @@ MonoBehaviour:
     all damage.
   _icon: {fileID: -3306201139672504968, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
   Guid: c14ccf53-d89c-4b34-87e9-00dc5d4804e4
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 250
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 3
   IsEvolved: 0

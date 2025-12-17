@@ -21,6 +21,6 @@ public class PoisonArrow : Fireball
         enemy.Statuses.ApplyEffect(acidEffect);
 
         Destroy(gameObject);
-        Ability.StartCooldown();
+        //Ability.StartCooldown();
     }
 }

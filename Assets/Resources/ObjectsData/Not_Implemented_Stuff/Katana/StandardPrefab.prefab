@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b0cdb800273ef4fb7c8d7d871d1acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Katana
+  OnActivation: {fileID: 0}
+  OnHit: {fileID: 8300000, guid: 23f69b3392a72074d9394e4c5f9f4677, type: 3}
   _evoParticles: {fileID: 0}
 --- !u!61 &-8582951853049282626
 BoxCollider2D:

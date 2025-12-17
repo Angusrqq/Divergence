@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// StatusHolder class represents a container for managing multiple <see cref="StatusEffect"/> instances applied to an <see cref="Enemy"/>.
@@ -41,7 +42,8 @@ public class StatusHolder
         StatusEffect foundEffect = _effectBuffer.Find(e => e.Name == effect.Name);
         if (foundEffect != null)
         {
-            foundEffect += effect;
+            _effectBuffer.Remove(foundEffect);
+            _effectBuffer.Add(foundEffect + effect);
         }
         else
         {

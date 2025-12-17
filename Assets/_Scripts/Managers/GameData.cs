@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -61,7 +62,10 @@ public class GameData : MonoBehaviour
         {
             instance = this;
         }
-
+        Abilities = Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities").ToList();
+        Characters = Resources.LoadAll<Character>("ObjectsData/Characters").ToList();
+        Maps = Resources.LoadAll<BetterMapData>("ObjectsData/Maps").ToList();
+        Upgrades = Resources.LoadAll<UpgradeScriptable>("ObjectsData/Upgrades").ToList();
         LockedIcon = Resources.Load<Sprite>("Icons/locked_icon");
         if (LockedIcon == null)
         {
@@ -86,36 +90,52 @@ public class GameData : MonoBehaviour
     {
         //TODO: check the shit thats unlocked in the metadata
         //loading all data from resources, idk if this is the best way tho
-        foreach (BaseAbilityScriptable ability in Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities"))
+        foreach (BaseAbilityScriptable ability in Abilities)
         {
-            Abilities.Add(ability);
             if (ability.IsUnlocked)
             {
                 unlockedAbilities.Add(ability);
             }
+            else if (CurrentMetadata.UnlockedAbilities.Contains(ability))
+            {
+                unlockedAbilities.Add(ability);
+                ability.IsUnlocked = true;
+            }
         }
-        foreach (BetterMapData map in Resources.LoadAll<BetterMapData>("ObjectsData/Maps"))
+        foreach (BetterMapData map in Maps)
         {
-            Maps.Add(map);
             if(map.IsUnlocked)
             {
                 unlockedMaps.Add(map);
             }
+            else if (CurrentMetadata.UnlockedMaps.Contains(map))
+            {
+                unlockedMaps.Add(map);
+                map.IsUnlocked = true;
+            }
         }
-        foreach (Character character in Resources.LoadAll<Character>("ObjectsData/Characters"))
+        foreach (Character character in Characters)
         {
-            Characters.Add(character);
             if(character.IsUnlocked)
             {
                 unlockedCharacters.Add(character);
             }
+            else if (CurrentMetadata.UnlockedCharacters.Contains(character))
+            {
+                unlockedCharacters.Add(character);
+                character.IsUnlocked = true;
+            }
         }
-        foreach (UpgradeScriptable upgrade in Resources.LoadAll<UpgradeScriptable>("ObjectsData/Upgrades"))
+        foreach (UpgradeScriptable upgrade in Upgrades)
         {
-            Upgrades.Add(upgrade);
             if (upgrade.IsUnlocked)
             {
                 unlockedUpgrades.Add(upgrade);
+            }
+            else if (CurrentMetadata.Upgrades.Contains(upgrade))
+            {
+                unlockedUpgrades.Add(upgrade);
+                upgrade.IsUnlocked = true;
             }
         }
         foreach (EnemyData enemy in Resources.LoadAll<EnemyData>("ObjectsData/Enemies"))
@@ -128,6 +148,8 @@ public class GameData : MonoBehaviour
     {
         SaveMetaData();
     }
+
+    public static BaseAbilityScriptable GetAbilityFromGuid(string guid) => Abilities.Find(x => x.Guid == guid);
 
     /// <summary>
     /// <para>

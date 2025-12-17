@@ -17,8 +17,8 @@ MonoBehaviour:
     delay.
   _icon: {fileID: -5297724541878534130, guid: a733a9349385dde43aac483dbcc32bbe, type: 3}
   Guid: f0ea7641-06ed-4c15-9899-8f32ecc4ba45
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 1000
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 5
   IsEvolved: 0

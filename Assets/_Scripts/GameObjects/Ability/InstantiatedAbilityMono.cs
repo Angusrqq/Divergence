@@ -146,7 +146,7 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     /// <param name="enemy"></param>
     public virtual void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("KnockbackForce"), Ability.KnockbackDuration);
+        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
     }
 
     /// <summary>

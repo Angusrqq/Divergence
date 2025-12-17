@@ -17,8 +17,8 @@ MonoBehaviour:
     deals reduced damage but delivers stronger knockback.
   _icon: {fileID: 2752649814888968227, guid: fd3898d6aa09f994ca705a0ba8a101a1, type: 3}
   Guid: b39f2279-d5bb-414c-873d-74de5d108072
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 500
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 3
   IsEvolved: 0

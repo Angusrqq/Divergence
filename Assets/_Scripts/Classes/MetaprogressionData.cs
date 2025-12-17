@@ -23,13 +23,13 @@ public class MetaprogressionData
     [Key(7)] public GameStats gameStats = new();
 
     [IgnoreMember] public List<Character> UnlockedCharacters = new();
-    [IgnoreMember] public List<Ability> UnlockedAbilities = new();
+    [IgnoreMember] public List<BaseAbilityScriptable> UnlockedAbilities = new();
     [IgnoreMember] public List<UpgradeScriptable> Upgrades = new();
     [IgnoreMember] public List<BetterMapData> UnlockedMaps = new();
 
     // some parameters that need to be saved here
 
-    public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<Ability> unlockedAbilities = null,
+    public MetaprogressionData(int timeKnowledge, List<Character> unlockedCharacters = null, List<BaseAbilityScriptable> unlockedAbilities = null,
                             List<BetterMapData> unlockedMaps = null, List<UpgradeScriptable> upgrades = null, StartingAttributesSnapshot startingAttributes = null,
                             GameRecords records = null, GameStats gameStats = null)
     {
@@ -65,9 +65,17 @@ public class MetaprogressionData
 
     public void Load()
     {
-        UnlockedCharacters = UnlockedCharactersGuids.Select(x => Resources.Load<Character>(x)).ToList();
-        UnlockedAbilities = UnlockedAbilitiesGuids.Select(x => Resources.Load<Ability>(x)).ToList();
-        Upgrades = UpgradesGuids.Select(x => Resources.Load<UpgradeScriptable>(x)).ToList();
-        UnlockedMaps = UnlockedMapsGuids.Select(x => Resources.Load<BetterMapData>(x)).ToList();
+        UnlockedCharacters = UnlockedCharactersGuids.Select(x => GameData.Characters.Find(y => y.Guid == x)).ToList();
+        UnlockedAbilities = UnlockedAbilitiesGuids.Select(x => GameData.Abilities.Find(y => y.Guid == x)).ToList();
+        Upgrades = UpgradesGuids.Select(x => GameData.Upgrades.Find(y => y.Guid == x)).ToList();
+        UnlockedMaps = UnlockedMapsGuids.Select(x => GameData.Maps.Find(y => y.Guid == x)).ToList();
+    }
+
+    public void UpdateGuids()
+    {
+        UnlockedCharactersGuids = GameData.unlockedCharacters.Select(x => x.Guid).ToList();
+        UnlockedAbilitiesGuids = GameData.unlockedAbilities.Select(x => x.Guid).ToList();
+        UpgradesGuids = GameData.unlockedUpgrades.Select(x => x.Guid).ToList();
+        UnlockedMapsGuids = GameData.unlockedMaps.Select(x => x.Guid).ToList();
     }
 }

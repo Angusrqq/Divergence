@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ public class AbilityHolder : MonoBehaviour
 
     public List<string> AbilityNames => _abilityNames;
     public List<string> PassiveNames => _passiveNames;
+
+    public List<BaseAbilityHandler> GetAllAbilities() => Abilities.Concat(Passives).ToList();
 
     void Update()
     {

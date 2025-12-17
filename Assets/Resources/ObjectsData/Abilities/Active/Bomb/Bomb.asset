@@ -16,8 +16,8 @@ MonoBehaviour:
   _description: Throws a bomb that explodes on hit, dealing area damage.
   _icon: {fileID: 5823914111252901910, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Guid: 6226e89b-aa62-41f3-8570-a63e14bfe8c1
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 400
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 5
   IsEvolved: 1

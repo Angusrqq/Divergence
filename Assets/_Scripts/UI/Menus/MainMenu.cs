@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     void Start()
     {
-        BuildSelector(GameData.Characters, _characterSelectorManager);
+        BuildSelector(GameData.unlockedCharacters, _characterSelectorManager);
         BuildSelector(GameData.Maps, _mapSelectorManager);
         BuildSelectorUnlockables(GameData.Abilities, GameData.unlockedAbilities, _abilityUnlockablesSelectorManager);
         BuildSelectorUnlockables(GameData.Characters, GameData.unlockedCharacters, _characterUnlockableSelectorManager);
@@ -122,7 +122,7 @@ public class MainMenu : MonoBehaviour
         if (infoButtons.Count > 0)
         {
             infoButtons[0].OnSelect(null); // Select first item by default
-            infoButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
+            infoButtons[0].GetComponent<Selectable>().Select();
         }
     }
 
@@ -143,7 +143,7 @@ public class MainMenu : MonoBehaviour
         if (infoButtons.Count > 0)
         {
             infoButtons[0].OnSelect(null); // Select first item by default
-            infoButtons[0].GetComponent<UnityEngine.UI.Selectable>().Select();
+            infoButtons[0].GetComponent<Selectable>().Select();
         }
     }
 

@@ -16,8 +16,8 @@ MonoBehaviour:
   _description: Collecting XP crystals also heals you.
   _icon: {fileID: 4343528361783417165, guid: 918bdf82bf209d6499e1e68dda7d01bd, type: 3}
   Guid: ed0e31bd-e9fe-4bd3-8bc5-0ab7f1bce5b3
-  _cost: 0
-  _isUnlocked: 1
+  _cost: 1000
+  _isUnlocked: 0
   Level: 1
   MaxLevel: 3
   IsEvolved: 0

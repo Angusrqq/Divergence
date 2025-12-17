@@ -20,6 +20,7 @@ public static class DataSystem
     /// <param name="data">The metaprogression data to be saved.</param>
     public static void SaveProgData(MetaprogressionData data)
     {
+        data.UpdateGuids();
         byte[] bytes = MessagePackSerializer.Serialize(data);
         File.WriteAllBytes(SAVE_FILE_PATH, bytes);
     }
