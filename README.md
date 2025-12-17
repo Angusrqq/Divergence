@@ -1,8 +1,8 @@
-# GAME_NAME
+# Divergence
 *A dark fantasy rogue-lite survival game*
 
 ## Overview
-GAME_NAME is a 2D top-down rogue-lite survival game developed as part of a 6-month educational project. The game focuses on fast-paced gameplay, enemy waves, experience collection, and ability progression within a single run.
+Divergence is a 2D top-down rogue-lite survival game developed as part of a 4-month educational project. The game focuses on fast-paced gameplay, enemy waves, experience collection, and ability progression within a single run.
 
 ## Features
 - Top-down 2D gameplay focused on survival and progression
