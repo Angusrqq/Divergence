@@ -55,8 +55,8 @@ public struct RuntimeStatHolder
     public UniversalAbilityType universalType;
     public Stat stat;
 
-    public RuntimeStatHolder(AbilityType type, Stat stat, UniversalAbilityType universalType = UniversalAbilityType.None) =>
-        (this.type, this.stat, this.universalType) = (type, stat, universalType);
+    public RuntimeStatHolder(AbilityType type, float BaseValue, UniversalAbilityType universalType = UniversalAbilityType.None) =>
+        (this.type, stat, this.universalType) = (type, new(BaseValue), universalType);
 }
 
 public static class Utilities

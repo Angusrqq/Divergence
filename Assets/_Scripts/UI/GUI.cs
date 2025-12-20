@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,31 +24,47 @@ public class GUI : MonoBehaviour
     public List<BaseAbilityScriptable> AbilityChoices { get; private set; } = new();
     private List<AbilityButton> _abilityButtons = new();
     private List<BaseAbilityScriptable> _availableAbilities;
+    private InputAction _escapeAction;
 
-    /// <summary>
-    /// Subscribes to the player's level-up event to trigger the level-up UI flow.
-    /// </summary>
     void Start()
     {
         GameData.player.OnLevelUp += OnLevelUp;
+        _escapeAction = GameData.PlayerInputAsset.FindAction("Escape");
+        InputActionMap _escapeActionMap = _escapeAction.actionMap;
+        _escapeAction.performed += HandlePause;
+        _escapeActionMap.Enable();
         _availableAbilities = new(GameData.unlockedAbilities);
     }
 
     /// <summary>
     /// Handles pausing when Escape is pressed.
     /// </summary>
-    void Update()
+    // void Update()
+    // {
+    //     if (_escapeAction.) && CanPause)
+    //     {
+    //         if (Paused)
+    //         {
+    //             Continue();
+    //         }
+    //         else
+    //         {
+    //             Pause();
+    //         }
+    //     }
+    // }
+
+    private void HandlePause(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && CanPause)
+        if(!CanPause) return;
+        if(!context.performed) return;
+        if (Paused)
         {
-            if (Paused)
-            {
-                Continue();
-            }
-            else
-            {
-                Pause();
-            }
+            Continue();
+        }
+        else
+        {
+            Pause();
         }
     }
 
@@ -80,22 +97,17 @@ public class GUI : MonoBehaviour
     {
         PauseInternal();
 
-        if(GameData.InGameAttributes.Lives > 0f) ReviveButton.gameObject.SetActive(true);
-        else ReviveButton.gameObject.SetActive(false);
+        if (GameData.InGameAttributes.Lives > 0f)
+        {
+            ReviveButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            ReviveButton.gameObject.SetActive(false);
+        }
 
         DeathScreenPanel.gameObject.SetActive(true);
         GameData.InGameAttributes.Lives--;
-    }
-
-    /// <summary>
-    /// <para>
-    /// <c>UnpauseInternal</c> is used to unpause the game from non-GUI scripts.
-    /// </para> Unpauses the game.
-    /// </summary>
-    public void UnpauseInternal()
-    {
-        TogglePause(false);
-        CanPause = true;
     }
 
     /// <summary>
@@ -107,6 +119,17 @@ public class GUI : MonoBehaviour
     {
         TogglePause(true);
         CanPause = false;
+    }
+
+    /// <summary>
+    /// <para>
+    /// <c>UnpauseInternal</c> is used to unpause the game from non-GUI scripts.
+    /// </para> Unpauses the game.
+    /// </summary>
+    public void UnpauseInternal()
+    {
+        TogglePause(false);
+        CanPause = true;
     }
 
     /// <summary>
@@ -302,5 +325,10 @@ public class GUI : MonoBehaviour
         DeathScreenPanel.gameObject.SetActive(false);
         //Some ability specific code here 
         GameData.player.DamageableEntity.Heal(this, GameData.player.DamageableEntity.MaxHealth, GetType());
+    }
+
+    private void OnDestroy()
+    {
+        _escapeAction.performed -= HandlePause;
     }
 }
