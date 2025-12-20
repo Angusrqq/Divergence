@@ -6,12 +6,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// <summary>
-/// <para>
-/// Handles in-game GUI.
-/// </para>
-/// Contains functions for buttons and handling pausing.
-/// </summary>
 public class GUI : MonoBehaviour
 {
     public Image PauseScreenPanel;
@@ -21,10 +15,12 @@ public class GUI : MonoBehaviour
     public AbilityButton AbilityButtonPrefab;
     [NonSerialized] public static bool Paused = false;
     [NonSerialized] public static bool CanPause = true;
-    public List<BaseAbilityScriptable> AbilityChoices { get; private set; } = new();
+
     private List<AbilityButton> _abilityButtons = new();
     private List<BaseAbilityScriptable> _availableAbilities;
     private InputAction _escapeAction;
+
+    public List<BaseAbilityScriptable> AbilityChoices { get; private set; } = new();
 
     void Start()
     {
@@ -36,28 +32,11 @@ public class GUI : MonoBehaviour
         _availableAbilities = new(GameData.unlockedAbilities);
     }
 
-    /// <summary>
-    /// Handles pausing when Escape is pressed.
-    /// </summary>
-    // void Update()
-    // {
-    //     if (_escapeAction.) && CanPause)
-    //     {
-    //         if (Paused)
-    //         {
-    //             Continue();
-    //         }
-    //         else
-    //         {
-    //             Pause();
-    //         }
-    //     }
-    // }
-
     private void HandlePause(InputAction.CallbackContext context)
     {
-        if(!CanPause) return;
-        if(!context.performed) return;
+        if (!CanPause) return;
+        if (!context.performed) return;
+
         if (Paused)
         {
             Continue();
@@ -171,6 +150,7 @@ public class GUI : MonoBehaviour
         GameData.CurrentMetadata.gameStats.RunsFinished += 1;
         GameData.CurrentMetadata.gameStats.TotalDamageDealt += (ulong)GameData.InGameAttributes.DamageDealt;
         GameData.CurrentMetadata.gameStats.TotalDamageTaken += (ulong)GameData.InGameAttributes.DamageTaken;
+
         GameData.CurrentMetadata.Records.MaxCritMult = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxCritMult, GameData.InGameAttributes.CritMult * 100f);
         GameData.CurrentMetadata.Records.MaxDamageMult = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxDamageMult, GameData.InGameAttributes.PlayerDamageMult * 100f);
         GameData.CurrentMetadata.Records.MaxCritChance = (uint)Mathf.Max(GameData.CurrentMetadata.Records.MaxCritChance, GameData.InGameAttributes.CritChance * 100f);
@@ -187,95 +167,74 @@ public class GUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>LevelUp</c> is called when the player levels up.
-    /// </para> Shows the level up screen.
-    /// </summary>
-    public void OnLevelUp_Deprecated(UnityEngine.Object source, int level)
-    {
-        PauseInternal();
-        AbilityChoices.Clear();
-        List<BaseAbilityScriptable> toRemove = new();
-        foreach(BaseAbilityScriptable ability in _availableAbilities)
-        {
-            BaseAbilityHandler handler = null;
-            if(ability.Type == HandlerType.Passive) handler = GameData.player.AbilityHolder.GetPassiveByName(ability.Name);
-            if(ability.Type == HandlerType.InstantiatedAbility) handler = GameData.player.AbilityHolder.GetAbilityByName(ability.Name);
-            if(handler == null)
-            {
-                if(ability.Type == HandlerType.Passive && GameData.player.AbilityHolder.Passives.Count >= GameData.InGameAttributes.PassiveAbilitySlots)
-                {
-                    toRemove.Add(ability);
-                }
-                if(ability.Type == HandlerType.InstantiatedAbility && GameData.player.AbilityHolder.Abilities.Count >= GameData.InGameAttributes.ActiveAbilitySlots)
-                {
-                    toRemove.Add(ability);
-                }
-                continue;
-            } 
-            if(handler.Level >= handler.MaxLevel) toRemove.Add(ability);
-        }
-
-        foreach(BaseAbilityScriptable ability in toRemove) _availableAbilities.Remove(ability);
-
-        List<BaseAbilityScriptable> availableAbilities = new(_availableAbilities);
-
-        for (int i = 0; i < GameData.InGameAttributes.AbilitiesPerLevel; i++)
-        {
-            if (availableAbilities.Count == 0) break;
-            BaseAbilityScriptable rolled = availableAbilities[GameData.ValuableRoll(0, availableAbilities.Count)];
-            availableAbilities.Remove(rolled);
-            AbilityChoices.Add(rolled);
-        }
-        RebuildAbilities();
-        LevelUpPanel.gameObject.SetActive(true);
-        if(AbilityChoices.Count == 0) CloseLevelUp();
-    }
-
     public void OnLevelUp(UnityEngine.Object source, int level)
     {
         PauseInternal();
         AbilityChoices.Clear();
         RefreshAvailableAbilities();
 
-        if(GameData.player.AbilityHolder.GetPassiveByName("Rabbit's paw")) AbilityChoices.Add(GameData.player.AbilityHolder.GetPassiveByName("Rabbit's paw").Source);
-        if(GameData.ValuableValue <= 0.65f && AbilityChoices.Count == 0) // chance to roll a guaranteed upgrade
+        var rabbitsPaw = GameData.player.AbilityHolder.GetPassiveByName("Rabbit's paw");
+        if (rabbitsPaw != null)
         {
-            BaseAbilityScriptable rolledUpgrade = GameData.player.AbilityHolder.GetAllAbilities()[GameData.ValuableRoll(0, GameData.player.AbilityHolder.GetAllAbilities().Count)].Source;
+            AbilityChoices.Add(rabbitsPaw.Source);
+        }
+
+        // Chance to roll a guaranteed upgrade
+        if (GameData.ValuableValue <= 0.65f && AbilityChoices.Count == 0)
+        {
+            var allAbilities = GameData.player.AbilityHolder.GetAllAbilities();
+            BaseAbilityScriptable rolledUpgrade = allAbilities[GameData.ValuableRoll(0, allAbilities.Count)].Source;
+
             AbilityChoices.Add(rolledUpgrade);
         }
-        List<BaseAbilityScriptable> options = Utilities.GetRandomAbilities(_availableAbilities.Except(AbilityChoices).ToList(), GameData.InGameAttributes.Luck, (int)GameData.InGameAttributes.AbilitiesPerLevel - AbilityChoices.Count);
-        foreach(BaseAbilityScriptable ability in options) AbilityChoices.Add(ability);
+
+        List<BaseAbilityScriptable> options = Utilities.GetRandomAbilities(
+            unlockedAbilities: _availableAbilities.Except(AbilityChoices).ToList(),
+            luck: GameData.InGameAttributes.Luck,
+            amount: (int)GameData.InGameAttributes.AbilitiesPerLevel - AbilityChoices.Count
+        );
+        
+        foreach (BaseAbilityScriptable ability in options)
+        {
+            AbilityChoices.Add(ability);
+        }
+
         RebuildAbilities();
         LevelUpPanel.gameObject.SetActive(true);
-        if(AbilityChoices.Count == 0) CloseLevelUp();
+
+        if (AbilityChoices.Count == 0)
+        {
+            CloseLevelUp();
+        }
     }
 
     private void RefreshAvailableAbilities()
     {
         List<BaseAbilityScriptable> toRemove = new();
-        foreach(BaseAbilityScriptable ability in _availableAbilities)
+
+        foreach (BaseAbilityScriptable ability in _availableAbilities)
         {
-            BaseAbilityHandler handler = null;
-            if(ability.Type == HandlerType.Passive) handler = GameData.player.AbilityHolder.GetPassiveByName(ability.Name);
-            if(ability.Type == HandlerType.InstantiatedAbility) handler = GameData.player.AbilityHolder.GetAbilityByName(ability.Name);
-            if(handler == null)
+            BaseAbilityHandler handler = GameData.player.AbilityHolder.GetHandlerForAbility(ability);
+
+            if (handler == null)
             {
-                if(ability.Type == HandlerType.Passive && GameData.player.AbilityHolder.Passives.Count >= GameData.InGameAttributes.PassiveAbilitySlots)
+                if (ability.Type == HandlerType.Passive && GameData.player.AbilityHolder.Passives.Count >= GameData.InGameAttributes.PassiveAbilitySlots)
                 {
                     toRemove.Add(ability);
                 }
-                if(ability.Type == HandlerType.InstantiatedAbility && GameData.player.AbilityHolder.Abilities.Count >= GameData.InGameAttributes.ActiveAbilitySlots)
+                if (ability.Type == HandlerType.InstantiatedAbility && GameData.player.AbilityHolder.Abilities.Count >= GameData.InGameAttributes.ActiveAbilitySlots)
                 {
                     toRemove.Add(ability);
                 }
+
                 continue;
             } 
-            //if(handler.Level >= handler.MaxLevel) toRemove.Add(ability);
         }
 
-        foreach(BaseAbilityScriptable ability in toRemove) _availableAbilities.Remove(ability);
+        foreach (BaseAbilityScriptable ability in toRemove)
+        {
+            _availableAbilities.Remove(ability);
+        }
     }
 
     /// <summary>
@@ -303,11 +262,12 @@ public class GUI : MonoBehaviour
         }
         _abilityButtons.Clear();
         
-        foreach(BaseAbilityScriptable a in AbilityChoices)
+        foreach(BaseAbilityScriptable ability in AbilityChoices)
         {
             AbilityButton button = Instantiate(AbilityButtonPrefab, LevelUpPanel.transform);
-            bool acquired = a.Type == HandlerType.Passive ? GameData.player.AbilityHolder.GetPassiveByName(a.Name) != null : GameData.player.AbilityHolder.GetAbilityByName(a.Name) != null;
-            button.Init(a);
+            bool acquired = GameData.player.AbilityHolder.GetHandlerForAbility(ability) != null;
+
+            button.Init(ability);
             _abilityButtons.Add(button);
         }
     }
@@ -323,7 +283,7 @@ public class GUI : MonoBehaviour
         TogglePause(false);
         CanPause = true;
         DeathScreenPanel.gameObject.SetActive(false);
-        //Some ability specific code here 
+        // Some ability specific code here 
         GameData.player.DamageableEntity.Heal(this, GameData.player.DamageableEntity.MaxHealth, GetType());
     }
 

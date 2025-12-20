@@ -118,7 +118,7 @@ public class AbilityHolder : MonoBehaviour
     /// <returns></returns>
     public BaseAbilityHandler GetPassiveByName(string name)
     {
-        if(_passiveNames.IndexOf(name) == -1) return null;
+        if (_passiveNames.IndexOf(name) == -1) return null;
         return Passives[_passiveNames.IndexOf(name)];
     }
 
@@ -164,7 +164,23 @@ public class AbilityHolder : MonoBehaviour
     {
         OnEnemyHit?.Invoke(abilityType, target, damage, projectile);
         GameData.InGameAttributes.DamageDealt += damage;
-    } 
+    }
+
+    public BaseAbilityHandler GetHandlerForAbility(BaseAbilityScriptable ability)
+    {
+        if (ability.Type == HandlerType.Passive)
+        {
+            return GameData.player.AbilityHolder.GetPassiveByName(ability.Name);
+        }
+
+        if (ability.Type == HandlerType.InstantiatedAbility)
+        {
+            return GameData.player.AbilityHolder.GetAbilityByName(ability.Name);
+        }
+
+        return null;
+    }
+
     public void TriggerOnProjectileFired(Type abilityType, InstantiatedAbilityMono projectile) => OnProjectileFired?.Invoke(abilityType, projectile);
     public void TriggerOnProjectileHit(Type abilityType, Vector2 position) => OnProjectileHit?.Invoke(abilityType, position);
     public void TriggerOnAbilityActivated(Type abilityType, InstantiatedAbilityHandler ability, InstantiatedAbilityMono prefab) => OnAbilityActivated?.Invoke(abilityType, ability, prefab);

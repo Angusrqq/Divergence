@@ -7,17 +7,16 @@ public class BaseAbilityHandler : MonoBehaviour
     public int Level = 1;
     public int MaxLevel;
     public bool IsEvolved = false;
+    public AudioSource AudioSource;
+    public AbilityTier Tier;
+    public Dictionary<string, RuntimeStatHolder> Stats;
 
     protected BaseAbilityScriptable _source;
 
     public BaseAbilityScriptable Source => _source;
-    
     public string Name => _source.Name;
     public string Description => _source.Description;
     public Sprite Icon => _source.Icon;
-    public AudioSource AudioSource;
-    public AbilityTier Tier;
-    public Dictionary<string, RuntimeStatHolder> Stats;
 
     public void Init(BaseAbilityScriptable source)
     {
@@ -27,9 +26,9 @@ public class BaseAbilityHandler : MonoBehaviour
         IsEvolved = source.IsEvolved;
         Tier = source.Tier;
         Stats = new();
-        RecalculateStats();
         AudioSource = GetComponent<AudioSource>();
 
+        RecalculateStats();
         AfterInit();
     }
 
@@ -41,7 +40,7 @@ public class BaseAbilityHandler : MonoBehaviour
             Debug.LogWarning($"Attempt to access the non-existent stat type '{type}' in ability '{Name}'");
             return 0;
         }
-        if(stats.Count > 1) 
+        if (stats.Count > 1) 
         {
             Debug.LogWarning($"Multiple stats with the same type '{type}' exist in ability '{Name}'. Use the stat name instead.");
         }
