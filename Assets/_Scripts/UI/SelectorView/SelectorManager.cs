@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// <para>
-/// <c>SelectorManager</c> is a class that manages a selection menu (Scroll View), such as character or map selection.
-/// </para>
-/// </summary>
 public class SelectorManager : MonoBehaviour
 {
     [NonSerialized] public ScriptableObject CurrentSelectedData;
@@ -17,8 +12,8 @@ public class SelectorManager : MonoBehaviour
     public Mask Mask;
 
     [Header("Scroll Settings")]
-    public float scrollDuration = 0.25f;   // time to smooth scroll
-    public float centerOffset = 0f;        // optional padding when centering
+    public float scrollDuration = 0.25f; // Time to smooth scroll
+    public float centerOffset = 0f; // Optional padding when centering
 
     private ScrollRect _scrollRect;
     private SelectorItem _currentSelectedItem;
@@ -37,16 +32,11 @@ public class SelectorManager : MonoBehaviour
             _currentSelectedItem?.OnDeselect();
             _currentSelectedItem = value;
             CurrentSelectedData = _currentSelectedItem.ItemData;
+
             ScrollToItem(_currentSelectedItem.transform as RectTransform);
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>InitElements</c> instantiates and initializes the passed list of <c>SelectorItem</c> elements as children of <c>contentContainer</c>.
-    /// </para>
-    /// </summary>
-    /// <param name="elements">Initial list of items to be instantiated</param>
     public virtual void InitElements(List<SelectorItem> elements)
     {
         foreach (SelectorItem element in elements)
@@ -55,23 +45,20 @@ public class SelectorManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// <c>UpdateDescription</c> updates the description text with the passed string.
-    /// </summary>
     public void UpdateDescription(string description)
     {
         descriptionText.text = description;
     }
 
-
     private void ScrollToItem(RectTransform target)
     {
-        if (_scrollRect == null || target == null || gameObject.activeInHierarchy == false)
-            return;
+        if (_scrollRect == null || target == null || gameObject.activeInHierarchy == false) return;
 
         // Stop previous smooth scroll
         if (scrollRoutine != null)
+        {
             StopCoroutine(scrollRoutine);
+        }
 
         scrollRoutine = StartCoroutine(SmoothScrollCoroutine(target));
     }
@@ -99,8 +86,7 @@ public class SelectorManager : MonoBehaviour
         float targetBottom = targetCorners[0].y;
 
         // If fully visible, no need to scroll
-        if (targetTop <= viewportTop && targetBottom >= viewportBottom)
-            yield break;
+        if (targetTop <= viewportTop && targetBottom >= viewportBottom) yield break;
 
         // ------------ Centering Logic ------------
         // Find the vertical offset in content local space
@@ -112,7 +98,7 @@ public class SelectorManager : MonoBehaviour
 
         // Normalize for ScrollRect
         float normalizedTarget = Mathf.Clamp01(targetCenteredY / (contentHeight - viewportHeight));
-        float scrollTarget = 1f - normalizedTarget; // invert because ScrollRect uses 1 = top
+        float scrollTarget = 1f - normalizedTarget; // Invert because ScrollRect uses 1 = top
 
         // ------------ Smooth Scroll Animation ------------
         float start = _scrollRect.verticalNormalizedPosition;
@@ -123,9 +109,10 @@ public class SelectorManager : MonoBehaviour
             t += Time.unscaledDeltaTime; // UI usually ignores game time scale
             float lerp = Mathf.SmoothStep(start, scrollTarget, t / scrollDuration);
             _scrollRect.verticalNormalizedPosition = lerp;
+
             yield return null;
         }
 
-        _scrollRect.verticalNormalizedPosition = scrollTarget; // ensure exact
+        _scrollRect.verticalNormalizedPosition = scrollTarget; // Ensure exact
     }
 }

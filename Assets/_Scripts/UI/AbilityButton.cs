@@ -58,6 +58,6 @@ public class AbilityButton : MonoBehaviour
             GameData.player.AbilityHolder.AddAbility((InstantiatedAbilityScriptable)Ability);
         }
         
-        transform.parent.GetComponentInParent<GUI>().CloseLevelUp(); // TODO: Find a better way, looks bad
+        transform.parent.GetComponentInParent<GUI>().CloseLevelUpPanel(); // TODO: Find a better way, looks bad
     }
 }

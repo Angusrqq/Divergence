@@ -23,7 +23,7 @@ public class SelectorManagerUpgrades : SelectorManagerUnlockables
 
     public override void Unlock(string type)
     {
-        if(((UpgradeScriptable)CurrentSelectedData).IsUnlocked)
+        if (((UpgradeScriptable)CurrentSelectedData).IsUnlocked)
         {
             SelectorUpgrade selectorUpgrade = (SelectorUpgrade)CurrentSelectedItem;
             selectorUpgrade.OnUpgrade();

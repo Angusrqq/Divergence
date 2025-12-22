@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class SelectorManagerUnlockables : SelectorManager
@@ -14,12 +13,12 @@ public class SelectorManagerUnlockables : SelectorManager
 
     public virtual void Unlock(string type)
     {
-        
         if (GameData.CurrentMetadata.TimeKnowledge < ((BaseScriptableObjectUnlockable)CurrentSelectedData).Cost)
         {
-            //some kind of feedback for not enough currency
+            // Some kind of feedback for not enough currency
             return;
         }
+
         GameData.CurrentMetadata.TimeKnowledge -= ((BaseScriptableObjectUnlockable)CurrentSelectedData).Cost;
         ((BaseScriptableObjectUnlockable)CurrentSelectedData).IsUnlocked = true;
 

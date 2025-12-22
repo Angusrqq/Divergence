@@ -20,36 +20,27 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
         set => _selectorManager = value;
     }
 
-    /// <summary>
-    /// Initializes the selector item with the given data and manager.
-    /// </summary>
-    /// <param name="data">The <c>ScriptableObject</c> to be associated with this item.</param>
-    /// <param name="manager">The <c>SelectorManager</c> parent that will contain this item.</param>
     public virtual void Init(ScriptableObject data, SelectorManager manager)
     {
         _selectorManager = manager;
         _itemData = data;
     }
 
-    /// <summary>
-    /// Called when this item is selected. Updates the SelectorManager's current selection and enables the selection image.
-    /// </summary>
-    /// <param name="eventData">The event data associated with the selection.</param>
     public virtual void OnSelect(BaseEventData eventData)
     {
         _selectorManager.CurrentSelectedItem = this;
+
         SelectedImage.enabled = true;
         try
         {
             SelectedImage.material.SetColor("_Color", Utilities.GetTierColor(((BaseAbilityScriptable)_itemData).Tier) * 4f);
         }
-        catch { SelectedImage.material.SetColor("_Color", new Color(3.56486797f,1.9095813f,0,2) * 1f); }
+        catch
+        {
+            SelectedImage.material.SetColor("_Color", new Color(3.56486797f,1.9095813f,0,2) * 1f);
+        }
     }
 
-    /// <summary>
-    /// Called when this item is deselected. Disables the selection image to indicate the item is no longer selected.
-    /// This method is invoked by the <see cref="SelectorManager"/> when a new item is selected.
-    /// </summary>
     public virtual void OnDeselect()
     {
         SelectedImage.enabled = false;

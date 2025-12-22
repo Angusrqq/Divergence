@@ -18,6 +18,7 @@ public class AbilityIconDisplay : MonoBehaviour
         {
             _activeAbilitiesIcons.Add(Instantiate(_IconHolderPrefab, _activeAbilitiesIconsRoot));
         }
+
         for(int i = 0; i < GameData.InGameAttributes.PassiveAbilitySlots; i++)
         {
             _passiveAbilitiesIcons.Add(Instantiate(_IconHolderPrefab, _passiveAbilitiesIconsRoot));
@@ -39,14 +40,13 @@ public class AbilityIconDisplay : MonoBehaviour
         byte abilityIndex = 0;
         foreach (Image image in icons)
         {
-            if (abilityIndex >= abilities.Count)
-                break;
+            if (abilityIndex >= abilities.Count) break;
 
             Sprite abilityIcon = abilities[abilityIndex].Icon;
             image.sprite = abilityIcon;
 
             TMP_Text abilityLevel = image.GetComponentInChildren<TMP_Text>();
-            abilityLevel.text = "lv. " + abilities[abilityIndex].Level.ToString();
+            abilityLevel.text = $"lv. {abilities[abilityIndex].Level}";
 
             image.color = Color.white;
 

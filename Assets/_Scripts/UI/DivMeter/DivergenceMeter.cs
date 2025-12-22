@@ -12,8 +12,6 @@ using UnityEngine;
 /// </remarks>
 public class DivergenceMeter : MonoBehaviour
 {
-    private const string CATEGORY = "DivergenceMeterSheet";
-
     [SerializeField] private AnimationCurve _glowCurve;
     [SerializeField] private Material _divergenceMeterMaterial;
 
@@ -36,9 +34,6 @@ public class DivergenceMeter : MonoBehaviour
         Fast
     }
 
-    /// <summary>
-    /// Initializes state, caches default material color, collects digit components, and loads the seed.
-    /// </summary>
     void Awake()
     {
         AnimationEnded = false;
@@ -47,15 +42,13 @@ public class DivergenceMeter : MonoBehaviour
         foreach (Transform child in transform)
         {
             if (child.gameObject.name.Contains("dot")) continue;
+
             _numbers.Add(child.GetComponent<DivergenceMeterNumber>());
         }
 
         Seed = PlayerPrefs.GetInt("Seed", Random.Range(0, 1999999));
     }
 
-    /// <summary>
-    /// Restores the material color when the object is destroyed.
-    /// </summary>
     void OnDestroy()
     {
         _divergenceMeterMaterial.SetColor("_Color", _defaultMaterialColor);
@@ -83,7 +76,6 @@ public class DivergenceMeter : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-
         else if (variant == AnimationVariant.Fast)
         {
             foreach (DivergenceMeterNumber num in _numbers)
@@ -104,9 +96,7 @@ public class DivergenceMeter : MonoBehaviour
     /// Idle loop that softly fades the meter's glow and updates each digit between pulses.
     /// </summary>
     /// <param name="time">Duration for each fade segment.</param>
-    /// <param name="variant">Animation detail level.</param>
-    /// <returns>Coroutine enumerator.</returns>
-    public IEnumerator IdleAnimation(float time = 1.5f, AnimationVariant variant = AnimationVariant.Full)
+    public IEnumerator IdleAnimation(float time = 1.5f)
     {
         while (true)
         {
@@ -170,7 +160,10 @@ public class DivergenceMeter : MonoBehaviour
     /// <returns>The digit at the requested position, or 0 if out of bounds.</returns>
     public static int GetDigitFromNumber(int number, int index, int length = 0)
     {
-        if (index > number.ToString().Length - 1 || length - index > number.ToString().Length) return 0;
+        if (index > number.ToString().Length - 1 || length - index > number.ToString().Length)
+        {
+            return 0;
+        }
 
         index = length == 0 ? index : length - index - 1;
 

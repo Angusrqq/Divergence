@@ -1,5 +1,15 @@
 using UnityEngine;
 
+public enum PostGameStatType
+{
+    Time,
+    Level,
+    Currency,
+    Kills,
+    DamageDealt
+    // Abilities
+}
+
 public class PostGameStat : MonoBehaviour
 {
     [SerializeField] private TMPro.TMP_Text valueText;
@@ -13,18 +23,23 @@ public class PostGameStat : MonoBehaviour
             case PostGameStatType.Time:
                 SetTime();
                 break;
+
             case PostGameStatType.Level:
                 SetLevel();
                 break;
+
             case PostGameStatType.Currency:
                 SetCurrency();
                 break;
+
             case PostGameStatType.Kills:
                 SetKills();
                 break;
+
             case PostGameStatType.DamageDealt:
                 SetDamageDealt();
                 break;
+
             // case PostGameStatType.Abilities:
             //     SetAbilities();
             //     break;
@@ -40,10 +55,10 @@ public class PostGameStat : MonoBehaviour
     private /*async*/ void SetLevel()
     {
         valueText.text = GameData.player.Level.ToString();
-        if(GameData.player.Level > GameData.CurrentMetadata.Records.MaxLevel)
+        if (GameData.player.Level > GameData.CurrentMetadata.Records.MaxLevel)
         {
             GameData.CurrentMetadata.Records.MaxLevel = (uint)GameData.player.Level;
-            //TODO: add feedback (text like PB or something), applies for everything
+            // TODO: add feedback (text like PB or something), applies for everything
         }
     }
 
@@ -53,10 +68,12 @@ public class PostGameStat : MonoBehaviour
         float phaseMultiplier = 1f + (EnemyManager.Instance.CurrentPhase * 0.5f);
         float baseReward = (KillCounter.Kills * 0.3f) + (GameData.GameTimerInstance.currentTime * 0.15f);
         int currency = (int)((baseReward * phaseMultiplier) + (averageKPS * 50f));
+
         valueText.text = currency.ToString();
         GameData.CurrentMetadata.TimeKnowledge += currency;
         GameData.CurrentMetadata.gameStats.TotalCurrency += (uint)currency;
-        if(GameData.CurrentMetadata.Records.MaxCurrency < currency)
+
+        if (GameData.CurrentMetadata.Records.MaxCurrency < currency)
         {
             GameData.CurrentMetadata.Records.MaxCurrency = (uint)currency;
             //TODO: add feedback (text like PB or something), applies for everything
@@ -92,16 +109,5 @@ public class PostGameStat : MonoBehaviour
     //         abilityIconDisplay.UpdateActiveAbilitiesIcons(GameData.player.AbilityHolder.Abilities);
     //         abilityIconDisplay.UpdatePassiveAbilitiesIcons(GameData.player.AbilityHolder.Passives);
     //     }
-
     // }
-}
-
-public enum PostGameStatType
-{
-    Time,
-    Level,
-    Currency,
-    Kills,
-    DamageDealt
-    // Abilities
 }

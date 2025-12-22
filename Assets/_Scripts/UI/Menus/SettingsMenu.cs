@@ -3,13 +3,6 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-/// <summary>
-/// Manages graphics-related settings UI: resolution, refresh rate, and fullscreen mode.
-/// </summary>
-/// <remarks>
-/// Populates dropdowns at startup using the current monitor's supported modes, then applies
-/// selected options via <see cref="Screen"/> and <see cref="Application.targetFrameRate"/>.
-/// </remarks>
 public class SettingsMenu : MonoBehaviour
 {
     [Header("Dropdowns")]
@@ -29,9 +22,6 @@ public class SettingsMenu : MonoBehaviour
     private int _currentResolutionIndex = 0;
     private int _currentFullScreenIndex = 0;
 
-    /// <summary>
-    /// Initializes dropdown options based on the current monitor capabilities and current settings.
-    /// </summary>
     void Start()
     {
         _resolutions = Screen.resolutions;
@@ -58,6 +48,7 @@ public class SettingsMenu : MonoBehaviour
         {
             string resolutionOption = _filteredResolutions[i].width + " x " + _filteredResolutions[i].height;
             resolutionOptions.Add(resolutionOption);
+
             if (_filteredResolutions[i].width == Screen.width && _filteredResolutions[i].height == Screen.height)
             {
                 _currentResolutionIndex = i;
@@ -70,6 +61,7 @@ public class SettingsMenu : MonoBehaviour
         {
             string refreshRateOption = _refreshRates[i].ToString() + " Hz";
             refreshRateOptions.Add(refreshRateOption);
+
             if (_refreshRates[i] == currentRefreshRate)
             {
                 _currentRefreshRateIndex = i;
@@ -81,21 +73,22 @@ public class SettingsMenu : MonoBehaviour
         _resolutionDropdown.value = _currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
 
-        _fullScreenDropdown.AddOptions(new List<string> { "FullScreen", "Borderless", "Windowed" });
-
         switch (Screen.fullScreenMode)
         {
             case FullScreenMode.ExclusiveFullScreen:
                 _currentFullScreenIndex = 0;
                 break;
+
             case FullScreenMode.FullScreenWindow:
                 _currentFullScreenIndex = 1;
                 break;
+
             case FullScreenMode.Windowed:
                 _currentFullScreenIndex = 2;
                 break;
         }
-        
+
+        _fullScreenDropdown.AddOptions(new List<string> { "FullScreen", "Borderless", "Windowed" });
         _fullScreenDropdown.value = _currentFullScreenIndex;
         _fullScreenDropdown.RefreshShownValue();
 
@@ -108,35 +101,23 @@ public class SettingsMenu : MonoBehaviour
 
     private void DefaultValues()
     {
-        // inverse of Mathf.Log10(volume) * 20f
+        // Inverse of Mathf.Log10(volume) * 20f
         _masterVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetMasterVolume() / 20f);
         _musicVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetMusicVolume() / 20f);
         _sfxVolumeSlider.value = Mathf.Pow(10f, AudioManager.instance.GetSFXVolume() / 20f);
     }
 
-    /// <summary>
-    /// Set the selected resolution.
-    /// </summary>
-    /// <param name="resolutionIndex">Index into the filtered resolutions list.</param>
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = _filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
-    /// <summary>
-    /// Sets the game's target frame rate to the selected refresh rate.
-    /// </summary>
-    /// <param name="refreshRateIndex">Index into the available refresh rate array.</param>
     public void SetRefreshRate(int refreshRateIndex)
     {
         Application.targetFrameRate = _refreshRates[refreshRateIndex];
     }
 
-    /// <summary>
-    /// Changes the fullscreen mode according to the selected dropdown option.
-    /// </summary>
-    /// <param name="fullScreenIndex">0 = Exclusive Fullscreen, 1 = Borderless, 2 = Windowed.</param>
     public void SetFullscreen(int fullScreenIndex)
     {
         switch (fullScreenIndex)
@@ -174,6 +155,7 @@ public class SettingsMenu : MonoBehaviour
         AudioManager.instance.Mixer.GetFloat("masterVolume", out float masterVolume);
         AudioManager.instance.Mixer.GetFloat("musicVolume", out float musicVolume);
         AudioManager.instance.Mixer.GetFloat("sfxVolume", out float sfxVolume);
+
         int ScreenWidth = Screen.width;
         int ScreenHeight = Screen.height;
         int RefreshRate = Application.targetFrameRate;

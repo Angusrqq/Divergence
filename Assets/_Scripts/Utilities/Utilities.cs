@@ -61,6 +61,8 @@ public struct RuntimeStatHolder
 
 public static class Utilities
 {
+    public const float EXPONENT_FACTOR = 0.01f;
+
     public static async Task AsyncAnimation<T>(float speed, T start, T end, Action<T, T, float> LerpCallback = null)
     {
         float elapsedTime = 0f;
@@ -68,6 +70,7 @@ public static class Utilities
         {
             elapsedTime += Time.deltaTime * speed;
             LerpCallback.Invoke(start, end, elapsedTime);
+
             await Awaitable.NextFrameAsync();
         }
     }
@@ -88,10 +91,9 @@ public static class Utilities
         {
             modifiedWeights.Add(weight.Key, ModifyWeight(weight.Value, luck));
         }
+
         return modifiedWeights;
     }
-
-    public const float EXPONENT_FACTOR = 0.01f;
 
     public static float ModifyWeight(float weight, float luck)
     {
@@ -115,22 +117,26 @@ public static class Utilities
             }
         }
 
-        // should never happen
+        // Should never happen
         Debug.LogError("Could not get random tier");
         return AbilityTier.Tier1;
     }
 
     public static BaseAbilityScriptable GetAbilityFromTier(List<BaseAbilityScriptable> unlockedAbilities, AbilityTier tier)
     {
-        int t = (int)tier;
-        while(t >= 0)
+        int currentTier = (int)tier;
+        while(currentTier >= 0)
         {
-            var abilitylist = unlockedAbilities.Where(x => (int)x.Tier == t).ToList();
-            if(abilitylist.Count > 0) 
+            var abilitylist = unlockedAbilities.Where(x => (int)x.Tier == currentTier).ToList();
+            if(abilitylist.Count > 0)
+            {
                 return abilitylist[GameData.ValuableRoll(0, abilitylist.Count)];
-            Debug.LogWarning("Could not find ability in tier: " + t);
-            t--;
+            }
+
+            Debug.LogWarning($"Could not find ability in tier: {currentTier}");
+            currentTier--;
         }
+
         Debug.LogError($"Could not find ability in tiers: from {tier} to {AbilityTier.Tier1}");
         return null;
     }
@@ -143,13 +149,15 @@ public static class Utilities
         for (int i = 0; i < amount; i++)
         {
             AbilityTier tier = GetRandomTier(luck);
+            
             BaseAbilityScriptable ability = GetAbilityFromTier(pool, tier);
-            if(ability == null)
+            if (ability == null)
             {
-                if(pool.Count == 0) return result;
+                if (pool.Count == 0) return result;
 
                 ability = pool[GameData.ValuableRoll(0, pool.Count)];
             }
+
             pool.Remove(ability);
             result.Add(ability);
         }
@@ -162,11 +170,17 @@ public static class Utilities
         return type switch
         {
             AbilityType.Regular => FormatFloat(value, floatingPoints),
+
             AbilityType.Chance => $"{FormatFloat(value * 100f, floatingPoints)}%",
+
             AbilityType.Percent => (value > 0f ? "+" : "") + FormatFloat(value * 100f, floatingPoints) + "%",
+
             AbilityType.Custom => name switch
-                { "Resist" => "+" + FormatFloat(Mathf.Abs(value) * 100f, floatingPoints) + "%",
-                _ => FormatFloat(value * 100f, floatingPoints) + "%" },
+            {
+                "Resist" => $"+{FormatFloat(Mathf.Abs(value) * 100f, floatingPoints)}%",
+                _ => $"{FormatFloat(value * 100f, floatingPoints)}%"
+            },
+            
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }
@@ -186,10 +200,10 @@ public static class Utilities
             AbilityTier.Tier3 => new Color32(90, 50, 134, 255),
             AbilityTier.Tier4 => new Color32(255, 215, 0, 255),
             AbilityTier.Tier5 => Color.black,
+
             _ => Color.white
         };
     }
-    
 
     public static Type GetHandlerTypeByEnum(HandlerType type)
     {
@@ -198,7 +212,8 @@ public static class Utilities
             HandlerType.BaseAbility => typeof(BaseAbilityHandler),
             HandlerType.Ability => typeof(AbilityHandler),
             HandlerType.InstantiatedAbility => typeof(InstantiatedAbilityHandler),
-            HandlerType.Passive => typeof(BaseAbilityHandler),// funny low iq shit
+            HandlerType.Passive => typeof(BaseAbilityHandler),
+
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }

@@ -5,10 +5,11 @@ using UnityEngine.U2D.Animation;
 [RequireComponent(typeof(SpriteResolver))]
 public class DivergenceMeterNumber : MonoBehaviour
 {
-    private SpriteResolver _resolver;
-    public bool Rolled { get; private set; } = false;
-
     private const string CATEGORY = "DivergenceMeterSheet";
+
+    private SpriteResolver _resolver;
+
+    public bool Rolled { get; private set; } = false;
 
     void Awake()
     {

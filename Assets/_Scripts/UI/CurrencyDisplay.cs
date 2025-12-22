@@ -6,7 +6,7 @@ public class CurrencyDisplay : MonoBehaviour
 
     void Start()
     {
-        _currencyText.text = GameData.CurrentMetadata?.TimeKnowledge.ToString();
+        UpdateText();
     }
 
     public void UpdateText()

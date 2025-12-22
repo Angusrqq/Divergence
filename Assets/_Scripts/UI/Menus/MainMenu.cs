@@ -1,14 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// <summary>
-/// <para>
-/// <c>MainMenu</c> class manages the main menu scene, including character selection, game start, and menu navigation.
-/// </para>
-/// </summary>
 [RequireComponent(typeof(Canvas))]
 public class MainMenu : MonoBehaviour
 {
@@ -23,29 +16,23 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SelectorUnlockable _selectorUnlockablePrefab;
     [SerializeField] private SelectorUpgrade _selectorUpgradePrefab;
     [SerializeField] private GameObject _mainMenuButtons;
+
     private Coroutine _idleAnim;
 
-    /// <summary>
-    /// <para>
-    /// <c>Start</c> method builds the character selector and starts the divergence meter idle animation.
-    /// </para>
-    /// </summary>
     void Start()
     {
         BuildSelector(GameData.unlockedCharacters, _characterSelectorManager);
         BuildSelector(GameData.Maps, _mapSelectorManager);
+
         BuildSelectorUnlockables(GameData.Abilities, GameData.unlockedAbilities, _abilityUnlockablesSelectorManager);
         BuildSelectorUnlockables(GameData.Characters, GameData.unlockedCharacters, _characterUnlockableSelectorManager);
         BuildSelectorUnlockables(GameData.Maps, GameData.unlockedMaps, _mapUnlockableSelectorManager);
+
         BuildSelectorUpgrades(GameData.Upgrades, GameData.unlockedUpgrades, _upgradeSelectorManager);
+
         _idleAnim = StartCoroutine(_divergenceMeter.IdleAnimation());
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>FixedUpdate</c> method checks if the divergence meter animation has ended and loads the game scene.
-    /// </para>
-    /// </summary>
     void FixedUpdate()
     {
         if (DivergenceMeter.AnimationEnded)
@@ -54,14 +41,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>PlayGame</c> method is called when the play button is clicked.
-    /// </para>
-    /// <para>
-    /// Disables the main menu canvas, stops the idle animation, and starts the divergence meter play animation.
-    /// </para>
-    /// </summary>
     public void PlayGame()
     {
         _mainMenuButtons.SetActive(false);
@@ -76,39 +55,18 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(_divergenceMeter.PlayAnimation());
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>SetCharacter</c> method is called when the confirm button on character selector menu is clicked.
-    /// </para>
-    /// <para>
-    /// Sets the selected character in <c>GameData</c>.
-    /// </para>
-    /// </summary>
     public void SetCharacter()
     {
         GameData.ChooseCharacter((Character)_characterSelectorManager.CurrentSelectedData);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>SetMap</c> method is not implemented yet because map data storage is not yet determined.
-    /// </para>
-    /// <para>
-    /// Should be called when the confirm button on map selector menu is clicked.
-    /// </para>
-    /// </summary>
     public void SetMap()
     {
         GameData.ChooseMap((BetterMapData)_mapSelectorManager.CurrentSelectedData);
     }
 
     /// <summary>
-    /// <para>
-    /// <c>BuildSelector</c> method is called in <c>Start()</c>.
-    /// </para>
-    /// <para>
-    /// Creates a <c>SelectorItemWithInfo</c> for each object in passed collection of type T (<c>BaseScriptableObjectInfo</c>) and selects the first character by default.
-    /// </para>
+    /// Creates a <c>SelectorItemWithInfo</c> for each object in passed collection of type T (<c>BaseScriptableObjectInfo</c>).
     /// </summary>
     public void BuildSelector<T>(ICollection<T> objectInfos, SelectorManager selectorManager) where T : BaseScriptableObjectInfo
     {
@@ -166,14 +124,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Quit</c> method is called when the quit button is clicked.
-    /// </para>
-    /// <para>
-    /// Quits the application. Parameters should be saved before quitting.
-    /// </para>
-    /// </summary>
     public static void Quit()
     {
         // TODO: Save parameters here

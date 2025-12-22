@@ -204,7 +204,7 @@ public class GUI : MonoBehaviour
 
         if (AbilityChoices.Count == 0)
         {
-            CloseLevelUp();
+            CloseLevelUpPanel();
         }
     }
 
@@ -240,11 +240,7 @@ public class GUI : MonoBehaviour
     /// <summary>
     /// Closes the level-up UI and returns the game to an unpaused state.
     /// </summary>
-    /// <remarks>
-    /// Typically invoked by a UI button after the player confirms an ability choice.
-    /// Calls <see cref="UnpauseInternal"/> and hides <see cref="LevelUpPanel"/>.
-    /// </remarks>
-    public void CloseLevelUp()
+    public void CloseLevelUpPanel()
     {
         UnpauseInternal();
         LevelUpPanel.gameObject.SetActive(false);
@@ -273,17 +269,14 @@ public class GUI : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>
-    /// <c>Resurrect</c> is called when the player chooses to resurrect from the death screen.
-    /// </para>
-    /// Not fully implemented - some ability specific code should be added here.
+    /// <c>Revive</c> is called when the player chooses to revive from the death screen.
     /// </summary>
     public void Revive()
     {
         TogglePause(false);
         CanPause = true;
         DeathScreenPanel.gameObject.SetActive(false);
-        // Some ability specific code here 
+
         GameData.player.DamageableEntity.Heal(this, GameData.player.DamageableEntity.MaxHealth, GetType());
     }
 
