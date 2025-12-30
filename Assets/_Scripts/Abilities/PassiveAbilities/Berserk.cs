@@ -12,12 +12,12 @@ public class Berserk : PassiveAbilityMono
 
     void OnPlayerDamageTaken(UnityEngine.Object source, float amount, Type type = null)
     {
-        if (GameData.player.DamageableEntity.Health <= GameData.player.DamageableEntity.MaxHealth * _thresholdMult && !_isActive)
+        if (!_isActive && GameData.player.DamageableEntity.Health <= GameData.player.DamageableEntity.MaxHealth * _thresholdMult)
         {
             _isActive = true;
             ActivateEffect();
         }
-        else if (GameData.player.DamageableEntity.Health > GameData.player.DamageableEntity.MaxHealth * _thresholdMult && _isActive)
+        else if (_isActive && GameData.player.DamageableEntity.Health > GameData.player.DamageableEntity.MaxHealth * _thresholdMult)
         {
             _isActive = false;
             DeactivateEffect();

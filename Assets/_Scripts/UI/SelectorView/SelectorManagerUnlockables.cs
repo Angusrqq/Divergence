@@ -13,33 +13,33 @@ public class SelectorManagerUnlockables : SelectorManager
 
     public virtual void Unlock(string type)
     {
-        if (GameData.CurrentMetadata.TimeKnowledge < ((BaseScriptableObjectUnlockable)CurrentSelectedData).Cost)
+        if (GameData.CurrentMetadata.TimeKnowledge < CurrentSelectedUnlockable.Cost)
         {
             // Some kind of feedback for not enough currency
             return;
         }
 
-        GameData.CurrentMetadata.TimeKnowledge -= ((BaseScriptableObjectUnlockable)CurrentSelectedData).Cost;
-        ((BaseScriptableObjectUnlockable)CurrentSelectedData).IsUnlocked = true;
+        GameData.CurrentMetadata.TimeKnowledge -= CurrentSelectedUnlockable.Cost;
+        CurrentSelectedUnlockable.IsUnlocked = true;
 
         switch (type)
         {
             case "ability":
-                GameData.unlockedAbilities.Add((BaseAbilityScriptable)CurrentSelectedData);
+                GameData.unlockedAbilities.Add(CurrentSelectedAbility);
                 break;
             case "upgrade":
-                GameData.unlockedUpgrades.Add((UpgradeScriptable)CurrentSelectedData);
+                GameData.unlockedUpgrades.Add(CurrentSelectedUpgrade);
                 break;
             case "character":
-                GameData.unlockedCharacters.Add((Character)CurrentSelectedData);
+                GameData.unlockedCharacters.Add(CurrentSelectedCharacter);
                 break;
             case "map":
-                GameData.unlockedMaps.Add((BetterMapData)CurrentSelectedData);
+                GameData.unlockedMaps.Add(CurrentSelectedMap);
                 break;
         }
 
         ((SelectorUnlockable)CurrentSelectedItem).OnUnlock();
         CurrencyDisplay.UpdateText();
-        //something else unlocking related?
+        // Something else unlocking related?
     }
 }

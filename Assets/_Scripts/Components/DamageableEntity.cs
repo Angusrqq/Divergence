@@ -1,12 +1,6 @@
 using UnityEngine;
 using System;
 
-/// <summary>
-/// <para>
-/// <c>DamageableEntity</c> is a class for handling the health and damage of an entity (do not confuse with the Unity`s ECS (Entity Component System) entity).
-/// </para>
-/// Should be used like a component or a module for objects that can take damage and/or heal.
-/// </summary>
 public class DamageableEntity : MonoBehaviour, IDamageable
 {
     public event Action<UnityEngine.Object> OnDeath;
@@ -14,22 +8,12 @@ public class DamageableEntity : MonoBehaviour, IDamageable
     public event Action<UnityEngine.Object, float, Type> OnHeal;
     public bool IsVulnerable = true;
     public bool CanHeal = true;
+    public bool CanDealDamage = false;
 
     public float Health { get; set; }
     public float MaxHealth { get; set; }
-    public bool CanDealDamage = false;
     public float Damage { get; set; }
 
-    /// <summary>
-    /// <para>
-    /// <c>TakeDamage</c> is a method for taking damage to the entity.
-    /// </para>
-    /// Checks if the entity is vulnerable and if it has health left.
-    /// <para>
-    /// If the entity has health left, it takes the damage and invokes the <c>OnDamageTaken</c> event.
-    /// </para>
-    /// If the entity has no health left, it invokes the <c>OnDeath</c> event.
-    /// </summary>
     public void TakeDamage(UnityEngine.Object source, float damageAmount, Type type = null)
     {
         if (!IsVulnerable) return;
@@ -39,8 +23,10 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         {
             float taken = Health;
             Health = 0;
+
             OnDamageTaken?.Invoke(source, taken, type);
             OnDeath?.Invoke(source);
+
             return;
         }
 
@@ -48,30 +34,11 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         OnDamageTaken?.Invoke(source, damageAmount, type);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>СanTakeDamage</c> is a method for checking if the entity can take damage.
-    /// </para>
-    /// Checks if the entity is vulnerable and if it has health left.
-    /// <para>
-    /// If the entity is vulnerable and has health left, it returns true.
-    /// </para>
-    /// Should be used if you want to do something before taking damage.
-    /// </summary>
-    /// <returns>
-    /// <c>true</c> if the entity can take damage, <c>false</c> otherwise.
-    /// </returns>
-    public bool CanTakeDamage() => IsVulnerable && Health > 0;
+    public bool CanTakeDamage()
+    {
+        return IsVulnerable && Health > 0;
+    }
 
-    /// <summary>
-    /// <para>
-    /// <c>Heal</c> is a method for healing the entity.
-    /// </para>
-    /// Checks if the entity can heal and if it has health left.
-    /// <para>
-    /// If the entity can heal and has health left, it heals the entity and invokes the <c>OnHeal</c> event.
-    /// </para>
-    /// </summary>
     public void Heal(UnityEngine.Object source, float amount, Type type)
     {
         if (!CanHeal) return;
@@ -81,6 +48,7 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         {
             OnHeal?.Invoke(source, MaxHealth - Health, type);
             Health = MaxHealth;
+
             return;
         }
 
@@ -88,14 +56,6 @@ public class DamageableEntity : MonoBehaviour, IDamageable
         OnHeal?.Invoke(source, amount, type);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Init</c> is a method for initializing the entity.
-    /// </para>
-    /// <para>
-    /// Sets the max health, health, can deal damage and damage of the entity.
-    /// </para>
-    /// </summary>
     public void Init(float maxHealth, bool canDealDamage = false, float damage = 0)
     {
         MaxHealth = maxHealth;

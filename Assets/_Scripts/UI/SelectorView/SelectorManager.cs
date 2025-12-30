@@ -19,6 +19,12 @@ public class SelectorManager : MonoBehaviour
     private SelectorItem _currentSelectedItem;
     private Coroutine scrollRoutine;
 
+    protected BaseScriptableObjectUnlockable CurrentSelectedUnlockable => (BaseScriptableObjectUnlockable)CurrentSelectedData;
+    protected BaseAbilityScriptable CurrentSelectedAbility => (BaseAbilityScriptable)CurrentSelectedData;
+    protected UpgradeScriptable CurrentSelectedUpgrade => (UpgradeScriptable)CurrentSelectedData;
+    protected Character CurrentSelectedCharacter => (Character)CurrentSelectedData;
+    protected BetterMapData CurrentSelectedMap => (BetterMapData)CurrentSelectedData;
+
     private void Awake()
     {
         _scrollRect = GetComponent<ScrollRect>();
@@ -29,7 +35,11 @@ public class SelectorManager : MonoBehaviour
         get => _currentSelectedItem;
         set
         {
-            _currentSelectedItem?.OnDeselect();
+            if (_currentSelectedItem != null)
+            {
+                _currentSelectedItem.OnDeselect();
+            }
+            
             _currentSelectedItem = value;
             CurrentSelectedData = _currentSelectedItem.ItemData;
 
@@ -45,7 +55,7 @@ public class SelectorManager : MonoBehaviour
         }
     }
     
-    public void UpdateDescription(string description)
+    public void SetDescription(string description)
     {
         descriptionText.text = description;
     }

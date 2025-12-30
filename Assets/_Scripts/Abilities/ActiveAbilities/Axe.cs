@@ -13,9 +13,9 @@ public class Axe : InstantiatedAbilityMono
 
     protected override void Start()
     {
-        Enemy _target = FindClosest();
         _forceTimer = Ability.ActiveTime / 1.8f;
 
+        Enemy _target = FindClosest();
         if (_target != null)
         {
             direction = (_target.transform.position - transform.position).normalized;
@@ -27,6 +27,7 @@ public class Axe : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+
             return;
         }
     }

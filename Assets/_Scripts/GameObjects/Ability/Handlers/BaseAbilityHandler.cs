@@ -59,10 +59,6 @@ public class BaseAbilityHandler : MonoBehaviour
         return Stats[name].stat;
     }
 
-    protected virtual void AfterInit() { }
-
-    public virtual void Activate() { }
-
     public virtual void Upgrade()
     {
         Level++;
@@ -71,8 +67,6 @@ public class BaseAbilityHandler : MonoBehaviour
             s.Value.stat.BaseValue = _source.GetValue(s.Key, Level);
         }
     }
-
-    public virtual void UpdateAbility() { }
 
     public virtual void RecalculateStats()
     {
@@ -87,4 +81,8 @@ public class BaseAbilityHandler : MonoBehaviour
             Stats[lookup].stat.BaseValue = _source.GetValue(lookup, Level);
         }
     }
+
+    protected virtual void AfterInit() { }
+    public virtual void Activate() { }
+    public virtual void UpdateAbility() { }
 }

@@ -1,4 +1,3 @@
-
 public class CriticalStrike : PassiveAbilityMono
 {
     private Stat _critChance;
@@ -8,6 +7,7 @@ public class CriticalStrike : PassiveAbilityMono
     {
         _critChance = Ability.GetStat("Crit Chance");
         _critChanceModifier = new StatModifierByStat(ref _critChance, StatModifierType.Flat, this);
+
         GameData.InGameAttributes.CritChance.AddModifier(_critChanceModifier);
     }
 }

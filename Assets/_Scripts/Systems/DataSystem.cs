@@ -1,41 +1,27 @@
 using UnityEngine;
 using System.IO;
 using System;
-using UnityEngine.InputSystem;
 using MessagePack;
 
-// TODO: Implement this class because we cant save any data right now
-/// <summary>
-/// <para>
-/// <c>DataSystem</c> is a static class that handles saving and loading of metaprogression data.
-/// </para>
-/// </summary>
 public static class DataSystem
 {
     public static readonly string SAVE_FILE_PATH = Application.persistentDataPath + "/save.adun";
 
-    /// <summary>
-    /// Saves the given metaprogression data to the file located at DataSystem.SAVE_FILE_PATH.
-    /// </summary>
-    /// <param name="data">The metaprogression data to be saved.</param>
-    public static void SaveProgData(MetaprogressionData data)
+    public static void SaveProgressionData(MetaprogressionData data)
     {
         data.UpdateGuids();
         byte[] bytes = MessagePackSerializer.Serialize(data);
+
         File.WriteAllBytes(SAVE_FILE_PATH, bytes);
     }
 
-    /// <summary>
-    /// Loads metaprogression data from the file located at DataSystem.SAVE_FILE_PATH.
-    /// If the file does not exist, returns null.
-    /// </summary>
-    /// <returns>The loaded metaprogression data or null if the file does not exist.</returns>
-    public static MetaprogressionData LoadProgData()
+    public static MetaprogressionData LoadProgressionData()
     {
         if (File.Exists(SAVE_FILE_PATH))
         {
             byte[] bytes = File.ReadAllBytes(SAVE_FILE_PATH);
             var data = MessagePackSerializer.Deserialize<MetaprogressionData>(bytes);
+
             return data;
         }
         else
@@ -56,6 +42,7 @@ public static class DataSystem
         {
             return JsonUtility.FromJson<SettingsData>(PlayerPrefs.GetString("Config"));
         }
+        
         return null;
     }
 }

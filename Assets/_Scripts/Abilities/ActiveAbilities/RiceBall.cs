@@ -9,6 +9,7 @@ public class RiceBall : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+            
             return;
         }
 

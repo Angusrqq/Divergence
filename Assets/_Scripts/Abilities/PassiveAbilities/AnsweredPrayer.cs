@@ -10,14 +10,22 @@ public class AnsweredPrayer : PassiveAbilityMono
     private bool _isActive = false;
     private Coroutine _activeCoroutine = null;
 
+    public override void Activate()
+    {
+        Ability.GetStat("Wave Spawn Chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
+        Ability.GetStat("Cooldown").AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
+
+        GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;
+    }
+
     void OnHealthChanged(UnityEngine.Object source, float amount, Type type = null)
     {
-        if (GameData.player.DamageableEntity.Health <= GameData.player.DamageableEntity.MaxHealth * _thresholdMult && !_isActive)
+        if (!_isActive && GameData.player.DamageableEntity.Health <= GameData.player.DamageableEntity.MaxHealth * _thresholdMult)
         {
             _isActive = true;
             ActivateEffect();
         }
-        else if (GameData.player.DamageableEntity.Health > GameData.player.DamageableEntity.MaxHealth * _thresholdMult && _isActive)
+        else if (_isActive && GameData.player.DamageableEntity.Health > GameData.player.DamageableEntity.MaxHealth * _thresholdMult)
         {
             _isActive = false;
             DeactivateEffect();
@@ -49,13 +57,5 @@ public class AnsweredPrayer : PassiveAbilityMono
 
             yield return new WaitForSeconds(Ability.GetStat("Cooldown"));
         }
-    }
-
-    public override void Activate()
-    {
-        Ability.GetStat("Wave Spawn Chance").AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
-        Ability.GetStat("Cooldown").AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
-
-        GameData.player.DamageableEntity.OnDamageTaken += OnHealthChanged;
     }
 }

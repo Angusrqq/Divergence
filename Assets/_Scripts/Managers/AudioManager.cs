@@ -25,59 +25,6 @@ public class AudioManager : MonoBehaviour
     public List<PitchGroup> groups = new List<PitchGroup>();
     public AudioMixer mixer;
 
-    public PitchGroup GetAvailableGroup()
-    {
-        foreach (var g in groups)
-        {
-            if (!g.inUse)
-            {
-                g.inUse = true;
-                return g;
-            }
-        }
-
-        // No free group? Just reuse the first one.
-        // (Optional: Expand pool or add round-robin logic)
-        return groups[0];
-    }
-
-    public void ReleaseGroup(PitchGroup g)
-    {
-        g.inUse = false;
-    }
-
-    public void PlaySound(AudioSource source, float pitch)
-    {
-        var g = GetAvailableGroup();
-
-        source.outputAudioMixerGroup = g.mixerGroup;
-
-        mixer.SetFloat(g.exposedPitchParam, pitch);
-
-        source.Play();
-
-        StartCoroutine(ReleaseAfter(source, g));
-    }
-
-    public void PlaySound(AudioSource source, float pitch, AudioClip clip)
-    {
-        var g = GetAvailableGroup();
-
-        source.outputAudioMixerGroup = g.mixerGroup;
-
-        mixer.SetFloat(g.exposedPitchParam, pitch);
-
-        source.PlayOneShot(clip);
-
-        StartCoroutine(ReleaseAfter(source, g));
-    }
-
-    private System.Collections.IEnumerator ReleaseAfter(AudioSource src, PitchGroup group)
-    {
-        yield return new WaitWhile(() => src != null && src.isPlaying);
-        ReleaseGroup(group);
-    }
-
     private void Awake()
     {
         if (instance != null)
@@ -88,6 +35,55 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    public PitchGroup GetAvailableGroup()
+    {
+        foreach (var group in groups)
+        {
+            if (!group.inUse)
+            {
+                group.inUse = true;
+                return group;
+            }
+        }
+
+        // No free group? Just reuse the first one.
+        // (Optional: Expand pool or add round-robin logic)
+        return groups[0];
+    }
+
+    public void ReleaseGroup(PitchGroup group)
+    {
+        group.inUse = false;
+    }
+
+    public void PlaySound(AudioSource source, float pitch)
+    {
+        var group = GetAvailableGroup();
+        source.outputAudioMixerGroup = group.mixerGroup;
+        mixer.SetFloat(group.exposedPitchParam, pitch);
+
+        source.Play();
+
+        StartCoroutine(ReleaseAfter(source, group));
+    }
+
+    public void PlaySound(AudioSource source, float pitch, AudioClip clip)
+    {
+        var group = GetAvailableGroup();
+        source.outputAudioMixerGroup = group.mixerGroup;
+        mixer.SetFloat(group.exposedPitchParam, pitch);
+
+        source.PlayOneShot(clip);
+
+        StartCoroutine(ReleaseAfter(source, group));
+    }
+
+    private System.Collections.IEnumerator ReleaseAfter(AudioSource src, PitchGroup group)
+    {
+        yield return new WaitWhile(() => src != null && src.isPlaying);
+        ReleaseGroup(group);
     }
 
     public void PlayMusic(int index)
@@ -142,6 +138,7 @@ public class AudioManager : MonoBehaviour
         return volume;
     }
 }
+
 [System.Serializable]
 public class PitchGroup
 {

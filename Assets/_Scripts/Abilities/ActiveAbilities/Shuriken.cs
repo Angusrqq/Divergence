@@ -11,7 +11,6 @@ public class Shuriken : InstantiatedAbilityMono
     protected override void Start()
     {
         Enemy _target = FindClosest();
-
         if (_target != null)
         {
             direction = (_target.transform.position - transform.position).normalized;
@@ -38,7 +37,8 @@ public class Shuriken : InstantiatedAbilityMono
             amount: Ability.GetStat("Damage"),
             type: GetType(),
             knockbackForce: Ability.GetStat("Knockback Force"),
-            knockbackDuration: Ability.KnockbackDuration);
+            knockbackDuration: Ability.KnockbackDuration
+        );
         
         Destroy(gameObject);
         Ability.StartCooldown();

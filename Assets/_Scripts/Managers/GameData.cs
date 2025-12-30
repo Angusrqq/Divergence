@@ -17,14 +17,9 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GameData : MonoBehaviour
 {
-    // TODO: We need to do scary refactoring here because this is gonna break everything ☢️
     public static GameData instance;
     public static Player player;
     public static int currentSeed;
-    private static Random.State lastValuableState;
-    private static Random.State lastInvaluableState;
-    private static Random.State lastMidValueState;
-    private static Random.State lastLowValueState;
     public static List<Character> Characters = new();
     public static List<Character> unlockedCharacters = new();
     public static Character currentCharacter;
@@ -40,6 +35,11 @@ public class GameData : MonoBehaviour
     public static MetaprogressionData CurrentMetadata;
     public static InputActionAsset PlayerInputAsset;
     public static GameTimer GameTimerInstance;
+
+    private static Random.State lastValuableState;
+    private static Random.State lastInvaluableState;
+    private static Random.State lastMidValueState;
+    private static Random.State lastLowValueState;
 
     public static Sprite LockedIcon { get; private set; } // not going to cut it, // TODO: figure out a way to store/load constant icons
     public static Tilemap TilemapToLoadMaps { get; set; }
@@ -62,22 +62,23 @@ public class GameData : MonoBehaviour
         {
             instance = this;
         }
+
         Abilities = Resources.LoadAll<BaseAbilityScriptable>("ObjectsData/Abilities").ToList();
         Characters = Resources.LoadAll<Character>("ObjectsData/Characters").ToList();
         Maps = Resources.LoadAll<BetterMapData>("ObjectsData/Maps").ToList();
         Upgrades = Resources.LoadAll<UpgradeScriptable>("ObjectsData/Upgrades").ToList();
+        PlayerInputAsset = Resources.Load<InputActionAsset>("Input/PlayerControls");
         LockedIcon = Resources.Load<Sprite>("Icons/locked_icon");
         if (LockedIcon == null)
         {
             Debug.LogError("Locked icon not found in Resources/Icons/locked_icon");
         }
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        PlayerInputAsset = Resources.Load<InputActionAsset>("Input/PlayerControls");
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         InitializeBindings();
         CurrentSettings = InitializeSettings();
-        CurrentMetadata = InitializeProgData();
+        CurrentMetadata = InitializeProgressionData();
         LoadAssets();
     }
 
@@ -88,8 +89,6 @@ public class GameData : MonoBehaviour
 
     private void LoadAssets()
     {
-        //TODO: check the shit thats unlocked in the metadata
-        //loading all data from resources, idk if this is the best way tho
         foreach (BaseAbilityScriptable ability in Abilities)
         {
             if (ability.IsUnlocked)
@@ -102,6 +101,7 @@ public class GameData : MonoBehaviour
                 ability.IsUnlocked = true;
             }
         }
+
         foreach (BetterMapData map in Maps)
         {
             if(map.IsUnlocked)
@@ -114,6 +114,7 @@ public class GameData : MonoBehaviour
                 map.IsUnlocked = true;
             }
         }
+
         foreach (Character character in Characters)
         {
             if(character.IsUnlocked)
@@ -126,6 +127,7 @@ public class GameData : MonoBehaviour
                 character.IsUnlocked = true;
             }
         }
+
         foreach (UpgradeScriptable upgrade in Upgrades)
         {
             if (upgrade.IsUnlocked)
@@ -138,6 +140,7 @@ public class GameData : MonoBehaviour
                 upgrade.IsUnlocked = true;
             }
         }
+
         foreach (EnemyData enemy in Resources.LoadAll<EnemyData>("ObjectsData/Enemies"))
         {
             Enemies.Add(enemy);
@@ -159,13 +162,14 @@ public class GameData : MonoBehaviour
     public static void ResetRandomToSeed()
     {
         Random.InitState(currentSeed);
+
         lastValuableState = Random.state;
         lastInvaluableState = Random.state;
         lastMidValueState = Random.state;
         lastLowValueState = Random.state;
     }
 
-    //  USE THESE FUNCTIONS WHEN YOU WANT TO KEEP TRACK OF THE IMPORTANT EVENTS (like rolling abilities after levelling up).
+    //  Use these functions when you want to keep track of the important events (like rolling abilities after levelling up).
     /// <summary>
     /// Regular int <c>Random.Range</c> function, but saves random states
     /// </summary>
@@ -173,22 +177,25 @@ public class GameData : MonoBehaviour
     {
         lastInvaluableState = Random.state;
         Random.state = lastValuableState;
+
         int res = Random.Range(minInclusive, maxExclusive);
+
         lastValuableState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
-    /// <summary>
-    /// Regular float <c>Random.Range</c> function, but saves random states
-    /// </summary>
     public static float ValuableRoll(float minInclusive, float maxInclusive)
     {
         lastInvaluableState = Random.state;
         Random.state = lastValuableState;
+
         float res = Random.Range(minInclusive, maxInclusive);
+        
         lastValuableState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
@@ -196,9 +203,12 @@ public class GameData : MonoBehaviour
     {
         lastInvaluableState = Random.state;
         Random.state = lastMidValueState;
+
         int res = Random.Range(minInclusive, maxExclusive);
+
         lastMidValueState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
@@ -206,9 +216,12 @@ public class GameData : MonoBehaviour
     {
         lastInvaluableState = Random.state;
         Random.state = lastMidValueState;
+
         float res = Random.Range(minInclusive, maxInclusive);
+
         lastMidValueState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
@@ -216,9 +229,12 @@ public class GameData : MonoBehaviour
     {
         lastInvaluableState = Random.state;
         Random.state = lastLowValueState;
+
         int res = Random.Range(minInclusive, maxExclusive);
+
         lastLowValueState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
@@ -226,9 +242,12 @@ public class GameData : MonoBehaviour
     {
         lastInvaluableState = Random.state;
         Random.state = lastLowValueState;
+
         float res = Random.Range(minInclusive, maxInclusive);
+
         lastLowValueState = Random.state;
         Random.state = lastInvaluableState;
+
         return res;
     }
 
@@ -238,9 +257,12 @@ public class GameData : MonoBehaviour
         {
             lastInvaluableState = Random.state;
             Random.state = lastValuableState;
+
             float res = Random.value;
+
             lastValuableState = Random.state;
             Random.state = lastInvaluableState;
+
             return res;
         }
     }
@@ -251,9 +273,12 @@ public class GameData : MonoBehaviour
         {
             lastInvaluableState = Random.state;
             Random.state = lastMidValueState;
+
             float res = Random.value;
+
             lastMidValueState = Random.state;
             Random.state = lastInvaluableState;
+
             return res;
         }
     }
@@ -264,18 +289,16 @@ public class GameData : MonoBehaviour
         {
             lastInvaluableState = Random.state;
             Random.state = lastLowValueState;
+
             float res = Random.value;
+
             lastLowValueState = Random.state;
             Random.state = lastInvaluableState;
+
             return res;
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>SetSeed</c> method sets the current seed to the passed value and optionally resets the random number generator to that seed.
-    /// </para>
-    /// </summary>
     public static void SetSeed(int seed, bool resetRandom = false)
     {
         currentSeed = seed;
@@ -288,11 +311,6 @@ public class GameData : MonoBehaviour
         Debug.Log($"Set seed to {currentSeed}");
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>OnSceneLoaded</c> method is called when a new scene is loaded
-    /// </para>
-    /// </summary>
     public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene Loaded: {scene.name}");
@@ -304,75 +322,52 @@ public class GameData : MonoBehaviour
             currentMap = currentMap != null ? currentMap : Maps[0];
             GameObject temp = Instantiate(currentMap.mapPrefab);
             Camera.main.transform.parent.GetComponentInChildren<CinemachineConfiner2D>().BoundingShape2D = temp.GetComponent<Collider2D>();
-            InGameAttributes = new(); // reconstruct to use the new values from starting attributes
+            InGameAttributes = new(); // Reconstruct to use the new values from starting attributes
+
             CurrentMetadata.gameStats.TotalRuns += 1;
+
             Debug.Log($"Loaded map: {currentMap.name}");
             Debug.Log($"Lives ingame: {InGameAttributes.Lives}");
             Debug.Log($"Lives Starting: {StartingAttributes.Lives}");
-            Debug.Log("Reset random to seed " + currentSeed);
+            Debug.Log($"Reset random to seed {currentSeed}");
         }
 
         if (scene.name == "MainMenu")
         {
             Random.InitState((int)System.DateTime.Now.Ticks); // Reset random to current time
+
             Debug.Log("Reset random to current time");
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>ChooseCharacter</c> method sets the current character to the passed character.
-    /// </para>
-    /// Used in the character selection menu.
-    /// </summary>
-    /// <param name="character"></param>
     public static void ChooseCharacter(Character character)
     {
         currentCharacter = character;
+
         Debug.Log($"Chosen character: {character.name}");
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>ChooseMap</c> method sets the current map to the passed map.
-    /// </para>
-    /// Used in the map selection menu.
-    /// </summary>
-    /// <param name="map"></param>
+
     public static void ChooseMap(BetterMapData map)
     {
         currentMap = map;
+
         Debug.Log($"Chosen map: {map.name}");
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>UpdatePlayerRef</c> method updates the static reference to the player.
-    /// </para>
-    /// Used in the player script.
-    /// </summary>
-    /// <param name="_player"></param>
-    public static void UpdatePlayerRef(Player _player)
+    public static void UpdatePlayerReference(Player _player)
     {
         player = _player;
     }
 
-    public static void UpdateTimerRef(GameTimer timer)
+    public static void UpdateTimerReference(GameTimer timer)
     {
         GameTimerInstance = timer;
     }
 
-    /// <summary>
-    /// Called when the object is destroyed.
-    /// Unsubscribes from the <c>SceneManager.sceneLoaded</c> event to prevent memory leaks.
-    /// </summary>
     void OnDestroy()
     {
-        // if (instance == this)
-        // {
-        //     SaveMetaData();
-        // }
-        if(instance == this)
+        if (instance == this)
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
@@ -382,13 +377,16 @@ public class GameData : MonoBehaviour
     {
         SettingsData data = new();
         data = DataSystem.LoadSettingsData() ?? data;
+
         return data;
     }
 
     private static void InitializeBindings()
     {
         if (!PlayerPrefs.HasKey("Bindings"))
+        {
             PlayerPrefs.SetString("Bindings", PlayerInputAsset.SaveBindingOverridesAsJson());
+        }
 
         PlayerInputAsset.LoadBindingOverridesFromJson(PlayerPrefs.GetString("Bindings"));
     }
@@ -398,20 +396,25 @@ public class GameData : MonoBehaviour
         if (asset == PlayerInputAsset && PlayerPrefs.GetString("Bindings") != PlayerInputAsset.SaveBindingOverridesAsJson())
         {
             PlayerPrefs.SetString("Bindings", PlayerInputAsset.SaveBindingOverridesAsJson());
+
             return true;
         }
+
         return false;
     }
 
     public static void LoadBindings(InputActionAsset asset = null)
     {
         if (asset == PlayerInputAsset)
+        {
             asset.LoadBindingOverridesFromJson(PlayerPrefs.GetString("Bindings"));
+        }
     }
 
-    private static MetaprogressionData InitializeProgData()
+    private static MetaprogressionData InitializeProgressionData()
     {
-        MetaprogressionData data = DataSystem.LoadProgData() ?? new MetaprogressionData(0);
+        MetaprogressionData data = DataSystem.LoadProgressionData() ?? new MetaprogressionData(0);
+
         return data;
     }
 
@@ -419,11 +422,11 @@ public class GameData : MonoBehaviour
     {
         if (data != null)
         {
-            DataSystem.SaveProgData(data);
+            DataSystem.SaveProgressionData(data);
         }
         else
         {
-            DataSystem.SaveProgData(CurrentMetadata);
+            DataSystem.SaveProgressionData(CurrentMetadata);
         }
     }
 
@@ -439,15 +442,8 @@ public class GameData : MonoBehaviour
 
     public static void UpdateSettings(SettingsData data, bool refreshSettings = false, bool save = false)
     {
-        if (refreshSettings)
-        {
-            SetGameSettings(data);
-        }
-
-        if (save)
-        {
-            DataSystem.SaveSettingsData(data);
-        }
+        if (refreshSettings) SetGameSettings(data);
+        if (save) DataSystem.SaveSettingsData(data);
 
         CurrentSettings = data;
     }

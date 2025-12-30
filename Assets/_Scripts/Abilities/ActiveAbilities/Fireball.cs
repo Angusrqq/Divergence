@@ -24,6 +24,7 @@ public class Fireball : InstantiatedAbilityMono
         {
             Destroy(gameObject);
             Ability.StartCooldown();
+
             return;
         }
     }

@@ -10,6 +10,7 @@ public class Fleetfoot : PassiveAbilityMono
         _speedValue = Ability.GetStat("Movement Speed");
         _speedValue.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
         _speedModifier = new StatModifierByStat(ref _speedValue, StatModifierType.Percent, this);
+
         GameData.player.MovementSpeed.AddModifier(_speedModifier);
 
         Debug.Log($"Fleetfoot activated, player speed: {GameData.player.MovementSpeed}, Base speed: {_speedValue.BaseValue}, Current speed: {_speedValue}");

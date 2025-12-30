@@ -1,17 +1,18 @@
 using System;
-using System.Timers;
 using UnityEngine;
 
 [RequireComponent(typeof(TMPro.TMP_Text))]
 public class GameTimer : MonoBehaviour
 {
-    void Awake()
-    {
-        GameData.UpdateTimerRef(this);
-        timerText = GetComponent<TMPro.TMP_Text>();
-    }
     public float currentTime = 0f;
     public TMPro.TMP_Text timerText;
+
+    void Awake()
+    {
+        GameData.UpdateTimerReference(this);
+        timerText = GetComponent<TMPro.TMP_Text>();
+    }
+
     private void Update()
     {
         currentTime += Time.deltaTime;
@@ -21,6 +22,7 @@ public class GameTimer : MonoBehaviour
     public static string FormatTime(float time, bool showMilliseconds = false, bool showHours = false)
     {
         string res = "";
+
         int hours = (int)(time / 3600);
         int minutes = (int)(time % 3600 / 60);
         int seconds = (int)(time % 60);
@@ -29,17 +31,23 @@ public class GameTimer : MonoBehaviour
         res += showHours ? hours.ToString("00") + ":" : "";
         res += minutes.ToString("00") + ":";
         res += seconds.ToString("00");
-        if (showMilliseconds) res += "." + milliseconds.ToString("000");
+
+        if (showMilliseconds)
+        {
+            res += "." + milliseconds.ToString("000");
+        }
+
         return res;
     }
 
     public static string FormatTimeConditionally(float time)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-        string result =
-            (timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "") +
-            (timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "") +
-            $"{timeSpan.Seconds}s";
+        var result = string.Concat(
+            timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "",
+            timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "",
+            $"{timeSpan.Seconds}s"
+        );
 
         return result;
     }

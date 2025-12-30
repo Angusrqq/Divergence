@@ -4,6 +4,7 @@ using UnityEngine;
 public class UpgradeLogicSO : ScriptableObject
 {
     public UpgradeScriptable source;
+
     public virtual void OnBuy()
     {
         source.Level = 1;

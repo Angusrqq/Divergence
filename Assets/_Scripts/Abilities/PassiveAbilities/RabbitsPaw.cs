@@ -7,6 +7,7 @@ public class RabbitsPaw : PassiveAbilityMono
     {
         _luck = Ability.GetStat("Luck");
         _luckModifier = new StatModifierByStat(ref _luck, StatModifierType.Flat, this);
+
         GameData.InGameAttributes.Luck.AddModifier(_luckModifier);
     }
 }

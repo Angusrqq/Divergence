@@ -6,7 +6,7 @@ public class SelectorUpgrade : SelectorUnlockable
     {
         base.OnSelect(eventData);
 
-        SelectorManagerUpgrades selectorManager = (SelectorManagerUpgrades)SelectorManager;
+        var selectorManager = SelectorUpgradesManager;
         selectorManager.RebuildLevelsContainer();
 
         if (IsUnlocked)
@@ -27,7 +27,7 @@ public class SelectorUpgrade : SelectorUnlockable
         UpgradeScriptable upgradeData = (UpgradeScriptable)Data;
         upgradeData.UpgradeLogic.OnUpgrade();
 
-        SelectorManagerUpgrades selectorManager = (SelectorManagerUpgrades)SelectorManager;
+        var selectorManager = SelectorUpgradesManager;
         selectorManager.RebuildLevelsContainer();
         
         if (upgradeData.Level >= upgradeData.MaxLevel)

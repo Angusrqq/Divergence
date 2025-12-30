@@ -128,7 +128,7 @@ public static class Utilities
         while(currentTier >= 0)
         {
             var abilitylist = unlockedAbilities.Where(x => (int)x.Tier == currentTier).ToList();
-            if(abilitylist.Count > 0)
+            if (abilitylist.Count > 0)
             {
                 return abilitylist[GameData.ValuableRoll(0, abilitylist.Count)];
             }

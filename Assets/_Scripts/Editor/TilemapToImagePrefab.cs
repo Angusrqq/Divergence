@@ -33,6 +33,7 @@ public class TilemapToImagePrefab : EditorWindow
                 EditorUtility.DisplayDialog("Error", "Please assign a Tilemap to bake.", "OK");
                 return;
             }
+
             BakeTilemap();
         }
     }
@@ -40,21 +41,24 @@ public class TilemapToImagePrefab : EditorWindow
     private void BakeTilemap()
     {
         if (!Directory.Exists(outputFolder))
+        {
             Directory.CreateDirectory(outputFolder);
+        }
 
         BoundsInt bounds = sourceTilemap.cellBounds;
         int mapWidth = bounds.size.x * pixelsPerUnit;
         int mapHeight = bounds.size.y * pixelsPerUnit;
 
-        // how many tiles fit in one texture
+        // How many tiles fit in one texture
         int chunkPixelSize = maxTextureSize;
         int chunksX = Mathf.CeilToInt((float)mapWidth / chunkPixelSize);
         int chunksY = Mathf.CeilToInt((float)mapHeight / chunkPixelSize);
 
         Grid grid = sourceTilemap.layoutGrid;
-        Vector3Int cellSize = new Vector3Int(pixelsPerUnit, pixelsPerUnit, 0);
+        Vector3Int cellSize = new(pixelsPerUnit, pixelsPerUnit, 0);
 
-        List<Sprite> bakedSprites = new List<Sprite>();
+        List<Sprite> bakedSprites = new();
+
         string prefabName = sourceTilemap.name + "_BakedMap";
         string prefabFolder = Path.Combine(outputFolder, prefabName);
         Directory.CreateDirectory(prefabFolder);
@@ -67,7 +71,7 @@ public class TilemapToImagePrefab : EditorWindow
         cam.enabled = false;
         cam.transform.position = new Vector3(0, 0, -10);
 
-        int overlap = 2; // overlap pixels between chunks to avoid seams
+        byte overlap = 2; // Overlap pixels between chunks to avoid seams
 
         for (int y = 0; y < chunksY; y++)
         {
@@ -79,28 +83,37 @@ public class TilemapToImagePrefab : EditorWindow
                 int chunkWidthPx = Mathf.Min(chunkPixelSize + overlap, mapWidth - x * chunkPixelSize + overlap);
                 int chunkHeightPx = Mathf.Min(chunkPixelSize + overlap, mapHeight - y * chunkPixelSize + overlap);
 
-                RenderTexture rt = new RenderTexture(chunkWidthPx, chunkHeightPx, 24);
+                RenderTexture rt = new(chunkWidthPx, chunkHeightPx, 24);
                 cam.targetTexture = rt;
                 cam.orthographicSize = chunkHeightPx / (2f * pixelsPerUnit);
 
                 // Calculate chunk center in world space (aligned to pixels)
-                float worldCenterX = (startX * pixelsPerUnit + chunkWidthPx / 2f - overlap / 2f) / (float)pixelsPerUnit;
-                float worldCenterY = (startY * pixelsPerUnit + chunkHeightPx / 2f - overlap / 2f) / (float)pixelsPerUnit;
+                float worldCenterX = (startX * pixelsPerUnit + chunkWidthPx / 2f - overlap / 2f) / pixelsPerUnit;
+                float worldCenterY = (startY * pixelsPerUnit + chunkHeightPx / 2f - overlap / 2f) / pixelsPerUnit;
                 cam.transform.position = new Vector3(worldCenterX, worldCenterY, -10);
 
                 // Render only target tilemap
-                var renderers = Object.FindObjectsByType<TilemapRenderer>(FindObjectsSortMode.None);
-                foreach (var r in renderers) r.enabled = false;
-                var targetRenderer = sourceTilemap.GetComponent<TilemapRenderer>();
-                if (targetRenderer) targetRenderer.enabled = true;
+                var renderers = FindObjectsByType<TilemapRenderer>(FindObjectsSortMode.None);
+                foreach (var r in renderers)
+                {
+                    r.enabled = false;
+                }
+                
+                if (sourceTilemap.TryGetComponent(out TilemapRenderer targetRenderer))
+                {
+                    targetRenderer.enabled = true;
+                }
 
                 cam.Render();
 
-                foreach (var r in renderers) r.enabled = true;
+                foreach (var r in renderers)
+                {
+                    r.enabled = true;
+                }
 
                 // Save texture
                 RenderTexture.active = rt;
-                Texture2D tex = new Texture2D(chunkWidthPx, chunkHeightPx, TextureFormat.RGBA32, false);
+                Texture2D tex = new(chunkWidthPx, chunkHeightPx, TextureFormat.RGBA32, false);
                 tex.ReadPixels(new Rect(0, 0, chunkWidthPx, chunkHeightPx), 0, 0);
                 tex.Apply();
 
@@ -110,7 +123,7 @@ public class TilemapToImagePrefab : EditorWindow
 
                 string assetPath = texPath.Replace(Application.dataPath, "Assets");
                 AssetDatabase.ImportAsset(assetPath);
-                TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
+                TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(assetPath);
                 importer.textureType = TextureImporterType.Sprite;
                 importer.spritePixelsPerUnit = pixelsPerUnit;
                 importer.filterMode = FilterMode.Point;
@@ -123,24 +136,25 @@ public class TilemapToImagePrefab : EditorWindow
 
                 RenderTexture.active = null;
                 rt.Release();
-                Object.DestroyImmediate(rt);
-                Object.DestroyImmediate(tex);
+                DestroyImmediate(rt);
+                DestroyImmediate(tex);
             }
         }
 
-
-        Object.DestroyImmediate(cam.gameObject);
+        DestroyImmediate(cam.gameObject);
 
         // Create assembled prefab
-        GameObject mapParent = new GameObject(prefabName);
+        GameObject mapParent = new(prefabName);
         int index = 0;
+
         for (int y = 0; y < chunksY; y++)
         {
             for (int x = 0; x < chunksX; x++)
             {
                 if (index >= bakedSprites.Count) break;
+
                 Sprite sprite = bakedSprites[index++];
-                GameObject chunkObj = new GameObject($"Chunk_{x}_{y}");
+                GameObject chunkObj = new($"Chunk_{x}_{y}");
                 chunkObj.transform.SetParent(mapParent.transform);
 
                 var sr = chunkObj.AddComponent<SpriteRenderer>();
@@ -157,10 +171,10 @@ public class TilemapToImagePrefab : EditorWindow
 
         string prefabPath = Path.Combine(outputFolder, prefabName + ".prefab");
         PrefabUtility.SaveAsPrefabAsset(mapParent, prefabPath);
-        Object.DestroyImmediate(mapParent);
+        DestroyImmediate(mapParent);
 
         AssetDatabase.Refresh();
         EditorUtility.DisplayDialog("Done!", $"Tilemap baked to prefab:\n{prefabPath}", "OK");
-        Debug.Log($"✅ Tilemap baked successfully to: {prefabPath}");
+        Debug.Log($"Tilemap baked successfully to: {prefabPath}");
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine;
 public class PassiveAbilityMono : BaseAbilityMono
 {
     public List<AudioClip> AudioClips;
+
     protected PassiveAbilityHandler Ability;
+
     public virtual void Activate() { }
     public virtual void Upgrade() { }
     public virtual void UpdateBehaviour() { }
@@ -15,5 +17,4 @@ public class PassiveAbilityMono : BaseAbilityMono
     {
         Ability = ability;
     }
-
 }

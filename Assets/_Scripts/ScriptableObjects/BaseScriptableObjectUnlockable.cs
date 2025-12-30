@@ -7,5 +7,9 @@ public class BaseScriptableObjectUnlockable : BaseScriptableObjectInfo
     [SerializeField] protected bool _isUnlocked = false;
 
     public int Cost => _cost;
-    public bool IsUnlocked { get => _isUnlocked; set => _isUnlocked = value; }
+    public bool IsUnlocked
+    {
+        get => _isUnlocked;
+        set => _isUnlocked = value;
+    }
 }

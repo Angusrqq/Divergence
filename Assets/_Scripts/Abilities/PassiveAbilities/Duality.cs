@@ -15,6 +15,7 @@ public class Duality : PassiveAbilityMono
 
         _damageModifier = new StatModifierByStat(ref _cloneDamage, StatModifierType.Percent, this);
         _knockBackForceModifier = new StatModifierByStat(ref _knockbackForce, StatModifierType.Percent, this);
+
         GameData.player.AbilityHolder.OnAbilityActivated += CloneProjectile;
     }
 

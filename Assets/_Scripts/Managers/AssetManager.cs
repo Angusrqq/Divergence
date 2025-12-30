@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour
 {
-    public static AssetManager Instance { get; private set; }
-
     public DamagePopup damagePopupPrefab;
     public DamagePopup criticalDamagePopupPrefab;
+
+    public static AssetManager Instance { get; private set; }
 
     private void Awake()
     {

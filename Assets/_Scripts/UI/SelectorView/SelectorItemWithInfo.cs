@@ -12,10 +12,10 @@ public class SelectorItemWithInfo : SelectorItem
     [NonSerialized] public BaseScriptableObjectInfo Data;
     [NonSerialized] public TMPro.TMP_Text nameText;
     public Image ButtonImage;
-    //public Color SelectColor = new(255, 225, 90, 255);
 
     private MaskedGlowOnHover _maskedGlowOnHover;
-    //private Color _baseColor;
+
+    protected BaseScriptableObjectUnlockable UnlockableData => (BaseScriptableObjectUnlockable)Data;
 
     public virtual void Init(BaseScriptableObjectInfo data, SelectorManager manager)
     {
@@ -23,8 +23,10 @@ public class SelectorItemWithInfo : SelectorItem
         Data = data;
         base.Init(Data, manager);
         SelectorManager = manager;
+
         _maskedGlowOnHover = GetComponent<MaskedGlowOnHover>();
         _maskedGlowOnHover.SetMask(SelectorManager.Mask);
+        
         SetUI();
     }
 
@@ -32,7 +34,7 @@ public class SelectorItemWithInfo : SelectorItem
     {
         base.OnSelect(eventData);
 
-        SelectorManager.UpdateDescription(Data.Description);
+        SelectorManager.SetDescription(Data.Description);
     }
 
     public override void OnDeselect()

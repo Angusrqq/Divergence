@@ -12,6 +12,14 @@ public class Shrapnel : PassiveAbilityMono
     private float _lastHealth;
     private float _buffer = 0f;
 
+    public override void Activate()
+    {
+        Damage.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
+        Damage.AddModifier(GameData.InGameAttributes.PlayerDamageMultModifier);
+
+        GameData.player.DamageableEntity.OnDamageTaken += OnPlayerDamageTaken;
+    }
+
     void OnPlayerDamageTaken(UnityEngine.Object source, float amount, Type type = null)
     {
         if (amount >= Ability.GetStat("Required Damage") - _buffer)
@@ -36,12 +44,5 @@ public class Shrapnel : PassiveAbilityMono
 
             _instance.Init(damage, Ability.GetStat("Thorn Size"), direction, Speed);
         }
-    }
-
-    public override void Activate()
-    {
-        Damage.AddModifier(GameData.InGameAttributes.PassiveAbilityEffectMultModifier);
-        Damage.AddModifier(GameData.InGameAttributes.PlayerDamageMultModifier);
-        GameData.player.DamageableEntity.OnDamageTaken += OnPlayerDamageTaken;
     }
 }

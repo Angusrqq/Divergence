@@ -18,12 +18,32 @@ public class DeathMarkInstance : MonoBehaviour
         _animatedEntity = GetComponent<AnimatedEntity>();
     }
 
+    private void Start()
+    {
+        _target.GetComponent<DamageableEntity>().OnDeath += OnEnemyDeath;
+        StartCoroutine(Idle());
+    }
+
+    public void Init(Enemy target, float damage, float explosionRadius)
+    {
+        _damage = damage;
+        _target = target;
+        _explosionRadius = explosionRadius;
+    }
+
     private void OnEnemyDeath(UnityEngine.Object sender)
     {
         StopAllCoroutines();
+
         transform.rotation = Quaternion.identity;
         _spriteRenderer.sortingOrder = 0;
         StartCoroutine(Explosion());
+    }
+
+    private void OnDestroy()
+    {
+        OnDeath?.Invoke();
+        OnDeath = null;
     }
 
     private IEnumerator Explosion()
@@ -40,29 +60,12 @@ public class DeathMarkInstance : MonoBehaviour
             {
                 if (enemy == null) continue;
 
-                enemy.TakeDamage(
-                    source: gameObject,
-                    amount: _damage,
-                    type: GetType()
-                );
+                enemy.TakeDamage(gameObject, _damage, GetType());
             }
         }
+
         yield return new WaitForSeconds(_animatedEntity.AnimatorController.animationClips[1].length);
-
         Destroy(gameObject);
-    }
-
-    public void Init(Enemy target, float damage, float explosionRadius)
-    {
-        _damage = damage;
-        _target = target;
-        _explosionRadius = explosionRadius;
-    }
-
-    private void Start()
-    {
-        _target.GetComponent<DamageableEntity>().OnDeath += OnEnemyDeath;
-        StartCoroutine(Idle());
     }
 
     private IEnumerator Idle(float speed = 4f)
@@ -80,17 +83,12 @@ public class DeathMarkInstance : MonoBehaviour
             }
 
             float t = (Mathf.Sin(timer * speed) + 1) / 2f;
+
             Vector3 offsetPos = _target.transform.position + new Vector3(0f, 0.5f, 0f);
             transform.SetPositionAndRotation(offsetPos, Quaternion.Euler(new Vector3(0f, 0f, Mathf.Lerp(minDeg, maxDeg, t))));
-            timer += Time.fixedDeltaTime;
 
+            timer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
-    }
-
-    private void OnDestroy()
-    {
-        OnDeath?.Invoke();
-        OnDeath = null;
     }
 }

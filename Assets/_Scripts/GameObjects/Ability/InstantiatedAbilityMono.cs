@@ -1,27 +1,13 @@
 using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 using System;
 
-/// <summary>
-/// Base MonoBehaviour for runtime ability instances spawned by
-/// <see cref="InstantiatedAbilityScriptable"/> during <c>Activate()</c>.
-/// Handles movement, lifetime countdown, collision damage, and self-unregistration.
-/// </summary>
-/// <remarks>
-/// Instances are created by <see cref="InstantiatedAbilityScriptable.Activate"/>, which calls
-/// <see cref="Init"/> and adds the instance to
-/// <see cref="InstantiatedAbilityScriptable.Instances"/>. This component moves every physics tick
-/// using the player's current movement vector or facing as a fallback, and destroys itself when the
-/// configured active time elapses. On destruction, it removes itself from the owning ability's
-/// <see cref="InstantiatedAbilityScriptable.Instances"/> list.
-/// </remarks>
-// [RequireComponent(typeof(Rigidbody2D))]
-// [RequireComponent(typeof(Collider2D))]
 public class InstantiatedAbilityMono : BaseAbilityMono
 {
-    [NonSerialized] private InstantiatedAbilityHandler _ability;
-    private bool _hit = false;
+    [NonSerialized] public Enemy Target;
+    public AudioClip OnActivation;
+    public AudioClip OnHit;
+    public Action<InstantiatedAbilityMono> OnDeath;
 
     protected Rigidbody2D rb;
     protected AnimatedEntity animatedEntity;
@@ -29,12 +15,14 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     protected float timer;
     protected bool doesDamage = true;
 
-    [NonSerialized] public Enemy Target;
+    [NonSerialized] private InstantiatedAbilityHandler _ability;
+    private bool _hit = false;
 
-    public InstantiatedAbilityHandler Ability { get => _ability; protected set => _ability = value; }
-    public AudioClip OnActivation;
-    public AudioClip OnHit;
-    public Action<InstantiatedAbilityMono> OnDeath;
+    public InstantiatedAbilityHandler Ability
+    {
+        get => _ability;
+        protected set => _ability = value;
+    }
 
     /// <summary>
     /// Caches the <see cref="Rigidbody2D"/> and derives the initial movement direction
@@ -44,8 +32,8 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     {
         rb = GetComponent<Rigidbody2D>();
         TryGetComponent(out animatedEntity);
-        direction = GameData.player.MovementVector;
 
+        direction = GameData.player.MovementVector;
         if (direction == Vector2.zero)
         {
             direction = new Vector2(GameData.player.SpriteRenderer.flipX ? -1 : 1, 0);
@@ -56,16 +44,10 @@ public class InstantiatedAbilityMono : BaseAbilityMono
     {
         if (OnActivation != null)
         {
-            //AudioManager.instance.PlaySFXPitched(OnActivation, UnityEngine.Random.Range(0.95f, 1.05f));
             AudioManager.instance.PlaySound(Ability.AudioSource, UnityEngine.Random.Range(0.95f, 1.05f), OnActivation);
         }
     }
 
-    /// <summary>
-    /// Initializes the instance with its owning ability and lifetime.
-    /// Called by <see cref="InstantiatedAbilityHandler.Activate"/> right after instantiation.
-    /// </summary>
-    /// <param name="ability">The ability data providing speed, damage, and ActiveTime.</param>
     public virtual void Init(InstantiatedAbilityHandler ability)
     {
         Ability = ability;
@@ -104,9 +86,6 @@ public class InstantiatedAbilityMono : BaseAbilityMono
         }
     }
 
-    /// <summary>
-    /// On destruction, unregisters this instance from <see cref="InstantiatedAbilityScriptable.Instances"/>.
-    /// </summary>
     protected virtual void OnDestroy()
     {
         OnDeath?.Invoke(this);
@@ -114,17 +93,12 @@ public class InstantiatedAbilityMono : BaseAbilityMono
         OnDeath = null;
     }
 
-    /// <summary>
-    /// Called when another object enters a 2D collider trigger and checks if the other object has an Enemy component to apply damage, knockback force, and knockback duration to the enemy.
-    /// </summary>
-    /// <param name="other">The Collider2D of the other object</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
             if (OnHit != null && !_hit)
             {
-                //AudioManager.instance.PlaySFXPitched(OnHit, UnityEngine.Random.Range(-3f, 3f));
                 AudioManager.instance.PlaySound(Ability.AudioSource, UnityEngine.Random.Range(0.95f, 1.05f), OnHit);
                 _hit = true;
             }
@@ -140,19 +114,20 @@ public class InstantiatedAbilityMono : BaseAbilityMono
         GameData.player.AbilityHolder.TriggerOnProjectileHit(GetType(), rb.position);
     }
 
-    /// <summary>
-    /// Called when another object enters a 2D collider trigger that is an Enemy.
-    /// </summary>
-    /// <param name="enemy"></param>
     public virtual void EnemyCollision(Enemy enemy)
     {
-        enemy.TakeDamage(GameData.player.gameObject, Ability.GetStat("Damage"), GetType(), Ability.GetStat("Knockback Force"), Ability.KnockbackDuration);
+        enemy.TakeDamage(
+            GameData.player.gameObject,
+            Ability.GetStat("Damage"),
+            GetType(),
+            Ability.GetStat("Knockback Force"),
+            Ability.KnockbackDuration
+        );
     }
 
     /// <summary>
     /// Called when another object enters a 2D collider trigger that is not an Enemy.
     /// </summary>
-    /// <param name="other"></param>
     protected virtual void OtherCollision(Collider2D other) { }
 
     public static Enemy FindClosest()
@@ -166,14 +141,14 @@ public class InstantiatedAbilityMono : BaseAbilityMono
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            var e = enemies[i];
-            if (e == null) continue;
+            var enemy = enemies[i];
+            if (enemy == null) continue;
 
-            float dist = (e.transform.position - playerPos).sqrMagnitude;
+            float dist = (enemy.transform.position - playerPos).sqrMagnitude;
             if (dist < minDist)
             {
                 minDist = dist;
-                closest = e;
+                closest = enemy;
             }
         }
 
@@ -197,8 +172,5 @@ public class InstantiatedAbilityMono : BaseAbilityMono
         }
     }
     
-    public virtual void Upgrade(InstantiatedAbilityHandler ability)
-    {
-        
-    }
+    public virtual void Upgrade(InstantiatedAbilityHandler ability) { }
 }

@@ -16,20 +16,20 @@ public class SelectorUnlockable : SelectorItemWithInfo
     {
         base.OnSelect(eventData);
 
-        SelectorManagerUnlockables selectorManager = (SelectorManagerUnlockables)SelectorManager;
+        var selectorManager = SelectorUnlockablesManager;
         selectorManager.UnlockButton.interactable = !IsUnlocked;
         selectorManager.CurrencyDisplay.UpdateText();
 
         if (IsUnlocked) return;
 
-        selectorManager.UpdateDescription("???");
-        selectorManager.UpdateCost(((BaseScriptableObjectUnlockable)Data).Cost);
+        selectorManager.SetDescription("???");
+        selectorManager.UpdateCost(UnlockableData.Cost);
     }
 
     public void OnUnlock()
     {
         IsUnlocked = true;
-        ((SelectorManagerUnlockables)SelectorManager).UpdateDescription(Data.Description);
+        SelectorUnlockablesManager.SetDescription(Data.Description);
 
         SetUI();
     }

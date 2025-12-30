@@ -2,9 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-/// <summary>
-/// Base enemy class.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DamageableEntity))]
 [RequireComponent(typeof(AnimatedEntity))]
@@ -31,17 +28,11 @@ public class Enemy : MonoBehaviour
     protected Transform target;
     protected Rigidbody2D rb;
 
-    // private Color _originalColor; // Uncomment if needed
     private ParticleSystem _particleSystemInstance;
     private Vector2 _knockbackVelocity;
     private float _knockbackDuration;
     private float _experience = 1f;
 
-    /// <summary>
-    /// Initializes the enemy with the provided data and target.
-    /// </summary>
-    /// <param name="data">The data for the enemy to be initialized with.</param>
-    /// <param name="newTarget">The target for the enemy to move towards.</param>
     public void Init(EnemyData data, Transform newTarget)
     {
         enemyData = data;
@@ -50,11 +41,12 @@ public class Enemy : MonoBehaviour
         moveSpeed = data.BaseMovementSpeed;
         target = newTarget;
         animatedEntity = GetComponent<AnimatedEntity>();
+        
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
         circleCollider2D.radius = data.ColliderRadius;
         circleCollider2D.offset = data.ColliderOffset;
-        damageableEntity.Init(maxHealth, true, damage);
 
+        damageableEntity.Init(maxHealth, true, damage);
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
@@ -67,41 +59,24 @@ public class Enemy : MonoBehaviour
         _experience = experience;
         target = newTarget;
         animatedEntity = GetComponent<AnimatedEntity>();
+
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
         circleCollider2D.radius = data.ColliderRadius;
         circleCollider2D.offset = data.ColliderOffset;
-        damageableEntity.Init(maxHealth, true, damage);
 
+        damageableEntity.Init(maxHealth, true, damage);
         animatedEntity.SetAnimatorController(data.AnimatorController);
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Awake</c> is a method for initializing the enemy.
-    /// </para>
-    /// Initializes the damageable entity, sets the max health, damage and knockback velocity and duration.
-    /// </summary>
     protected virtual void Awake()
     {
         damageableEntity = GetComponent<DamageableEntity>();
-        if (damageableEntity == null)
-        {
-            Debug.LogError($"{GetType()} at {gameObject} has no DamageableEntity component");
-        }
-
         damageableEntity.OnDeath += OnDeath;
 
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // _originalColor = spriteRenderer.color;
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>FixedUpdate</c> is a method for updating the enemy.
-    /// </para>
-    /// Moves the enemy towards the target and applies the knockback if there is one.
-    /// </summary>
     protected virtual void FixedUpdate()
     {
         if (target != null)
@@ -110,6 +85,7 @@ public class Enemy : MonoBehaviour
             {
                 rb.MovePosition(rb.position + _knockbackVelocity * Time.fixedDeltaTime);
                 _knockbackDuration -= Time.fixedDeltaTime;
+
                 return;
             }
 
@@ -124,6 +100,7 @@ public class Enemy : MonoBehaviour
                 {
                     spriteRenderer.flipX = false;
                 }
+
                 animatedEntity.ChangeAnimation("Run");
             }
             else
@@ -139,12 +116,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void SetTarget(Transform newTarget) => target = newTarget;
 
-    /// <summary>
-    /// <para>
-    /// Modified method from the DamageableEntity class.
-    /// </para>
-    /// Starts the <c>DamageFlash</c> coroutine and applies the knockback if there is one.
-    /// </summary>
     public virtual void TakeDamage(GameObject source, float amount, Type type = null, float knockbackForce = 0f, float knockbackDuration = 0f,
     Color flashColor = default, float damageFlashDuration = default, bool useParticles = true, ParticleSystem particleSystem = default, bool useSound = false, int sfxIndex = default)
     {
@@ -177,11 +148,13 @@ public class Enemy : MonoBehaviour
             if (source.TryGetComponent(out Player t))
             {
                 amount *= GameData.InGameAttributes.PlayerDamageMult;
-                if(GameData.LowValue < GameData.InGameAttributes.CritChance)
+
+                if (GameData.LowValue < GameData.InGameAttributes.CritChance)
                 {
                     amount *= GameData.InGameAttributes.CritMult;
-                    Debug.Log($"Critical hit! Damage: {amount}, Crit multiplier: {GameData.InGameAttributes.CritMult}, crit chance: {GameData.InGameAttributes.CritChance}");
                     DamagePopup.Create(transform.position, amount, (transform.position - source.transform.position).normalized, true, textColor: flashColor);
+
+                    Debug.Log($"Critical hit! Damage: {amount}, Crit multiplier: {GameData.InGameAttributes.CritMult}, crit chance: {GameData.InGameAttributes.CritChance}");
                 }
                 else
                 {
@@ -189,23 +162,12 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-
             damageableEntity.TakeDamage(source, amount, type);
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// Just the method from the DamageableEntity class.
-    /// </para>
-    /// </summary>
     public virtual void Heal(UnityEngine.Object source, float amount, Type type = null) => damageableEntity.Heal(source, amount, type);
 
-    /// <summary>
-    /// <para>
-    /// Updates the max health of the enemy.
-    /// </para>
-    /// </summary>
     protected virtual void SetMaxHealth(float amount)
     {
         damageableEntity.MaxHealth = amount;
@@ -214,34 +176,22 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnSpawn() { }
 
-    /// <summary>
-    /// <para>
-    /// Called when the enemy dies (<c>OnDeath</c> event from the <c>DamageableEntity</c> class).
-    /// </para>
-    /// </summary>
     protected virtual void OnDeath(UnityEngine.Object source)
     {
         if (ExperienceCrystalPrefab != null)
         {
             ExperienceCrystal.Create(ExperienceCrystalPrefab, transform.position, transform.parent, _experience);
         }
+
         EnemyManager.Instance.TriggerEnemyDeath(this);
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Unsubscribes from the <c>OnDeath</c> event from the <c>DamageableEntity</c> class when the enemy is destroyed.
-    /// </summary>
     protected virtual void OnDestroy()
     {
         damageableEntity.OnDeath -= OnDeath;
     }
 
-    /// <summary>
-    /// <para>
-    /// Flashes the enemy`s sprite.
-    /// </para>
-    /// </summary>
     IEnumerator DamageFlash(Color flashColor, float damageFlashDuration)
     {
         Material material = spriteRenderer.material;
@@ -258,11 +208,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// Applies the knockback to the enemy.
-    /// </para>
-    /// </summary>
     public virtual void Knockback(Vector2 velocity, float duration)
     {
         if (_knockbackDuration > 0) return;
@@ -271,11 +216,6 @@ public class Enemy : MonoBehaviour
         _knockbackDuration = duration;
     }
 
-    /// <summary>
-    /// Emits particles from a particle system in a specified direction.
-    /// </summary>
-    /// <param name="system">The particle system to be instantiated and emitted</param>
-    /// <param name="direction">The direction in which the particles should be emitted</param>
     void EmitParticles(ParticleSystem system, Vector2 direction)
     {
         Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, direction);

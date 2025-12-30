@@ -13,7 +13,7 @@ public class SelectorManagerUpgrades : SelectorManagerUnlockables
             Destroy(child.gameObject);
         }
 
-        UpgradeScriptable upgradeData = (UpgradeScriptable)CurrentSelectedData;
+        UpgradeScriptable upgradeData = CurrentSelectedUpgrade;
         for (int i = 1; i <= upgradeData.MaxLevel; i++)
         {
             Toggle levelToggle = Instantiate(LevelTogglePrefab, LevelsContainer);
@@ -23,7 +23,7 @@ public class SelectorManagerUpgrades : SelectorManagerUnlockables
 
     public override void Unlock(string type)
     {
-        if (((UpgradeScriptable)CurrentSelectedData).IsUnlocked)
+        if (CurrentSelectedUpgrade.IsUnlocked)
         {
             SelectorUpgrade selectorUpgrade = (SelectorUpgrade)CurrentSelectedItem;
             selectorUpgrade.OnUpgrade();

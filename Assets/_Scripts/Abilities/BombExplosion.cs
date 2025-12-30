@@ -1,13 +1,7 @@
 using UnityEngine;
 
-/// <summary>
-/// Handles the behavior of a bomb explosion instance spawned by an ability.
-/// </summary>
 /// <remarks>
-/// This component relies on <see cref="Rigidbody2D"/> for physics timing and a trigger <see cref="Collider2D"/>
-/// to detect damageable targets. It uses data from an <see cref="InstantiatedAbilityHandler"/> to
-/// apply damage and knockback when overlapping enemies. Damage applied on hit is doubled relative to the
-/// base ability damage.
+/// It uses data from an <see cref="InstantiatedAbilityHandler"/> to apply damage and knockback.
 /// </remarks>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -21,7 +15,6 @@ public class BombExplosion : InstantiatedAbilityMono
     /// <summary>
     /// Initializes the explosion instance with a lifetime and ability configuration.
     /// </summary>
-    /// <param name="timer">Lifetime in seconds before the explosion despawns.</param>
     public void Init(float timer, InstantiatedAbilityHandler ability)
     {
         this.timer = timer;

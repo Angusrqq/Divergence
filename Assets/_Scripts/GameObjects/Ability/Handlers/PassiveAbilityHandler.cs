@@ -6,10 +6,9 @@ public class PassiveAbilityHandler : BaseAbilityHandler
     {
         PassiveAbility source = _source as PassiveAbility;
         _monoLogic = source.MonoLogic;
+        
         base.AfterInit();
     }
-
-    public override void Activate() => _monoLogic.Activate();
 
     public override void Upgrade()
     {
@@ -22,5 +21,7 @@ public class PassiveAbilityHandler : BaseAbilityHandler
         _monoLogic = monoLogic;
         _monoLogic.Init(this);
     }
+
+    public override void Activate() => _monoLogic.Activate();
     public override void UpdateAbility() => _monoLogic.UpdateBehaviour();
 }

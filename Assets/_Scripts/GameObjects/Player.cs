@@ -47,17 +47,11 @@ public class Player : MonoBehaviour
     public PlayerMagnet Magnet { get; private set; }
     public AbilityIconDisplay PlayerAbilityIconDisplay => _playerAbilityIconDisplay;
 
-    /// <summary>
-    /// Initializes global player reference.
-    /// </summary>
     void Awake()
     {
-        GameData.UpdatePlayerRef(this);
+        GameData.UpdatePlayerReference(this);
     }
 
-    /// <summary>
-    /// Caches components, wires events, builds character, and initializes health.
-    /// </summary>
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -85,21 +79,11 @@ public class Player : MonoBehaviour
         DamageableEntity.OnDeath += OnDeath;
         DamageableEntity.Init(MaxHealth);
         DamageableEntity.OnDamageTaken += (source, amount, type) => GameData.InGameAttributes.DamageTaken += amount;
-
-        // _abilityIconDisplay.UpdateActiveAbilitiesIcons(AbilityHolder.GetActiveAbilitiesList());
-        // _abilityIconDisplay.UpdatePassiveAbilitiesIcons(AbilityHolder.GetPassiveAbilitiesList());
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Update</c> is a method for updating the player.
-    /// </para>
-    /// Handles the player`s input, sets the movement vector and changes the animation.
-    /// </summary>
     private void Update()
     {
         MovementVector = _movementAction.action.ReadValue<Vector2>();
-
         if (MovementVector != Vector2.zero)
         {
             SpriteRenderer.flipX = MovementVector.x != 0 ? MovementVector.x < 0 : SpriteRenderer.flipX;
@@ -111,31 +95,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>FixedUpdate</c> is used here for updating the player`s physics.
-    /// </para>
-    /// Updates the player`s position.
-    /// </summary>
     private void FixedUpdate()
     {
         _rb.MovePosition(_rb.position + MovementSpeed * Time.fixedDeltaTime * MovementVector);
         UpdateHpBarPosition();
-        if (_experienceDirty)
-        {
-            OverLevel();
-        }
+
+        if (_experienceDirty) OverLevel();
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>OnCollisionStay2D</c> is used here for handling the player`s collisions.
-    /// </para>
-    /// Handles the player`s collisions with other objects.
-    /// <para>
-    /// If the collision object has a <c>DamageableEntity</c> component and the <c>canDealDamage</c> property is true, it deals damage to the player.
-    /// </para>
-    /// </summary>
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out DamageableEntity collision_dentity))
@@ -148,12 +115,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>OnDestroy</c> called when the GameObject is destroyed
-    /// </para>
-    /// Just unsubscribes from events
-    /// </summary>
     void OnDestroy()
     {
         DamageableEntity.OnDamageTaken -= UpdateHealth;
@@ -164,67 +125,45 @@ public class Player : MonoBehaviour
         OnLevelUp = null;
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>OnDeath</c> is called when the player dies (<c>onDeath</c> event from the <c>DamageableEntity</c> class).
-    /// </para>
-    /// Shows the death screen and logs the death.
-    /// </summary>
     private void OnDeath(UnityEngine.Object source)
     {
         GUI.Death();
+
         Debug.Log($"Player died by {source}");
     }
 
     /// <summary>
-    /// <para>
     /// <c>UpdateHealth</c> is used here for updating the health bar.
-    /// </para>
-    /// Updates the player`s health slider.
     /// </summary>
-    /// <param name="source">Origin of the health change.</param>
-    /// <param name="amount">Change amount.</param>
-    void UpdateHealth(UnityEngine.Object source, float amount, Type type = null)
+    private void UpdateHealth(UnityEngine.Object source, float amount, Type type = null)
     {
         _healthSlider.value = DamageableEntity.Health / DamageableEntity.MaxHealth;
     }
 
     /// <summary>
-    /// Positions the health bar UI above the player's sprite in screen space.
+    /// Positions the health bar UI below the player's sprite in screen space.
     /// </summary>
-    void UpdateHpBarPosition()
+    private void UpdateHpBarPosition()
     {
         float offset = -0.5f;
         Vector2 pos = new(transform.position.x, -(SpriteRenderer.bounds.size.y / 2) + transform.position.y + offset);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             HealthBar.parent.transform as RectTransform,
             screenPos,
             Camera.main,
             out Vector2 localPos
         );
+
         HealthBar.localPosition = localPos;
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>LevelUp</c> is called when the player levels up.
-    /// </para>
-    /// Increments the player`s level, updates the experience required to level up, and invokes the <c>OnLevelUp</c> event.
-    /// </summary>
-    /// <param name="source">Origin of the level up.</param>
     public void LevelUp(UnityEngine.Object source)
     {
         Level++;
 
-        if (_experience > _experienceToLevelUp)
-        {
-            _experienceDirty = true;
-        }
-        else
-        {
-            _experienceDirty = false;
-        }
+        _experienceDirty = _experience > _experienceToLevelUp;
 
         // Special walls
         if (Level == 20)
@@ -254,11 +193,6 @@ public class Player : MonoBehaviour
         Debug.Log($"Player leveled up to level {Level}");
     }
 
-    /// <summary>
-    /// Adds experience to the player, leveling up if necessary.
-    /// </summary>
-    /// <param name="experienceSource">Origin of the experience.</param>
-    /// <param name="experienceToAdd">Amount of experience to add.</param>
     public void AddExperience(UnityEngine.Object experienceSource, float experienceToAdd)
     {
         float gainedExperience = experienceToAdd * GameData.InGameAttributes.ExperienceMultiplier;
@@ -266,6 +200,7 @@ public class Player : MonoBehaviour
         if (_experienceToLevelUp - _experience <= gainedExperience)
         {
             _experience = gainedExperience - (_experienceToLevelUp - _experience);
+
             LevelUp(experienceSource);
         }
         else
@@ -274,11 +209,11 @@ public class Player : MonoBehaviour
         }
 
         _onExperienceChange?.Invoke(experienceSource, (int)gainedExperience);
-        if(experienceSource.GetComponent<ExperienceCrystal>() != null)
+
+        if (experienceSource.GetComponent<ExperienceCrystal>() != null)
         {
             OnCrystalPickup?.Invoke((int)gainedExperience);
         }
-        //Debug.Log($"Player gained {gainedExperience} experience from {experienceSource.name} | {_experience}/{_experienceToLevelUp}");
     }
 
     /// <summary>
@@ -289,14 +224,10 @@ public class Player : MonoBehaviour
     {
         _experience -= _experienceToLevelUp;
         LevelUp(_lastSource);
+
         _onExperienceChange?.Invoke(_lastSource, _experienceToLevelUp);
     }
 
-    /// <summary>
-    /// Updates the level bar UI with the current experience and level.
-    /// </summary>
-    /// <param name="source">The source of the experience change.</param>
-    /// <param name="experienceValue">The amount of experience gained.</param>
     public void UpdateLevelBar(UnityEngine.Object source, int experienceValue)
     {
         _levelSlider.value = _experience / _experienceToLevelUp;
@@ -304,11 +235,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// <para>
     /// Sets up the player character with the given character data.
-    /// </para>
-    /// Sets the animator controller, movement speed, max health and level of the player.
-    /// Adds all the starting abilities of the character to the ability holder.
     /// </summary>
     private void BuildCharacter()
     {
@@ -324,6 +251,7 @@ public class Player : MonoBehaviour
             {
                 AbilityHolder.AddAbility((InstantiatedAbilityScriptable)ability);
             }
+            
             if (ability.GetType() == typeof(PassiveAbility))
             {
                 AbilityHolder.AddPassive((PassiveAbility)ability);

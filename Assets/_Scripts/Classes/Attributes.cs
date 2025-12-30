@@ -45,39 +45,47 @@ public static class StartingAttributes
     {
         Health = startingAttributes.Health;
         MaxHealth = startingAttributes.MaxHealth;
+        Lives = startingAttributes.Lives;
+
         PlayerDamageMult = startingAttributes.PlayerDamageMult;
         PlayerResistsMult = startingAttributes.ProjectilesAdd;
-        ProjectilesAdd = startingAttributes.ProjectilesAdd;
-        CastSpeedMult = startingAttributes.CastSpeedMult;
-        CooldownReductionMult = startingAttributes.CooldownReductionMult;
-        ActiveAbilitySlots = startingAttributes.ActiveAbilitySlots;
-        AbilitiesPerLevel = startingAttributes.AbilitiesPerLevel;
-        PassiveAbilitySlots = startingAttributes.PassiveAbilitySlots;
-        ManuallyTriggeredAbilitySlots = startingAttributes.ManuallyTriggeredAbilitySlots;
-        PassiveAbilityEffectMult = startingAttributes.PassiveAbilityEffectMult;
-        PierceTargets = startingAttributes.PierceTargets;
-        MagnetRadius = startingAttributes.MagnetRadius;
-        ExperienceMultiplier = startingAttributes.ExperienceMultiplier;
-        ProjectileSpeedMult = startingAttributes.ProjectileSpeedMult;
-        AbilityActiveTimeMult = startingAttributes.AbilityActiveTimeMult;
         CritChance = startingAttributes.CritChance;
         CritMult = startingAttributes.CritMult;
-        Lives = startingAttributes.Lives;
+
+        ProjectilesAdd = startingAttributes.ProjectilesAdd;
+        ProjectileSpeedMult = startingAttributes.ProjectileSpeedMult;
+        PierceTargets = startingAttributes.PierceTargets;
+
+        CastSpeedMult = startingAttributes.CastSpeedMult;
+        CooldownReductionMult = startingAttributes.CooldownReductionMult;
+        AbilityActiveTimeMult = startingAttributes.AbilityActiveTimeMult;
+
+        ActiveAbilitySlots = startingAttributes.ActiveAbilitySlots;
+        PassiveAbilitySlots = startingAttributes.PassiveAbilitySlots;
+        ManuallyTriggeredAbilitySlots = startingAttributes.ManuallyTriggeredAbilitySlots;
+        AbilitiesPerLevel = startingAttributes.AbilitiesPerLevel;
+        PassiveAbilityEffectMult = startingAttributes.PassiveAbilityEffectMult;
+
+        MagnetRadius = startingAttributes.MagnetRadius;
+        ExperienceMultiplier = startingAttributes.ExperienceMultiplier;
         Luck = startingAttributes.Luck;
     }
 
     public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
+
     public static StatModifierByStat PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance);
     public static StatModifierByStat PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
+
     public static StatModifierByStat ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+
     public static StatModifierByStat CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance);
     public static StatModifierByStat CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance);
+
     public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
     public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
-    public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
 }
-
 
 [MessagePackObject]
 public class StartingAttributesSnapshot
@@ -129,10 +137,14 @@ public class StartingAttributesSnapshot
         Luck = StartingAttributes.Luck;
     }
 
-    // i didn't sign up for this shit
     [SerializationConstructor]
-    public StartingAttributesSnapshot(float key1, float key2, float key3, float key4, float key5, float key6, float key7, float key8, float key9, float key10,
-                                    float key11, float key12, float key13, float key14, float key15, float key16, float key17, float key18, float key19, float key20, float key21)
+    public StartingAttributesSnapshot(
+        float key1, float key2, float key3, float key4, float key5,
+        float key6, float key7, float key8, float key9, float key10,
+        float key11, float key12, float key13, float key14, float key15,
+        float key16, float key17, float key18, float key19, float key20,
+        float key21
+    )
     {
         Health = key1;
         MaxHealth = key2;
@@ -213,6 +225,7 @@ public class InGameAtributes
         set
         {
             if (Mathf.Approximately(_magnetRadius, value)) return;
+            
             _magnetRadius = value;
             OnAttributeChanged?.Invoke(AttributeId.MagnetRadius, _magnetRadius);
         }
@@ -224,9 +237,25 @@ public class InGameAtributes
     /// It takes optional parameters for each attribute and assigns them to the corresponding <see cref="Stat"/> instance.
     /// </para>
     /// </summary>
-    public InGameAtributes(Stat health = null, Stat maxHealth = null, Stat playerDamageMult = null, Stat playerResistsMult = null, Stat projectilesAdd = null,
-    Stat castSpeedMult = null, Stat cooldownReductionMult = null, Stat passiveAbilityEffectMult = null, Stat pierceTargets = null, Stat magnetRadius = null,
-    Stat experienceMultiplier = null, Stat abilityActiveTimeMult = null, Stat projectileSpeedMult = null, Stat critChance = null, Stat critMult = null, Stat lives = null, Stat luck = null)
+    public InGameAtributes(
+        Stat health = null,
+        Stat maxHealth = null,
+        Stat playerDamageMult = null,
+        Stat playerResistsMult = null,
+        Stat projectilesAdd = null,
+        Stat castSpeedMult = null,
+        Stat cooldownReductionMult = null,
+        Stat passiveAbilityEffectMult = null,
+        Stat pierceTargets = null,
+        Stat magnetRadius = null,
+        Stat experienceMultiplier = null,
+        Stat abilityActiveTimeMult = null,
+        Stat projectileSpeedMult = null,
+        Stat critChance = null,
+        Stat critMult = null,
+        Stat lives = null,
+        Stat luck = null
+    )
     {
         Health = health ?? StartingAttributes.Health;
         MaxHealth = maxHealth ?? StartingAttributes.MaxHealth;
@@ -280,42 +309,48 @@ public class GameStats
     [Key(0)] public ulong TotalTime = 0;
     [Key(1)] public ulong TotalRuns = 0;
     [Key(2)] public ulong RunsFinished = 0;
-    //public ulong TotalDeaths = 0;
     [Key(3)] public ulong TotalCurrency = 0;
     [Key(4)] public ulong TotalKills = 0;
     [Key(5)] public ulong TotalDamageDealt = 0;
     [Key(6)] public ulong TotalDamageTaken = 0;
 
     public enum StatType { Time, Runs, Deaths, Currency, Kills, DamageDealt, DamageTaken, RunsFinished };
-
     public string GetStat(StatType type)
     {
         return type switch
         {
             StatType.Time => TotalTime.ToString(),
             StatType.Runs => TotalRuns.ToString(),
-            //StatType.Deaths => TotalDeaths.ToString(),
             StatType.Currency => TotalCurrency.ToString(),
             StatType.Kills => TotalKills.ToString(),
             StatType.DamageDealt => TotalDamageDealt.ToString(),
             StatType.DamageTaken => TotalDamageTaken.ToString(),
             StatType.RunsFinished => RunsFinished.ToString(),
+
             _ => "0"
         };
     }
 
-    public GameStats(ulong totalTime, ulong totalRuns, ulong totalRunsFinished, ulong totalCurrency, ulong totalKills, ulong totalDamageDealt, ulong totalDamageTaken)
+    public GameStats(
+        ulong totalTime,
+        ulong totalRuns,
+        ulong totalRunsFinished,
+        ulong totalCurrency,
+        ulong totalKills,
+        ulong totalDamageDealt,
+        ulong totalDamageTaken
+    )
     {
         TotalTime = totalTime;
         TotalRuns = totalRuns;
-        //TotalDeaths = totalDeaths;
         TotalCurrency = totalCurrency;
         TotalKills = totalKills;
         TotalDamageDealt = totalDamageDealt;
         TotalDamageTaken = totalDamageTaken;
         RunsFinished = totalRunsFinished;
     }
-    public GameStats(){}
+
+    public GameStats() { }
 }
 
 [MessagePackObject]
@@ -329,7 +364,6 @@ public class GameRecords
     [Key(5)] public uint MaxDamageDealt = 0;
 
     public enum RecordType { Level, Currency, CritChance, CritMult, DamageMult, DamageDealt };
-
     public string GetRecord(RecordType type)
     {
         return type switch
@@ -340,6 +374,7 @@ public class GameRecords
             RecordType.CritMult => MaxCritMult.ToString("F2"),
             RecordType.DamageMult => MaxDamageMult.ToString("F2"),
             RecordType.DamageDealt => MaxDamageDealt.ToString(),
+
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }
@@ -353,5 +388,6 @@ public class GameRecords
         MaxDamageMult = maxDamageMult;
         MaxDamageDealt = maxDamageDealt;
     }
+
     public GameRecords() { }
 }

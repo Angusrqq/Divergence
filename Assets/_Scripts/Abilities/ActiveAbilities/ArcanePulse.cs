@@ -19,7 +19,6 @@ public class ArcanePulse : InstantiatedAbilityMono
         rb.position = GameData.player.transform.position;
 
         _damageTimer -= Time.fixedDeltaTime;
-
         if (_damageTimer <= 0)
         {
             _damageBuffer.Clear();

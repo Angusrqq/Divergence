@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class UINavigationManager : MonoBehaviour
 {
-    public static UINavigationManager Instance { get; private set; }
-
     public bool autoFillSelection = true;
 
     private List<Transform> _activePanels = new();
+
+    public static UINavigationManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -25,11 +25,7 @@ public class UINavigationManager : MonoBehaviour
     private void Update()
     {
         if (!autoFillSelection) return;
-
-        // Something is already selected
-        if (EventSystem.current.currentSelectedGameObject != null)
-            return;
-
+        if (EventSystem.current.currentSelectedGameObject != null) return; // Something is already selected
         if (_activePanels.Count <= 0) return;
 
         // Try selecting from active panels first
@@ -47,7 +43,9 @@ public class UINavigationManager : MonoBehaviour
     public void RegisterPanel(Transform panel)
     {
         if (!_activePanels.Contains(panel))
+        {
             _activePanels.Add(panel);
+        }
 
         // Delay 1 frame to ensure layout is built
         StartCoroutine(SelectDelayed(panel));
@@ -68,29 +66,28 @@ public class UINavigationManager : MonoBehaviour
     {
         Button btn = FindButton(panel);
         if (btn != null)
+        {
             EventSystem.current.SetSelectedGameObject(btn.gameObject);
+        }
     }
 
     private Button FindButton(Transform root)
     {
-        foreach (Transform t in root)
+        foreach (Transform transform in root)
         {
-            if (!t.gameObject.activeInHierarchy)
-                continue;
+            if (!transform.gameObject.activeInHierarchy) continue;
 
-            Button b = t.GetComponent<Button>();
-            if (b && b.interactable)
-                return b;
+            Button btn = transform.GetComponent<Button>();
+            if (btn && btn.interactable) return btn;
 
-            Button nested = FindButton(t);
+            Button nested = FindButton(transform);
             if (nested) return nested;
         }
+        
         return null;
     }
 
-    // -----------------------------------------------------------
     // Call this when you enable a panel: panel.SetActive(true);
-    // -----------------------------------------------------------
     public void SelectFirstButtonInPanel(Transform panel)
     {
         StartCoroutine(DelaySelect(panel));
@@ -98,29 +95,28 @@ public class UINavigationManager : MonoBehaviour
 
     private System.Collections.IEnumerator DelaySelect(Transform panel)
     {
-        yield return null; // wait 1 frame
+        yield return null; // Wait 1 frame
 
         Button btn = FindFirstButton(panel);
         if (btn)
+        {
             EventSystem.current.SetSelectedGameObject(btn.gameObject);
+        }
     }
-
-    // -----------------------------------------------------------
-    // INTERNAL HELPERS
-    // -----------------------------------------------------------
 
     // Searches entire scene (not children of singleton!)
     private void SelectAnyButtonInScene()
     {
         Button[] allButtons = FindObjectsByType<Button>(FindObjectsSortMode.None);
 
-        foreach (var b in allButtons)
+        foreach (var btn in allButtons)
         {
-            if (!b.gameObject.activeInHierarchy) continue;
-            if (!b.interactable) continue;
+            if (!btn.gameObject.activeInHierarchy) continue;
+            if (!btn.interactable) continue;
 
-            StartCoroutine(DelaySelect(b.transform));
-            Debug.Log("Found and selected button: " + b.name);
+            StartCoroutine(DelaySelect(btn.transform));
+
+            Debug.Log("Found and selected button: " + btn.name);
             return;
         }
     }
@@ -128,18 +124,17 @@ public class UINavigationManager : MonoBehaviour
     // Searches specific panel only
     private Button FindFirstButton(Transform root)
     {
-        foreach (Transform t in root)
+        foreach (Transform transform in root)
         {
-            if (!t.gameObject.activeInHierarchy) continue;
+            if (!transform.gameObject.activeInHierarchy) continue;
 
-            Button b = t.GetComponent<Button>();
-            if (b && b.interactable)
-                return b;
+            Button btn = transform.GetComponent<Button>();
+            if (btn && btn.interactable) return btn;
 
-            // recurse
-            Button nested = FindFirstButton(t);
+            Button nested = FindFirstButton(transform);
             if (nested) return nested;
         }
+
         return null;
     }
 }

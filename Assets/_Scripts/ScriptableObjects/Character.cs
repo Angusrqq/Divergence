@@ -35,11 +35,6 @@ public class Character : BaseScriptableObjectUnlockable //TODO: open to suggesti
     public RuntimeAnimatorController CharacterAnimatorController => _characterAnimatorController;
     public List<BaseAbilityScriptable> StartingAbilities => _startingAbilities;
 
-    /// <summary>
-    /// <para>
-    /// <c>Unlock</c> adds this character to the <c>GameData.unlockedCharacters</c> List if it is not already present.
-    /// </para>
-    /// </summary>
     public virtual void Unlock()
     {
         if (!GameData.unlockedCharacters.Contains(this))
@@ -48,18 +43,14 @@ public class Character : BaseScriptableObjectUnlockable //TODO: open to suggesti
         }
     }
 
-    // TODO: We need to implement this method because game is so boring rn
-    public virtual void Upgrade() // wow great autocomplete suggestion, might implement that later
+    // TODO: Implement this method
+    public virtual void Upgrade()
     {
         throw new System.NotImplementedException();
-        // startLevel++;
         // maxHealth = Mathf.RoundToInt(maxHealth * 1.2f);
         // moveSpeed *= 1.1f;
         // damageScale *= 1.1f;
         // cooldownReduction += 0.05f;
-        // foreach (Ability a in startingAbilities)
-        // {
-        //     a.Upgrade();
-        // }
+        // magnetRadius += 0.05f;
     }
 }

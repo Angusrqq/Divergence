@@ -19,11 +19,13 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
         get => _selectorManager;
         set => _selectorManager = value;
     }
+    protected SelectorManagerUnlockables SelectorUnlockablesManager => (SelectorManagerUnlockables)SelectorManager;
+    protected SelectorManagerUpgrades SelectorUpgradesManager => (SelectorManagerUpgrades)SelectorManager;
 
     public virtual void Init(ScriptableObject data, SelectorManager manager)
     {
-        _selectorManager = manager;
         _itemData = data;
+        _selectorManager = manager;
     }
 
     public virtual void OnSelect(BaseEventData eventData)
@@ -37,7 +39,7 @@ public class SelectorItem : MonoBehaviour, ISelectHandler
         }
         catch
         {
-            SelectedImage.material.SetColor("_Color", new Color(3.56486797f,1.9095813f,0,2) * 1f);
+            SelectedImage.material.SetColor("_Color", new Color(3.56486797f, 1.9095813f, 0, 2) * 1f);
         }
     }
 

@@ -1,6 +1,14 @@
 using System;
 using UnityEngine;
 
+public enum HandlerType
+{
+    BaseAbility,
+    Ability,
+    InstantiatedAbility,
+    Passive
+}
+
 public class AbilityHandler : BaseAbilityHandler
 {
     [NonSerialized] public float CooldownTimer;
@@ -17,54 +25,38 @@ public class AbilityHandler : BaseAbilityHandler
         Ability source = _source as Ability;
         State = AbilityState.ready;
         CountActiveTimeInCooldown = source.CountActiveTimeInCooldown;
+
         ActiveTime = source.ActiveTime;
         ActiveTime.AddModifier(GameData.InGameAttributes.AbilityActiveTimeMultModifier);
+
         CooldownTime = source.CooldownTime;
         CooldownTime.AddModifier(GameData.InGameAttributes.CooldownReductionMultModifier);
+
         KnockbackForce = source.KnockbackForce;
         KnockbackDuration = source.KnockbackDuration;
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>Activate</c> is a virtual method that sets the state to active and starts the active timer.
-    /// </para>
-    /// </summary>
     public override void Activate()
     {
         State = AbilityState.active;
+
         if (CountActiveTimeInCooldown)
         {
             ActiveTimer = ActiveTime;
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>StartCooldown</c> is a virtual method that sets the state to cooldown and starts the cooldown timer.
-    /// </para>
-    /// </summary>
     public virtual void StartCooldown()
     {
         State = AbilityState.cooldown;
         CooldownTimer = CooldownTime;
     }
 
-    /// <summary>
-    /// <para>
-    /// <c>CooldownEnded</c> is a virtual method that sets the state to ready.
-    /// </para>
-    /// </summary>
     public virtual void CooldownEnded()
     {
         State = AbilityState.ready;
     }
 
-    /// <summary>
-    /// <para>
-    /// Handles the states of the ability. Should be manually called in update.
-    /// </para>
-    /// </summary>
     public override void UpdateAbility()
     {
         switch (State)
@@ -97,11 +89,6 @@ public class AbilityHandler : BaseAbilityHandler
         }
     }
 
-    /// <summary>
-    /// <para>
-    /// Handles the states of the ability to be used in fixed update.
-    /// </para>
-    /// </summary>
     public virtual void FixedUpdateAbility()
     {
         switch (State)
@@ -133,12 +120,4 @@ public class AbilityHandler : BaseAbilityHandler
                 break;
         }
     }
-}
-
-public enum HandlerType
-{
-    BaseAbility,
-    Ability,
-    InstantiatedAbility,
-    Passive
 }

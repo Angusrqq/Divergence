@@ -34,10 +34,19 @@ public class ShrapnelInstance : MonoBehaviour
     {
         if (!_hit && collision.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(GameData.player.gameObject, _damage, GetType(), 10f, 0.2f, useSound: true);
+            enemy.TakeDamage(
+                source: GameData.player.gameObject,
+                amount: _damage,
+                type: GetType(),
+                knockbackForce: 10f,
+                knockbackDuration: 0.2f,
+                useSound: true
+            );
+
             _hit = true;
             _hitEnemy = enemy;
             _animatedEntity.ChangeAnimation("Shrapnel_hit");
+
             StopAllCoroutines();
             StartCoroutine(HitFlash(2f));
         }

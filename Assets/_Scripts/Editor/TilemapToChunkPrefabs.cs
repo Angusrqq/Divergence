@@ -29,6 +29,7 @@ public class TilemapToChunkPrefabs : EditorWindow
                 EditorUtility.DisplayDialog("Error", "Please assign a Tilemap to export.", "OK");
                 return;
             }
+
             ExportToPrefabs();
         }
     }
@@ -36,7 +37,9 @@ public class TilemapToChunkPrefabs : EditorWindow
     private void ExportToPrefabs()
     {
         if (!Directory.Exists(outputFolder))
+        {
             Directory.CreateDirectory(outputFolder);
+        }
 
         Grid grid = sourceTilemap.layoutGrid;
         BoundsInt bounds = sourceTilemap.cellBounds;
@@ -50,7 +53,7 @@ public class TilemapToChunkPrefabs : EditorWindow
         {
             for (int x = minX; x < maxX; x += chunkSize)
             {
-                GameObject chunkObj = new GameObject($"Chunk_{x / chunkSize}_{y / chunkSize}");
+                GameObject chunkObj = new($"Chunk_{x / chunkSize}_{y / chunkSize}");
                 chunkObj.transform.position = grid.CellToWorld(new Vector3Int(x, y, 0));
 
                 Tilemap tm = chunkObj.AddComponent<Tilemap>();
@@ -61,7 +64,7 @@ public class TilemapToChunkPrefabs : EditorWindow
                 {
                     for (int tx = x; tx < x + chunkSize; tx++)
                     {
-                        Vector3Int pos = new Vector3Int(tx, ty, 0);
+                        Vector3Int pos = new(tx, ty, 0);
                         TileBase tile = sourceTilemap.GetTile(pos);
                         if (tile != null)
                         {
