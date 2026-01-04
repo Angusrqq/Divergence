@@ -21,25 +21,36 @@ public static class StartingAttributes
 {
     public static Stat Health = 100;
     public static Stat MaxHealth = 100;
+    public static Stat Lives = 1f;
     public static Stat PlayerDamageMult = 1f;
     public static Stat PlayerResistsMult = 1f;
-    public static Stat ProjectilesAdd = 0;
-    public static Stat CastSpeedMult = 1f;
-    public static Stat CooldownReductionMult = 1f;
-    public static Stat ActiveAbilitySlots = 5;
-    public static Stat AbilitiesPerLevel = 3;
-    public static Stat PassiveAbilitySlots = 5;
-    public static Stat ManuallyTriggeredAbilitySlots = 0;
-    public static Stat PassiveAbilityEffectMult = 1f;
-    public static Stat PierceTargets = 0;
-    public static Stat MagnetRadius = 0.5f;
-    public static Stat ExperienceMultiplier = 1f;
-    public static Stat ProjectileSpeedMult = 1f;
-    public static Stat AbilityActiveTimeMult = 1f;
     public static Stat CritChance = 0f;
     public static Stat CritMult = 1.5f;
-    public static Stat Lives = 1f;
+    public static Stat ProjectilesAdd = 0;
+    public static Stat ProjectileSpeedMult = 1f;
+    public static Stat PierceTargets = 0;
+    public static Stat CastSpeedMult = 1f;
+    public static Stat CooldownReductionMult = 1f;
+    public static Stat AbilityActiveTimeMult = 1f;
+    public static Stat ActiveAbilitySlots = 5;
+    public static Stat PassiveAbilitySlots = 5;
+    public static Stat ManuallyTriggeredAbilitySlots = 0;
+    public static Stat AbilitiesPerLevel = 3;
+    public static Stat PassiveAbilityEffectMult = 1f;
+    public static Stat MagnetRadius = 0.5f;
+    public static Stat ExperienceMultiplier = 1f;
     public static Stat Luck = 0f;
+
+    public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance);
+    public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
+    public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
 
     public static void ReloadStats(StartingAttributesSnapshot startingAttributes)
     {
@@ -48,7 +59,7 @@ public static class StartingAttributes
         Lives = startingAttributes.Lives;
 
         PlayerDamageMult = startingAttributes.PlayerDamageMult;
-        PlayerResistsMult = startingAttributes.ProjectilesAdd;
+        PlayerResistsMult = startingAttributes.PlayerResistsMult;
         CritChance = startingAttributes.CritChance;
         CritMult = startingAttributes.CritMult;
 
@@ -70,21 +81,6 @@ public static class StartingAttributes
         ExperienceMultiplier = startingAttributes.ExperienceMultiplier;
         Luck = startingAttributes.Luck;
     }
-
-    public static StatModifierByStat HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
-    public static StatModifierByStat MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
-
-    public static StatModifierByStat PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance);
-    public static StatModifierByStat PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
-
-    public static StatModifierByStat ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
-    public static StatModifierByStat PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
-
-    public static StatModifierByStat CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance);
-    public static StatModifierByStat CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance);
-
-    public static StatModifierByStat AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
-    public static StatModifierByStat PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance);
 }
 
 [MessagePackObject]
@@ -92,48 +88,53 @@ public class StartingAttributesSnapshot
 {
     [Key(0)] public Stat Health = 100;
     [Key(1)] public Stat MaxHealth = 100;
-    [Key(2)] public Stat PlayerDamageMult = 1f;
-    [Key(3)] public Stat PlayerResistsMult = 1f;
-    [Key(4)] public Stat ProjectilesAdd = 0;
-    [Key(5)] public Stat CastSpeedMult = 1f;
-    [Key(6)] public Stat CooldownReductionMult = 1f;
-    [Key(7)] public Stat ActiveAbilitySlots = 5;
-    [Key(8)] public Stat AbilitiesPerLevel = 3;
-    [Key(9)] public Stat PassiveAbilitySlots = 5;
-    [Key(10)] public Stat ManuallyTriggeredAbilitySlots = 0;
-    [Key(11)] public Stat PassiveAbilityEffectMult = 1f;
-    [Key(12)] public Stat PierceTargets = 0;
-    [Key(13)] public Stat MagnetRadius = 0.5f;
-    [Key(14)] public Stat ExperienceMultiplier = 1f;
-    [Key(15)] public Stat ProjectileSpeedMult = 1f;
-    [Key(16)] public Stat AbilityActiveTimeMult = 1f;
-    [Key(17)] public Stat CritChance = 0f;
-    [Key(18)] public Stat CritMult = 1.5f;
-    [Key(19)] public Stat Lives = 1f;
+    [Key(2)] public Stat Lives = 1f;
+    [Key(3)] public Stat PlayerDamageMult = 1f;
+    [Key(4)] public Stat PlayerResistsMult = 1f;
+    [Key(5)] public Stat CritChance = 0f;
+    [Key(6)] public Stat CritMult = 1.5f;
+    [Key(7)] public Stat ProjectilesAdd = 0;
+    [Key(8)] public Stat ProjectileSpeedMult = 1f;
+    [Key(9)] public Stat PierceTargets = 0;
+    [Key(10)] public Stat CastSpeedMult = 1f;
+    [Key(11)] public Stat CooldownReductionMult = 1f;
+    [Key(12)] public Stat AbilityActiveTimeMult = 1f;
+    [Key(13)] public Stat ActiveAbilitySlots = 5;
+    [Key(14)] public Stat PassiveAbilitySlots = 5;
+    [Key(15)] public Stat ManuallyTriggeredAbilitySlots = 0;
+    [Key(16)] public Stat AbilitiesPerLevel = 3;
+    [Key(17)] public Stat PassiveAbilityEffectMult = 1f;
+    [Key(18)] public Stat MagnetRadius = 0.5f;
+    [Key(19)] public Stat ExperienceMultiplier = 1f;
     [Key(20)] public Stat Luck = 0f;
 
     public StartingAttributesSnapshot()
     {
         Health = StartingAttributes.Health;
         MaxHealth = StartingAttributes.MaxHealth;
+        Lives = StartingAttributes.Lives;
+
         PlayerDamageMult = StartingAttributes.PlayerDamageMult;
-        PlayerResistsMult = StartingAttributes.ProjectilesAdd;
-        ProjectilesAdd = StartingAttributes.ProjectilesAdd;
-        CastSpeedMult = StartingAttributes.CastSpeedMult;
-        CooldownReductionMult = StartingAttributes.CooldownReductionMult;
-        ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
-        AbilitiesPerLevel = StartingAttributes.AbilitiesPerLevel;
-        PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;
-        ManuallyTriggeredAbilitySlots = StartingAttributes.ManuallyTriggeredAbilitySlots;
-        PassiveAbilityEffectMult = StartingAttributes.PassiveAbilityEffectMult;
-        PierceTargets = StartingAttributes.PierceTargets;
-        MagnetRadius = StartingAttributes.MagnetRadius;
-        ExperienceMultiplier = StartingAttributes.ExperienceMultiplier;
-        ProjectileSpeedMult = StartingAttributes.ProjectileSpeedMult;
-        AbilityActiveTimeMult = StartingAttributes.AbilityActiveTimeMult;
+        PlayerResistsMult = StartingAttributes.PlayerResistsMult;
         CritChance = StartingAttributes.CritChance;
         CritMult = StartingAttributes.CritMult;
-        Lives = StartingAttributes.Lives;
+
+        ProjectilesAdd = StartingAttributes.ProjectilesAdd;
+        ProjectileSpeedMult = StartingAttributes.ProjectileSpeedMult;
+        PierceTargets = StartingAttributes.PierceTargets;
+
+        CastSpeedMult = StartingAttributes.CastSpeedMult;
+        CooldownReductionMult = StartingAttributes.CooldownReductionMult;
+        AbilityActiveTimeMult = StartingAttributes.AbilityActiveTimeMult;
+
+        ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
+        PassiveAbilitySlots = StartingAttributes.PassiveAbilitySlots;
+        ManuallyTriggeredAbilitySlots = StartingAttributes.ManuallyTriggeredAbilitySlots;
+        AbilitiesPerLevel = StartingAttributes.AbilitiesPerLevel;
+        PassiveAbilityEffectMult = StartingAttributes.PassiveAbilityEffectMult;
+
+        MagnetRadius = StartingAttributes.MagnetRadius;
+        ExperienceMultiplier = StartingAttributes.ExperienceMultiplier;
         Luck = StartingAttributes.Luck;
     }
 
@@ -148,24 +149,29 @@ public class StartingAttributesSnapshot
     {
         Health = key1;
         MaxHealth = key2;
-        PlayerDamageMult = key3;
-        PlayerResistsMult = key4;
-        ProjectilesAdd = key5;
-        CastSpeedMult = key6;
-        CooldownReductionMult = key7;
-        ActiveAbilitySlots = key8;
-        AbilitiesPerLevel = key9;
-        PassiveAbilitySlots = key10;
-        ManuallyTriggeredAbilitySlots = key11;
-        PassiveAbilityEffectMult = key12;
-        PierceTargets = key13;
-        MagnetRadius = key14;
-        ExperienceMultiplier = key15;
-        ProjectileSpeedMult = key16;
-        AbilityActiveTimeMult = key17;
-        CritChance = key18;
-        CritMult = key19;
-        Lives = key20;
+        Lives = key3;
+
+        PlayerDamageMult = key4;
+        PlayerResistsMult = key5;
+        CritChance = key6;
+        CritMult = key7;
+
+        ProjectilesAdd = key8;
+        ProjectileSpeedMult = key9;
+        PierceTargets = key10;
+
+        CastSpeedMult = key11;
+        CooldownReductionMult = key12;
+        AbilityActiveTimeMult = key13;
+
+        ActiveAbilitySlots = key14;
+        PassiveAbilitySlots = key15;
+        ManuallyTriggeredAbilitySlots = key16;
+        AbilitiesPerLevel = key17;
+        PassiveAbilityEffectMult = key18;
+
+        MagnetRadius = key19;
+        ExperienceMultiplier = key20;
         Luck = key21;
     }
 }
@@ -181,40 +187,40 @@ public class InGameAtributes
 {
     public Stat Health = 100;
     public Stat MaxHealth = 100;
+    public Stat Lives = 1f;
     public Stat PlayerDamageMult = 1f;
     public Stat PlayerResistsMult = 1f;
-    public Stat ProjectilesAdd = 0;
-    public Stat ProjectileSpeedMult = 1f;
-    public Stat AbilityActiveTimeMult = 1f;
-    public Stat CastSpeedMult = 1f;
-    public Stat CooldownReductionMult = 1f;
-    public Stat ActiveAbilitySlots = 5;
-    public Stat AbilitiesPerLevel = 0;
-    public Stat PassiveAbilitySlots = 5;
-    public Stat ManuallyTriggeredAbilitySlots = 0;
-    public Stat PassiveAbilityEffectMult = 1f;
-    public Stat PierceTargets = 0;
-    public Stat ExperienceMultiplier = 1f;
     public Stat CritChance = 0f;
     public Stat CritMult = 1.5f;
-    public Stat Lives = 1f;
+    public Stat ProjectilesAdd = 0;
+    public Stat ProjectileSpeedMult = 1f;
+    public Stat PierceTargets = 0;
+    public Stat CastSpeedMult = 1f;
+    public Stat CooldownReductionMult = 1f;
+    public Stat AbilityActiveTimeMult = 1f;
+    public Stat ActiveAbilitySlots = 5;
+    public Stat PassiveAbilitySlots = 5;
+    public Stat ManuallyTriggeredAbilitySlots = 0;
+    public Stat AbilitiesPerLevel = 0;
+    public Stat PassiveAbilityEffectMult = 1f;
+    public Stat ExperienceMultiplier = 1f;
     public Stat Luck = 0f;
-
     public float DamageDealt = 0;
     public float DamageTaken = 0;
-
     public StatModifierByStat HealthModifier;
     public StatModifierByStat MaxHealthModifier;
     public StatModifierByStat PlayerDamageMultModifier;
     public StatModifierByStat PlayerResistsMultModifier;
+    public StatModifierByStat CritChanceModifier;
+    public StatModifierByStat CritMultModifier;
     public StatModifierByStat ProjectilesAddModifier;
     public StatModifierByStat ProjectileSpeedMultModifier;
-    public StatModifierByStat AbilityActiveTimeMultModifier;
+    public StatModifierByStat PierceTargetsModifier;
     public StatModifierByStat CastSpeedMultModifier;
     public StatModifierByStat CooldownReductionMultModifier;
+    public StatModifierByStat AbilityActiveTimeMultModifier;
     public StatModifierByStat AbilitiesPerLevelModifier;
     public StatModifierByStat PassiveAbilityEffectMultModifier;
-    public StatModifierByStat PierceTargetsModifier;
     public event Action<AttributeId, Stat> OnAttributeChanged;
 
     private Stat _magnetRadius = 0.5f;
@@ -240,39 +246,43 @@ public class InGameAtributes
     public InGameAtributes(
         Stat health = null,
         Stat maxHealth = null,
+        Stat lives = null,
         Stat playerDamageMult = null,
         Stat playerResistsMult = null,
-        Stat projectilesAdd = null,
-        Stat castSpeedMult = null,
-        Stat cooldownReductionMult = null,
-        Stat passiveAbilityEffectMult = null,
-        Stat pierceTargets = null,
-        Stat magnetRadius = null,
-        Stat experienceMultiplier = null,
-        Stat abilityActiveTimeMult = null,
-        Stat projectileSpeedMult = null,
         Stat critChance = null,
         Stat critMult = null,
-        Stat lives = null,
+        Stat projectilesAdd = null,
+        Stat projectileSpeedMult = null,
+        Stat pierceTargets = null,
+        Stat castSpeedMult = null,
+        Stat cooldownReductionMult = null,
+        Stat abilityActiveTimeMult = null,
+        Stat passiveAbilityEffectMult = null,
+        Stat magnetRadius = null,
+        Stat experienceMultiplier = null,
         Stat luck = null
     )
     {
         Health = health ?? StartingAttributes.Health;
         MaxHealth = maxHealth ?? StartingAttributes.MaxHealth;
+        Lives = lives ?? StartingAttributes.Lives;
+
         PlayerDamageMult = playerDamageMult ?? StartingAttributes.PlayerDamageMult;
         PlayerResistsMult = playerResistsMult ?? StartingAttributes.PlayerResistsMult;
-        ProjectilesAdd = projectilesAdd ?? StartingAttributes.ProjectilesAdd;
-        CastSpeedMult = castSpeedMult ?? StartingAttributes.CastSpeedMult;
-        CooldownReductionMult = cooldownReductionMult ?? StartingAttributes.CooldownReductionMult;
-        PassiveAbilityEffectMult = passiveAbilityEffectMult ?? StartingAttributes.PassiveAbilityEffectMult;
-        PierceTargets = pierceTargets ?? StartingAttributes.PierceTargets;
-        _magnetRadius = magnetRadius ?? StartingAttributes.MagnetRadius;
-        ExperienceMultiplier = experienceMultiplier ?? StartingAttributes.ExperienceMultiplier;
-        ProjectileSpeedMult = projectileSpeedMult ?? StartingAttributes.ProjectileSpeedMult;
-        AbilityActiveTimeMult = abilityActiveTimeMult ?? StartingAttributes.AbilityActiveTimeMult;
         CritChance = critChance ?? StartingAttributes.CritChance;
         CritMult = critMult ?? StartingAttributes.CritMult;
-        Lives = lives ?? StartingAttributes.Lives;
+
+        ProjectilesAdd = projectilesAdd ?? StartingAttributes.ProjectilesAdd;
+        ProjectileSpeedMult = projectileSpeedMult ?? StartingAttributes.ProjectileSpeedMult;
+        PierceTargets = pierceTargets ?? StartingAttributes.PierceTargets;
+
+        CastSpeedMult = castSpeedMult ?? StartingAttributes.CastSpeedMult;
+        CooldownReductionMult = cooldownReductionMult ?? StartingAttributes.CooldownReductionMult;
+        AbilityActiveTimeMult = abilityActiveTimeMult ?? StartingAttributes.AbilityActiveTimeMult;
+
+        PassiveAbilityEffectMult = passiveAbilityEffectMult ?? StartingAttributes.PassiveAbilityEffectMult;
+        _magnetRadius = magnetRadius ?? StartingAttributes.MagnetRadius;
+        ExperienceMultiplier = experienceMultiplier ?? StartingAttributes.ExperienceMultiplier;
         Luck = luck ?? StartingAttributes.Luck;
 
         ActiveAbilitySlots = StartingAttributes.ActiveAbilitySlots;
@@ -290,16 +300,20 @@ public class InGameAtributes
     {
         HealthModifier = new(ref Health, StatModifierType.Flat, GameData.instance);
         MaxHealthModifier = new(ref MaxHealth, StatModifierType.Flat, GameData.instance);
+
         PlayerDamageMultModifier = new(ref PlayerDamageMult, StatModifierType.Mult, GameData.instance, true);
         PlayerResistsMultModifier = new(ref PlayerResistsMult, StatModifierType.Mult, GameData.instance);
+
         ProjectilesAddModifier = new(ref ProjectilesAdd, StatModifierType.Flat, GameData.instance);
+        ProjectileSpeedMultModifier = new(ref ProjectileSpeedMult, StatModifierType.Mult, GameData.instance, true);
+        PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
+
         CastSpeedMultModifier = new(ref CastSpeedMult, StatModifierType.Mult, GameData.instance, true);
         CooldownReductionMultModifier = new(ref CooldownReductionMult, StatModifierType.Mult, GameData.instance, true);
+        AbilityActiveTimeMultModifier = new(ref AbilityActiveTimeMult, StatModifierType.Mult, GameData.instance, true);
+
         AbilitiesPerLevelModifier = new(ref AbilitiesPerLevel, StatModifierType.Flat, GameData.instance);
         PassiveAbilityEffectMultModifier = new(ref PassiveAbilityEffectMult, StatModifierType.Mult, GameData.instance, true);
-        PierceTargetsModifier = new(ref PierceTargets, StatModifierType.Flat, GameData.instance);
-        ProjectileSpeedMultModifier = new(ref ProjectileSpeedMult, StatModifierType.Mult, GameData.instance, true);
-        AbilityActiveTimeMultModifier = new(ref AbilityActiveTimeMult, StatModifierType.Mult, GameData.instance, true);
     }
 }
 
@@ -363,7 +377,16 @@ public class GameRecords
     [Key(4)] public float MaxDamageMult = 0f;
     [Key(5)] public uint MaxDamageDealt = 0;
 
-    public enum RecordType { Level, Currency, CritChance, CritMult, DamageMult, DamageDealt };
+    public enum RecordType
+    {
+        Level,
+        Currency,
+        CritChance,
+        CritMult,
+        DamageMult,
+        DamageDealt
+    }
+
     public string GetRecord(RecordType type)
     {
         return type switch
